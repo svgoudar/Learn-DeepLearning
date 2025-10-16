@@ -1,0 +1,25 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: introduction
+parts:
+- chapters:
+  - file: neural_network/overview
+    sections:
+    - glob: neural_network/*part
+  - file: cost_loss_function/overview
+    sections:
+    - glob: cost_loss_function/*part
+  - file: activation/overview
+    sections:
+    - glob: activation/*part
+  - file: optmizers/overview
+    sections:
+    - glob: optmizers/*part
+    - glob: techniques/*part
+  - file: cnn/overview
+    sections:
+    - glob: cnn/*part
+  
+  
