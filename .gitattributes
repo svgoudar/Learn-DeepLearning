@@ -1,0 +1,1 @@
+deeplearning_book/ann/practicals/fashionmnist/*.csv filter=lfs diff=lfs merge=lfs -text
