@@ -21,7 +21,32 @@ parts:
       - glob: ann/optimizers/*part
     - glob: ann/techniques/*part
   - file: cnn/overview
-  sections:
-  - glob: cnn/*part
+    sections:
+    - glob: cnn/*part
+  - file: ffn/overview
+    sections:
+    - glob: ffn/*part
+  - file: rnn/overview
+    sections:
+    - glob: rnn/*part
+    - file: rnn/variants/overview  
+      sections:
+      - glob: rnn/variants/*part
+  - file: transformers/overview
+    sections:
+    - glob: transformers/*part
+  - file: gan/overview
+    sections:
+    - glob: gan/*part
+  - file: rbf/overview
+    sections:
+    - glob: rbf/*part
+  - file: siamese/overview
+    sections:
+    - glob: siamese/*part
+  - file: autoencoders/overview
+    sections:
+    - glob: autoencoders/*part
+  
   
   
