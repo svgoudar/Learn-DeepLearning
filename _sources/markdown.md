@@ -1,9 +1,3 @@
----
-noteId: "74778020b7ce11f0a138e96fcab27c0a"
-tags: []
-
----
-
 # Markdown Files
 
 Whether you write your book's content in Jupyter Notebooks (`.ipynb`) or
