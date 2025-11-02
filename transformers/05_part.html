@@ -1,0 +1,1016 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Transformer Decoder Layer &#8212; Machine Learning Handbook</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=4c969af8" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-examples.css?v=e236af4b" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.bundle.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-shadow.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-punk.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-noir.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-light.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-borderless.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/micromodal.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=40389e5b" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/jquery.js?v=5d32c60e"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=7f8ff830"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/tabs.js?v=3ee01567"></script>
+    <script src="../_static/js/hoverxref.js"></script>
+    <script src="../_static/js/tooltipster.bundle.min.js"></script>
+    <script src="../_static/js/micromodal.min.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'transformers/05_part';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Practicals" href="06_part.html" />
+    <link rel="prev" title="Residual Connection + Layer Normalization" href="04_part.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../introduction.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Machine Learning Handbook - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Machine Learning Handbook - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../introduction.html">
+                    Deep Learning
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ann/overview.html">Artificial Neural Network (ANN)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ann/neural_network/overview.html">Neural Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ann/neural_network/01_part.html">Intuition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/neural_network/02_part.html">Problem Statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/neural_network/03_part.html">Perceptron</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/neural_network/04_part.html">Multi-Layer Neural Networks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/neural_network/05_part.html">Vanishing Gradient Problem in Deep Learning</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ann/cost_loss_function/overview.html">Loss Function vs Cost Function</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ann/cost_loss_function/01_part.html">Cost Function vs Loss Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/cost_loss_function/02_part.html">Loss Functions for Regression in Neural Networks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/cost_loss_function/03_part.html">Loss Functions for Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/cost_loss_function/04_part.html">Choice of Loss Function</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ann/optimizers/overview.html">Optmizers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ann/optimizers/01_part.html">Gradient Descent Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/optimizers/02_part.html">Stochastic Gradient Descent (SGD) Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/optimizers/03_part.html">Mini-batch Stochastic Gradient Descent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/optimizers/04_part.html">SGD with Momentum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/optimizers/05_part.html">Adagrad Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/optimizers/06_part.html">Adadelta and RMSProp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/optimizers/07_part.html">Adam Optmizers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../ann/techniques/01_part.html">Exploding Gradient Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ann/techniques/02_part.html">Weight Initializing Techniques</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ann/techniques/03_part.html">Dropout Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ann/techniques/04_part.html">Optmization Techniques</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ann/techniques/05_part.html">Regularization</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../cnn/overview.html">CNN (Convolution Neural Network)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cnn/01_part.html">CNN v/s Brain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cnn/02_part.html">Know about Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cnn/03_part.html">Convolution Operation in CNNs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cnn/04_part.html">Padding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cnn/05_part.html">ANN vs CNN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cnn/06_part.html">Pooling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cnn/07_part.html">Fully Connected Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cnn/08_part.html">CNN Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cnn/09_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ffn/overview.html">FeedForward Neural Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ffn/01_part.html">Intiution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffn/02_part.html">Workflow</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../ffn/03_part.html">Training &amp; Hyper-Parameter Tuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffn/04_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../rnn/overview.html">RNN</a></li>
+
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="overview.html">The Transformer</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_part.html">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_part.html">The Transformer Encoder Layer (Deep Explanation)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_part.html">Positional Encoding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_part.html"><strong>Residual Connection + Layer Normalization</strong></a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#"><strong>Transformer Decoder Layer</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_part.html">Practicals</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../gan/overview.html"><strong>Generative Adversarial Network (GAN)</strong></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../gan/01_part.html">Intuition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gan/02_part.html">Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gan/03_part.html">Applications of Generative Adversarial Networks (GANs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gan/04_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../rbf/overview.html">Radial Basis Function (RBF) Neural Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../rbf/01_part.html">Intuition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rbf/02_part.html">Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rbf/03_part.html">Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rbf/04_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../siamese/overview.html">Siamese Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../siamese/01_part.html">Intuition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../siamese/02_part.html">Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../siamese/03_part.html">Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../siamese/04_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../autoencoders/overview.html">Autoencoders</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../autoencoders/01_part.html">Intiution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoencoders/02_part.html">Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoencoders/03_part.html">Application of Autoencoders</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/svgoudar/AI-ML-Essentials/blob/master/transformers/05_part.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/svgoudar/AI-ML-Essentials" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/svgoudar/AI-ML-Essentials/issues/new?title=Issue%20on%20page%20%2Ftransformers/05_part.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/transformers/05_part.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Transformer Decoder Layer</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#purpose-of-the-decoder">Purpose of the Decoder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structure-of-one-decoder-layer">Structure of One Decoder Layer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-by-step-workflow">Step-by-Step Workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-masked-multi-head-self-attention"><strong>Step 1: Masked Multi-Head Self-Attention</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-masking">Why Masking?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#formula">Formula:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output">Output:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-encoderdecoder-attention-cross-attention">🔹 <strong>Step 2: Encoder–Decoder Attention (Cross-Attention)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Formula:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-feed-forward-network-ffn"><strong>Step 3: Feed-Forward Network (FFN)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-summary">Mathematical Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition-behind-each-component">Intuition Behind Each Component</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualization-of-attention-flow">Visualization of Attention Flow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decoder-stack">Decoder Stack</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#auto-regressive-generation-inference">Auto-Regressive Generation (Inference)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualization-conceptual-flow">Visualization (Conceptual Flow)</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <nav class="contents" id="contents" role="doc-toc">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#transformer-decoder-layer" id="id2"><strong>Transformer Decoder Layer</strong></a></p>
+<ul>
+<li><p><a class="reference internal" href="#purpose-of-the-decoder" id="id3">Purpose of the Decoder</a></p></li>
+<li><p><a class="reference internal" href="#example" id="id4">Example</a></p></li>
+<li><p><a class="reference internal" href="#structure-of-one-decoder-layer" id="id5">Structure of One Decoder Layer</a></p></li>
+<li><p><a class="reference internal" href="#step-by-step-workflow" id="id6">Step-by-Step Workflow</a></p></li>
+<li><p><a class="reference internal" href="#step-1-masked-multi-head-self-attention" id="id7"><strong>Step 1: Masked Multi-Head Self-Attention</strong></a></p>
+<ul>
+<li><p><a class="reference internal" href="#why-masking" id="id8">Why Masking?</a></p></li>
+<li><p><a class="reference internal" href="#formula" id="id9">Formula:</a></p></li>
+<li><p><a class="reference internal" href="#output" id="id10">Output:</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#step-2-encoderdecoder-attention-cross-attention" id="id11">🔹 <strong>Step 2: Encoder–Decoder Attention (Cross-Attention)</strong></a></p>
+<ul>
+<li><p><a class="reference internal" href="#id1" id="id12">Formula:</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#step-3-feed-forward-network-ffn" id="id13"><strong>Step 3: Feed-Forward Network (FFN)</strong></a></p></li>
+<li><p><a class="reference internal" href="#mathematical-summary" id="id14">Mathematical Summary</a></p></li>
+<li><p><a class="reference internal" href="#intuition-behind-each-component" id="id15">Intuition Behind Each Component</a></p></li>
+<li><p><a class="reference internal" href="#visualization-of-attention-flow" id="id16">Visualization of Attention Flow</a></p></li>
+<li><p><a class="reference internal" href="#decoder-stack" id="id17">Decoder Stack</a></p></li>
+<li><p><a class="reference internal" href="#auto-regressive-generation-inference" id="id18">Auto-Regressive Generation (Inference)</a></p></li>
+<li><p><a class="reference internal" href="#visualization-conceptual-flow" id="id19">Visualization (Conceptual Flow)</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="transformer-decoder-layer">
+<h1><a class="toc-backref" href="#id2" role="doc-backlink"><strong>Transformer Decoder Layer</strong></a><a class="headerlink" href="#transformer-decoder-layer" title="Link to this heading">#</a></h1>
+<hr class="docutils" />
+<section id="purpose-of-the-decoder">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Purpose of the Decoder</a><a class="headerlink" href="#purpose-of-the-decoder" title="Link to this heading">#</a></h2>
+<p>The <strong>decoder</strong> is the <strong>generation component</strong> of the Transformer.
+It takes:</p>
+<ul class="simple">
+<li><p><strong>Encoded representations</strong> from the encoder (context), and</p></li>
+<li><p><strong>Previously generated tokens</strong>,</p></li>
+</ul>
+<p>and produces the <strong>next token</strong> in the output sequence (auto-regressively).</p>
+</section>
+<hr class="docutils" />
+<section id="example">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Example</a><a class="headerlink" href="#example" title="Link to this heading">#</a></h2>
+<p>In <strong>English → French translation</strong>:</p>
+<ul class="simple">
+<li><p>Encoder processes: <code class="docutils literal notranslate"><span class="pre">&quot;I</span> <span class="pre">love</span> <span class="pre">cats&quot;</span></code></p></li>
+<li><p>Decoder generates: <code class="docutils literal notranslate"><span class="pre">&quot;J'</span> <span class="pre">aime</span> <span class="pre">les</span> <span class="pre">chats&quot;</span></code></p></li>
+</ul>
+<p>The decoder:</p>
+<ul class="simple">
+<li><p>Sees encoder outputs (context),</p></li>
+<li><p>Predicts one word at a time: <code class="docutils literal notranslate"><span class="pre">&quot;J'&quot;</span> <span class="pre">→</span> <span class="pre">&quot;aime&quot;</span> <span class="pre">→</span> <span class="pre">&quot;les&quot;</span> <span class="pre">→</span> <span class="pre">&quot;chats&quot;</span></code></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="structure-of-one-decoder-layer">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Structure of One Decoder Layer</a><a class="headerlink" href="#structure-of-one-decoder-layer" title="Link to this heading">#</a></h2>
+<p>Each decoder layer contains <strong>three sublayers</strong>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>             ┌───────────────────────────────┐
+Input  ---&gt;  │ 1. Masked Multi-Head Attention │
+             └───────────────────────────────┘
+                        │
+                        ▼
+             ┌───────────────────────────────┐
+             │ 2. Encoder–Decoder Attention   │
+             └───────────────────────────────┘
+                        │
+                        ▼
+             ┌───────────────────────────────┐
+             │ 3. Feed Forward Network (FFN)  │
+             └───────────────────────────────┘
+                        │
+                        ▼
+                   Add + LayerNorm after each sublayer
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="step-by-step-workflow">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">Step-by-Step Workflow</a><a class="headerlink" href="#step-by-step-workflow" title="Link to this heading">#</a></h2>
+<p>Let’s denote</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(X_{dec}\)</span>: input embeddings (decoder input sequence)</p></li>
+<li><p><span class="math notranslate nohighlight">\(E_{enc}\)</span>: encoder outputs</p></li>
+<li><p><span class="math notranslate nohighlight">\(d_{model} = 512\)</span></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="step-1-masked-multi-head-self-attention">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink"><strong>Step 1: Masked Multi-Head Self-Attention</strong></a><a class="headerlink" href="#step-1-masked-multi-head-self-attention" title="Link to this heading">#</a></h2>
+<p>The decoder first applies <strong>self-attention</strong> — but with a <strong>mask</strong>.</p>
+<section id="why-masking">
+<h3><a class="toc-backref" href="#id8" role="doc-backlink">Why Masking?</a><a class="headerlink" href="#why-masking" title="Link to this heading">#</a></h3>
+<p>The model generates tokens one-by-one during training.
+Each position <strong>must not attend to future positions</strong>.</p>
+<p>✅ Example:
+When predicting the 3rd word, it should only see words 1 and 2 — <strong>not</strong> 4 or 5.</p>
+<p>So, we use a <strong>look-ahead mask</strong> (upper-triangular matrix) to zero out attention beyond the current position.</p>
+</section>
+<section id="formula">
+<h3><a class="toc-backref" href="#id9" role="doc-backlink">Formula:</a><a class="headerlink" href="#formula" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}} + \text{mask}\right)V
+\]</div>
+<p>Where masked entries are set to <span class="math notranslate nohighlight">\(-\infty\)</span>, so softmax = 0.</p>
+</section>
+<section id="output">
+<h3><a class="toc-backref" href="#id10" role="doc-backlink">Output:</a><a class="headerlink" href="#output" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+Z_1 = \text{MaskedMultiHead}(X_{dec}, X_{dec}, X_{dec})
+\]</div>
+<p>Then apply residual + layer norm:
+$<span class="math notranslate nohighlight">\(
+X_1 = \text{LayerNorm}(X_{dec} + Z_1)
+\)</span>$</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="step-2-encoderdecoder-attention-cross-attention">
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">🔹 <strong>Step 2: Encoder–Decoder Attention (Cross-Attention)</strong></a><a class="headerlink" href="#step-2-encoderdecoder-attention-cross-attention" title="Link to this heading">#</a></h2>
+<p>This is what connects the <strong>encoder</strong> and <strong>decoder</strong>.</p>
+<p>Here:</p>
+<ul class="simple">
+<li><p>Queries <span class="math notranslate nohighlight">\(Q\)</span> come from the <strong>decoder</strong> (output of Step 1).</p></li>
+<li><p>Keys <span class="math notranslate nohighlight">\(K\)</span>, Values <span class="math notranslate nohighlight">\(V\)</span> come from the <strong>encoder outputs</strong>.</p></li>
+</ul>
+<p>So the decoder “looks at” the entire encoded input sequence to decide what to generate next.</p>
+<section id="id1">
+<h3><a class="toc-backref" href="#id12" role="doc-backlink">Formula:</a><a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+Z_2 = \text{MultiHead}(Q = X_1, K = E_{enc}, V = E_{enc})
+\]</div>
+<p>Then apply residual + layer norm:
+$<span class="math notranslate nohighlight">\(
+X_2 = \text{LayerNorm}(X_1 + Z_2)
+\)</span>$</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="step-3-feed-forward-network-ffn">
+<h2><a class="toc-backref" href="#id13" role="doc-backlink"><strong>Step 3: Feed-Forward Network (FFN)</strong></a><a class="headerlink" href="#step-3-feed-forward-network-ffn" title="Link to this heading">#</a></h2>
+<p>Each token position is processed independently through a two-layer feedforward network:</p>
+<div class="math notranslate nohighlight">
+\[
+\text{FFN}(x) = \max(0, xW_1 + b_1)W_2 + b_2
+\]</div>
+<ul class="simple">
+<li><p>Expands from <span class="math notranslate nohighlight">\(d_{model}=512\)</span> → <span class="math notranslate nohighlight">\(d_{ff}=2048\)</span></p></li>
+<li><p>Then projects back to 512</p></li>
+</ul>
+<p>Then apply residual + layer norm again:
+$<span class="math notranslate nohighlight">\(
+Y = \text{LayerNorm}(X_2 + \text{FFN}(X_2))
+\)</span>$</p>
+</section>
+<hr class="docutils" />
+<section id="mathematical-summary">
+<h2><a class="toc-backref" href="#id14" role="doc-backlink">Mathematical Summary</a><a class="headerlink" href="#mathematical-summary" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Sub-layer</p></th>
+<th class="head"><p>Operation</p></th>
+<th class="head"><p>Formula</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Masked Self-Attention</p></td>
+<td><p><span class="math notranslate nohighlight">\(X_1 = \text{LayerNorm}(X + \text{MHA}(X, X, X))\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Encoder–Decoder Attention</p></td>
+<td><p><span class="math notranslate nohighlight">\(X_2 = \text{LayerNorm}(X_1 + \text{MHA}(X_1, E, E))\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Feed Forward</p></td>
+<td><p><span class="math notranslate nohighlight">\(Y = \text{LayerNorm}(X_2 + \text{FFN}(X_2))\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Where MHA = Multi-Head Attention.</p>
+</section>
+<hr class="docutils" />
+<section id="intuition-behind-each-component">
+<h2><a class="toc-backref" href="#id15" role="doc-backlink">Intuition Behind Each Component</a><a class="headerlink" href="#intuition-behind-each-component" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Component</p></th>
+<th class="head"><p>Role</p></th>
+<th class="head"><p>Analogy</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Masked Self-Attention</strong></p></td>
+<td><p>Understand partial sentence generated so far</p></td>
+<td><p>“What have I said already?”</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Cross-Attention</strong></p></td>
+<td><p>Attend to relevant encoder words</p></td>
+<td><p>“Which input words are related to my current word?”</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>FFN</strong></p></td>
+<td><p>Non-linear transformation per token</p></td>
+<td><p>“Adjust or refine meaning before output”</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Residual + LayerNorm</strong></p></td>
+<td><p>Stabilize training</p></td>
+<td><p>“Keep gradients healthy and representations balanced”</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="visualization-of-attention-flow">
+<h2><a class="toc-backref" href="#id16" role="doc-backlink">Visualization of Attention Flow</a><a class="headerlink" href="#visualization-of-attention-flow" title="Link to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Encoder Outputs (context vectors)
+          │
+          ▼
+ ┌──────────────────────────────┐
+ │ Encoder–Decoder Attention    │ ← Decoder uses context here
+ └──────────────────────────────┘
+          ▲
+          │
+ ┌──────────────────────────────┐
+ │ Masked Self-Attention (past) │ ← Only previous tokens visible
+ └──────────────────────────────┘
+          │
+          ▼
+    Feed Forward Network
+          │
+          ▼
+    Output Token Probabilities
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="decoder-stack">
+<h2><a class="toc-backref" href="#id17" role="doc-backlink">Decoder Stack</a><a class="headerlink" href="#decoder-stack" title="Link to this heading">#</a></h2>
+<p>There are <strong>N = 6 decoder layers</strong>, each processing the output of the previous one.
+Final layer output goes to a <strong>linear layer + softmax</strong> to predict token probabilities.</p>
+<div class="math notranslate nohighlight">
+\[
+P(y_t) = \text{softmax}(W_o Y_t)
+\]</div>
+</section>
+<hr class="docutils" />
+<section id="auto-regressive-generation-inference">
+<h2><a class="toc-backref" href="#id18" role="doc-backlink">Auto-Regressive Generation (Inference)</a><a class="headerlink" href="#auto-regressive-generation-inference" title="Link to this heading">#</a></h2>
+<p>During inference, the decoder works <strong>one step at a time</strong>:</p>
+<ol class="arabic simple">
+<li><p>Input previous predicted tokens</p></li>
+<li><p>Apply all decoder layers</p></li>
+<li><p>Generate next token (argmax or sampling)</p></li>
+<li><p>Append token and repeat</p></li>
+</ol>
+<p>Masked self-attention ensures it only attends to <strong>past tokens</strong> at every step.</p>
+</section>
+<hr class="docutils" />
+<section id="visualization-conceptual-flow">
+<h2><a class="toc-backref" href="#id19" role="doc-backlink">Visualization (Conceptual Flow)</a><a class="headerlink" href="#visualization-conceptual-flow" title="Link to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Input: &quot;I love cats&quot;
+Encoder → Context vectors
+                    ↓
+Decoder Input: &lt;sos&gt;
+Masked Self-Attention → &quot;J&#39;&quot;
+Cross-Attention → Encoder info → &quot;J&#39;aime&quot;
+Feed-Forward → next word
+Repeat → &quot;J&#39;aime les chats&quot;
+</pre></div>
+</div>
+<hr class="docutils" />
+<p><strong>Summary Table</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Stage</p></th>
+<th class="head"><p>Attention Type</p></th>
+<th class="head"><p>Source of Q, K, V</p></th>
+<th class="head"><p>Masking</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Masked Self-Attention</p></td>
+<td><p>Q=K=V from decoder</p></td>
+<td><p>✅ Yes</p></td>
+<td><p>Understand previous outputs</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Encoder–Decoder Attention</p></td>
+<td><p>Q from decoder, K,V from encoder</p></td>
+<td><p>❌ No</p></td>
+<td><p>Use source context</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>FFN</p></td>
+<td><p>Independent per position</p></td>
+<td><p>❌ No</p></td>
+<td><p>Non-linear refinement</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+<p><strong>In Essence</strong></p>
+<blockquote>
+<div><p>The Transformer <strong>decoder</strong> learns to generate text one token at a time,
+looking backward (via masked self-attention) to understand what’s been generated,
+and looking sideways (via cross-attention) to see what the input means.
+Residual connections and layer normalization keep everything smooth and stable.</p>
+</div></blockquote>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./transformers"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="04_part.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><strong>Residual Connection + Layer Normalization</strong></p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="06_part.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Practicals</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#purpose-of-the-decoder">Purpose of the Decoder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example">Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#structure-of-one-decoder-layer">Structure of One Decoder Layer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-by-step-workflow">Step-by-Step Workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-masked-multi-head-self-attention"><strong>Step 1: Masked Multi-Head Self-Attention</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-masking">Why Masking?</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#formula">Formula:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output">Output:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-encoderdecoder-attention-cross-attention">🔹 <strong>Step 2: Encoder–Decoder Attention (Cross-Attention)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Formula:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-feed-forward-network-ffn"><strong>Step 3: Feed-Forward Network (FFN)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-summary">Mathematical Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition-behind-each-component">Intuition Behind Each Component</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualization-of-attention-flow">Visualization of Attention Flow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decoder-stack">Decoder Stack</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#auto-regressive-generation-inference">Auto-Regressive Generation (Inference)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#visualization-conceptual-flow">Visualization (Conceptual Flow)</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By svgoudar
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

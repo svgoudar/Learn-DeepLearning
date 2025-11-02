@@ -1,0 +1,1512 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Deep (Stacked) RNN — Explanation, Intuition, and Workflow &#8212; Machine Learning Handbook</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=4c969af8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-examples.css?v=e236af4b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.bundle.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-shadow.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-punk.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-noir.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-light.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-borderless.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/micromodal.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=40389e5b" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/jquery.js?v=5d32c60e"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=7f8ff830"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../../_static/tabs.js?v=3ee01567"></script>
+    <script src="../../_static/js/hoverxref.js"></script>
+    <script src="../../_static/js/tooltipster.bundle.min.js"></script>
+    <script src="../../_static/js/micromodal.min.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'rnn/variants/05_part';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Echo State Networks (ESN)" href="06_part.html" />
+    <link rel="prev" title="BiRNN" href="04_part.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../introduction.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Machine Learning Handbook - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Machine Learning Handbook - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../introduction.html">
+                    Deep Learning
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ann/overview.html">Artificial Neural Network (ANN)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../ann/neural_network/overview.html">Neural Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/neural_network/01_part.html">Intuition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/neural_network/02_part.html">Problem Statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/neural_network/03_part.html">Perceptron</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/neural_network/04_part.html">Multi-Layer Neural Networks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/neural_network/05_part.html">Vanishing Gradient Problem in Deep Learning</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../ann/cost_loss_function/overview.html">Loss Function vs Cost Function</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/cost_loss_function/01_part.html">Cost Function vs Loss Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/cost_loss_function/02_part.html">Loss Functions for Regression in Neural Networks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/cost_loss_function/03_part.html">Loss Functions for Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/cost_loss_function/04_part.html">Choice of Loss Function</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../ann/optimizers/overview.html">Optmizers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/optimizers/01_part.html">Gradient Descent Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/optimizers/02_part.html">Stochastic Gradient Descent (SGD) Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/optimizers/03_part.html">Mini-batch Stochastic Gradient Descent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/optimizers/04_part.html">SGD with Momentum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/optimizers/05_part.html">Adagrad Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/optimizers/06_part.html">Adadelta and RMSProp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/optimizers/07_part.html">Adam Optmizers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ann/techniques/01_part.html">Exploding Gradient Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ann/techniques/02_part.html">Weight Initializing Techniques</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ann/techniques/03_part.html">Dropout Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ann/techniques/04_part.html">Optmization Techniques</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ann/techniques/05_part.html">Regularization</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../cnn/overview.html">CNN (Convolution Neural Network)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/01_part.html">CNN v/s Brain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/02_part.html">Know about Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/03_part.html">Convolution Operation in CNNs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/04_part.html">Padding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/05_part.html">ANN vs CNN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/06_part.html">Pooling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/07_part.html">Fully Connected Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/08_part.html">CNN Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/09_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ffn/overview.html">FeedForward Neural Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ffn/01_part.html">Intiution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffn/02_part.html">Workflow</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../ffn/03_part.html">Training &amp; Hyper-Parameter Tuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffn/04_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">RNN</a></li>
+
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../transformers/overview.html">The Transformer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/01_part.html">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/02_part.html">The Transformer Encoder Layer (Deep Explanation)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/03_part.html">Positional Encoding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/04_part.html"><strong>Residual Connection + Layer Normalization</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/05_part.html"><strong>Transformer Decoder Layer</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/06_part.html">Practicals</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../gan/overview.html"><strong>Generative Adversarial Network (GAN)</strong></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../gan/01_part.html">Intuition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gan/02_part.html">Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gan/03_part.html">Applications of Generative Adversarial Networks (GANs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gan/04_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../rbf/overview.html">Radial Basis Function (RBF) Neural Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../rbf/01_part.html">Intuition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rbf/02_part.html">Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rbf/03_part.html">Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rbf/04_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../siamese/overview.html">Siamese Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../siamese/01_part.html">Intuition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../siamese/02_part.html">Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../siamese/03_part.html">Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../siamese/04_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../autoencoders/overview.html">Autoencoders</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../autoencoders/01_part.html">Intiution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoencoders/02_part.html">Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoencoders/03_part.html">Application of Autoencoders</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/svgoudar/AI-ML-Essentials/blob/master/rnn/variants/05_part.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/svgoudar/AI-ML-Essentials" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/svgoudar/AI-ML-Essentials/issues/new?title=Issue%20on%20page%20%2Frnn/variants/05_part.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/rnn/variants/05_part.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Deep (Stacked) RNN — Explanation, Intuition, and Workflow</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concept">1. <strong>Concept</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition">2. <strong>Intuition</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture-overview">Architecture Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-summary">Workflow Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-rnn-vs-shallow-rnn">Deep RNN vs Shallow RNN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variants">Variants</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages"><strong>Advantages</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#disadvantages"><strong>Disadvantages</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demonstration">Demonstration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-1-install-and-import-libraries"><strong>Cell 1 — Install and Import Libraries</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-2-generate-synthetic-time-series-data"><strong>Cell 2 — Generate Synthetic Time Series Data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-3-prepare-the-dataset"><strong>Cell 3 — Prepare the Dataset</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-4-define-hyperparameter-grid-and-callbacks"><strong>Cell 4 — Define Hyperparameter Grid and Callbacks</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-5-train-and-evaluate-deep-lstm-models"><strong>Cell 5 — Train and Evaluate Deep LSTM Models</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-6-select-best-configuration"><strong>Cell 6 — Select Best Configuration</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-7-retrain-best-deep-lstm-and-visualize-predictions"><strong>Cell 7 — Retrain Best Deep LSTM and Visualize Predictions</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explanation-of-the-workflow"><strong>Explanation of the Workflow</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameter-tuning-strategy"><strong>Hyperparameter Tuning Strategy</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-vs-shallow-rnns"><strong>Deep vs Shallow RNNs</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-to-use-deep-stacked-rnns"><strong>When to Use Deep (Stacked) RNNs</strong></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <nav class="contents" id="contents" role="doc-toc">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#deep-stacked-rnn-explanation-intuition-and-workflow" id="id1">Deep (Stacked) RNN — Explanation, Intuition, and Workflow</a></p>
+<ul>
+<li><p><a class="reference internal" href="#concept" id="id2">1. <strong>Concept</strong></a></p></li>
+<li><p><a class="reference internal" href="#intuition" id="id3">2. <strong>Intuition</strong></a></p>
+<ul>
+<li><p><a class="reference internal" href="#architecture-overview" id="id4">Architecture Overview</a></p></li>
+<li><p><a class="reference internal" href="#workflow-summary" id="id5">Workflow Summary</a></p></li>
+<li><p><a class="reference internal" href="#deep-rnn-vs-shallow-rnn" id="id6">Deep RNN vs Shallow RNN</a></p></li>
+<li><p><a class="reference internal" href="#variants" id="id7">Variants</a></p></li>
+<li><p><a class="reference internal" href="#advantages" id="id8"><strong>Advantages</strong></a></p></li>
+<li><p><a class="reference internal" href="#disadvantages" id="id9"><strong>Disadvantages</strong></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#demonstration" id="id10">Demonstration</a></p>
+<ul>
+<li><p><a class="reference internal" href="#cell-1-install-and-import-libraries" id="id11"><strong>Cell 1 — Install and Import Libraries</strong></a></p></li>
+<li><p><a class="reference internal" href="#cell-2-generate-synthetic-time-series-data" id="id12"><strong>Cell 2 — Generate Synthetic Time Series Data</strong></a></p></li>
+<li><p><a class="reference internal" href="#cell-3-prepare-the-dataset" id="id13"><strong>Cell 3 — Prepare the Dataset</strong></a></p></li>
+<li><p><a class="reference internal" href="#cell-4-define-hyperparameter-grid-and-callbacks" id="id14"><strong>Cell 4 — Define Hyperparameter Grid and Callbacks</strong></a></p></li>
+<li><p><a class="reference internal" href="#cell-5-train-and-evaluate-deep-lstm-models" id="id15"><strong>Cell 5 — Train and Evaluate Deep LSTM Models</strong></a></p></li>
+<li><p><a class="reference internal" href="#cell-6-select-best-configuration" id="id16"><strong>Cell 6 — Select Best Configuration</strong></a></p></li>
+<li><p><a class="reference internal" href="#cell-7-retrain-best-deep-lstm-and-visualize-predictions" id="id17"><strong>Cell 7 — Retrain Best Deep LSTM and Visualize Predictions</strong></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#explanation-of-the-workflow" id="id18"><strong>Explanation of the Workflow</strong></a></p></li>
+<li><p><a class="reference internal" href="#hyperparameter-tuning-strategy" id="id19"><strong>Hyperparameter Tuning Strategy</strong></a></p></li>
+<li><p><a class="reference internal" href="#deep-vs-shallow-rnns" id="id20"><strong>Deep vs Shallow RNNs</strong></a></p></li>
+<li><p><a class="reference internal" href="#when-to-use-deep-stacked-rnns" id="id21"><strong>When to Use Deep (Stacked) RNNs</strong></a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="deep-stacked-rnn-explanation-intuition-and-workflow">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">Deep (Stacked) RNN — Explanation, Intuition, and Workflow</a><a class="headerlink" href="#deep-stacked-rnn-explanation-intuition-and-workflow" title="Link to this heading">#</a></h1>
+<hr class="docutils" />
+<section id="concept">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">1. <strong>Concept</strong></a><a class="headerlink" href="#concept" title="Link to this heading">#</a></h2>
+<p>A <strong>Deep or Stacked RNN</strong> is a Recurrent Neural Network with <strong>multiple RNN layers stacked on top of each other</strong>, where each layer’s output sequence serves as the input to the next.</p>
+<p>It extends the <strong>basic RNN</strong> (which has a single recurrent layer) into a <strong>multi-layer hierarchy</strong> to capture <strong>more complex temporal patterns</strong> and <strong>abstract features</strong> from sequence data.</p>
+</section>
+<hr class="docutils" />
+<section id="intuition">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">2. <strong>Intuition</strong></a><a class="headerlink" href="#intuition" title="Link to this heading">#</a></h2>
+<p>Think of a Stacked RNN as a <strong>multi-level temporal feature extractor</strong>:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Layer</p></th>
+<th class="head"><p>Role</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Lower layers</strong></p></td>
+<td><p>Capture short-term, low-level patterns (e.g., local rhythm, phoneme, short word structure).</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Higher layers</strong></p></td>
+<td><p>Capture long-term, high-level dependencies (e.g., sentence meaning, context, trend).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Like CNNs in images — deeper layers detect complex shapes — in RNNs, deeper layers detect complex time relationships.</p>
+<hr class="docutils" />
+<section id="architecture-overview">
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">Architecture Overview</a><a class="headerlink" href="#architecture-overview" title="Link to this heading">#</a></h3>
+<p><img alt="alt text" src="../../_images/deepRNN.png" /></p>
+<p>If a single-layer RNN has:</p>
+<div class="math notranslate nohighlight">
+\[
+h_t = f(W_{xh}x_t + W_{hh}h_{t-1} + b_h)
+\]</div>
+<p>Then a stacked RNN with <em>L</em> layers computes:</p>
+<div class="math notranslate nohighlight">
+\[
+h_t^{(1)} = f(W_{xh}^{(1)}x_t + W_{hh}^{(1)}h_{t-1}^{(1)} + b^{(1)})
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+h_t^{(2)} = f(W_{xh}^{(2)}h_t^{(1)} + W_{hh}^{(2)}h_{t-1}^{(2)} + b^{(2)})
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\vdots
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+h_t^{(L)} = f(W_{xh}^{(L)}h_t^{(L-1)} + W_{hh}^{(L)}h_{t-1}^{(L)} + b^{(L)})
+\]</div>
+<p>Only the top layer’s output is typically passed to the next network component (e.g., classifier or dense layer).</p>
+</section>
+<hr class="docutils" />
+<section id="workflow-summary">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">Workflow Summary</a><a class="headerlink" href="#workflow-summary" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Step</p></th>
+<th class="head"><p>Component</p></th>
+<th class="head"><p>Operation</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Input layer</p></td>
+<td><p>Feed sequence ( x_1, x_2, \dots, x_T )</p></td>
+<td><p>Sequential data input</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>First RNN layer</p></td>
+<td><p>Produces hidden sequence ( h_t^{(1)} )</p></td>
+<td><p>Learn local temporal structure</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Second RNN layer</p></td>
+<td><p>Takes ( h_t^{(1)} ) as input</p></td>
+<td><p>Learn higher-order temporal abstractions</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Final RNN / Dense layer</p></td>
+<td><p>Generates output</p></td>
+<td><p>Predict or classify</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>Loss optimization</p></td>
+<td><p>Backpropagation through time (BPTT)</p></td>
+<td><p>Adjust all layers jointly</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="deep-rnn-vs-shallow-rnn">
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">Deep RNN vs Shallow RNN</a><a class="headerlink" href="#deep-rnn-vs-shallow-rnn" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>Shallow RNN</p></th>
+<th class="head"><p>Deep (Stacked) RNN</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Layers</p></td>
+<td><p>1</p></td>
+<td><p>2+</p></td>
+</tr>
+<tr class="row-odd"><td><p>Feature depth</p></td>
+<td><p>Simple temporal features</p></td>
+<td><p>Hierarchical temporal abstractions</p></td>
+</tr>
+<tr class="row-even"><td><p>Representational power</p></td>
+<td><p>Limited</p></td>
+<td><p>Higher</p></td>
+</tr>
+<tr class="row-odd"><td><p>Training time</p></td>
+<td><p>Faster</p></td>
+<td><p>Slower</p></td>
+</tr>
+<tr class="row-even"><td><p>Tuning difficulty</p></td>
+<td><p>Easier</p></td>
+<td><p>Harder (more parameters, vanishing gradients)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Use cases</p></td>
+<td><p>Simple time-series</p></td>
+<td><p>Complex sequential tasks (speech, NLP)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="variants">
+<h3><a class="toc-backref" href="#id7" role="doc-backlink">Variants</a><a class="headerlink" href="#variants" title="Link to this heading">#</a></h3>
+<p>You can stack any recurrent cell type:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Stacked Vanilla RNN</strong></p></td>
+<td><p>Basic, but suffers vanishing gradients</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Stacked LSTM</strong></p></td>
+<td><p>Common; handles long-term dependencies well</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Stacked GRU</strong></p></td>
+<td><p>Simpler and faster than LSTM</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Stacked BiLSTM/GRU</strong></p></td>
+<td><p>Adds bidirectional context per layer</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="advantages">
+<h3><a class="toc-backref" href="#id8" role="doc-backlink"><strong>Advantages</strong></a><a class="headerlink" href="#advantages" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Advantage</p></th>
+<th class="head"><p>Explanation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Hierarchical learning</strong></p></td>
+<td><p>Deeper layers capture abstract temporal patterns</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Better generalization</strong></p></td>
+<td><p>Multi-level temporal features improve accuracy</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Reusable representation</strong></p></td>
+<td><p>Intermediate features can be used for transfer learning</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="disadvantages">
+<h3><a class="toc-backref" href="#id9" role="doc-backlink"><strong>Disadvantages</strong></a><a class="headerlink" href="#disadvantages" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Disadvantage</p></th>
+<th class="head"><p>Explanation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>More parameters</strong></p></td>
+<td><p>Higher computational cost and memory usage</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Harder to train</strong></p></td>
+<td><p>Vanishing/exploding gradient risk increases with depth</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Slower convergence</strong></p></td>
+<td><p>Needs careful tuning and normalization (e.g., layer norm, residuals)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+<p><strong>Practical Notes</strong></p>
+<ul class="simple">
+<li><p>Typical depth: <strong>2–4 layers</strong> (beyond that offers diminishing returns).</p></li>
+<li><p>Use <strong>Dropout</strong> and <strong>Batch Normalization</strong> to stabilize training.</p></li>
+<li><p>Combine with <strong>Residual Connections</strong> (skip connections) to improve gradient flow.</p></li>
+</ul>
+<hr class="docutils" />
+<p><strong>Use Cases</strong></p>
+<ul class="simple">
+<li><p>Speech recognition</p></li>
+<li><p>Sentiment analysis</p></li>
+<li><p>Time-series forecasting</p></li>
+<li><p>Language modeling</p></li>
+<li><p>Stock or sensor prediction</p></li>
+</ul>
+<hr class="docutils" />
+<p><strong>Summary Analogy</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Model</p></th>
+<th class="head"><p>Analogy</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Simple RNN</strong></p></td>
+<td><p>A single memory unit reading a sequence</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>LSTM / GRU</strong></p></td>
+<td><p>A smart memory unit with gates</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>BiRNN</strong></p></td>
+<td><p>Two smart units — one looks forward, one backward</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Deep RNN</strong></p></td>
+<td><p>A hierarchy of memory units — each level refines understanding</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="demonstration">
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">Demonstration</a><a class="headerlink" href="#demonstration" title="Link to this heading">#</a></h2>
+<hr class="docutils" />
+<section id="cell-1-install-and-import-libraries">
+<h3><a class="toc-backref" href="#id11" role="doc-backlink"><strong>Cell 1 — Install and Import Libraries</strong></a><a class="headerlink" href="#cell-1-install-and-import-libraries" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tensorflow</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tf</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tensorflow.keras.models</span><span class="w"> </span><span class="kn">import</span> <span class="n">Sequential</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tensorflow.keras.layers</span><span class="w"> </span><span class="kn">import</span> <span class="n">LSTM</span><span class="p">,</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Dropout</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tensorflow.keras.optimizers</span><span class="w"> </span><span class="kn">import</span> <span class="n">Adam</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tensorflow.keras.callbacks</span><span class="w"> </span><span class="kn">import</span> <span class="n">EarlyStopping</span><span class="p">,</span> <span class="n">LearningRateScheduler</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">itertools</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="cell-2-generate-synthetic-time-series-data">
+<h3><a class="toc-backref" href="#id12" role="doc-backlink"><strong>Cell 2 — Generate Synthetic Time Series Data</strong></a><a class="headerlink" href="#cell-2-generate-synthetic-time-series-data" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">time</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">time</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">time</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Synthetic Time Series&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Value&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/f44e7540e5f981bc715437b442e18433e367020895edb3ba7d82126a851454e0.png" src="../../_images/f44e7540e5f981bc715437b442e18433e367020895edb3ba7d82126a851454e0.png" />
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="cell-3-prepare-the-dataset">
+<h3><a class="toc-backref" href="#id13" role="doc-backlink"><strong>Cell 3 — Prepare the Dataset</strong></a><a class="headerlink" href="#cell-3-prepare-the-dataset" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">window_size</span> <span class="o">=</span> <span class="mi">30</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">-</span> <span class="n">window_size</span><span class="p">):</span>
+    <span class="n">X</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span> <span class="o">+</span> <span class="n">window_size</span><span class="p">])</span>
+    <span class="n">y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">window_size</span><span class="p">])</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">window_size</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Train samples: </span><span class="si">{</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">, Test samples: </span><span class="si">{</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train samples: 1576, Test samples: 394
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="cell-4-define-hyperparameter-grid-and-callbacks">
+<h3><a class="toc-backref" href="#id14" role="doc-backlink"><strong>Cell 4 — Define Hyperparameter Grid and Callbacks</strong></a><a class="headerlink" href="#cell-4-define-hyperparameter-grid-and-callbacks" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define hyperparameters to tune</span>
+<span class="n">units_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">]</span>
+<span class="n">dropouts</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">]</span>
+<span class="n">learning_rates</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.005</span><span class="p">]</span>
+<span class="n">batch_sizes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">]</span>
+
+<span class="c1"># Learning rate scheduler: gradual decay</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">lr_scheduler</span><span class="p">(</span><span class="n">epoch</span><span class="p">,</span> <span class="n">lr</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">lr</span> <span class="o">*</span> <span class="mf">0.9</span> <span class="k">if</span> <span class="n">epoch</span> <span class="o">&gt;</span> <span class="mi">10</span> <span class="k">else</span> <span class="n">lr</span>
+
+<span class="c1"># Early stopping to prevent overfitting</span>
+<span class="n">early_stop</span> <span class="o">=</span> <span class="n">EarlyStopping</span><span class="p">(</span><span class="n">monitor</span><span class="o">=</span><span class="s1">&#39;val_loss&#39;</span><span class="p">,</span> <span class="n">patience</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">restore_best_weights</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="cell-5-train-and-evaluate-deep-lstm-models">
+<h3><a class="toc-backref" href="#id15" role="doc-backlink"><strong>Cell 5 — Train and Evaluate Deep LSTM Models</strong></a><a class="headerlink" href="#cell-5-train-and-evaluate-deep-lstm-models" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">units</span><span class="p">,</span> <span class="n">dropout</span><span class="p">,</span> <span class="n">lr</span><span class="p">,</span> <span class="n">batch</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">units_list</span><span class="p">,</span> <span class="n">dropouts</span><span class="p">,</span> <span class="n">learning_rates</span><span class="p">,</span> <span class="n">batch_sizes</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">([</span>
+        <span class="n">LSTM</span><span class="p">(</span><span class="n">units</span><span class="p">,</span> <span class="n">return_sequences</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="n">window_size</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
+        <span class="n">Dropout</span><span class="p">(</span><span class="n">dropout</span><span class="p">),</span>
+        <span class="n">LSTM</span><span class="p">(</span><span class="n">units</span><span class="p">,</span> <span class="n">return_sequences</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+        <span class="n">Dropout</span><span class="p">(</span><span class="n">dropout</span><span class="p">),</span>
+        <span class="n">LSTM</span><span class="p">(</span><span class="n">units</span><span class="p">),</span>
+        <span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="p">])</span>
+    
+    <span class="n">optimizer</span> <span class="o">=</span> <span class="n">Adam</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="n">lr</span><span class="p">)</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;mse&#39;</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="n">optimizer</span><span class="p">)</span>
+
+    <span class="n">history</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+        <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span>
+        <span class="n">epochs</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="o">=</span><span class="n">batch</span><span class="p">,</span>
+        <span class="n">validation_split</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+        <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+        <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">early_stop</span><span class="p">,</span> <span class="n">LearningRateScheduler</span><span class="p">(</span><span class="n">lr_scheduler</span><span class="p">)]</span>
+    <span class="p">)</span>
+
+    <span class="n">test_loss</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">units</span><span class="p">,</span> <span class="n">dropout</span><span class="p">,</span> <span class="n">lr</span><span class="p">,</span> <span class="n">batch</span><span class="p">,</span> <span class="n">test_loss</span><span class="p">))</span>
+
+<span class="n">results_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Units&quot;</span><span class="p">,</span> <span class="s2">&quot;Dropout&quot;</span><span class="p">,</span> <span class="s2">&quot;Learning Rate&quot;</span><span class="p">,</span> <span class="s2">&quot;Batch Size&quot;</span><span class="p">,</span> <span class="s2">&quot;Test Loss&quot;</span><span class="p">])</span>
+<span class="n">results_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Units</th>
+      <th>Dropout</th>
+      <th>Learning Rate</th>
+      <th>Batch Size</th>
+      <th>Test Loss</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>32</td>
+      <td>0.1</td>
+      <td>0.001</td>
+      <td>16</td>
+      <td>0.013114</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>32</td>
+      <td>0.1</td>
+      <td>0.001</td>
+      <td>32</td>
+      <td>0.012691</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>32</td>
+      <td>0.1</td>
+      <td>0.005</td>
+      <td>16</td>
+      <td>0.013718</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>32</td>
+      <td>0.1</td>
+      <td>0.005</td>
+      <td>32</td>
+      <td>0.013264</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>32</td>
+      <td>0.3</td>
+      <td>0.001</td>
+      <td>16</td>
+      <td>0.014598</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>32</td>
+      <td>0.3</td>
+      <td>0.001</td>
+      <td>32</td>
+      <td>0.013379</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>32</td>
+      <td>0.3</td>
+      <td>0.005</td>
+      <td>16</td>
+      <td>0.014845</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>32</td>
+      <td>0.3</td>
+      <td>0.005</td>
+      <td>32</td>
+      <td>0.013923</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>64</td>
+      <td>0.1</td>
+      <td>0.001</td>
+      <td>16</td>
+      <td>0.013016</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>64</td>
+      <td>0.1</td>
+      <td>0.001</td>
+      <td>32</td>
+      <td>0.013961</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>64</td>
+      <td>0.1</td>
+      <td>0.005</td>
+      <td>16</td>
+      <td>0.014304</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>64</td>
+      <td>0.1</td>
+      <td>0.005</td>
+      <td>32</td>
+      <td>0.014740</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>64</td>
+      <td>0.3</td>
+      <td>0.001</td>
+      <td>16</td>
+      <td>0.013906</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>64</td>
+      <td>0.3</td>
+      <td>0.001</td>
+      <td>32</td>
+      <td>0.013192</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>64</td>
+      <td>0.3</td>
+      <td>0.005</td>
+      <td>16</td>
+      <td>0.014880</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>64</td>
+      <td>0.3</td>
+      <td>0.005</td>
+      <td>32</td>
+      <td>0.020032</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="cell-6-select-best-configuration">
+<h3><a class="toc-backref" href="#id16" role="doc-backlink"><strong>Cell 6 — Select Best Configuration</strong></a><a class="headerlink" href="#cell-6-select-best-configuration" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">best_config</span> <span class="o">=</span> <span class="n">results_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">results_df</span><span class="p">[</span><span class="s2">&quot;Test Loss&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmin</span><span class="p">()]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Best Configuration:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">best_config</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best Configuration:
+Units            32.000000
+Dropout           0.100000
+Learning Rate     0.001000
+Batch Size       32.000000
+Test Loss         0.012691
+Name: 1, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="cell-7-retrain-best-deep-lstm-and-visualize-predictions">
+<h3><a class="toc-backref" href="#id17" role="doc-backlink"><strong>Cell 7 — Retrain Best Deep LSTM and Visualize Predictions</strong></a><a class="headerlink" href="#cell-7-retrain-best-deep-lstm-and-visualize-predictions" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">best_units</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">best_config</span><span class="p">[</span><span class="s2">&quot;Units&quot;</span><span class="p">])</span>
+<span class="n">best_dropout</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">best_config</span><span class="p">[</span><span class="s2">&quot;Dropout&quot;</span><span class="p">])</span>
+<span class="n">best_lr</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">best_config</span><span class="p">[</span><span class="s2">&quot;Learning Rate&quot;</span><span class="p">])</span>
+<span class="n">best_batch</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">best_config</span><span class="p">[</span><span class="s2">&quot;Batch Size&quot;</span><span class="p">])</span>
+
+<span class="n">best_model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">([</span>
+    <span class="n">LSTM</span><span class="p">(</span><span class="n">best_units</span><span class="p">,</span> <span class="n">return_sequences</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="n">window_size</span><span class="p">,</span> <span class="mi">1</span><span class="p">)),</span>
+    <span class="n">Dropout</span><span class="p">(</span><span class="n">best_dropout</span><span class="p">),</span>
+    <span class="n">LSTM</span><span class="p">(</span><span class="n">best_units</span><span class="p">,</span> <span class="n">return_sequences</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+    <span class="n">Dropout</span><span class="p">(</span><span class="n">best_dropout</span><span class="p">),</span>
+    <span class="n">LSTM</span><span class="p">(</span><span class="n">best_units</span><span class="p">),</span>
+    <span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="p">])</span>
+
+<span class="n">best_model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;mse&#39;</span><span class="p">,</span> <span class="n">optimizer</span><span class="o">=</span><span class="n">Adam</span><span class="p">(</span><span class="n">learning_rate</span><span class="o">=</span><span class="n">best_lr</span><span class="p">))</span>
+
+<span class="n">history</span> <span class="o">=</span> <span class="n">best_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span>
+    <span class="n">epochs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="o">=</span><span class="n">best_batch</span><span class="p">,</span>
+    <span class="n">validation_split</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">callbacks</span><span class="o">=</span><span class="p">[</span><span class="n">early_stop</span><span class="p">,</span> <span class="n">LearningRateScheduler</span><span class="p">(</span><span class="n">lr_scheduler</span><span class="p">)]</span>
+<span class="p">)</span>
+
+<span class="n">preds</span> <span class="o">=</span> <span class="n">best_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;True&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">preds</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Predicted&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Deep LSTM Predictions vs True Values&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Epoch 1/50
+<span class=" -Color -Color-Bold">45/45</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">8s</span> 49ms/step - loss: 0.6877 - val_loss: 0.0795 - learning_rate: 0.0010
+Epoch 2/50
+<span class=" -Color -Color-Bold">45/45</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">2s</span> 36ms/step - loss: 0.0780 - val_loss: 0.0468 - learning_rate: 0.0010
+Epoch 3/50
+<span class=" -Color -Color-Bold">45/45</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">2s</span> 33ms/step - loss: 0.0436 - val_loss: 0.0265 - learning_rate: 0.0010
+Epoch 4/50
+<span class=" -Color -Color-Bold">45/45</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">1s</span> 31ms/step - loss: 0.0279 - val_loss: 0.0153 - learning_rate: 0.0010
+Epoch 5/50
+<span class=" -Color -Color-Bold">45/45</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">2s</span> 33ms/step - loss: 0.0179 - val_loss: 0.0157 - learning_rate: 0.0010
+Epoch 6/50
+<span class=" -Color -Color-Bold">45/45</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">3s</span> 33ms/step - loss: 0.0164 - val_loss: 0.0171 - learning_rate: 0.0010
+Epoch 7/50
+<span class=" -Color -Color-Bold">45/45</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">2s</span> 34ms/step - loss: 0.0152 - val_loss: 0.0168 - learning_rate: 0.0010
+Epoch 8/50
+<span class=" -Color -Color-Bold">45/45</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">1s</span> 32ms/step - loss: 0.0155 - val_loss: 0.0159 - learning_rate: 0.0010
+Epoch 9/50
+<span class=" -Color -Color-Bold">45/45</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">3s</span> 31ms/step - loss: 0.0153 - val_loss: 0.0170 - learning_rate: 0.0010
+<span class=" -Color -Color-Bold">13/13</span> <span class=" -Color -Color-Green">━━━━━━━━━━━━━━━━━━━━</span> <span class=" -Color -Color-Bold">1s</span> 43ms/step
+</pre></div>
+</div>
+<img alt="../../_images/c1ce6208d0219afdc38dcc6f437ad823d5a227160a6a2fc4202f5d8d0ffa5c41.png" src="../../_images/c1ce6208d0219afdc38dcc6f437ad823d5a227160a6a2fc4202f5d8d0ffa5c41.png" />
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="explanation-of-the-workflow">
+<h2><a class="toc-backref" href="#id18" role="doc-backlink"><strong>Explanation of the Workflow</strong></a><a class="headerlink" href="#explanation-of-the-workflow" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Step</p></th>
+<th class="head"><p>Operation</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Generate synthetic data</p></td>
+<td><p>Simulates complex temporal behavior</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Convert to sliding windows</p></td>
+<td><p>Creates sequence samples</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Define deep LSTM</p></td>
+<td><p>Multi-layer recurrent structure for hierarchical learning</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Tune hyperparameters</p></td>
+<td><p>Grid search to optimize model performance</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>Apply early stopping and learning rate decay</p></td>
+<td><p>Prevent overfitting and improve convergence</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>Retrain best configuration</p></td>
+<td><p>Obtain optimal final model</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>Evaluate and visualize</p></td>
+<td><p>Assess forecasting accuracy</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="hyperparameter-tuning-strategy">
+<h2><a class="toc-backref" href="#id19" role="doc-backlink"><strong>Hyperparameter Tuning Strategy</strong></a><a class="headerlink" href="#hyperparameter-tuning-strategy" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Hyperparameter</p></th>
+<th class="head"><p>Role</p></th>
+<th class="head"><p>Typical Range</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Units</strong></p></td>
+<td><p>Controls memory capacity</p></td>
+<td><p>32–128</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Dropout</strong></p></td>
+<td><p>Prevents overfitting</p></td>
+<td><p>0.1–0.5</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Learning Rate</strong></p></td>
+<td><p>Controls update step</p></td>
+<td><p>0.001–0.01</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Batch Size</strong></p></td>
+<td><p>Affects stability and speed</p></td>
+<td><p>16–64</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Number of Layers</strong></p></td>
+<td><p>Controls depth of temporal abstraction</p></td>
+<td><p>2–4 layers</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="deep-vs-shallow-rnns">
+<h2><a class="toc-backref" href="#id20" role="doc-backlink"><strong>Deep vs Shallow RNNs</strong></a><a class="headerlink" href="#deep-vs-shallow-rnns" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Aspect</p></th>
+<th class="head"><p>Shallow RNN</p></th>
+<th class="head"><p>Deep (Stacked) RNN</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Layers</p></td>
+<td><p>1</p></td>
+<td><p>≥ 2</p></td>
+</tr>
+<tr class="row-odd"><td><p>Temporal abstraction</p></td>
+<td><p>Single-level</p></td>
+<td><p>Multi-level</p></td>
+</tr>
+<tr class="row-even"><td><p>Expressiveness</p></td>
+<td><p>Limited</p></td>
+<td><p>High</p></td>
+</tr>
+<tr class="row-odd"><td><p>Training difficulty</p></td>
+<td><p>Easier</p></td>
+<td><p>Harder</p></td>
+</tr>
+<tr class="row-even"><td><p>Use cases</p></td>
+<td><p>Simple trends</p></td>
+<td><p>Complex temporal patterns</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="when-to-use-deep-stacked-rnns">
+<h2><a class="toc-backref" href="#id21" role="doc-backlink"><strong>When to Use Deep (Stacked) RNNs</strong></a><a class="headerlink" href="#when-to-use-deep-stacked-rnns" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Scenario</p></th>
+<th class="head"><p>Reason</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Long or multi-scale sequences</p></td>
+<td><p>Each layer captures different temporal granularity</p></td>
+</tr>
+<tr class="row-odd"><td><p>Complex signals (speech, stock, sensor)</p></td>
+<td><p>Deep architecture models multi-level dynamics</p></td>
+</tr>
+<tr class="row-even"><td><p>When accuracy &gt; speed</p></td>
+<td><p>Deeper models generalize better</p></td>
+</tr>
+<tr class="row-odd"><td><p>When sufficient data available</p></td>
+<td><p>More parameters need more training data</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+<p>Would you like me to <strong>extend this to compare shallow vs deep RNN performance</strong> on the same dataset (side-by-side training curves and accuracy metrics)?</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./rnn\variants"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="04_part.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">BiRNN</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="06_part.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Echo State Networks (ESN)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concept">1. <strong>Concept</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition">2. <strong>Intuition</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture-overview">Architecture Overview</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-summary">Workflow Summary</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-rnn-vs-shallow-rnn">Deep RNN vs Shallow RNN</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#variants">Variants</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages"><strong>Advantages</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#disadvantages"><strong>Disadvantages</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demonstration">Demonstration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-1-install-and-import-libraries"><strong>Cell 1 — Install and Import Libraries</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-2-generate-synthetic-time-series-data"><strong>Cell 2 — Generate Synthetic Time Series Data</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-3-prepare-the-dataset"><strong>Cell 3 — Prepare the Dataset</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-4-define-hyperparameter-grid-and-callbacks"><strong>Cell 4 — Define Hyperparameter Grid and Callbacks</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-5-train-and-evaluate-deep-lstm-models"><strong>Cell 5 — Train and Evaluate Deep LSTM Models</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-6-select-best-configuration"><strong>Cell 6 — Select Best Configuration</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-7-retrain-best-deep-lstm-and-visualize-predictions"><strong>Cell 7 — Retrain Best Deep LSTM and Visualize Predictions</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#explanation-of-the-workflow"><strong>Explanation of the Workflow</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameter-tuning-strategy"><strong>Hyperparameter Tuning Strategy</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-vs-shallow-rnns"><strong>Deep vs Shallow RNNs</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-to-use-deep-stacked-rnns"><strong>When to Use Deep (Stacked) RNNs</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By svgoudar
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

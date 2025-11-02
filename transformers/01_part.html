@@ -1,0 +1,974 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Architecture &#8212; Machine Learning Handbook</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=4c969af8" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-examples.css?v=e236af4b" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.bundle.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-shadow.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-punk.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-noir.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-light.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-borderless.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/micromodal.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=40389e5b" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/jquery.js?v=5d32c60e"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=7f8ff830"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/tabs.js?v=3ee01567"></script>
+    <script src="../_static/js/hoverxref.js"></script>
+    <script src="../_static/js/tooltipster.bundle.min.js"></script>
+    <script src="../_static/js/micromodal.min.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'transformers/01_part';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The Transformer Encoder Layer (Deep Explanation)" href="02_part.html" />
+    <link rel="prev" title="The Transformer" href="overview.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../introduction.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Machine Learning Handbook - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Machine Learning Handbook - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../introduction.html">
+                    Deep Learning
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ann/overview.html">Artificial Neural Network (ANN)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ann/neural_network/overview.html">Neural Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ann/neural_network/01_part.html">Intuition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/neural_network/02_part.html">Problem Statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/neural_network/03_part.html">Perceptron</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/neural_network/04_part.html">Multi-Layer Neural Networks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/neural_network/05_part.html">Vanishing Gradient Problem in Deep Learning</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ann/cost_loss_function/overview.html">Loss Function vs Cost Function</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ann/cost_loss_function/01_part.html">Cost Function vs Loss Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/cost_loss_function/02_part.html">Loss Functions for Regression in Neural Networks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/cost_loss_function/03_part.html">Loss Functions for Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/cost_loss_function/04_part.html">Choice of Loss Function</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ann/optimizers/overview.html">Optmizers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ann/optimizers/01_part.html">Gradient Descent Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/optimizers/02_part.html">Stochastic Gradient Descent (SGD) Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/optimizers/03_part.html">Mini-batch Stochastic Gradient Descent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/optimizers/04_part.html">SGD with Momentum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/optimizers/05_part.html">Adagrad Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/optimizers/06_part.html">Adadelta and RMSProp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/optimizers/07_part.html">Adam Optmizers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../ann/techniques/01_part.html">Exploding Gradient Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ann/techniques/02_part.html">Weight Initializing Techniques</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ann/techniques/03_part.html">Dropout Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ann/techniques/04_part.html">Optmization Techniques</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ann/techniques/05_part.html">Regularization</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../cnn/overview.html">CNN (Convolution Neural Network)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cnn/01_part.html">CNN v/s Brain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cnn/02_part.html">Know about Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cnn/03_part.html">Convolution Operation in CNNs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cnn/04_part.html">Padding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cnn/05_part.html">ANN vs CNN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cnn/06_part.html">Pooling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cnn/07_part.html">Fully Connected Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cnn/08_part.html">CNN Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cnn/09_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ffn/overview.html">FeedForward Neural Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../ffn/01_part.html">Intiution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffn/02_part.html">Workflow</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../ffn/03_part.html">Training &amp; Hyper-Parameter Tuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ffn/04_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../rnn/overview.html">RNN</a></li>
+
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="overview.html">The Transformer</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_part.html">The Transformer Encoder Layer (Deep Explanation)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_part.html">Positional Encoding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_part.html"><strong>Residual Connection + Layer Normalization</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_part.html"><strong>Transformer Decoder Layer</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_part.html">Practicals</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../gan/overview.html"><strong>Generative Adversarial Network (GAN)</strong></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../gan/01_part.html">Intuition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gan/02_part.html">Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gan/03_part.html">Applications of Generative Adversarial Networks (GANs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gan/04_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../rbf/overview.html">Radial Basis Function (RBF) Neural Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../rbf/01_part.html">Intuition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rbf/02_part.html">Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rbf/03_part.html">Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rbf/04_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../siamese/overview.html">Siamese Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../siamese/01_part.html">Intuition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../siamese/02_part.html">Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../siamese/03_part.html">Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../siamese/04_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../autoencoders/overview.html">Autoencoders</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../autoencoders/01_part.html">Intiution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoencoders/02_part.html">Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoencoders/03_part.html">Application of Autoencoders</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/svgoudar/AI-ML-Essentials/blob/master/transformers/01_part.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/svgoudar/AI-ML-Essentials" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/svgoudar/AI-ML-Essentials/issues/new?title=Issue%20on%20page%20%2Ftransformers/01_part.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/transformers/01_part.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Architecture</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-this-matters">Why this matters:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overall-structure-encoderdecoder"><strong>Overall Structure (Encoder–Decoder)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inside-the-encoder"><strong>Inside the Encoder</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inside-the-decoder"><strong>Inside the Decoder</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-mechanism-attention"><strong>Core Mechanism — Attention</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scaled-dot-product-attention"><strong>Scaled Dot-Product Attention</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-head-attention"><strong>Multi-Head Attention</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input-representation-positional-encoding"><strong>Input Representation (Positional Encoding)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-parts">Two parts:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-transformers-are-superior"><strong>Why Transformers Are Superior</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#real-performance"><strong>Real Performance</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intuitive-analogy"><strong>Intuitive Analogy</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-it-matters"><strong>Why It Matters</strong></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <nav class="contents" id="contents" role="doc-toc">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#architecture" id="id1">Architecture</a></p>
+<ul>
+<li><p><a class="reference internal" href="#why-this-matters" id="id2">Why this matters:</a></p></li>
+<li><p><a class="reference internal" href="#overall-structure-encoderdecoder" id="id3"><strong>Overall Structure (Encoder–Decoder)</strong></a></p>
+<ul>
+<li><p><a class="reference internal" href="#inside-the-encoder" id="id4"><strong>Inside the Encoder</strong></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#inside-the-decoder" id="id5"><strong>Inside the Decoder</strong></a></p></li>
+<li><p><a class="reference internal" href="#core-mechanism-attention" id="id6"><strong>Core Mechanism — Attention</strong></a></p>
+<ul>
+<li><p><a class="reference internal" href="#scaled-dot-product-attention" id="id7"><strong>Scaled Dot-Product Attention</strong></a></p></li>
+<li><p><a class="reference internal" href="#multi-head-attention" id="id8"><strong>Multi-Head Attention</strong></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#input-representation-positional-encoding" id="id9"><strong>Input Representation (Positional Encoding)</strong></a></p>
+<ul>
+<li><p><a class="reference internal" href="#two-parts" id="id10">Two parts:</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#why-transformers-are-superior" id="id11"><strong>Why Transformers Are Superior</strong></a></p></li>
+<li><p><a class="reference internal" href="#real-performance" id="id12"><strong>Real Performance</strong></a></p></li>
+<li><p><a class="reference internal" href="#intuitive-analogy" id="id13"><strong>Intuitive Analogy</strong></a></p></li>
+<li><p><a class="reference internal" href="#why-it-matters" id="id14"><strong>Why It Matters</strong></a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="architecture">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">Architecture</a><a class="headerlink" href="#architecture" title="Link to this heading">#</a></h1>
+<p>A <strong>Transformer</strong> is a <strong>deep learning architecture</strong> for sequence-based problems (like language translation, summarization, or text generation).
+It replaces older architectures — <strong>RNNs</strong> and <strong>CNNs</strong> — by using only <strong>attention mechanisms</strong>, removing the need for sequential processing.</p>
+<section id="why-this-matters">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Why this matters:</a><a class="headerlink" href="#why-this-matters" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>RNNs</strong> process words one at a time → slow, poor long-range memory.</p></li>
+<li><p><strong>Transformers</strong> process <strong>all words at once</strong>, learning how much each word should attend to others → fast and global understanding.</p></li>
+</ul>
+<p>So instead of reading a sentence left to right, it looks at <strong>the whole sentence simultaneously</strong>.</p>
+</section>
+<hr class="docutils" />
+<section id="overall-structure-encoderdecoder">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink"><strong>Overall Structure (Encoder–Decoder)</strong></a><a class="headerlink" href="#overall-structure-encoderdecoder" title="Link to this heading">#</a></h2>
+<p>Transformers have two main parts — the <strong>encoder</strong> and the <strong>decoder</strong>.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Component</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Encoder</strong></p></td>
+<td><p>Reads the input sequence (e.g., English sentence) and converts it into vector representations (<code class="docutils literal notranslate"><span class="pre">z₁,</span> <span class="pre">z₂,</span> <span class="pre">…,</span> <span class="pre">zₙ</span></code>).</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Decoder</strong></p></td>
+<td><p>Takes these vectors and generates the output sequence (e.g., French translation) <strong>one word at a time</strong>, using the previous word’s predictions as input.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Both the encoder and decoder have <strong>6 identical layers</strong> (in the original paper).</p>
+<p><img alt="alt text" src="../_images/transformers_arc.png" /></p>
+<hr class="docutils" />
+<section id="inside-the-encoder">
+<h3><a class="toc-backref" href="#id4" role="doc-backlink"><strong>Inside the Encoder</strong></a><a class="headerlink" href="#inside-the-encoder" title="Link to this heading">#</a></h3>
+<p>Each encoder layer has two sub-layers:</p>
+<ol class="arabic">
+<li><p><strong>Multi-Head Self-Attention:</strong></p>
+<ul class="simple">
+<li><p>Every token (word) in the sentence looks at <strong>all other tokens</strong> to decide which are important for its meaning.</p></li>
+<li><p>Example: In “The cat sat on the mat,” “cat” may focus more on “sat” than “mat.”</p></li>
+</ul>
+<p>All three — <strong>Queries (Q)</strong>, <strong>Keys (K)</strong>, and <strong>Values (V)</strong> — come from the same source: the input sentence.</p>
+</li>
+<li><p><strong>Feed-Forward Network (FFN):</strong></p>
+<ul class="simple">
+<li><p>A small two-layer neural network applied to each word’s embedding independently to add non-linearity and transform the representation.</p></li>
+</ul>
+</li>
+</ol>
+<ul class="simple">
+<li><p><strong>Residual + LayerNorm:</strong></p>
+<ul>
+<li><p>Each sub-layer has a <strong>residual connection</strong> (<code class="docutils literal notranslate"><span class="pre">output</span> <span class="pre">=</span> <span class="pre">LayerNorm(x</span> <span class="pre">+</span> <span class="pre">Sublayer(x))</span></code>) — this stabilizes training and helps gradients flow through very deep networks.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="inside-the-decoder">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink"><strong>Inside the Decoder</strong></a><a class="headerlink" href="#inside-the-decoder" title="Link to this heading">#</a></h2>
+<p>Each decoder layer has <strong>three</strong> sub-layers:</p>
+<ol class="arabic simple">
+<li><p><strong>Masked Multi-Head Self-Attention:</strong></p>
+<ul class="simple">
+<li><p>The decoder cannot “peek” at future words (to maintain the sequence prediction property).</p></li>
+<li><p>Masking ensures word <em>i</em> only attends to previous words (<em>1…i-1</em>).</p></li>
+</ul>
+</li>
+<li><p><strong>Encoder–Decoder Attention:</strong></p>
+<ul class="simple">
+<li><p>Allows the decoder to attend to the encoder’s output (i.e., “look” at the input sentence).</p></li>
+<li><p>Example: While generating the French word for “cat,” the decoder focuses on “cat” in English.</p></li>
+</ul>
+</li>
+<li><p><strong>Feed-Forward Network (FFN):</strong></p>
+<ul class="simple">
+<li><p>Same as in the encoder; adds non-linearity.</p></li>
+</ul>
+</li>
+</ol>
+<p>Each sub-layer also has residual connections and normalization.</p>
+</section>
+<hr class="docutils" />
+<section id="core-mechanism-attention">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink"><strong>Core Mechanism — Attention</strong></a><a class="headerlink" href="#core-mechanism-attention" title="Link to this heading">#</a></h2>
+<section id="scaled-dot-product-attention">
+<h3><a class="toc-backref" href="#id7" role="doc-backlink"><strong>Scaled Dot-Product Attention</strong></a><a class="headerlink" href="#scaled-dot-product-attention" title="Link to this heading">#</a></h3>
+<p>This is the mathematical engine behind everything.</p>
+<p>Given:</p>
+<ul class="simple">
+<li><p>Queries (Q)</p></li>
+<li><p>Keys (K)</p></li>
+<li><p>Values (V)</p></li>
+</ul>
+<p>The formula:
+$<span class="math notranslate nohighlight">\(
+\text{Attention}(Q,K,V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V
+\)</span>$</p>
+<p>Intuitively:</p>
+<ul class="simple">
+<li><p>Each <strong>query</strong> compares itself with all <strong>keys</strong> (similarity check).</p></li>
+<li><p>The <strong>softmax</strong> converts these similarity scores into probabilities (attention weights).</p></li>
+<li><p>The output is a <strong>weighted sum of the values (V)</strong>.</p></li>
+</ul>
+<p>This gives each token a context-aware representation of how much to “focus” on every other token.</p>
+<p>The <strong>scaling factor</strong> <span class="math notranslate nohighlight">\(\sqrt{d_k}\)</span> prevents large dot products from causing vanishing gradients.</p>
+</section>
+<hr class="docutils" />
+<section id="multi-head-attention">
+<h3><a class="toc-backref" href="#id8" role="doc-backlink"><strong>Multi-Head Attention</strong></a><a class="headerlink" href="#multi-head-attention" title="Link to this heading">#</a></h3>
+<p>Instead of doing one attention computation, Transformers use multiple in parallel.</p>
+<p>Steps:</p>
+<ol class="arabic simple">
+<li><p>Split Q, K, V into <em>h</em> smaller “heads.”</p></li>
+<li><p>Perform attention on each.</p></li>
+<li><p>Concatenate all results.</p></li>
+<li><p>Project back to full dimension.</p></li>
+</ol>
+<p>This allows different heads to learn <strong>different relationships</strong> (syntax, semantics, position, etc.).</p>
+<p>Example:</p>
+<ul class="simple">
+<li><p>One head might focus on verb–subject relationships.</p></li>
+<li><p>Another might focus on adjectives modifying nouns.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="input-representation-positional-encoding">
+<h2><a class="toc-backref" href="#id9" role="doc-backlink"><strong>Input Representation (Positional Encoding)</strong></a><a class="headerlink" href="#input-representation-positional-encoding" title="Link to this heading">#</a></h2>
+<p>Transformers don’t use recurrence or convolution, so they can’t automatically track token order.</p>
+<section id="two-parts">
+<h3><a class="toc-backref" href="#id10" role="doc-backlink">Two parts:</a><a class="headerlink" href="#two-parts" title="Link to this heading">#</a></h3>
+<ol class="arabic simple">
+<li><p><strong>Embeddings:</strong>
+Convert each word to a continuous vector (<code class="docutils literal notranslate"><span class="pre">d_model</span> <span class="pre">=</span> <span class="pre">512</span></code>).</p></li>
+<li><p><strong>Positional Encoding:</strong>
+Add sinusoidal signals to embeddings to represent word position:
+$<span class="math notranslate nohighlight">\(
+PE_{(pos, 2i)} = \sin\left(\frac{pos}{10000^{2i/d_{\text{model}}}}\right)
+\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(
+PE_{(pos, 2i+1)} = \cos\left(\frac{pos}{10000^{2i/d_{\text{model}}}}\right)
+\)</span>$
+This allows the model to <strong>learn order and distance</strong> relationships between words.</p></li>
+</ol>
+</section>
+</section>
+<hr class="docutils" />
+<section id="why-transformers-are-superior">
+<h2><a class="toc-backref" href="#id11" role="doc-backlink"><strong>Why Transformers Are Superior</strong></a><a class="headerlink" href="#why-transformers-are-superior" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>Transformer</p></th>
+<th class="head"><p>RNN</p></th>
+<th class="head"><p>CNN</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Computation</strong></p></td>
+<td><p>Fully parallel (O(1))</p></td>
+<td><p>Sequential (O(n))</p></td>
+<td><p>Limited local parallel</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Dependency length</strong></p></td>
+<td><p>Constant (any word can connect to any other)</p></td>
+<td><p>Linear (depends on distance)</p></td>
+<td><p>Log/Linear</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Training speed</strong></p></td>
+<td><p>Very high</p></td>
+<td><p>Slow</p></td>
+<td><p>Medium</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Interpretability</strong></p></td>
+<td><p>Clear (attention weights)</p></td>
+<td><p>Opaque</p></td>
+<td><p>Moderate</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="real-performance">
+<h2><a class="toc-backref" href="#id12" role="doc-backlink"><strong>Real Performance</strong></a><a class="headerlink" href="#real-performance" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>English → German: <strong>BLEU = 28.4</strong></p></li>
+<li><p>English → French: <strong>BLEU = 41.8</strong></p></li>
+</ul>
+<p>Both <strong>outperformed previous RNN and CNN models</strong> by over <strong>2 BLEU points</strong>, training in just <strong>12 hours on 8 GPUs</strong> — showing that attention-based architectures are more efficient and scalable.</p>
+</section>
+<hr class="docutils" />
+<section id="intuitive-analogy">
+<h2><a class="toc-backref" href="#id13" role="doc-backlink"><strong>Intuitive Analogy</strong></a><a class="headerlink" href="#intuitive-analogy" title="Link to this heading">#</a></h2>
+<p>Imagine translating a sentence:</p>
+<blockquote>
+<div><p>“The book that you gave me is on the table.”</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>An RNN reads word-by-word and may forget earlier words.</p></li>
+<li><p>A Transformer looks at <strong>the entire sentence simultaneously</strong>, and when generating each output word, it “attends” to the most relevant parts (like focusing on “book” when translating “livre”).</p></li>
+</ul>
+<p>It’s like a <strong>smart spotlight</strong> scanning all words and focusing on the most relevant ones for each step.</p>
+</section>
+<hr class="docutils" />
+<section id="why-it-matters">
+<h2><a class="toc-backref" href="#id14" role="doc-backlink"><strong>Why It Matters</strong></a><a class="headerlink" href="#why-it-matters" title="Link to this heading">#</a></h2>
+<p>Transformers are the foundation of <strong>modern AI language and vision models</strong>:</p>
+<ul class="simple">
+<li><p><strong>BERT, GPT, T5, BART, Whisper, ViT</strong> — all use this same attention-based core.</p></li>
+<li><p>They scale efficiently, train fast, and capture global context better than any previous model.</p></li>
+</ul>
+<hr class="docutils" />
+<p><strong>In Summary</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Concept</p></th>
+<th class="head"><p>Key Idea</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Attention</strong></p></td>
+<td><p>Learn relevance between tokens.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Multi-Head Attention</strong></p></td>
+<td><p>Look at information from multiple perspectives.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Positional Encoding</strong></p></td>
+<td><p>Add order to token embeddings.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Encoder–Decoder</strong></p></td>
+<td><p>Encode input → generate output.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Residual Connections</strong></p></td>
+<td><p>Stabilize deep training.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Result</strong></p></td>
+<td><p>Fast, interpretable, and globally contextual sequence modeling.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+<p><strong>In essence:</strong></p>
+<blockquote>
+<div><p>The Transformer learns how every word relates to every other word — globally and in parallel — enabling unprecedented speed, scalability, and performance in modern deep learning.</p>
+</div></blockquote>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./transformers"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="overview.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">The Transformer</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="02_part.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">The Transformer Encoder Layer (Deep Explanation)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-this-matters">Why this matters:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overall-structure-encoderdecoder"><strong>Overall Structure (Encoder–Decoder)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inside-the-encoder"><strong>Inside the Encoder</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#inside-the-decoder"><strong>Inside the Decoder</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-mechanism-attention"><strong>Core Mechanism — Attention</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scaled-dot-product-attention"><strong>Scaled Dot-Product Attention</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multi-head-attention"><strong>Multi-Head Attention</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input-representation-positional-encoding"><strong>Input Representation (Positional Encoding)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#two-parts">Two parts:</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-transformers-are-superior"><strong>Why Transformers Are Superior</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#real-performance"><strong>Real Performance</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intuitive-analogy"><strong>Intuitive Analogy</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-it-matters"><strong>Why It Matters</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By svgoudar
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

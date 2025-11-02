@@ -1,0 +1,1398 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Echo State Networks (ESN) &#8212; Machine Learning Handbook</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=4c969af8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-examples.css?v=e236af4b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.bundle.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-shadow.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-punk.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-noir.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-light.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-borderless.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/micromodal.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=40389e5b" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/jquery.js?v=5d32c60e"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=7f8ff830"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../../_static/tabs.js?v=3ee01567"></script>
+    <script src="../../_static/js/hoverxref.js"></script>
+    <script src="../../_static/js/tooltipster.bundle.min.js"></script>
+    <script src="../../_static/js/micromodal.min.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'rnn/variants/06_part';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Attention-Based RNN (Vanilla)" href="07_part.html" />
+    <link rel="prev" title="Deep (Stacked) RNN — Explanation, Intuition, and Workflow" href="05_part.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../introduction.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Machine Learning Handbook - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Machine Learning Handbook - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../introduction.html">
+                    Deep Learning
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ann/overview.html">Artificial Neural Network (ANN)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../ann/neural_network/overview.html">Neural Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/neural_network/01_part.html">Intuition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/neural_network/02_part.html">Problem Statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/neural_network/03_part.html">Perceptron</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/neural_network/04_part.html">Multi-Layer Neural Networks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/neural_network/05_part.html">Vanishing Gradient Problem in Deep Learning</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../ann/cost_loss_function/overview.html">Loss Function vs Cost Function</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/cost_loss_function/01_part.html">Cost Function vs Loss Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/cost_loss_function/02_part.html">Loss Functions for Regression in Neural Networks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/cost_loss_function/03_part.html">Loss Functions for Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/cost_loss_function/04_part.html">Choice of Loss Function</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../ann/optimizers/overview.html">Optmizers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/optimizers/01_part.html">Gradient Descent Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/optimizers/02_part.html">Stochastic Gradient Descent (SGD) Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/optimizers/03_part.html">Mini-batch Stochastic Gradient Descent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/optimizers/04_part.html">SGD with Momentum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/optimizers/05_part.html">Adagrad Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/optimizers/06_part.html">Adadelta and RMSProp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/optimizers/07_part.html">Adam Optmizers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ann/techniques/01_part.html">Exploding Gradient Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ann/techniques/02_part.html">Weight Initializing Techniques</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ann/techniques/03_part.html">Dropout Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ann/techniques/04_part.html">Optmization Techniques</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ann/techniques/05_part.html">Regularization</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../cnn/overview.html">CNN (Convolution Neural Network)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/01_part.html">CNN v/s Brain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/02_part.html">Know about Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/03_part.html">Convolution Operation in CNNs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/04_part.html">Padding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/05_part.html">ANN vs CNN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/06_part.html">Pooling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/07_part.html">Fully Connected Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/08_part.html">CNN Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/09_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ffn/overview.html">FeedForward Neural Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ffn/01_part.html">Intiution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffn/02_part.html">Workflow</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../ffn/03_part.html">Training &amp; Hyper-Parameter Tuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffn/04_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">RNN</a></li>
+
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../transformers/overview.html">The Transformer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/01_part.html">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/02_part.html">The Transformer Encoder Layer (Deep Explanation)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/03_part.html">Positional Encoding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/04_part.html"><strong>Residual Connection + Layer Normalization</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/05_part.html"><strong>Transformer Decoder Layer</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/06_part.html">Practicals</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../gan/overview.html"><strong>Generative Adversarial Network (GAN)</strong></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../gan/01_part.html">Intuition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gan/02_part.html">Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gan/03_part.html">Applications of Generative Adversarial Networks (GANs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gan/04_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../rbf/overview.html">Radial Basis Function (RBF) Neural Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../rbf/01_part.html">Intuition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rbf/02_part.html">Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rbf/03_part.html">Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rbf/04_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../siamese/overview.html">Siamese Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../siamese/01_part.html">Intuition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../siamese/02_part.html">Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../siamese/03_part.html">Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../siamese/04_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../autoencoders/overview.html">Autoencoders</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../autoencoders/01_part.html">Intiution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoencoders/02_part.html">Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoencoders/03_part.html">Application of Autoencoders</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/svgoudar/AI-ML-Essentials/blob/master/rnn/variants/06_part.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/svgoudar/AI-ML-Essentials" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/svgoudar/AI-ML-Essentials/issues/new?title=Issue%20on%20page%20%2Frnn/variants/06_part.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/rnn/variants/06_part.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Echo State Networks (ESN)</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concept"><strong>Concept</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-intuition"><strong>Core Intuition</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture-overview"><strong>Architecture Overview</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-workflow"><strong>Mathematical Workflow</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#echo-state-property-esp"><strong>Echo State Property (ESP)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-summary"><strong>Workflow Summary</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intuitive-analogy"><strong>Intuitive Analogy</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages"><strong>Advantages</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#disadvantages"><strong>Disadvantages</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-to-use-esns"><strong>When to Use ESNs</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#typical-hyperparameters"><strong>Typical Hyperparameters</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-with-other-rnns"><strong>Comparison with Other RNNs</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demonstration">Demonstration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-1-import-dependencies"><strong>Cell 1 — Import Dependencies</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-2-generate-synthetic-time-series-data">🧩 <strong>Cell 2 — Generate Synthetic Time-Series Data</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-3-train-test-split">🧩 <strong>Cell 3 — Train/Test Split</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-4-define-esn-helper-functions"><strong>Cell 4 — Define ESN Helper Functions</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-5-define-hyperparameter-grid">🧩 <strong>Cell 5 — Define Hyperparameter Grid</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-6-train-and-tune-esn-models">🧩 <strong>Cell 6 — Train and Tune ESN Models</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-7-display-best-configuration">🧩 <strong>Cell 7 — Display Best Configuration</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-8-retrain-best-esn-and-visualize-predictions"><strong>Cell 8 — Retrain Best ESN and Visualize Predictions</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-happens-here"><strong>What Happens Here</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tuning-parameters-summary"><strong>Tuning Parameters Summary</strong></a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <nav class="contents" id="contents" role="doc-toc">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#echo-state-networks-esn" id="id1">Echo State Networks (ESN)</a></p>
+<ul>
+<li><p><a class="reference internal" href="#concept" id="id2"><strong>Concept</strong></a></p></li>
+<li><p><a class="reference internal" href="#core-intuition" id="id3"><strong>Core Intuition</strong></a></p></li>
+<li><p><a class="reference internal" href="#architecture-overview" id="id4"><strong>Architecture Overview</strong></a></p></li>
+<li><p><a class="reference internal" href="#mathematical-workflow" id="id5"><strong>Mathematical Workflow</strong></a></p></li>
+<li><p><a class="reference internal" href="#echo-state-property-esp" id="id6"><strong>Echo State Property (ESP)</strong></a></p></li>
+<li><p><a class="reference internal" href="#workflow-summary" id="id7"><strong>Workflow Summary</strong></a></p></li>
+<li><p><a class="reference internal" href="#intuitive-analogy" id="id8"><strong>Intuitive Analogy</strong></a></p></li>
+<li><p><a class="reference internal" href="#advantages" id="id9"><strong>Advantages</strong></a></p></li>
+<li><p><a class="reference internal" href="#disadvantages" id="id10"><strong>Disadvantages</strong></a></p></li>
+<li><p><a class="reference internal" href="#when-to-use-esns" id="id11"><strong>When to Use ESNs</strong></a></p></li>
+<li><p><a class="reference internal" href="#typical-hyperparameters" id="id12"><strong>Typical Hyperparameters</strong></a></p></li>
+<li><p><a class="reference internal" href="#comparison-with-other-rnns" id="id13"><strong>Comparison with Other RNNs</strong></a></p></li>
+<li><p><a class="reference internal" href="#demonstration" id="id14">Demonstration</a></p>
+<ul>
+<li><p><a class="reference internal" href="#cell-1-import-dependencies" id="id15"><strong>Cell 1 — Import Dependencies</strong></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#cell-2-generate-synthetic-time-series-data" id="id16">🧩 <strong>Cell 2 — Generate Synthetic Time-Series Data</strong></a></p></li>
+<li><p><a class="reference internal" href="#cell-3-train-test-split" id="id17">🧩 <strong>Cell 3 — Train/Test Split</strong></a></p>
+<ul>
+<li><p><a class="reference internal" href="#cell-4-define-esn-helper-functions" id="id18"><strong>Cell 4 — Define ESN Helper Functions</strong></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#cell-5-define-hyperparameter-grid" id="id19">🧩 <strong>Cell 5 — Define Hyperparameter Grid</strong></a></p></li>
+<li><p><a class="reference internal" href="#cell-6-train-and-tune-esn-models" id="id20">🧩 <strong>Cell 6 — Train and Tune ESN Models</strong></a></p></li>
+<li><p><a class="reference internal" href="#cell-7-display-best-configuration" id="id21">🧩 <strong>Cell 7 — Display Best Configuration</strong></a></p>
+<ul>
+<li><p><a class="reference internal" href="#cell-8-retrain-best-esn-and-visualize-predictions" id="id22"><strong>Cell 8 — Retrain Best ESN and Visualize Predictions</strong></a></p></li>
+<li><p><a class="reference internal" href="#what-happens-here" id="id23"><strong>What Happens Here</strong></a></p></li>
+<li><p><a class="reference internal" href="#tuning-parameters-summary" id="id24"><strong>Tuning Parameters Summary</strong></a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="echo-state-networks-esn">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">Echo State Networks (ESN)</a><a class="headerlink" href="#echo-state-networks-esn" title="Link to this heading">#</a></h1>
+<hr class="docutils" />
+<section id="concept">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink"><strong>Concept</strong></a><a class="headerlink" href="#concept" title="Link to this heading">#</a></h2>
+<p>An <strong>Echo State Network (ESN)</strong> is a type of <strong>Recurrent Neural Network (RNN)</strong> that uses a <strong>fixed, randomly initialized “reservoir”</strong> of neurons to model temporal dynamics — only the <strong>output weights</strong> are trained.</p>
+<p>It belongs to the broader class of <strong>Reservoir Computing</strong> architectures.</p>
+<hr class="docutils" />
+</section>
+<section id="core-intuition">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink"><strong>Core Intuition</strong></a><a class="headerlink" href="#core-intuition" title="Link to this heading">#</a></h2>
+<p>Traditional RNNs (like LSTMs, GRUs) train <em>all</em> weights — this is slow and prone to vanishing gradients.
+ESNs avoid this by:</p>
+<ul class="simple">
+<li><p>Keeping the recurrent (hidden) connections <strong>fixed and random</strong>,</p></li>
+<li><p>Training <strong>only the output layer</strong> (using simple linear regression).</p></li>
+</ul>
+<p>This random recurrent “reservoir” acts as a <strong>dynamic memory</strong> that transforms the input sequence into a rich, high-dimensional temporal representation.
+The <strong>“echo”</strong> in <em>Echo State Network</em> comes from how the reservoir’s internal states keep a fading memory of past inputs — like echoes fading over time.</p>
+<hr class="docutils" />
+</section>
+<section id="architecture-overview">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink"><strong>Architecture Overview</strong></a><a class="headerlink" href="#architecture-overview" title="Link to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Input  →  Reservoir (fixed RNN)  →  Output (trainable linear readout)
+</pre></div>
+</div>
+<p><img alt="alt text" src="../../_images/esn.png" /></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Component</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Input layer</strong></p></td>
+<td><p>Projects input into the reservoir</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Reservoir</strong></p></td>
+<td><p>Large, fixed RNN with randomly connected neurons</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Output layer</strong></p></td>
+<td><p>Linear model trained to map reservoir states to target output</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+</section>
+<section id="mathematical-workflow">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink"><strong>Mathematical Workflow</strong></a><a class="headerlink" href="#mathematical-workflow" title="Link to this heading">#</a></h2>
+<p>Let:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x_t\)</span>: input at time <em>t</em></p></li>
+<li><p><span class="math notranslate nohighlight">\(h_t\)</span>: reservoir state</p></li>
+<li><p><span class="math notranslate nohighlight">\(y_t\)</span>: output</p></li>
+<li><p><span class="math notranslate nohighlight">\(W_{in}, W, W_{out}\)</span>: input, recurrent, and output weights</p></li>
+</ul>
+<p><strong>State update equation:</strong>
+$<span class="math notranslate nohighlight">\(
+h_t = \tanh(W_{in}x_t + W h_{t-1})
+\)</span>$</p>
+<p><strong>Output:</strong>
+$<span class="math notranslate nohighlight">\(
+y_t = W_{out} [x_t, h_t]
+\)</span>$</p>
+<p>Only <span class="math notranslate nohighlight">\(W_{out}\)</span> is trained (using linear regression or ridge regression).
+<span class="math notranslate nohighlight">\(W\)</span> and <span class="math notranslate nohighlight">\(W_{in}\)</span> are fixed random matrices scaled to satisfy the <strong>Echo State Property</strong>.</p>
+<hr class="docutils" />
+</section>
+<section id="echo-state-property-esp">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink"><strong>Echo State Property (ESP)</strong></a><a class="headerlink" href="#echo-state-property-esp" title="Link to this heading">#</a></h2>
+<p>To ensure stability:</p>
+<ul class="simple">
+<li><p>The influence of old inputs should <strong>fade over time</strong>.</p></li>
+<li><p>This requires the <strong>spectral radius</strong> (largest absolute eigenvalue) of <span class="math notranslate nohighlight">\(W\)</span> to be <strong>&lt; 1</strong>.</p></li>
+</ul>
+<p>This keeps the reservoir dynamics stable (no exploding activations).</p>
+<hr class="docutils" />
+</section>
+<section id="workflow-summary">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink"><strong>Workflow Summary</strong></a><a class="headerlink" href="#workflow-summary" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Step</p></th>
+<th class="head"><p>Stage</p></th>
+<th class="head"><p>Operation</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Initialize</p></td>
+<td><p>Randomly set <span class="math notranslate nohighlight">\(W_{in}\)</span>, <span class="math notranslate nohighlight">\(W\)</span></p></td>
+<td><p>Create fixed reservoir</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Scale <span class="math notranslate nohighlight">\(W\)</span></p></td>
+<td><p>Adjust spectral radius &lt; 1</p></td>
+<td><p>Ensure echo state property</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Feed data</p></td>
+<td><p>Pass sequential input through reservoir</p></td>
+<td><p>Generate internal states <span class="math notranslate nohighlight">\(h_t\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Collect states</p></td>
+<td><p>Store all <span class="math notranslate nohighlight">\(h_t\)</span></p></td>
+<td><p>Form feature matrix</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>Train output layer</p></td>
+<td><p>Solve linear regression for <span class="math notranslate nohighlight">\(W_{out}\)</span></p></td>
+<td><p>Learn mapping from states to targets</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>Predict</p></td>
+<td><p>Use trained <span class="math notranslate nohighlight">\(W_{out}\)</span> for inference</p></td>
+<td><p>Fast, no recurrence training</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+</section>
+<section id="intuitive-analogy">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink"><strong>Intuitive Analogy</strong></a><a class="headerlink" href="#intuitive-analogy" title="Link to this heading">#</a></h2>
+<p>The reservoir acts like a <strong>liquid</strong> that ripples when new inputs are added:</p>
+<ul class="simple">
+<li><p>Each input perturbs the system,</p></li>
+<li><p>The ripples (internal activations) encode temporal information,</p></li>
+<li><p>The output layer learns to read these ripples to produce predictions.</p></li>
+</ul>
+<p>This is why ESNs are often visualized as a <strong>“liquid state machine.”</strong></p>
+<hr class="docutils" />
+</section>
+<section id="advantages">
+<h2><a class="toc-backref" href="#id9" role="doc-backlink"><strong>Advantages</strong></a><a class="headerlink" href="#advantages" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Advantage</p></th>
+<th class="head"><p>Explanation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Fast training</strong></p></td>
+<td><p>Only output weights are trained (simple regression).</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>No vanishing gradients</strong></p></td>
+<td><p>No backpropagation through time.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Good for temporal patterns</strong></p></td>
+<td><p>Reservoir captures dynamic system behavior.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Stable and robust</strong></p></td>
+<td><p>If spectral radius &lt; 1, dynamics stay bounded.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+</section>
+<section id="disadvantages">
+<h2><a class="toc-backref" href="#id10" role="doc-backlink"><strong>Disadvantages</strong></a><a class="headerlink" href="#disadvantages" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Disadvantage</p></th>
+<th class="head"><p>Explanation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Hyperparameter-sensitive</strong></p></td>
+<td><p>Performance depends on random initialization, spectral radius, and reservoir size.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Lack of adaptability</strong></p></td>
+<td><p>Reservoir is fixed; cannot fine-tune to specific data.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Less expressive</strong></p></td>
+<td><p>Struggles with highly nonlinear, long-term dependencies.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Not ideal for large-scale NLP or deep learning tasks</strong></p></td>
+<td><p>Works best for smaller or continuous dynamical systems.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+</section>
+<section id="when-to-use-esns">
+<h2><a class="toc-backref" href="#id11" role="doc-backlink"><strong>When to Use ESNs</strong></a><a class="headerlink" href="#when-to-use-esns" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Use Case</p></th>
+<th class="head"><p>Reason</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Time-series forecasting</strong></p></td>
+<td><p>Fast and effective for nonlinear temporal signals (e.g., weather, stock data).</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>System modeling / control</strong></p></td>
+<td><p>Captures dynamic behaviors of physical systems.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Signal processing</strong></p></td>
+<td><p>Works for temporal feature extraction and denoising.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Low-resource environments</strong></p></td>
+<td><p>No GPU training needed.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>When interpretability and speed matter</strong></p></td>
+<td><p>Easy to analyze due to linear output layer.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+</section>
+<section id="typical-hyperparameters">
+<h2><a class="toc-backref" href="#id12" role="doc-backlink"><strong>Typical Hyperparameters</strong></a><a class="headerlink" href="#typical-hyperparameters" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Hyperparameter</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Typical Range</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Reservoir size</strong></p></td>
+<td><p>Number of neurons in the reservoir</p></td>
+<td><p>100–1000</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Spectral radius</strong></p></td>
+<td><p>Controls memory length and stability</p></td>
+<td><p>0.8–0.99</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Input scaling</strong></p></td>
+<td><p>Controls input influence on reservoir</p></td>
+<td><p>0.1–1.0</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Leak rate</strong></p></td>
+<td><p>Controls update speed of states</p></td>
+<td><p>0.1–1.0</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Regularization (ridge α)</strong></p></td>
+<td><p>Stabilizes output weight learning</p></td>
+<td><p>1e−4–1e−2</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+<hr class="docutils" />
+</section>
+<section id="comparison-with-other-rnns">
+<h2><a class="toc-backref" href="#id13" role="doc-backlink"><strong>Comparison with Other RNNs</strong></a><a class="headerlink" href="#comparison-with-other-rnns" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>RNN / LSTM / GRU</p></th>
+<th class="head"><p>ESN</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Training</strong></p></td>
+<td><p>Backpropagation through time</p></td>
+<td><p>Linear regression only</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Trainable parameters</strong></p></td>
+<td><p>All weights</p></td>
+<td><p>Only output weights</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Speed</strong></p></td>
+<td><p>Slow</p></td>
+<td><p>Very fast</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Memory control</strong></p></td>
+<td><p>Learned via gates</p></td>
+<td><p>Controlled via spectral radius</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Stability</strong></p></td>
+<td><p>Learned</p></td>
+<td><p>Must be tuned manually</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Best for</strong></p></td>
+<td><p>Deep sequence modeling</p></td>
+<td><p>Dynamical systems, forecasting</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+<p><strong>Summary</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Aspect</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Idea</strong></p></td>
+<td><p>Fixed random reservoir transforms inputs; only output layer learns.</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Core property</strong></p></td>
+<td><p>Echo State Property ensures stable fading memory.</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Training</strong></p></td>
+<td><p>Linear regression (no backprop).</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Best for</strong></p></td>
+<td><p>Fast, interpretable modeling of time-dependent systems.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="demonstration">
+<h2><a class="toc-backref" href="#id14" role="doc-backlink">Demonstration</a><a class="headerlink" href="#demonstration" title="Link to this heading">#</a></h2>
+<hr class="docutils" />
+<section id="cell-1-import-dependencies">
+<h3><a class="toc-backref" href="#id15" role="doc-backlink"><strong>Cell 1 — Import Dependencies</strong></a><a class="headerlink" href="#cell-1-import-dependencies" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install if needed:</span>
+<span class="c1"># !pip install numpy pandas scikit-learn matplotlib</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.linear_model</span><span class="w"> </span><span class="kn">import</span> <span class="n">Ridge</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">mean_squared_error</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">itertools</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="cell-2-generate-synthetic-time-series-data">
+<h2><a class="toc-backref" href="#id16" role="doc-backlink">🧩 <strong>Cell 2 — Generate Synthetic Time-Series Data</strong></a><a class="headerlink" href="#cell-2-generate-synthetic-time-series-data" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">time</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">time</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>  <span class="c1"># sine wave + noise</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Synthetic Time Series (Sine + Noise)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Value&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/e813169ec60ab7009609b2288709e089db6f7758986c9b28a0289eb41b2e5505.png" src="../../_images/e813169ec60ab7009609b2288709e089db6f7758986c9b28a0289eb41b2e5505.png" />
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="cell-3-train-test-split">
+<h2><a class="toc-backref" href="#id17" role="doc-backlink">🧩 <strong>Cell 3 — Train/Test Split</strong></a><a class="headerlink" href="#cell-3-train-test-split" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">split</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">T</span> <span class="o">*</span> <span class="mf">0.8</span><span class="p">)</span>
+<span class="n">train_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:</span><span class="n">split</span><span class="p">]</span>
+<span class="n">test_data</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">split</span><span class="p">:]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Train samples: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">train_data</span><span class="p">)</span><span class="si">}</span><span class="s2">, Test samples: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train samples: 800, Test samples: 200
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<section id="cell-4-define-esn-helper-functions">
+<h3><a class="toc-backref" href="#id18" role="doc-backlink"><strong>Cell 4 — Define ESN Helper Functions</strong></a><a class="headerlink" href="#cell-4-define-esn-helper-functions" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">create_esn</span><span class="p">(</span><span class="n">n_inputs</span><span class="p">,</span> <span class="n">n_reservoir</span><span class="p">,</span> <span class="n">spectral_radius</span><span class="p">,</span> <span class="n">input_scaling</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Creates random input (Win) and reservoir (W) matrices scaled to spectral radius.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">Win</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="n">input_scaling</span><span class="p">,</span> <span class="n">input_scaling</span><span class="p">,</span> <span class="p">(</span><span class="n">n_reservoir</span><span class="p">,</span> <span class="n">n_inputs</span><span class="p">))</span>
+    <span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">n_reservoir</span><span class="p">,</span> <span class="n">n_reservoir</span><span class="p">))</span>
+    <span class="n">rhoW</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">eigvals</span><span class="p">(</span><span class="n">W</span><span class="p">)))</span>
+    <span class="n">W</span> <span class="o">*=</span> <span class="n">spectral_radius</span> <span class="o">/</span> <span class="n">rhoW</span>  <span class="c1"># ensure echo state property</span>
+    <span class="k">return</span> <span class="n">Win</span><span class="p">,</span> <span class="n">W</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">run_esn</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">Win</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">leak_rate</span><span class="o">=</span><span class="mf">1.0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Runs reservoir dynamics for input sequence u.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n_reservoir</span> <span class="o">=</span> <span class="n">W</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">n_reservoir</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">u</span><span class="p">)))</span>
+    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">u</span><span class="p">)):</span>
+        <span class="n">x</span><span class="p">[:,</span> <span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">leak_rate</span><span class="p">)</span> <span class="o">*</span> <span class="n">x</span><span class="p">[:,</span> <span class="n">t</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">leak_rate</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">tanh</span><span class="p">(</span><span class="n">Win</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="n">u</span><span class="p">[</span><span class="n">t</span><span class="p">]]])[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">W</span> <span class="o">@</span> <span class="n">x</span><span class="p">[:,</span> <span class="n">t</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">x</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">train_esn</span><span class="p">(</span><span class="n">u_train</span><span class="p">,</span> <span class="n">u_test</span><span class="p">,</span> <span class="n">Win</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Trains ESN output weights using Ridge regression and returns predictions.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x_train</span> <span class="o">=</span> <span class="n">run_esn</span><span class="p">(</span><span class="n">u_train</span><span class="p">,</span> <span class="n">Win</span><span class="p">,</span> <span class="n">W</span><span class="p">)</span>
+    <span class="n">ridge</span> <span class="o">=</span> <span class="n">Ridge</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">alpha</span><span class="p">)</span>
+    <span class="n">ridge</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">u_train</span><span class="p">)</span>
+    <span class="n">y_pred_train</span> <span class="o">=</span> <span class="n">ridge</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_train</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+
+    <span class="n">x_test</span> <span class="o">=</span> <span class="n">run_esn</span><span class="p">(</span><span class="n">u_test</span><span class="p">,</span> <span class="n">Win</span><span class="p">,</span> <span class="n">W</span><span class="p">)</span>
+    <span class="n">y_pred_test</span> <span class="o">=</span> <span class="n">ridge</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">y_pred_train</span><span class="p">,</span> <span class="n">y_pred_test</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="cell-5-define-hyperparameter-grid">
+<h2><a class="toc-backref" href="#id19" role="doc-backlink">🧩 <strong>Cell 5 — Define Hyperparameter Grid</strong></a><a class="headerlink" href="#cell-5-define-hyperparameter-grid" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spectral_radii</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">]</span>
+<span class="n">input_scalings</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]</span>
+<span class="n">reservoir_sizes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">]</span>
+<span class="n">alphas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1e-3</span><span class="p">,</span> <span class="mf">1e-2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="cell-6-train-and-tune-esn-models">
+<h2><a class="toc-backref" href="#id20" role="doc-backlink">🧩 <strong>Cell 6 — Train and Tune ESN Models</strong></a><a class="headerlink" href="#cell-6-train-and-tune-esn-models" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">sr</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">alpha</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">spectral_radii</span><span class="p">,</span> <span class="n">input_scalings</span><span class="p">,</span> <span class="n">reservoir_sizes</span><span class="p">,</span> <span class="n">alphas</span><span class="p">):</span>
+    <span class="n">Win</span><span class="p">,</span> <span class="n">W</span> <span class="o">=</span> <span class="n">create_esn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">sr</span><span class="p">,</span> <span class="n">scale</span><span class="p">)</span>
+    <span class="n">y_train_pred</span><span class="p">,</span> <span class="n">y_test_pred</span> <span class="o">=</span> <span class="n">train_esn</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span> <span class="n">test_data</span><span class="p">,</span> <span class="n">Win</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
+    <span class="n">mse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">test_data</span><span class="p">,</span> <span class="n">y_test_pred</span><span class="p">)</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">sr</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">mse</span><span class="p">))</span>
+
+<span class="n">results_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Spectral Radius&quot;</span><span class="p">,</span> <span class="s2">&quot;Input Scaling&quot;</span><span class="p">,</span> <span class="s2">&quot;Reservoir Size&quot;</span><span class="p">,</span> <span class="s2">&quot;Alpha&quot;</span><span class="p">,</span> <span class="s2">&quot;Test MSE&quot;</span><span class="p">])</span>
+<span class="n">results_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;Test MSE&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Spectral Radius</th>
+      <th>Input Scaling</th>
+      <th>Reservoir Size</th>
+      <th>Alpha</th>
+      <th>Test MSE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>10</th>
+      <td>0.8</td>
+      <td>1.0</td>
+      <td>200</td>
+      <td>0.001</td>
+      <td>0.000104</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.8</td>
+      <td>0.5</td>
+      <td>200</td>
+      <td>0.001</td>
+      <td>0.000104</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>0.9</td>
+      <td>0.5</td>
+      <td>200</td>
+      <td>0.001</td>
+      <td>0.000104</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.8</td>
+      <td>0.5</td>
+      <td>100</td>
+      <td>0.001</td>
+      <td>0.000104</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>0.9</td>
+      <td>0.1</td>
+      <td>200</td>
+      <td>0.001</td>
+      <td>0.000104</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="cell-7-display-best-configuration">
+<h2><a class="toc-backref" href="#id21" role="doc-backlink">🧩 <strong>Cell 7 — Display Best Configuration</strong></a><a class="headerlink" href="#cell-7-display-best-configuration" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">best_config</span> <span class="o">=</span> <span class="n">results_df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">results_df</span><span class="p">[</span><span class="s2">&quot;Test MSE&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">idxmin</span><span class="p">()]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Best ESN Configuration:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">best_config</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best ESN Configuration:
+Spectral Radius      0.800000
+Input Scaling        1.000000
+Reservoir Size     200.000000
+Alpha                0.001000
+Test MSE             0.000104
+Name: 10, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<section id="cell-8-retrain-best-esn-and-visualize-predictions">
+<h3><a class="toc-backref" href="#id22" role="doc-backlink"><strong>Cell 8 — Retrain Best ESN and Visualize Predictions</strong></a><a class="headerlink" href="#cell-8-retrain-best-esn-and-visualize-predictions" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">best_sr</span> <span class="o">=</span> <span class="n">best_config</span><span class="p">[</span><span class="s2">&quot;Spectral Radius&quot;</span><span class="p">]</span>
+<span class="n">best_scale</span> <span class="o">=</span> <span class="n">best_config</span><span class="p">[</span><span class="s2">&quot;Input Scaling&quot;</span><span class="p">]</span>
+<span class="n">best_size</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">best_config</span><span class="p">[</span><span class="s2">&quot;Reservoir Size&quot;</span><span class="p">])</span>
+<span class="n">best_alpha</span> <span class="o">=</span> <span class="n">best_config</span><span class="p">[</span><span class="s2">&quot;Alpha&quot;</span><span class="p">]</span>
+
+<span class="c1"># Recreate and retrain ESN with best hyperparameters</span>
+<span class="n">Win</span><span class="p">,</span> <span class="n">W</span> <span class="o">=</span> <span class="n">create_esn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">best_size</span><span class="p">,</span> <span class="n">best_sr</span><span class="p">,</span> <span class="n">best_scale</span><span class="p">)</span>
+<span class="n">y_train_pred</span><span class="p">,</span> <span class="n">y_test_pred</span> <span class="o">=</span> <span class="n">train_esn</span><span class="p">(</span><span class="n">train_data</span><span class="p">,</span> <span class="n">test_data</span><span class="p">,</span> <span class="n">Win</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">best_alpha</span><span class="p">)</span>
+
+<span class="c1"># Plot predictions</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test_data</span><span class="p">)),</span> <span class="n">test_data</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;True&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">test_data</span><span class="p">)),</span> <span class="n">y_test_pred</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Predicted&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Echo State Network Predictions vs True Values&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time Step&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Value&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/4ef9928949cb2c64212cac9a6fb97f4ce06d0d172ed17b733e4a8274f6b10f08.png" src="../../_images/4ef9928949cb2c64212cac9a6fb97f4ce06d0d172ed17b733e4a8274f6b10f08.png" />
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="what-happens-here">
+<h3><a class="toc-backref" href="#id23" role="doc-backlink"><strong>What Happens Here</strong></a><a class="headerlink" href="#what-happens-here" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Step</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Random reservoir (fixed) created</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Reservoir state evolves for each input</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>States used as features for Ridge regression</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Only output weights trained (fast)</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>Hyperparameters tuned via grid search</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>Best config used to retrain and predict</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="tuning-parameters-summary">
+<h3><a class="toc-backref" href="#id24" role="doc-backlink"><strong>Tuning Parameters Summary</strong></a><a class="headerlink" href="#tuning-parameters-summary" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Role</p></th>
+<th class="head"><p>Good Range</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Spectral Radius (ρ)</strong></p></td>
+<td><p>Controls memory retention</p></td>
+<td><p>0.8–0.99</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Input Scaling</strong></p></td>
+<td><p>Controls input sensitivity</p></td>
+<td><p>0.1–1.0</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Reservoir Size</strong></p></td>
+<td><p>Number of neurons in dynamic reservoir</p></td>
+<td><p>100–1000</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Alpha (Ridge)</strong></p></td>
+<td><p>Regularization strength</p></td>
+<td><p>1e−4–1e−2</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./rnn\variants"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="05_part.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Deep (Stacked) RNN — Explanation, Intuition, and Workflow</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="07_part.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Attention-Based RNN (Vanilla)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concept"><strong>Concept</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-intuition"><strong>Core Intuition</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture-overview"><strong>Architecture Overview</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-workflow"><strong>Mathematical Workflow</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#echo-state-property-esp"><strong>Echo State Property (ESP)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-summary"><strong>Workflow Summary</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intuitive-analogy"><strong>Intuitive Analogy</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages"><strong>Advantages</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#disadvantages"><strong>Disadvantages</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-to-use-esns"><strong>When to Use ESNs</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#typical-hyperparameters"><strong>Typical Hyperparameters</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-with-other-rnns"><strong>Comparison with Other RNNs</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demonstration">Demonstration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-1-import-dependencies"><strong>Cell 1 — Import Dependencies</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-2-generate-synthetic-time-series-data">🧩 <strong>Cell 2 — Generate Synthetic Time-Series Data</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-3-train-test-split">🧩 <strong>Cell 3 — Train/Test Split</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-4-define-esn-helper-functions"><strong>Cell 4 — Define ESN Helper Functions</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-5-define-hyperparameter-grid">🧩 <strong>Cell 5 — Define Hyperparameter Grid</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-6-train-and-tune-esn-models">🧩 <strong>Cell 6 — Train and Tune ESN Models</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-7-display-best-configuration">🧩 <strong>Cell 7 — Display Best Configuration</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cell-8-retrain-best-esn-and-visualize-predictions"><strong>Cell 8 — Retrain Best ESN and Visualize Predictions</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#what-happens-here"><strong>What Happens Here</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tuning-parameters-summary"><strong>Tuning Parameters Summary</strong></a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By svgoudar
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

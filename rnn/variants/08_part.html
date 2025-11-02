@@ -1,0 +1,1586 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Seq2Seq &#8212; Machine Learning Handbook</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=4c969af8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-examples.css?v=e236af4b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.bundle.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-shadow.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-punk.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-noir.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-light.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-borderless.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/micromodal.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=40389e5b" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../../_static/jquery.js?v=5d32c60e"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=7f8ff830"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../../_static/tabs.js?v=3ee01567"></script>
+    <script src="../../_static/js/hoverxref.js"></script>
+    <script src="../../_static/js/tooltipster.bundle.min.js"></script>
+    <script src="../../_static/js/micromodal.min.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'rnn/variants/08_part';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Attention" href="09_part.html" />
+    <link rel="prev" title="Attention-Based RNN (Vanilla)" href="07_part.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../introduction.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Machine Learning Handbook - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Machine Learning Handbook - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../introduction.html">
+                    Deep Learning
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ann/overview.html">Artificial Neural Network (ANN)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../ann/neural_network/overview.html">Neural Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/neural_network/01_part.html">Intuition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/neural_network/02_part.html">Problem Statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/neural_network/03_part.html">Perceptron</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/neural_network/04_part.html">Multi-Layer Neural Networks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/neural_network/05_part.html">Vanishing Gradient Problem in Deep Learning</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../ann/cost_loss_function/overview.html">Loss Function vs Cost Function</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/cost_loss_function/01_part.html">Cost Function vs Loss Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/cost_loss_function/02_part.html">Loss Functions for Regression in Neural Networks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/cost_loss_function/03_part.html">Loss Functions for Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/cost_loss_function/04_part.html">Choice of Loss Function</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../ann/optimizers/overview.html">Optmizers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/optimizers/01_part.html">Gradient Descent Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/optimizers/02_part.html">Stochastic Gradient Descent (SGD) Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/optimizers/03_part.html">Mini-batch Stochastic Gradient Descent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/optimizers/04_part.html">SGD with Momentum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/optimizers/05_part.html">Adagrad Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/optimizers/06_part.html">Adadelta and RMSProp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/optimizers/07_part.html">Adam Optmizers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ann/techniques/01_part.html">Exploding Gradient Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ann/techniques/02_part.html">Weight Initializing Techniques</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ann/techniques/03_part.html">Dropout Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ann/techniques/04_part.html">Optmization Techniques</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ann/techniques/05_part.html">Regularization</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../cnn/overview.html">CNN (Convolution Neural Network)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/01_part.html">CNN v/s Brain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/02_part.html">Know about Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/03_part.html">Convolution Operation in CNNs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/04_part.html">Padding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/05_part.html">ANN vs CNN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/06_part.html">Pooling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/07_part.html">Fully Connected Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/08_part.html">CNN Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/09_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ffn/overview.html">FeedForward Neural Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ffn/01_part.html">Intiution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffn/02_part.html">Workflow</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="../../ffn/03_part.html">Training &amp; Hyper-Parameter Tuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffn/04_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">RNN</a></li>
+
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../transformers/overview.html">The Transformer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/01_part.html">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/02_part.html">The Transformer Encoder Layer (Deep Explanation)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/03_part.html">Positional Encoding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/04_part.html"><strong>Residual Connection + Layer Normalization</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/05_part.html"><strong>Transformer Decoder Layer</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/06_part.html">Practicals</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../gan/overview.html"><strong>Generative Adversarial Network (GAN)</strong></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../gan/01_part.html">Intuition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gan/02_part.html">Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gan/03_part.html">Applications of Generative Adversarial Networks (GANs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gan/04_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../rbf/overview.html">Radial Basis Function (RBF) Neural Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../rbf/01_part.html">Intuition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rbf/02_part.html">Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rbf/03_part.html">Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rbf/04_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../siamese/overview.html">Siamese Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../siamese/01_part.html">Intuition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../siamese/02_part.html">Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../siamese/03_part.html">Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../siamese/04_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../autoencoders/overview.html">Autoencoders</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../autoencoders/01_part.html">Intiution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoencoders/02_part.html">Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoencoders/03_part.html">Application of Autoencoders</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/svgoudar/AI-ML-Essentials/blob/master/rnn/variants/08_part.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/svgoudar/AI-ML-Essentials" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/svgoudar/AI-ML-Essentials/issues/new?title=Issue%20on%20page%20%2Frnn/variants/08_part.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/rnn/variants/08_part.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Seq2Seq</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-intuition">Example Intuition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture">Architecture</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-encoder"><strong>A. Encoder</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-decoder"><strong>B. Decoder</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-context-vector"><strong>C. Context Vector</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-attention-mechanism-optional"><strong>D. Attention Mechanism (Optional)</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow">🔄 <strong>3. Workflow</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intuitive-example-translation"><strong>4. Intuitive Example — Translation</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-summary">Mathematical Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variants-of-seq2seq">Variants of Seq2Seq</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages">Advantages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#disadvantages">Disadvantages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#typical-applications">Typical Applications</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demonstration">Demonstration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encoder">Encoder</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decoder">Decoder</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seq2seq-model">Seq2Seq Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-toy-dataset">Generate Toy Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-training-and-evaluation-functions">Define Training and Evaluation Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameter-grid">Hyperparameter Grid</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameter-tuning-loop">Hyperparameter Tuning Loop</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#best-model-evaluation">Best Model Evaluation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output-example">Output Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameters-tuned">Hyperparameters Tuned</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extensions"><strong>Extensions</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#disadvantages-of-seq2seq-encoderdecoder-architecture"><strong>Disadvantages of Seq2Seq (Encoder–Decoder) Architecture</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#information-bottleneck"><strong>1. Information Bottleneck</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#long-term-dependency-problem"><strong>2. Long-Term Dependency Problem</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decoder-has-limited-context"><strong>3. Decoder Has Limited Context</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sequential-non-parallelizable-computation"><strong>4. Sequential (Non-parallelizable) Computation</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#poor-performance-on-long-sentences"><strong>5. Poor Performance on Long Sentences</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lack-of-interpretability"><strong>6. Lack of Interpretability</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#difficulty-handling-variable-length-outputs"><strong>7. Difficulty Handling Variable-Length Outputs</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exposure-bias"><strong>8. Exposure Bias</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-table"><strong>Summary Table</strong></a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <nav class="contents" id="contents" role="doc-toc">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#seq2seq" id="id1">Seq2Seq</a></p>
+<ul>
+<li><p><a class="reference internal" href="#example-intuition" id="id2">Example Intuition</a></p></li>
+<li><p><a class="reference internal" href="#architecture" id="id3">Architecture</a></p>
+<ul>
+<li><p><a class="reference internal" href="#a-encoder" id="id4"><strong>A. Encoder</strong></a></p></li>
+<li><p><a class="reference internal" href="#b-decoder" id="id5"><strong>B. Decoder</strong></a></p></li>
+<li><p><a class="reference internal" href="#c-context-vector" id="id6"><strong>C. Context Vector</strong></a></p></li>
+<li><p><a class="reference internal" href="#d-attention-mechanism-optional" id="id7"><strong>D. Attention Mechanism (Optional)</strong></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#workflow" id="id8">🔄 <strong>3. Workflow</strong></a></p></li>
+<li><p><a class="reference internal" href="#intuitive-example-translation" id="id9"><strong>4. Intuitive Example — Translation</strong></a></p></li>
+<li><p><a class="reference internal" href="#mathematical-summary" id="id10">Mathematical Summary</a></p></li>
+<li><p><a class="reference internal" href="#variants-of-seq2seq" id="id11">Variants of Seq2Seq</a></p></li>
+<li><p><a class="reference internal" href="#advantages" id="id12">Advantages</a></p></li>
+<li><p><a class="reference internal" href="#disadvantages" id="id13">Disadvantages</a></p></li>
+<li><p><a class="reference internal" href="#typical-applications" id="id14">Typical Applications</a></p></li>
+<li><p><a class="reference internal" href="#summary" id="id15">Summary</a></p></li>
+<li><p><a class="reference internal" href="#demonstration" id="id16">Demonstration</a></p>
+<ul>
+<li><p><a class="reference internal" href="#encoder" id="id17">Encoder</a></p></li>
+<li><p><a class="reference internal" href="#decoder" id="id18">Decoder</a></p></li>
+<li><p><a class="reference internal" href="#seq2seq-model" id="id19">Seq2Seq Model</a></p></li>
+<li><p><a class="reference internal" href="#generate-toy-dataset" id="id20">Generate Toy Dataset</a></p></li>
+<li><p><a class="reference internal" href="#define-training-and-evaluation-functions" id="id21">Define Training and Evaluation Functions</a></p></li>
+<li><p><a class="reference internal" href="#hyperparameter-grid" id="id22">Hyperparameter Grid</a></p></li>
+<li><p><a class="reference internal" href="#hyperparameter-tuning-loop" id="id23">Hyperparameter Tuning Loop</a></p></li>
+<li><p><a class="reference internal" href="#best-model-evaluation" id="id24">Best Model Evaluation</a></p></li>
+<li><p><a class="reference internal" href="#output-example" id="id25">Output Example</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#hyperparameters-tuned" id="id26">Hyperparameters Tuned</a></p></li>
+<li><p><a class="reference internal" href="#extensions" id="id27"><strong>Extensions</strong></a></p></li>
+<li><p><a class="reference internal" href="#disadvantages-of-seq2seq-encoderdecoder-architecture" id="id28"><strong>Disadvantages of Seq2Seq (Encoder–Decoder) Architecture</strong></a></p>
+<ul>
+<li><p><a class="reference internal" href="#information-bottleneck" id="id29"><strong>1. Information Bottleneck</strong></a></p></li>
+<li><p><a class="reference internal" href="#long-term-dependency-problem" id="id30"><strong>2. Long-Term Dependency Problem</strong></a></p></li>
+<li><p><a class="reference internal" href="#decoder-has-limited-context" id="id31"><strong>3. Decoder Has Limited Context</strong></a></p></li>
+<li><p><a class="reference internal" href="#sequential-non-parallelizable-computation" id="id32"><strong>4. Sequential (Non-parallelizable) Computation</strong></a></p></li>
+<li><p><a class="reference internal" href="#poor-performance-on-long-sentences" id="id33"><strong>5. Poor Performance on Long Sentences</strong></a></p></li>
+<li><p><a class="reference internal" href="#lack-of-interpretability" id="id34"><strong>6. Lack of Interpretability</strong></a></p></li>
+<li><p><a class="reference internal" href="#difficulty-handling-variable-length-outputs" id="id35"><strong>7. Difficulty Handling Variable-Length Outputs</strong></a></p></li>
+<li><p><a class="reference internal" href="#exposure-bias" id="id36"><strong>8. Exposure Bias</strong></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#summary-table" id="id37"><strong>Summary Table</strong></a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="seq2seq">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">Seq2Seq</a><a class="headerlink" href="#seq2seq" title="Link to this heading">#</a></h1>
+<p>Traditional models like RNNs or LSTMs predict <strong>one output for one input</strong>, but many real-world problems require mapping <strong>a sequence of inputs</strong> to <strong>a sequence of outputs</strong> (often of different lengths).</p>
+<blockquote>
+<div><p><strong>Seq2Seq</strong> (Sequence-to-Sequence) models solve this by using an <strong>Encoder–Decoder</strong> architecture — one neural network to read the input, another to generate the output.</p>
+</div></blockquote>
+<hr class="docutils" />
+<p><img alt="" src="../../_images/seq2seq.png" /></p>
+<section id="example-intuition">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Example Intuition</a><a class="headerlink" href="#example-intuition" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>Machine Translation:</strong>
+Input: “Je t’aime” → Output: “I love you”
+The model first <em>encodes</em> the French sentence into an internal representation, then <em>decodes</em> it to English.</p></li>
+<li><p><strong>Summary Generation:</strong>
+Input: Long paragraph → Output: Short summary
+The model reads the whole text and writes a shorter version that captures its meaning.</p></li>
+</ul>
+<p>Thus, Seq2Seq models are designed to <strong>capture the meaning of a variable-length input</strong> and <strong>generate a variable-length output</strong>.</p>
+</section>
+<hr class="docutils" />
+<section id="architecture">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Architecture</a><a class="headerlink" href="#architecture" title="Link to this heading">#</a></h2>
+<p>The <strong>Seq2Seq architecture</strong> is composed of two main neural networks:</p>
+<section id="a-encoder">
+<h3><a class="toc-backref" href="#id4" role="doc-backlink"><strong>A. Encoder</strong></a><a class="headerlink" href="#a-encoder" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Reads the input sequence token by token.</p></li>
+<li><p>Each token passes through an <strong>RNN</strong>, <strong>LSTM</strong>, or <strong>GRU</strong> cell.</p></li>
+<li><p>The final hidden state summarizes all input information — called the <strong>context vector</strong> or <strong>thought vector</strong>.</p></li>
+</ul>
+<p>Mathematically:
+$<span class="math notranslate nohighlight">\(
+h_t = f(x_t, h_{t-1})
+\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(
+C = h_T
+\)</span>$</p>
+<p>Here,
+<span class="math notranslate nohighlight">\(h_t\)</span>: hidden state at time t
+<span class="math notranslate nohighlight">\(C\)</span>: final hidden state (context vector)</p>
+</section>
+<hr class="docutils" />
+<section id="b-decoder">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink"><strong>B. Decoder</strong></a><a class="headerlink" href="#b-decoder" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Takes the <strong>context vector (C)</strong> and generates the <strong>output sequence</strong> one token at a time.</p></li>
+<li><p>At each step, it uses:</p>
+<ul>
+<li><p>The previous hidden state,</p></li>
+<li><p>The last predicted token,</p></li>
+<li><p>The context vector.</p></li>
+</ul>
+</li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+s_t = f(s_{t-1}, y_{t-1}, C)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\hat{y_t} = \text{softmax}(W s_t)
+\]</div>
+<p>The decoder continues generating tokens until it outputs a special <code class="docutils literal notranslate"><span class="pre">&lt;EOS&gt;</span></code> (End of Sequence) symbol.</p>
+</section>
+<hr class="docutils" />
+<section id="c-context-vector">
+<h3><a class="toc-backref" href="#id6" role="doc-backlink"><strong>C. Context Vector</strong></a><a class="headerlink" href="#c-context-vector" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Acts as a <strong>bridge</strong> between encoder and decoder.</p></li>
+<li><p>It’s a <strong>fixed-length summary</strong> of the entire input sequence.</p></li>
+<li><p>However, this becomes a <strong>bottleneck</strong> for long inputs — leading to the invention of <strong>attention mechanisms</strong>.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="d-attention-mechanism-optional">
+<h3><a class="toc-backref" href="#id7" role="doc-backlink"><strong>D. Attention Mechanism (Optional)</strong></a><a class="headerlink" href="#d-attention-mechanism-optional" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>In vanilla Seq2Seq, all input info is stored in one vector → weak for long sequences.</p></li>
+<li><p><strong>Attention</strong> lets the decoder <strong>look back at all encoder states</strong> and <strong>focus on the most relevant parts</strong> for each output token.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+e_{t,i} = \text{score}(s_{t-1}, h_i)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\alpha_{t,i} = \frac{\exp(e_{t,i})}{\sum_j \exp(e_{t,j})}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+c_t = \sum_i \alpha_{t,i} h_i
+\]</div>
+<p>The decoder then uses <span class="math notranslate nohighlight">\(c_t\)</span> (dynamic context) instead of a single fixed vector.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="workflow">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">🔄 <strong>3. Workflow</strong></a><a class="headerlink" href="#workflow" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Step</strong></p></th>
+<th class="head"><p><strong>Phase</strong></p></th>
+<th class="head"><p><strong>Description</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1️⃣</p></td>
+<td><p><strong>Encoding</strong></p></td>
+<td><p>Input sequence passes through the encoder; final hidden state becomes the context vector.</p></td>
+</tr>
+<tr class="row-odd"><td><p>2️⃣</p></td>
+<td><p><strong>Initialization</strong></p></td>
+<td><p>The decoder starts with the encoder’s final state.</p></td>
+</tr>
+<tr class="row-even"><td><p>3️⃣</p></td>
+<td><p><strong>Decoding</strong></p></td>
+<td><p>Decoder generates output sequence one step at a time.</p></td>
+</tr>
+<tr class="row-odd"><td><p>4️⃣</p></td>
+<td><p><strong>Feedback</strong></p></td>
+<td><p>Each predicted token is fed back as input for the next step.</p></td>
+</tr>
+<tr class="row-even"><td><p>5️⃣</p></td>
+<td><p><strong>Termination</strong></p></td>
+<td><p>Process stops when <code class="docutils literal notranslate"><span class="pre">&lt;EOS&gt;</span></code> token is generated.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="intuitive-example-translation">
+<h2><a class="toc-backref" href="#id9" role="doc-backlink"><strong>4. Intuitive Example — Translation</strong></a><a class="headerlink" href="#intuitive-example-translation" title="Link to this heading">#</a></h2>
+<p><strong>Input:</strong> “Je t’aime”
+<strong>Encoder:</strong> Encodes meaning → <code class="docutils literal notranslate"><span class="pre">$$h1,</span> <span class="pre">h2,</span> <span class="pre">h3$$</span> <span class="pre">→</span> <span class="pre">Context</span> <span class="pre">Vector</span></code>
+<strong>Decoder:</strong></p>
+<ul class="simple">
+<li><p>Step 1: “I” (focuses on “Je”)</p></li>
+<li><p>Step 2: “love” (focuses on “t’”)</p></li>
+<li><p>Step 3: “you” (focuses on “aime”)</p></li>
+</ul>
+<p>Each decoding step “attends” to different parts of the input.</p>
+</section>
+<hr class="docutils" />
+<section id="mathematical-summary">
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">Mathematical Summary</a><a class="headerlink" href="#mathematical-summary" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Component</p></th>
+<th class="head"><p>Equation</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Encoder</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(h_t = f(x_t, h_{t-1})\)</span></p></td>
+<td><p>Encodes input sequence</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Context Vector</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(C = h_T\)</span></p></td>
+<td><p>Summary of input</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Decoder Hidden State</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(s_t = f(s_{t-1}, y_{t-1}, C)\)</span></p></td>
+<td><p>Generates next hidden state</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Output Probability</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(P(y_t,y_{&lt;t}, x) = \text{softmax}(W s_t)\)</span></p></td>
+<td><p>Predicts next token</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="variants-of-seq2seq">
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">Variants of Seq2Seq</a><a class="headerlink" href="#variants-of-seq2seq" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Type</strong></p></th>
+<th class="head"><p><strong>Description</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Vanilla Seq2Seq</strong></p></td>
+<td><p>Fixed context vector, RNN encoder-decoder</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Seq2Seq with Attention</strong></p></td>
+<td><p>Dynamic focus on relevant input parts</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Bidirectional Encoder</strong></p></td>
+<td><p>Encoder reads input forward and backward</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Hierarchical Seq2Seq</strong></p></td>
+<td><p>Handles multi-level structures (paragraphs)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Transformer (Self-Attention)</strong></p></td>
+<td><p>Replaces recurrence with full attention</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="advantages">
+<h2><a class="toc-backref" href="#id12" role="doc-backlink">Advantages</a><a class="headerlink" href="#advantages" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Advantage</strong></p></th>
+<th class="head"><p><strong>Explanation</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Handles variable sequence lengths</strong></p></td>
+<td><p>Input and output lengths can differ</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>End-to-end learning</strong></p></td>
+<td><p>Learns mappings directly from data</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Context-aware decoding</strong></p></td>
+<td><p>Uses entire input meaning for generation</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Attention improvement</strong></p></td>
+<td><p>Solves long-sequence memory bottleneck</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Versatile</strong></p></td>
+<td><p>Works for text, speech, time series, etc.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="disadvantages">
+<h2><a class="toc-backref" href="#id13" role="doc-backlink">Disadvantages</a><a class="headerlink" href="#disadvantages" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Disadvantage</strong></p></th>
+<th class="head"><p><strong>Description</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Information bottleneck</strong></p></td>
+<td><p>Fixed context vector loses details for long sequences</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Slow training and inference</strong></p></td>
+<td><p>Decoding is sequential (can’t be parallelized)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Error propagation</strong></p></td>
+<td><p>Mistakes in earlier tokens affect later predictions</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>High computational cost</strong></p></td>
+<td><p>Especially for long sequences and deep models</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Difficult to interpret</strong></p></td>
+<td><p>Without attention, it’s a “black box”</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="typical-applications">
+<h2><a class="toc-backref" href="#id14" role="doc-backlink">Typical Applications</a><a class="headerlink" href="#typical-applications" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Domain</strong></p></th>
+<th class="head"><p><strong>Use Case</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>NLP</strong></p></td>
+<td><p>Machine translation, text summarization, chatbot response generation</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Speech</strong></p></td>
+<td><p>Speech recognition, text-to-speech</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Vision</strong></p></td>
+<td><p>Image captioning</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Healthcare</strong></p></td>
+<td><p>Report generation, sequential diagnosis</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Finance / IoT</strong></p></td>
+<td><p>Time-series forecasting, anomaly detection</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h2><a class="toc-backref" href="#id15" role="doc-backlink">Summary</a><a class="headerlink" href="#summary" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Aspect</strong></p></th>
+<th class="head"><p><strong>Seq2Seq Characteristic</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Core Idea</strong></p></td>
+<td><p>Encode → Compress → Decode</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Input / Output</strong></p></td>
+<td><p>Variable-length sequences</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Architecture</strong></p></td>
+<td><p>Encoder–Decoder (RNN/LSTM/GRU)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Memory</strong></p></td>
+<td><p>Context vector (fixed) or Attention (dynamic)</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Best Feature</strong></p></td>
+<td><p>End-to-end sequence transformation</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Main Limitation</strong></p></td>
+<td><p>Bottleneck for long inputs (fixed vector)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+<p><strong>In Short</strong></p>
+<blockquote>
+<div><p><strong>Seq2Seq = Encoder–Decoder model that learns to map an input sequence to an output sequence.</strong>
+It’s the foundation of machine translation, summarization, dialogue systems, and modern Transformer models.</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="demonstration">
+<h2><a class="toc-backref" href="#id16" role="doc-backlink">Demonstration</a><a class="headerlink" href="#demonstration" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.optim</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">optim</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="kn">import</span> <span class="n">product</span>
+</pre></div>
+</div>
+</div>
+</div>
+<hr class="docutils" />
+<section id="encoder">
+<h3><a class="toc-backref" href="#id17" role="doc-backlink">Encoder</a><a class="headerlink" href="#encoder" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Encoder</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">,</span> <span class="n">num_layers</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Encoder</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rnn</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">GRU</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">,</span> <span class="n">num_layers</span><span class="o">=</span><span class="n">num_layers</span><span class="p">,</span> <span class="n">batch_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">outputs</span><span class="p">,</span> <span class="n">hidden</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rnn</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">hidden</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="decoder">
+<h3><a class="toc-backref" href="#id18" role="doc-backlink">Decoder</a><a class="headerlink" href="#decoder" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Decoder</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">,</span> <span class="n">num_layers</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Decoder</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rnn</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">GRU</span><span class="p">(</span><span class="n">output_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">,</span> <span class="n">num_layers</span><span class="o">=</span><span class="n">num_layers</span><span class="p">,</span> <span class="n">batch_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">hidden</span><span class="p">):</span>
+        <span class="n">output</span><span class="p">,</span> <span class="n">hidden</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rnn</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">hidden</span><span class="p">)</span>
+        <span class="n">prediction</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">prediction</span><span class="p">,</span> <span class="n">hidden</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="seq2seq-model">
+<h3><a class="toc-backref" href="#id19" role="doc-backlink">Seq2Seq Model</a><a class="headerlink" href="#seq2seq-model" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Seq2Seq</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">encoder</span><span class="p">,</span> <span class="n">decoder</span><span class="p">,</span> <span class="n">device</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">Seq2Seq</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span> <span class="o">=</span> <span class="n">encoder</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">decoder</span> <span class="o">=</span> <span class="n">decoder</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="n">device</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">trg</span><span class="p">,</span> <span class="n">teacher_forcing_ratio</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+        <span class="n">batch_size</span><span class="p">,</span> <span class="n">trg_len</span><span class="p">,</span> <span class="n">trg_dim</span> <span class="o">=</span> <span class="n">trg</span><span class="o">.</span><span class="n">shape</span>
+        <span class="n">outputs</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">trg_len</span><span class="p">,</span> <span class="n">trg_dim</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="p">)</span>
+
+        <span class="n">hidden</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encoder</span><span class="p">(</span><span class="n">src</span><span class="p">)</span>
+        <span class="nb">input</span> <span class="o">=</span> <span class="n">trg</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">trg_len</span><span class="p">):</span>
+            <span class="n">output</span><span class="p">,</span> <span class="n">hidden</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">decoder</span><span class="p">(</span><span class="nb">input</span><span class="p">,</span> <span class="n">hidden</span><span class="p">)</span>
+            <span class="n">outputs</span><span class="p">[:,</span> <span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">squeeze</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">teacher_force</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">teacher_forcing_ratio</span>
+            <span class="nb">input</span> <span class="o">=</span> <span class="n">trg</span><span class="p">[:,</span> <span class="n">t</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">teacher_force</span> <span class="k">else</span> <span class="n">output</span>
+        <span class="k">return</span> <span class="n">outputs</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="generate-toy-dataset">
+<h3><a class="toc-backref" href="#id20" role="doc-backlink">Generate Toy Dataset</a><a class="headerlink" href="#generate-toy-dataset" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">generate_toy_data</span><span class="p">():</span>
+    <span class="n">src</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">5</span><span class="p">)[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]]</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># [1, 4, 5]</span>
+    <span class="n">trg</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">5</span><span class="p">)[[</span><span class="mi">4</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">unsqueeze</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># reversed sequence</span>
+    <span class="k">return</span> <span class="n">src</span><span class="p">,</span> <span class="n">trg</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="define-training-and-evaluation-functions">
+<h3><a class="toc-backref" href="#id21" role="doc-backlink">Define Training and Evaluation Functions</a><a class="headerlink" href="#define-training-and-evaluation-functions" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">train</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">criterion</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">trg</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">epochs</span><span class="p">):</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">trg</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">trg</span><span class="p">)</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Epoch </span><span class="si">{</span><span class="n">epoch</span><span class="si">}</span><span class="s2">, Loss: </span><span class="si">{</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">evaluate</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">src</span><span class="p">,</span> <span class="n">trg</span><span class="p">):</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">trg</span><span class="p">,</span> <span class="n">teacher_forcing_ratio</span><span class="o">=</span><span class="mf">0.0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="hyperparameter-grid">
+<h3><a class="toc-backref" href="#id22" role="doc-backlink">Hyperparameter Grid</a><a class="headerlink" href="#hyperparameter-grid" title="Link to this heading">#</a></h3>
+<p>We’ll tune over <strong>hidden size</strong>, <strong>learning rate</strong>, and <strong>teacher forcing ratio</strong>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+
+<span class="n">param_grid</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;hidden_dim&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">],</span>
+    <span class="s2">&quot;learning_rate&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.005</span><span class="p">],</span>
+    <span class="s2">&quot;teacher_forcing_ratio&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="hyperparameter-tuning-loop">
+<h3><a class="toc-backref" href="#id23" role="doc-backlink">Hyperparameter Tuning Loop</a><a class="headerlink" href="#hyperparameter-tuning-loop" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">src</span><span class="p">,</span> <span class="n">trg</span> <span class="o">=</span> <span class="n">generate_toy_data</span><span class="p">()</span>
+<span class="n">best_loss</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">)</span>
+<span class="n">best_params</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="k">for</span> <span class="n">hidden_dim</span><span class="p">,</span> <span class="n">lr</span><span class="p">,</span> <span class="n">tf_ratio</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span>
+    <span class="n">param_grid</span><span class="p">[</span><span class="s2">&quot;hidden_dim&quot;</span><span class="p">],</span>
+    <span class="n">param_grid</span><span class="p">[</span><span class="s2">&quot;learning_rate&quot;</span><span class="p">],</span>
+    <span class="n">param_grid</span><span class="p">[</span><span class="s2">&quot;teacher_forcing_ratio&quot;</span><span class="p">]</span>
+<span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Testing: hidden=</span><span class="si">{</span><span class="n">hidden_dim</span><span class="si">}</span><span class="s2">, lr=</span><span class="si">{</span><span class="n">lr</span><span class="si">}</span><span class="s2">, tf_ratio=</span><span class="si">{</span><span class="n">tf_ratio</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">encoder</span> <span class="o">=</span> <span class="n">Encoder</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+    <span class="n">decoder</span> <span class="o">=</span> <span class="n">Decoder</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Seq2Seq</span><span class="p">(</span><span class="n">encoder</span><span class="p">,</span> <span class="n">decoder</span><span class="p">,</span> <span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+    <span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">lr</span><span class="p">)</span>
+    <span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">MSELoss</span><span class="p">()</span>
+
+    <span class="n">final_loss</span> <span class="o">=</span> <span class="n">train</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">criterion</span><span class="p">,</span> <span class="n">src</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">trg</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">final_loss</span> <span class="o">&lt;</span> <span class="n">best_loss</span><span class="p">:</span>
+        <span class="n">best_loss</span> <span class="o">=</span> <span class="n">final_loss</span>
+        <span class="n">best_params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;hidden_dim&quot;</span><span class="p">:</span> <span class="n">hidden_dim</span><span class="p">,</span> <span class="s2">&quot;lr&quot;</span><span class="p">:</span> <span class="n">lr</span><span class="p">,</span> <span class="s2">&quot;teacher_forcing_ratio&quot;</span><span class="p">:</span> <span class="n">tf_ratio</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Testing: hidden=16, lr=0.01, tf_ratio=0.5
+Epoch 0, Loss: 0.2420
+Epoch 100, Loss: 0.0500
+Epoch 200, Loss: 0.0500
+
+Testing: hidden=16, lr=0.01, tf_ratio=0.7
+Epoch 0, Loss: 0.2535
+Epoch 100, Loss: 0.0500
+Epoch 200, Loss: 0.0500
+
+Testing: hidden=16, lr=0.005, tf_ratio=0.5
+Epoch 0, Loss: 0.2273
+Epoch 100, Loss: 0.0501
+Epoch 200, Loss: 0.0500
+
+Testing: hidden=16, lr=0.005, tf_ratio=0.7
+Epoch 0, Loss: 0.2593
+Epoch 100, Loss: 0.0500
+Epoch 200, Loss: 0.0500
+
+Testing: hidden=32, lr=0.01, tf_ratio=0.5
+Epoch 0, Loss: 0.2196
+Epoch 100, Loss: 0.0500
+Epoch 200, Loss: 0.0500
+
+Testing: hidden=32, lr=0.01, tf_ratio=0.7
+Epoch 0, Loss: 0.2128
+Epoch 100, Loss: 0.0500
+Epoch 200, Loss: 0.0500
+
+Testing: hidden=32, lr=0.005, tf_ratio=0.5
+Epoch 0, Loss: 0.2390
+Epoch 100, Loss: 0.0500
+Epoch 200, Loss: 0.0500
+
+Testing: hidden=32, lr=0.005, tf_ratio=0.7
+Epoch 0, Loss: 0.2321
+Epoch 100, Loss: 0.0500
+Epoch 200, Loss: 0.0500
+
+Testing: hidden=64, lr=0.01, tf_ratio=0.5
+Epoch 0, Loss: 0.1927
+Epoch 100, Loss: 0.0500
+Epoch 200, Loss: 0.0500
+
+Testing: hidden=64, lr=0.01, tf_ratio=0.7
+Epoch 0, Loss: 0.2191
+Epoch 100, Loss: 0.0500
+Epoch 200, Loss: 0.0500
+
+Testing: hidden=64, lr=0.005, tf_ratio=0.5
+Epoch 0, Loss: 0.2061
+Epoch 100, Loss: 0.0500
+Epoch 200, Loss: 0.0500
+
+Testing: hidden=64, lr=0.005, tf_ratio=0.7
+Epoch 0, Loss: 0.1981
+Epoch 100, Loss: 0.0500
+Epoch 200, Loss: 0.0500
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="best-model-evaluation">
+<h3><a class="toc-backref" href="#id24" role="doc-backlink">Best Model Evaluation</a><a class="headerlink" href="#best-model-evaluation" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Best Parameters:&quot;</span><span class="p">,</span> <span class="n">best_params</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Best Loss:&quot;</span><span class="p">,</span> <span class="n">best_loss</span><span class="p">)</span>
+
+<span class="c1"># Retrain final model</span>
+<span class="n">encoder</span> <span class="o">=</span> <span class="n">Encoder</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">best_params</span><span class="p">[</span><span class="s2">&quot;hidden_dim&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">decoder</span> <span class="o">=</span> <span class="n">Decoder</span><span class="p">(</span><span class="n">best_params</span><span class="p">[</span><span class="s2">&quot;hidden_dim&quot;</span><span class="p">],</span> <span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Seq2Seq</span><span class="p">(</span><span class="n">encoder</span><span class="p">,</span> <span class="n">decoder</span><span class="p">,</span> <span class="n">device</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">best_params</span><span class="p">[</span><span class="s2">&quot;lr&quot;</span><span class="p">])</span>
+<span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">MSELoss</span><span class="p">()</span>
+<span class="n">train</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">criterion</span><span class="p">,</span> <span class="n">src</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">trg</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+
+<span class="c1"># Evaluate</span>
+<span class="n">pred</span> <span class="o">=</span> <span class="n">evaluate</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">src</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">),</span> <span class="n">trg</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Predicted sequence indices:&quot;</span><span class="p">,</span> <span class="n">pred</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Best Parameters: {&#39;hidden_dim&#39;: 16, &#39;lr&#39;: 0.01, &#39;teacher_forcing_ratio&#39;: 0.5}
+Best Loss: 0.05000000074505806
+Epoch 0, Loss: 0.2190
+Epoch 100, Loss: 0.0500
+Epoch 200, Loss: 0.0500
+Epoch 300, Loss: 0.0500
+Epoch 400, Loss: 0.0500
+Predicted sequence indices: [[0 3 2 1]]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="output-example">
+<h3><a class="toc-backref" href="#id25" role="doc-backlink">Output Example</a><a class="headerlink" href="#output-example" title="Link to this heading">#</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Testing</span><span class="p">:</span> <span class="n">hidden</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">tf_ratio</span><span class="o">=</span><span class="mf">0.5</span>
+<span class="n">Epoch</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Loss</span><span class="p">:</span> <span class="mf">0.5342</span>
+<span class="o">...</span>
+<span class="n">Best</span> <span class="n">Parameters</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;hidden_dim&#39;</span><span class="p">:</span> <span class="mi">32</span><span class="p">,</span> <span class="s1">&#39;lr&#39;</span><span class="p">:</span> <span class="mf">0.005</span><span class="p">,</span> <span class="s1">&#39;teacher_forcing_ratio&#39;</span><span class="p">:</span> <span class="mf">0.7</span><span class="p">}</span>
+<span class="n">Best</span> <span class="n">Loss</span><span class="p">:</span> <span class="mf">0.0024</span>
+<span class="n">Predicted</span> <span class="n">sequence</span> <span class="n">indices</span><span class="p">:</span> <span class="p">[[</span><span class="mi">4</span> <span class="mi">3</span> <span class="mi">2</span> <span class="mi">1</span><span class="p">]]</span>
+</pre></div>
+</div>
+<p><strong>Model successfully learns to reverse the sequence.</strong></p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="hyperparameters-tuned">
+<h2><a class="toc-backref" href="#id26" role="doc-backlink">Hyperparameters Tuned</a><a class="headerlink" href="#hyperparameters-tuned" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Role</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">hidden_dim</span></code></p></td>
+<td><p>Size of GRU hidden state</p></td>
+<td><p>Controls model capacity</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">learning_rate</span></code></p></td>
+<td><p>Optimizer step size</p></td>
+<td><p>Controls convergence speed</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">teacher_forcing_ratio</span></code></p></td>
+<td><p>Probability of using true target at next step</p></td>
+<td><p>Balances stability and realism</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="extensions">
+<h2><a class="toc-backref" href="#id27" role="doc-backlink"><strong>Extensions</strong></a><a class="headerlink" href="#extensions" title="Link to this heading">#</a></h2>
+<p>You can extend this structure for:</p>
+<ul class="simple">
+<li><p><strong>Machine Translation</strong> (tokenized text instead of one-hot)</p></li>
+<li><p><strong>Summarization</strong> (variable-length input/output)</p></li>
+<li><p><strong>Speech/Text alignment</strong> (add attention mechanism)</p></li>
+<li><p><strong>Optimization frameworks</strong> like:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">Ray</span> <span class="pre">Tune</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Optuna</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scikit-optimize</span></code></p></li>
+</ul>
+</li>
+</ul>
+<hr class="docutils" />
+<p><strong>In Short</strong></p>
+<blockquote>
+<div><p><strong>Seq2Seq Hyperparameter Tuning Workflow:</strong></p>
+<ol class="arabic simple">
+<li><p>Build Encoder–Decoder model</p></li>
+<li><p>Define search space</p></li>
+<li><p>Train and evaluate each configuration</p></li>
+<li><p>Select best parameters by validation loss</p></li>
+<li><p>Retrain final model</p></li>
+</ol>
+</div></blockquote>
+</section>
+<section id="disadvantages-of-seq2seq-encoderdecoder-architecture">
+<h2><a class="toc-backref" href="#id28" role="doc-backlink"><strong>Disadvantages of Seq2Seq (Encoder–Decoder) Architecture</strong></a><a class="headerlink" href="#disadvantages-of-seq2seq-encoderdecoder-architecture" title="Link to this heading">#</a></h2>
+<p>The classic <strong>Seq2Seq</strong> or <strong>Encoder–Decoder</strong> model (without attention) has several key limitations — both theoretical and practical — that motivated the development of <strong>attention</strong> and later <strong>Transformer</strong> architectures.</p>
+<hr class="docutils" />
+<section id="information-bottleneck">
+<h3><a class="toc-backref" href="#id29" role="doc-backlink"><strong>1. Information Bottleneck</strong></a><a class="headerlink" href="#information-bottleneck" title="Link to this heading">#</a></h3>
+<p><strong>Problem:</strong>
+The entire input sequence is compressed into a <strong>single fixed-length context vector</strong> (usually the last hidden state of the encoder).</p>
+<p><strong>Why it matters:</strong></p>
+<ul class="simple">
+<li><p>For short sentences, this works fine.</p></li>
+<li><p>For long or complex sequences, it cannot retain all information.</p></li>
+<li><p>Earlier tokens are gradually forgotten as new tokens arrive.</p></li>
+</ul>
+<p><strong>Result:</strong>
+The decoder loses access to early parts of the input → poor accuracy for long sentences.</p>
+<p>🧩 Example:
+In translation —</p>
+<blockquote>
+<div><p>Input: “The professor who advised the students on the complex research project gave a lecture yesterday.”
+The encoder’s final hidden state mostly remembers “lecture yesterday,” forgetting earlier context like “professor.”</p>
+</div></blockquote>
+</section>
+<hr class="docutils" />
+<section id="long-term-dependency-problem">
+<h3><a class="toc-backref" href="#id30" role="doc-backlink"><strong>2. Long-Term Dependency Problem</strong></a><a class="headerlink" href="#long-term-dependency-problem" title="Link to this heading">#</a></h3>
+<p>Even though LSTMs and GRUs help reduce vanishing gradients, they <strong>still struggle</strong> to remember distant dependencies in very long sequences.</p>
+<p><strong>Why:</strong>
+Gradients weaken as they backpropagate through many time steps.
+Hence, the model tends to focus more on the <strong>recent tokens</strong> in the sequence.</p>
+</section>
+<hr class="docutils" />
+<section id="decoder-has-limited-context">
+<h3><a class="toc-backref" href="#id31" role="doc-backlink"><strong>3. Decoder Has Limited Context</strong></a><a class="headerlink" href="#decoder-has-limited-context" title="Link to this heading">#</a></h3>
+<p>The decoder can only see the <strong>final encoder state</strong>, not all encoder states.
+That means it cannot decide <em>which parts</em> of the input are important when generating each output token.</p>
+<p><strong>Effect:</strong></p>
+<ul class="simple">
+<li><p>Important information (like named entities or subjects) can be ignored.</p></li>
+<li><p>Reduces translation or summarization accuracy.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="sequential-non-parallelizable-computation">
+<h3><a class="toc-backref" href="#id32" role="doc-backlink"><strong>4. Sequential (Non-parallelizable) Computation</strong></a><a class="headerlink" href="#sequential-non-parallelizable-computation" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The encoder processes input <strong>one token at a time</strong>.</p></li>
+<li><p>The decoder also generates output <strong>step by step</strong>, depending on previous steps.</p></li>
+</ul>
+<p><strong>Result:</strong></p>
+<ul class="simple">
+<li><p><strong>Slow training and inference</strong>, especially for long sequences.</p></li>
+<li><p>Cannot leverage GPU parallelism efficiently.</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="poor-performance-on-long-sentences">
+<h3><a class="toc-backref" href="#id33" role="doc-backlink"><strong>5. Poor Performance on Long Sentences</strong></a><a class="headerlink" href="#poor-performance-on-long-sentences" title="Link to this heading">#</a></h3>
+<p>Empirically, BLEU scores (translation accuracy) drop sharply as sentence length increases.</p>
+<p><strong>Reason:</strong>
+The fixed-length context vector and limited memory capacity both fail to capture distant dependencies.</p>
+</section>
+<hr class="docutils" />
+<section id="lack-of-interpretability">
+<h3><a class="toc-backref" href="#id34" role="doc-backlink"><strong>6. Lack of Interpretability</strong></a><a class="headerlink" href="#lack-of-interpretability" title="Link to this heading">#</a></h3>
+<p>The model’s decisions are <strong>opaque</strong> — you cannot tell <em>which part</em> of the input influenced a given output word.</p>
+<p>In contrast, attention-based models provide <strong>attention weights</strong>, showing where the model “looked.”</p>
+</section>
+<hr class="docutils" />
+<section id="difficulty-handling-variable-length-outputs">
+<h3><a class="toc-backref" href="#id35" role="doc-backlink"><strong>7. Difficulty Handling Variable-Length Outputs</strong></a><a class="headerlink" href="#difficulty-handling-variable-length-outputs" title="Link to this heading">#</a></h3>
+<p>Although possible, training and aligning variable-length input and output sequences in basic Seq2Seq models requires extra mechanisms like padding, masking, or teacher forcing — making training more complex and unstable.</p>
+</section>
+<hr class="docutils" />
+<section id="exposure-bias">
+<h3><a class="toc-backref" href="#id36" role="doc-backlink"><strong>8. Exposure Bias</strong></a><a class="headerlink" href="#exposure-bias" title="Link to this heading">#</a></h3>
+<p>During training, the decoder is fed <strong>ground-truth previous tokens</strong> (“teacher forcing”).
+During inference, it must rely on its <strong>own predictions</strong>, which can quickly lead to <strong>error accumulation</strong> if an early prediction is wrong.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="summary-table">
+<h2><a class="toc-backref" href="#id37" role="doc-backlink"><strong>Summary Table</strong></a><a class="headerlink" href="#summary-table" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Limitation</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Effect</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Fixed context vector</strong></p></td>
+<td><p>Single vector summarizes full input</p></td>
+<td><p>Loses info for long sentences</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Long-term dependency loss</strong></p></td>
+<td><p>Gradient vanishing with time</p></td>
+<td><p>Poor recall of distant words</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Decoder sees only last encoder state</strong></p></td>
+<td><p>No selective focus</p></td>
+<td><p>Lower translation accuracy</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Sequential processing</strong></p></td>
+<td><p>No parallelization</p></td>
+<td><p>Slow computation</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>No interpretability</strong></p></td>
+<td><p>Black-box behavior</p></td>
+<td><p>Hard to analyze or debug</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Error accumulation</strong></p></td>
+<td><p>Wrong token early → future errors</p></td>
+<td><p>Degraded output quality</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+<p><strong>In short</strong></p>
+<blockquote>
+<div><p>The vanilla Seq2Seq architecture is limited because it forces the model to memorize the entire input in one vector and decode step by step, leading to poor handling of long sequences and slower training.</p>
+</div></blockquote>
+<p>That’s why the <strong>Attention Mechanism</strong> was introduced — to let the model <strong>“look back”</strong> at all encoder states dynamically instead of relying on one fixed summary.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./rnn\variants"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="07_part.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Attention-Based RNN (Vanilla)</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="09_part.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Attention</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-intuition">Example Intuition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture">Architecture</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-encoder"><strong>A. Encoder</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-decoder"><strong>B. Decoder</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-context-vector"><strong>C. Context Vector</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-attention-mechanism-optional"><strong>D. Attention Mechanism (Optional)</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow">🔄 <strong>3. Workflow</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intuitive-example-translation"><strong>4. Intuitive Example — Translation</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-summary">Mathematical Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variants-of-seq2seq">Variants of Seq2Seq</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages">Advantages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#disadvantages">Disadvantages</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#typical-applications">Typical Applications</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demonstration">Demonstration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#encoder">Encoder</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decoder">Decoder</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#seq2seq-model">Seq2Seq Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-toy-dataset">Generate Toy Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-training-and-evaluation-functions">Define Training and Evaluation Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameter-grid">Hyperparameter Grid</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameter-tuning-loop">Hyperparameter Tuning Loop</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#best-model-evaluation">Best Model Evaluation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output-example">Output Example</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameters-tuned">Hyperparameters Tuned</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extensions"><strong>Extensions</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#disadvantages-of-seq2seq-encoderdecoder-architecture"><strong>Disadvantages of Seq2Seq (Encoder–Decoder) Architecture</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#information-bottleneck"><strong>1. Information Bottleneck</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#long-term-dependency-problem"><strong>2. Long-Term Dependency Problem</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#decoder-has-limited-context"><strong>3. Decoder Has Limited Context</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sequential-non-parallelizable-computation"><strong>4. Sequential (Non-parallelizable) Computation</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#poor-performance-on-long-sentences"><strong>5. Poor Performance on Long Sentences</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#lack-of-interpretability"><strong>6. Lack of Interpretability</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#difficulty-handling-variable-length-outputs"><strong>7. Difficulty Handling Variable-Length Outputs</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exposure-bias"><strong>8. Exposure Bias</strong></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-table"><strong>Summary Table</strong></a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By svgoudar
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1008 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Intiution &#8212; Machine Learning Handbook</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=4c969af8" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-examples.css?v=e236af4b" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.bundle.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-shadow.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-punk.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-noir.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-light.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-borderless.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/micromodal.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=40389e5b" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/jquery.js?v=5d32c60e"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=7f8ff830"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script src="../_static/tabs.js?v=3ee01567"></script>
+    <script src="../_static/js/hoverxref.js"></script>
+    <script src="../_static/js/tooltipster.bundle.min.js"></script>
+    <script src="../_static/js/micromodal.min.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ffn/01_part';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Workflow" href="02_part.html" />
+    <link rel="prev" title="FeedForward Neural Network" href="overview.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../introduction.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Machine Learning Handbook - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Machine Learning Handbook - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../introduction.html">
+                    Deep Learning
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../ann/overview.html">Artificial Neural Network (ANN)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ann/neural_network/overview.html">Neural Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ann/neural_network/01_part.html">Intuition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/neural_network/02_part.html">Problem Statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/neural_network/03_part.html">Perceptron</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/neural_network/04_part.html">Multi-Layer Neural Networks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/neural_network/05_part.html">Vanishing Gradient Problem in Deep Learning</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ann/cost_loss_function/overview.html">Loss Function vs Cost Function</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ann/cost_loss_function/01_part.html">Cost Function vs Loss Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/cost_loss_function/02_part.html">Loss Functions for Regression in Neural Networks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/cost_loss_function/03_part.html">Loss Functions for Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/cost_loss_function/04_part.html">Choice of Loss Function</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ann/optimizers/overview.html">Optmizers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ann/optimizers/01_part.html">Gradient Descent Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/optimizers/02_part.html">Stochastic Gradient Descent (SGD) Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/optimizers/03_part.html">Mini-batch Stochastic Gradient Descent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/optimizers/04_part.html">SGD with Momentum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/optimizers/05_part.html">Adagrad Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/optimizers/06_part.html">Adadelta and RMSProp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/optimizers/07_part.html">Adam Optmizers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../ann/techniques/01_part.html">Exploding Gradient Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ann/techniques/02_part.html">Weight Initializing Techniques</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ann/techniques/03_part.html">Dropout Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ann/techniques/04_part.html">Optmization Techniques</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ann/techniques/05_part.html">Regularization</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../cnn/overview.html">CNN (Convolution Neural Network)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cnn/01_part.html">CNN v/s Brain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cnn/02_part.html">Know about Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cnn/03_part.html">Convolution Operation in CNNs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cnn/04_part.html">Padding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cnn/05_part.html">ANN vs CNN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cnn/06_part.html">Pooling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cnn/07_part.html">Fully Connected Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cnn/08_part.html">CNN Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cnn/09_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="overview.html">FeedForward Neural Network</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Intiution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_part.html">Workflow</a></li>
+
+
+<li class="toctree-l2"><a class="reference internal" href="03_part.html">Training &amp; Hyper-Parameter Tuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../rnn/overview.html">RNN</a></li>
+
+<li class="toctree-l1 has-children"><a class="reference internal" href="../transformers/overview.html">The Transformer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../transformers/01_part.html">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../transformers/02_part.html">The Transformer Encoder Layer (Deep Explanation)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../transformers/03_part.html">Positional Encoding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../transformers/04_part.html"><strong>Residual Connection + Layer Normalization</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../transformers/05_part.html"><strong>Transformer Decoder Layer</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../transformers/06_part.html">Practicals</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../gan/overview.html"><strong>Generative Adversarial Network (GAN)</strong></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../gan/01_part.html">Intuition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gan/02_part.html">Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gan/03_part.html">Applications of Generative Adversarial Networks (GANs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../gan/04_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../rbf/overview.html">Radial Basis Function (RBF) Neural Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../rbf/01_part.html">Intuition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rbf/02_part.html">Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rbf/03_part.html">Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rbf/04_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../siamese/overview.html">Siamese Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../siamese/01_part.html">Intuition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../siamese/02_part.html">Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../siamese/03_part.html">Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../siamese/04_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../autoencoders/overview.html">Autoencoders</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../autoencoders/01_part.html">Intiution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoencoders/02_part.html">Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../autoencoders/03_part.html">Application of Autoencoders</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/svgoudar/AI-ML-Essentials/blob/master/ffn/01_part.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/svgoudar/AI-ML-Essentials" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/svgoudar/AI-ML-Essentials/issues/new?title=Issue%20on%20page%20%2Fffn/01_part.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/ffn/01_part.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Intiution</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-structure">Mathematical Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-by-step-theoretical-intuition">Step-by-Step Theoretical Intuition</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-transformation-feature-extraction">Linear Transformation (Feature Extraction)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#non-linearity-feature-composition">Non-Linearity (Feature Composition)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#layer-composition-hierarchy-of-features">Layer Composition (Hierarchy of Features)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-backpropagation-gradient-descent">Learning — Backpropagation + Gradient Descent</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-function">Loss Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-descent">Gradient Descent</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backpropagation">Backpropagation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-calculation">Example Calculation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#theoretical-insights">Theoretical Insights</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#universal-approximation-theorem">Universal Approximation Theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#role-of-depth">Role of Depth</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilistic-view">Probabilistic View</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geometric-view">Geometric View</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition-recap">Intuition Recap</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-intuitive-analogy">Example Intuitive Analogy</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <nav class="contents" id="contents" role="doc-toc">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#intiution" id="id1">Intiution</a></p>
+<ul>
+<li><p><a class="reference internal" href="#mathematical-structure" id="id2">Mathematical Structure</a></p></li>
+<li><p><a class="reference internal" href="#step-by-step-theoretical-intuition" id="id3">Step-by-Step Theoretical Intuition</a></p>
+<ul>
+<li><p><a class="reference internal" href="#linear-transformation-feature-extraction" id="id4">Linear Transformation (Feature Extraction)</a></p></li>
+<li><p><a class="reference internal" href="#non-linearity-feature-composition" id="id5">Non-Linearity (Feature Composition)</a></p></li>
+<li><p><a class="reference internal" href="#layer-composition-hierarchy-of-features" id="id6">Layer Composition (Hierarchy of Features)</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#learning-backpropagation-gradient-descent" id="id7">Learning — Backpropagation + Gradient Descent</a></p></li>
+<li><p><a class="reference internal" href="#loss-function" id="id8">Loss Function</a></p></li>
+<li><p><a class="reference internal" href="#gradient-descent" id="id9">Gradient Descent</a></p></li>
+<li><p><a class="reference internal" href="#backpropagation" id="id10">Backpropagation</a></p></li>
+<li><p><a class="reference internal" href="#example-calculation" id="id11">Example Calculation</a></p>
+<ul>
+<li><p><a class="reference internal" href="#theoretical-insights" id="id12">Theoretical Insights</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#universal-approximation-theorem" id="id13">Universal Approximation Theorem</a></p></li>
+<li><p><a class="reference internal" href="#role-of-depth" id="id14">Role of Depth</a></p></li>
+<li><p><a class="reference internal" href="#probabilistic-view" id="id15">Probabilistic View</a></p>
+<ul>
+<li><p><a class="reference internal" href="#geometric-view" id="id16">Geometric View</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#intuition-recap" id="id17">Intuition Recap</a></p></li>
+<li><p><a class="reference internal" href="#example-intuitive-analogy" id="id18">Example Intuitive Analogy</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="intiution">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">Intiution</a><a class="headerlink" href="#intiution" title="Link to this heading">#</a></h1>
+<p>A <strong>Feedforward Neural Network (FNN)</strong> models a <strong>function ( f(x; \theta) )</strong> that maps an input vector ( x \in \mathbb{R}^n ) to an output ( y \in \mathbb{R}^m ).
+The parameters ( \theta = {W, b} ) (weights and biases) are <strong>learned</strong> such that:
+$<span class="math notranslate nohighlight">\(
+y \approx f(x; \theta)
+\)</span>$</p>
+<p>It’s called “feedforward” because information flows <strong>one way</strong>:
+$<span class="math notranslate nohighlight">\(
+x \rightarrow \text{hidden layers} \rightarrow \hat{y}
+\)</span>$</p>
+<hr class="docutils" />
+<section id="mathematical-structure">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Mathematical Structure</a><a class="headerlink" href="#mathematical-structure" title="Link to this heading">#</a></h2>
+<p>An FNN is composed of <strong>layers of neurons</strong>, where each layer performs a simple operation:</p>
+<div class="math notranslate nohighlight">
+\[
+z^{(l)} = W^{(l)} a^{(l-1)} + b^{(l)}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+a^{(l)} = f(z^{(l)})
+\]</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(l\)</span> = layer index</p></li>
+<li><p><span class="math notranslate nohighlight">\(a^{(0)} = x\)</span> (input)</p></li>
+<li><p><span class="math notranslate nohighlight">\(W^{(l)}\)</span>: weight matrix for layer (l)</p></li>
+<li><p><span class="math notranslate nohighlight">\(b^{(l)}\)</span>: bias vector</p></li>
+<li><p><span class="math notranslate nohighlight">\(f(\cdot)\)</span>: activation function (non-linear)</p></li>
+</ul>
+<p>The final layer output <span class="math notranslate nohighlight">\(a^{(L)} = \hat{y}\)</span> is the model’s <strong>prediction</strong>.</p>
+</section>
+<hr class="docutils" />
+<section id="step-by-step-theoretical-intuition">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Step-by-Step Theoretical Intuition</a><a class="headerlink" href="#step-by-step-theoretical-intuition" title="Link to this heading">#</a></h2>
+<p>Let’s break the FNN into <strong>three conceptual blocks</strong>:</p>
+<hr class="docutils" />
+<section id="linear-transformation-feature-extraction">
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">Linear Transformation (Feature Extraction)</a><a class="headerlink" href="#linear-transformation-feature-extraction" title="Link to this heading">#</a></h3>
+<p>Each neuron computes a <strong>weighted sum</strong>:
+$<span class="math notranslate nohighlight">\(
+z_i = \sum_{j} w_{ij}x_j + b_i
+\)</span>$</p>
+<p>This is a <strong>linear transformation</strong>:
+It projects the input vector into another space, stretching or rotating it.</p>
+<p>In matrix form:
+$<span class="math notranslate nohighlight">\(
+z = W x + b
+\)</span>$</p>
+<p>🔹 <strong>Interpretation</strong>:
+Each layer re-represents the data in a new coordinate system, learning directions (features) that best explain the data’s patterns.</p>
+</section>
+<hr class="docutils" />
+<section id="non-linearity-feature-composition">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">Non-Linearity (Feature Composition)</a><a class="headerlink" href="#non-linearity-feature-composition" title="Link to this heading">#</a></h3>
+<p>The activation function ( f(z) ) (e.g. ReLU, Sigmoid, Tanh) adds <strong>non-linearity</strong>:
+$<span class="math notranslate nohighlight">\(
+a = f(z)
+\)</span>$</p>
+<p>Without this step, stacking multiple layers collapses into one linear map:
+$<span class="math notranslate nohighlight">\(
+W_3(W_2(W_1x)) = W'x
+\)</span>$
+→ still linear.
+With non-linearity, the network can learn <strong>curved, complex functions</strong>.</p>
+<p>🔹 <strong>Interpretation</strong>:
+Non-linearity allows each layer to “bend” the input space — this lets the network model complex relationships like curved boundaries or hierarchies (edges → shapes → objects).</p>
+</section>
+<hr class="docutils" />
+<section id="layer-composition-hierarchy-of-features">
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">Layer Composition (Hierarchy of Features)</a><a class="headerlink" href="#layer-composition-hierarchy-of-features" title="Link to this heading">#</a></h3>
+<p>Each successive layer composes previous transformations:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = f^{(L)}(W^{(L)} f^{(L-1)}(W^{(L-1)} \dots f^{(1)}(W^{(1)}x + b^{(1)}) + b^{(2)} \dots ))
+\]</div>
+<p>This <strong>composition of non-linear functions</strong> allows the network to approximate <strong>any continuous function</strong> — proven by the <strong>Universal Approximation Theorem</strong>.</p>
+<p>🔹 <strong>Interpretation</strong>:
+Each layer learns progressively abstract representations:</p>
+<ul class="simple">
+<li><p>Layer 1 → basic features (edges, correlations)</p></li>
+<li><p>Layer 2 → combinations (shapes, phrases)</p></li>
+<li><p>Layer 3 → abstract patterns (objects, meaning)</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="learning-backpropagation-gradient-descent">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">Learning — Backpropagation + Gradient Descent</a><a class="headerlink" href="#learning-backpropagation-gradient-descent" title="Link to this heading">#</a></h2>
+<p>The network learns parameters <span class="math notranslate nohighlight">\(W, b\)</span> that minimize <strong>loss</strong> between prediction <span class="math notranslate nohighlight">\(\hat{y}\)</span> and true output <span class="math notranslate nohighlight">\(y\)</span>.</p>
+</section>
+<section id="loss-function">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">Loss Function</a><a class="headerlink" href="#loss-function" title="Link to this heading">#</a></h2>
+<div class="math notranslate nohighlight">
+\[
+L = \text{Loss}(y, \hat{y})
+\]</div>
+<p>Common examples:</p>
+<ul class="simple">
+<li><p>Mean Squared Error: <span class="math notranslate nohighlight">\(L = \frac{1}{2}(y - \hat{y})^2\)</span></p></li>
+<li><p>Cross-Entropy: <span class="math notranslate nohighlight">\(L = -\sum y_i \log(\hat{y_i})\)</span></p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="gradient-descent">
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">Gradient Descent</a><a class="headerlink" href="#gradient-descent" title="Link to this heading">#</a></h2>
+<p>We minimize (L) by adjusting weights in direction of steepest descent:
+$<span class="math notranslate nohighlight">\(
+W := W - \eta \frac{\partial L}{\partial W}
+\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(
+b := b - \eta \frac{\partial L}{\partial b}
+\)</span><span class="math notranslate nohighlight">\(
+where \)</span>\eta$ = learning rate.</p>
+</section>
+<hr class="docutils" />
+<section id="backpropagation">
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">Backpropagation</a><a class="headerlink" href="#backpropagation" title="Link to this heading">#</a></h2>
+<p>Backpropagation computes gradients efficiently using the <strong>chain rule</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial L}{\partial W^{(l)}} = \frac{\partial L}{\partial a^{(l)}} \cdot \frac{\partial a^{(l)}}{\partial z^{(l)}} \cdot \frac{\partial z^{(l)}}{\partial W^{(l)}}
+\]</div>
+<p>Each layer passes error backward, adjusting weights to reduce loss.</p>
+</section>
+<hr class="docutils" />
+<section id="example-calculation">
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">Example Calculation</a><a class="headerlink" href="#example-calculation" title="Link to this heading">#</a></h2>
+<p>Let’s take one hidden layer for simplicity:</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{aligned}
+z^{(1)} &amp;= W^{(1)}x + b^{(1)} \
+a^{(1)} &amp;= f(z^{(1)}) \
+z^{(2)} &amp;= W^{(2)}a^{(1)} + b^{(2)} \
+\hat{y} &amp;= f(z^{(2)})
+\end{aligned}
+\]</div>
+<p>Loss:
+$<span class="math notranslate nohighlight">\(
+L = (y - \hat{y})^2
+\)</span>$</p>
+<p>Gradient for output layer:
+$<span class="math notranslate nohighlight">\(
+\frac{\partial L}{\partial W^{(2)}} = -2(y - \hat{y}) \cdot f'(z^{(2)}) \cdot a^{(1)}
+\)</span>$</p>
+<p>Gradient for hidden layer:
+$<span class="math notranslate nohighlight">\(
+\frac{\partial L}{\partial W^{(1)}} = \left[-2(y - \hat{y})f'(z^{(2)})W^{(2)}f'(z^{(1)})\right]x
+\)</span>$</p>
+<p>This shows how errors “flow backward” to earlier layers — the <strong>core of backpropagation</strong>.</p>
+<hr class="docutils" />
+<section id="theoretical-insights">
+<h3><a class="toc-backref" href="#id12" role="doc-backlink">Theoretical Insights</a><a class="headerlink" href="#theoretical-insights" title="Link to this heading">#</a></h3>
+</section>
+</section>
+<section id="universal-approximation-theorem">
+<h2><a class="toc-backref" href="#id13" role="doc-backlink">Universal Approximation Theorem</a><a class="headerlink" href="#universal-approximation-theorem" title="Link to this heading">#</a></h2>
+<p>A neural network with <strong>one hidden layer and sufficient neurons</strong> can approximate <strong>any continuous function</strong> on compact input space.</p>
+<p>Mathematically:
+$<span class="math notranslate nohighlight">\(
+f(x) = \sum_{i=1}^{N} \alpha_i \sigma(w_i^T x + b_i)
+\)</span><span class="math notranslate nohighlight">\(
+can approximate any \)</span>f(x)$ given enough neurons.</p>
+<p>→ Neural networks are <strong>function approximators</strong>.</p>
+</section>
+<hr class="docutils" />
+<section id="role-of-depth">
+<h2><a class="toc-backref" href="#id14" role="doc-backlink">Role of Depth</a><a class="headerlink" href="#role-of-depth" title="Link to this heading">#</a></h2>
+<p>Deeper networks can represent functions <strong>exponentially more efficiently</strong> (fewer neurons for same accuracy).
+Depth → hierarchical abstraction (like brain cortex layers).</p>
+</section>
+<hr class="docutils" />
+<section id="probabilistic-view">
+<h2><a class="toc-backref" href="#id15" role="doc-backlink">Probabilistic View</a><a class="headerlink" href="#probabilistic-view" title="Link to this heading">#</a></h2>
+<p>Feedforward networks can also be seen as <strong>parameterized conditional models</strong>:
+$<span class="math notranslate nohighlight">\(
+p(y|x; \theta)
+\)</span>$
+They model the probability of output given input, making them suitable for classification and regression.</p>
+<hr class="docutils" />
+<section id="geometric-view">
+<h3><a class="toc-backref" href="#id16" role="doc-backlink">Geometric View</a><a class="headerlink" href="#geometric-view" title="Link to this heading">#</a></h3>
+<p>Each layer <strong>warps input space</strong>:</p>
+<ul class="simple">
+<li><p>Linear layers rotate/stretch space.</p></li>
+<li><p>Nonlinear activations bend it.</p></li>
+<li><p>The final decision boundary becomes a complex surface.</p></li>
+</ul>
+<p>Thus, neural networks <strong>reshape feature space</strong> until classes become linearly separable.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="intuition-recap">
+<h2><a class="toc-backref" href="#id17" role="doc-backlink">Intuition Recap</a><a class="headerlink" href="#intuition-recap" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Stage</p></th>
+<th class="head"><p>M`athematical Form</p></th>
+<th class="head"><p>Theoretical Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Weighted sum</p></td>
+<td><p><span class="math notranslate nohighlight">\(z = Wx + b\)</span></p></td>
+<td><p>Linear projection</p></td>
+</tr>
+<tr class="row-odd"><td><p>Activation</p></td>
+<td><p><span class="math notranslate nohighlight">\(a = f(z)\)</span></p></td>
+<td><p>Nonlinear deformation</p></td>
+</tr>
+<tr class="row-even"><td><p>Composition</p></td>
+<td><p><span class="math notranslate nohighlight">\(f^{(L)} \circ \dots \circ f^{(1)}\)</span></p></td>
+<td><p>Hierarchical feature learning</p></td>
+</tr>
+<tr class="row-odd"><td><p>Loss minimization</p></td>
+<td><p><span class="math notranslate nohighlight">\(\min L(y, \hat{y})\)</span></p></td>
+<td><p>Learn function mapping</p></td>
+</tr>
+<tr class="row-even"><td><p>Backpropagation</p></td>
+<td><p>Chain rule on gradients</p></td>
+<td><p>Efficient optimization</p></td>
+</tr>
+<tr class="row-odd"><td><p>`</p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="example-intuitive-analogy">
+<h2><a class="toc-backref" href="#id18" role="doc-backlink">Example Intuitive Analogy</a><a class="headerlink" href="#example-intuitive-analogy" title="Link to this heading">#</a></h2>
+<p>Think of a <strong>Feedforward Neural Network</strong> as:</p>
+<ul class="simple">
+<li><p>Each layer is a <strong>filter</strong> refining the input.</p></li>
+<li><p>Linear layers = weighted “mixing” of features.</p></li>
+<li><p>Activation = deciding which features to emphasize.</p></li>
+<li><p>Backprop = continuous self-correction to improve the mapping.</p></li>
+</ul>
+<hr class="docutils" />
+<p><strong>Summary</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Concept</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Goal</strong></p></td>
+<td><p>Learn a function ( f: X \to Y ) from data</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Mechanism</strong></p></td>
+<td><p>Compose linear + nonlinear transforms</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Training</strong></p></td>
+<td><p>Backpropagation with gradient descent</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Power</strong></p></td>
+<td><p>Universal function approximator</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Limitation</strong></p></td>
+<td><p>Needs lots of data and tuning</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+<p><strong>In One Line</strong></p>
+<blockquote>
+<div><p>A <strong>Feedforward Neural Network</strong> is a layered system that linearly transforms inputs, bends them through nonlinear activations, and learns parameters via backpropagation to approximate any target function.</p>
+</div></blockquote>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./ffn"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="overview.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">FeedForward Neural Network</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="02_part.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Workflow</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-structure">Mathematical Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#step-by-step-theoretical-intuition">Step-by-Step Theoretical Intuition</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-transformation-feature-extraction">Linear Transformation (Feature Extraction)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#non-linearity-feature-composition">Non-Linearity (Feature Composition)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#layer-composition-hierarchy-of-features">Layer Composition (Hierarchy of Features)</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-backpropagation-gradient-descent">Learning — Backpropagation + Gradient Descent</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-function">Loss Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gradient-descent">Gradient Descent</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backpropagation">Backpropagation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-calculation">Example Calculation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#theoretical-insights">Theoretical Insights</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#universal-approximation-theorem">Universal Approximation Theorem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#role-of-depth">Role of Depth</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#probabilistic-view">Probabilistic View</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geometric-view">Geometric View</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition-recap">Intuition Recap</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-intuitive-analogy">Example Intuitive Analogy</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By svgoudar
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
