@@ -248,24 +248,39 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="overview.html">FeedForward Neural Network</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="01_part.html">Intiution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="02_part.html">Workflow</a></li>
-
-
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Training &amp; Hyper-Parameter Tuning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="04_part.html">Demonstration</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../rnn/overview.html">RNN</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../rnn/overview.html">RNN</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../rnn/01_part.html">Intuition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rnn/02_part.html">Backward &amp; Forward Propogation with RNN context</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rnn/03_part.html">Workflows</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rnn/variants/overview.html">Variants</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../rnn/variants/01_part.html">Simple RNN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rnn/variants/02_part.html">LSTM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rnn/variants/03_part.html">GRU</a></li>
 
+<li class="toctree-l3"><a class="reference internal" href="../rnn/variants/04_part.html">BiRNN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rnn/variants/05_part.html">Deep (Stacked) RNN — Explanation, Intuition, and Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rnn/variants/06_part.html">Echo State Networks (ESN)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rnn/variants/07_part.html">Attention-Based RNN (Vanilla)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rnn/variants/08_part.html">Seq2Seq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rnn/variants/09_part.html">Attention</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../transformers/overview.html">The Transformer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../transformers/01_part.html">Architecture</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../transformers/02_part.html">The Transformer Encoder Layer (Deep Explanation)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../transformers/03_part.html">Positional Encoding</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../transformers/04_part.html"><strong>Residual Connection + Layer Normalization</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../transformers/05_part.html"><strong>Transformer Decoder Layer</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../transformers/06_part.html">Practicals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../transformers/06_part.html">Demonstration</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../gan/overview.html"><strong>Generative Adversarial Network (GAN)</strong></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../gan/overview.html">Generative Adversarial Network (GAN)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../gan/01_part.html">Intuition</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gan/02_part.html">Workflows</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gan/03_part.html">Applications of Generative Adversarial Networks (GANs)</a></li>
@@ -530,23 +545,22 @@ document.write(`
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#huperparameter-tuning-stratergies">Huperparameter Tuning Stratergies</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-hyperparameters-in-fnn">Common Hyperparameters in FNN</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tuning-strategies">Tuning Strategies</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-grid-search">(a) Grid Search</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-random-search">(b) Random Search</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-bayesian-optimization">(c) Bayesian Optimization</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-learning-rate-scheduling">(d) Learning Rate Scheduling</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#e-early-stopping">(e) Early Stopping</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#f-cross-validation">(f) Cross-Validation</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization-techniques">3. Regularization Techniques</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizer-tuning">4. Optimizer Tuning</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-workflow-for-tuning">5. Practical Workflow for Tuning</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-workflow-summary">Example Workflow Summary</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-principles">Key Principles</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#in-one-line">In One Line:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tuning-strategies">Tuning Strategies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-grid-search">(a) Grid Search</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-random-search">(b) Random Search</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-bayesian-optimization">(c) Bayesian Optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-learning-rate-scheduling">(d) Learning Rate Scheduling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e-early-stopping">(e) Early Stopping</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-cross-validation">(f) Cross-Validation</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization-techniques">Regularization Techniques</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizer-tuning">Optimizer Tuning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-workflow-for-tuning">Practical Workflow for Tuning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-workflow-summary">Example Workflow Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-principles">Key Principles</a></li>
 </ul>
             </nav>
         </div>
@@ -577,6 +591,8 @@ document.write(`
 <li><p><a class="reference internal" href="#huperparameter-tuning-stratergies" id="id10">Huperparameter Tuning Stratergies</a></p>
 <ul>
 <li><p><a class="reference internal" href="#common-hyperparameters-in-fnn" id="id11">Common Hyperparameters in FNN</a></p></li>
+</ul>
+</li>
 <li><p><a class="reference internal" href="#tuning-strategies" id="id12">Tuning Strategies</a></p>
 <ul>
 <li><p><a class="reference internal" href="#a-grid-search" id="id13">(a) Grid Search</a></p></li>
@@ -587,19 +603,16 @@ document.write(`
 <li><p><a class="reference internal" href="#f-cross-validation" id="id18">(f) Cross-Validation</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#regularization-techniques" id="id19">3. Regularization Techniques</a></p></li>
-<li><p><a class="reference internal" href="#optimizer-tuning" id="id20">4. Optimizer Tuning</a></p></li>
-<li><p><a class="reference internal" href="#practical-workflow-for-tuning" id="id21">5. Practical Workflow for Tuning</a></p></li>
+<li><p><a class="reference internal" href="#regularization-techniques" id="id19">Regularization Techniques</a></p></li>
+<li><p><a class="reference internal" href="#optimizer-tuning" id="id20">Optimizer Tuning</a></p></li>
+<li><p><a class="reference internal" href="#practical-workflow-for-tuning" id="id21">Practical Workflow for Tuning</a></p></li>
 <li><p><a class="reference internal" href="#example-workflow-summary" id="id22">Example Workflow Summary</a></p></li>
 <li><p><a class="reference internal" href="#key-principles" id="id23">Key Principles</a></p></li>
-<li><p><a class="reference internal" href="#in-one-line" id="id24">In One Line:</a></p></li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
 </nav>
-<section class="tex2jax_ignore mathjax_ignore" id="training-hyper-parameter-tuning">
+<section id="training-hyper-parameter-tuning">
 <h1><a class="toc-backref" href="#id1" role="doc-backlink">Training &amp; Hyper-Parameter Tuning</a><a class="headerlink" href="#training-hyper-parameter-tuning" title="Link to this heading">#</a></h1>
 <section id="training">
 <h2><a class="toc-backref" href="#id2" role="doc-backlink">Training</a><a class="headerlink" href="#training" title="Link to this heading">#</a></h2>
@@ -805,11 +818,12 @@ Training continues until:</p>
 </table>
 </div>
 </section>
+</section>
 <hr class="docutils" />
 <section id="tuning-strategies">
-<h3><a class="toc-backref" href="#id12" role="doc-backlink">Tuning Strategies</a><a class="headerlink" href="#tuning-strategies" title="Link to this heading">#</a></h3>
+<h2><a class="toc-backref" href="#id12" role="doc-backlink">Tuning Strategies</a><a class="headerlink" href="#tuning-strategies" title="Link to this heading">#</a></h2>
 <section id="a-grid-search">
-<h4><a class="toc-backref" href="#id13" role="doc-backlink">(a) Grid Search</a><a class="headerlink" href="#a-grid-search" title="Link to this heading">#</a></h4>
+<h3><a class="toc-backref" href="#id13" role="doc-backlink">(a) Grid Search</a><a class="headerlink" href="#a-grid-search" title="Link to this heading">#</a></h3>
 <ul>
 <li><p>Try all combinations of hyperparameters.</p></li>
 <li><p>Example:</p>
@@ -826,7 +840,7 @@ neurons = [64, 128, 256]
 </section>
 <hr class="docutils" />
 <section id="b-random-search">
-<h4><a class="toc-backref" href="#id14" role="doc-backlink">(b) Random Search</a><a class="headerlink" href="#b-random-search" title="Link to this heading">#</a></h4>
+<h3><a class="toc-backref" href="#id14" role="doc-backlink">(b) Random Search</a><a class="headerlink" href="#b-random-search" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Randomly select hyperparameter combinations.</p></li>
 <li><p>Usually faster and often as effective as grid search.</p></li>
@@ -835,7 +849,7 @@ neurons = [64, 128, 256]
 </section>
 <hr class="docutils" />
 <section id="c-bayesian-optimization">
-<h4><a class="toc-backref" href="#id15" role="doc-backlink">(c) Bayesian Optimization</a><a class="headerlink" href="#c-bayesian-optimization" title="Link to this heading">#</a></h4>
+<h3><a class="toc-backref" href="#id15" role="doc-backlink">(c) Bayesian Optimization</a><a class="headerlink" href="#c-bayesian-optimization" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Builds a probabilistic model of performance across hyperparameter space.</p></li>
 <li><p>Chooses next set of hyperparameters based on previous results.</p></li>
@@ -845,7 +859,7 @@ neurons = [64, 128, 256]
 </section>
 <hr class="docutils" />
 <section id="d-learning-rate-scheduling">
-<h4><a class="toc-backref" href="#id16" role="doc-backlink">(d) Learning Rate Scheduling</a><a class="headerlink" href="#d-learning-rate-scheduling" title="Link to this heading">#</a></h4>
+<h3><a class="toc-backref" href="#id16" role="doc-backlink">(d) Learning Rate Scheduling</a><a class="headerlink" href="#d-learning-rate-scheduling" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Start with higher learning rate and gradually reduce.</p></li>
 <li><p>Schedulers:</p>
@@ -860,7 +874,7 @@ neurons = [64, 128, 256]
 </section>
 <hr class="docutils" />
 <section id="e-early-stopping">
-<h4><a class="toc-backref" href="#id17" role="doc-backlink">(e) Early Stopping</a><a class="headerlink" href="#e-early-stopping" title="Link to this heading">#</a></h4>
+<h3><a class="toc-backref" href="#id17" role="doc-backlink">(e) Early Stopping</a><a class="headerlink" href="#e-early-stopping" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Monitor validation loss.</p></li>
 <li><p>Stop training when it stops improving.</p></li>
@@ -869,7 +883,7 @@ neurons = [64, 128, 256]
 </section>
 <hr class="docutils" />
 <section id="f-cross-validation">
-<h4><a class="toc-backref" href="#id18" role="doc-backlink">(f) Cross-Validation</a><a class="headerlink" href="#f-cross-validation" title="Link to this heading">#</a></h4>
+<h3><a class="toc-backref" href="#id18" role="doc-backlink">(f) Cross-Validation</a><a class="headerlink" href="#f-cross-validation" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Split data into ( k ) folds (e.g., 5-fold).</p></li>
 <li><p>Train on ( k-1 ) folds, validate on 1.</p></li>
@@ -879,7 +893,7 @@ neurons = [64, 128, 256]
 </section>
 <hr class="docutils" />
 <section id="regularization-techniques">
-<h3><a class="toc-backref" href="#id19" role="doc-backlink">3. Regularization Techniques</a><a class="headerlink" href="#regularization-techniques" title="Link to this heading">#</a></h3>
+<h2><a class="toc-backref" href="#id19" role="doc-backlink">Regularization Techniques</a><a class="headerlink" href="#regularization-techniques" title="Link to this heading">#</a></h2>
 <p>To prevent overfitting:</p>
 <ul class="simple">
 <li><p><strong>L2 regularization (weight decay):</strong>
@@ -893,7 +907,7 @@ L' = L + \lambda \sum W^2
 </section>
 <hr class="docutils" />
 <section id="optimizer-tuning">
-<h3><a class="toc-backref" href="#id20" role="doc-backlink">4. Optimizer Tuning</a><a class="headerlink" href="#optimizer-tuning" title="Link to this heading">#</a></h3>
+<h2><a class="toc-backref" href="#id20" role="doc-backlink">Optimizer Tuning</a><a class="headerlink" href="#optimizer-tuning" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Optimizer</p></th>
@@ -925,7 +939,7 @@ L' = L + \lambda \sum W^2
 </section>
 <hr class="docutils" />
 <section id="practical-workflow-for-tuning">
-<h3><a class="toc-backref" href="#id21" role="doc-backlink">5. Practical Workflow for Tuning</a><a class="headerlink" href="#practical-workflow-for-tuning" title="Link to this heading">#</a></h3>
+<h2><a class="toc-backref" href="#id21" role="doc-backlink">Practical Workflow for Tuning</a><a class="headerlink" href="#practical-workflow-for-tuning" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Start with baseline FNN (simple structure).</p></li>
 <li><p>Tune learning rate → use learning rate finder.</p></li>
@@ -938,7 +952,7 @@ L' = L + \lambda \sum W^2
 </section>
 <hr class="docutils" />
 <section id="example-workflow-summary">
-<h3><a class="toc-backref" href="#id22" role="doc-backlink">Example Workflow Summary</a><a class="headerlink" href="#example-workflow-summary" title="Link to this heading">#</a></h3>
+<h2><a class="toc-backref" href="#id22" role="doc-backlink">Example Workflow Summary</a><a class="headerlink" href="#example-workflow-summary" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Phase</p></th>
@@ -977,20 +991,17 @@ L' = L + \lambda \sum W^2
 </section>
 <hr class="docutils" />
 <section id="key-principles">
-<h3><a class="toc-backref" href="#id23" role="doc-backlink">Key Principles</a><a class="headerlink" href="#key-principles" title="Link to this heading">#</a></h3>
+<h2><a class="toc-backref" href="#id23" role="doc-backlink">Key Principles</a><a class="headerlink" href="#key-principles" title="Link to this heading">#</a></h2>
 <p>✅ Start simple, scale up gradually
 ✅ Use validation loss as your tuning signal
 ✅ Use <strong>learning rate warm-up &amp; decay</strong>
 ✅ Apply dropout and normalization in deeper models
 ✅ Automate search using Optuna or KerasTuner</p>
-</section>
 <hr class="docutils" />
-<section id="in-one-line">
-<h3><a class="toc-backref" href="#id24" role="doc-backlink">In One Line:</a><a class="headerlink" href="#in-one-line" title="Link to this heading">#</a></h3>
+<p><strong>In One Line:</strong></p>
 <blockquote>
 <div><p>Training an FNN means optimizing its weights through forward and backward passes, while <strong>hyperparameter tuning</strong> is the process of adjusting external configurations — like learning rate, depth, and regularization — to achieve the best generalization performance.</p>
 </div></blockquote>
-</section>
 </section>
 </section>
 
@@ -1070,23 +1081,22 @@ L' = L + \lambda \sum W^2
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#huperparameter-tuning-stratergies">Huperparameter Tuning Stratergies</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-hyperparameters-in-fnn">Common Hyperparameters in FNN</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#tuning-strategies">Tuning Strategies</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#a-grid-search">(a) Grid Search</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#b-random-search">(b) Random Search</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#c-bayesian-optimization">(c) Bayesian Optimization</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#d-learning-rate-scheduling">(d) Learning Rate Scheduling</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#e-early-stopping">(e) Early Stopping</a></li>
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#f-cross-validation">(f) Cross-Validation</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization-techniques">3. Regularization Techniques</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizer-tuning">4. Optimizer Tuning</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-workflow-for-tuning">5. Practical Workflow for Tuning</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-workflow-summary">Example Workflow Summary</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-principles">Key Principles</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#in-one-line">In One Line:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tuning-strategies">Tuning Strategies</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-grid-search">(a) Grid Search</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-random-search">(b) Random Search</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-bayesian-optimization">(c) Bayesian Optimization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-learning-rate-scheduling">(d) Learning Rate Scheduling</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e-early-stopping">(e) Early Stopping</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-cross-validation">(f) Cross-Validation</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#regularization-techniques">Regularization Techniques</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizer-tuning">Optimizer Tuning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-workflow-for-tuning">Practical Workflow for Tuning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-workflow-summary">Example Workflow Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-principles">Key Principles</a></li>
 </ul>
   </nav></div>
 

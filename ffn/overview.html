@@ -248,24 +248,39 @@
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">FeedForward Neural Network</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="01_part.html">Intiution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="02_part.html">Workflow</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="03_part.html">Training &amp; Hyper-Parameter Tuning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="04_part.html">Demonstration</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1"><a class="reference internal" href="../rnn/overview.html">RNN</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../rnn/overview.html">RNN</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../rnn/01_part.html">Intuition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rnn/02_part.html">Backward &amp; Forward Propogation with RNN context</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../rnn/03_part.html">Workflows</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../rnn/variants/overview.html">Variants</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../rnn/variants/01_part.html">Simple RNN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rnn/variants/02_part.html">LSTM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rnn/variants/03_part.html">GRU</a></li>
 
+<li class="toctree-l3"><a class="reference internal" href="../rnn/variants/04_part.html">BiRNN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rnn/variants/05_part.html">Deep (Stacked) RNN — Explanation, Intuition, and Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rnn/variants/06_part.html">Echo State Networks (ESN)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rnn/variants/07_part.html">Attention-Based RNN (Vanilla)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rnn/variants/08_part.html">Seq2Seq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rnn/variants/09_part.html">Attention</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../transformers/overview.html">The Transformer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../transformers/01_part.html">Architecture</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../transformers/02_part.html">The Transformer Encoder Layer (Deep Explanation)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../transformers/03_part.html">Positional Encoding</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../transformers/04_part.html"><strong>Residual Connection + Layer Normalization</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../transformers/05_part.html"><strong>Transformer Decoder Layer</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../transformers/06_part.html">Practicals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../transformers/06_part.html">Demonstration</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../gan/overview.html"><strong>Generative Adversarial Network (GAN)</strong></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../gan/overview.html">Generative Adversarial Network (GAN)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../gan/01_part.html">Intuition</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gan/02_part.html">Workflows</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gan/03_part.html">Applications of Generative Adversarial Networks (GANs)</a></li>
@@ -518,10 +533,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concept-overview"><strong>1. Concept Overview</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flow"><strong>Flow</strong></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concept-overview"><strong>1. Concept Overview</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flow"><strong>Flow</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#components"><strong>2. Components</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-working"><strong>3. Mathematical Working</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-process"><strong>4. Training Process</strong></a><ul class="nav section-nav flex-column">
@@ -552,11 +565,8 @@ document.write(`
 <ul class="simple">
 <li><p><a class="reference internal" href="#feedforward-neural-network" id="id1">FeedForward Neural Network</a></p>
 <ul>
-<li><p><a class="reference internal" href="#concept-overview" id="id2"><strong>1. Concept Overview</strong></a></p>
-<ul>
+<li><p><a class="reference internal" href="#concept-overview" id="id2"><strong>1. Concept Overview</strong></a></p></li>
 <li><p><a class="reference internal" href="#flow" id="id3"><strong>Flow</strong></a></p></li>
-</ul>
-</li>
 <li><p><a class="reference internal" href="#components" id="id4"><strong>2. Components</strong></a></p></li>
 <li><p><a class="reference internal" href="#mathematical-working" id="id5"><strong>3. Mathematical Working</strong></a></p></li>
 <li><p><a class="reference internal" href="#training-process" id="id6"><strong>4. Training Process</strong></a></p>
@@ -576,7 +586,7 @@ document.write(`
 </li>
 </ul>
 </nav>
-<section class="tex2jax_ignore mathjax_ignore" id="feedforward-neural-network">
+<section id="feedforward-neural-network">
 <h1><a class="toc-backref" href="#id1" role="doc-backlink">FeedForward Neural Network</a><a class="headerlink" href="#feedforward-neural-network" title="Link to this heading">#</a></h1>
 <p>A <strong>Feedforward Neural Network (FNN)</strong> — also called a <strong>Multilayer Perceptron (MLP)</strong> — is the most fundamental form of artificial neural network.
 It forms the <strong>basis of Deep Learning</strong>, where data flows <strong>strictly in one direction</strong>, from <strong>input → hidden layers → output</strong>, without any feedback loops.</p>
@@ -584,15 +594,15 @@ It forms the <strong>basis of Deep Learning</strong>, where data flows <strong>s
 <section id="concept-overview">
 <h2><a class="toc-backref" href="#id2" role="doc-backlink"><strong>1. Concept Overview</strong></a><a class="headerlink" href="#concept-overview" title="Link to this heading">#</a></h2>
 <p>Feedforward networks model a mathematical function that maps input features to outputs through a series of weighted transformations and nonlinear activations.</p>
+</section>
 <section id="flow">
-<h3><a class="toc-backref" href="#id3" role="doc-backlink"><strong>Flow</strong></a><a class="headerlink" href="#flow" title="Link to this heading">#</a></h3>
+<h2><a class="toc-backref" href="#id3" role="doc-backlink"><strong>Flow</strong></a><a class="headerlink" href="#flow" title="Link to this heading">#</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Input Layer → Hidden Layers → Output Layer
 </pre></div>
 </div>
 <p>Each layer passes information <strong>forward only</strong>.
 No cycles or memory of past data (unlike RNNs).</p>
 <p><img alt="alt text" src="../_images/fnn.png" /></p>
-</section>
 </section>
 <hr class="docutils" />
 <section id="components">
@@ -811,8 +821,6 @@ where \)</span>\eta$ = learning rate (step size).</p></li>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="01_part.html">Intiution</a></li>
 <li class="toctree-l1"><a class="reference internal" href="02_part.html">Workflow</a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_part.html#deployment">🔹 <strong>10. Deployment</strong></a></li>
-<li class="toctree-l1"><a class="reference internal" href="02_part.html#full-workflow-summary-table">🧠 Full Workflow Summary Table</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03_part.html">Training &amp; Hyper-Parameter Tuning</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04_part.html">Demonstration</a></li>
 </ul>
@@ -885,10 +893,8 @@ where \)</span>\eta$ = learning rate (step size).</p></li>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concept-overview"><strong>1. Concept Overview</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#flow"><strong>Flow</strong></a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concept-overview"><strong>1. Concept Overview</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#flow"><strong>Flow</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#components"><strong>2. Components</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-working"><strong>3. Mathematical Working</strong></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-process"><strong>4. Training Process</strong></a><ul class="nav section-nav flex-column">

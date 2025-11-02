@@ -248,24 +248,39 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ffn/overview.html">FeedForward Neural Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../ffn/01_part.html">Intiution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ffn/02_part.html">Workflow</a></li>
-
-
 <li class="toctree-l2"><a class="reference internal" href="../ffn/03_part.html">Training &amp; Hyper-Parameter Tuning</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../ffn/04_part.html">Demonstration</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">RNN</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">RNN</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="01_part.html">Intuition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_part.html">Backward &amp; Forward Propogation with RNN context</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_part.html">Workflows</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="variants/overview.html">Variants</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="variants/01_part.html">Simple RNN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="variants/02_part.html">LSTM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="variants/03_part.html">GRU</a></li>
 
+<li class="toctree-l3"><a class="reference internal" href="variants/04_part.html">BiRNN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="variants/05_part.html">Deep (Stacked) RNN — Explanation, Intuition, and Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="variants/06_part.html">Echo State Networks (ESN)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="variants/07_part.html">Attention-Based RNN (Vanilla)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="variants/08_part.html">Seq2Seq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="variants/09_part.html">Attention</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../transformers/overview.html">The Transformer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../transformers/01_part.html">Architecture</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../transformers/02_part.html">The Transformer Encoder Layer (Deep Explanation)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../transformers/03_part.html">Positional Encoding</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../transformers/04_part.html"><strong>Residual Connection + Layer Normalization</strong></a></li>
 <li class="toctree-l2"><a class="reference internal" href="../transformers/05_part.html"><strong>Transformer Decoder Layer</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../transformers/06_part.html">Practicals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../transformers/06_part.html">Demonstration</a></li>
 </ul>
 </details></li>
-<li class="toctree-l1 has-children"><a class="reference internal" href="../gan/overview.html"><strong>Generative Adversarial Network (GAN)</strong></a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../gan/overview.html">Generative Adversarial Network (GAN)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../gan/01_part.html">Intuition</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gan/02_part.html">Workflows</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../gan/03_part.html">Applications of Generative Adversarial Networks (GANs)</a></li>
@@ -518,12 +533,8 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">RNN</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-rnn">Why RNN?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-idea">Key Idea</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-representation">Mathematical Representation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-it-works">How It Works</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-sentiment-analysis">Example: Sentiment Analysis</a></li>
@@ -533,9 +544,6 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions-to-rnn-limitations">Solutions to RNN Limitations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-applications">Common Applications</a></li>
 </ul>
-</li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -549,33 +557,29 @@ document.write(`
   <nav class="contents" id="contents" role="doc-toc">
 <p class="topic-title">Contents</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#rnn" id="id2">RNN</a></p>
+<li><p><a class="reference internal" href="#rnn" id="id1">RNN</a></p>
 <ul>
-<li><p><a class="reference internal" href="#why-rnn" id="id3">Why RNN?</a></p></li>
-<li><p><a class="reference internal" href="#key-idea" id="id4">Key Idea</a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#id1" id="id5">alt text</a></p>
-<ul>
-<li><p><a class="reference internal" href="#mathematical-representation" id="id6">Mathematical Representation</a></p></li>
-<li><p><a class="reference internal" href="#how-it-works" id="id7">How It Works</a></p></li>
-<li><p><a class="reference internal" href="#example-sentiment-analysis" id="id8">Example: Sentiment Analysis</a></p></li>
-<li><p><a class="reference internal" href="#types-of-rnn-architectures" id="id9">Types of RNN Architectures</a></p></li>
-<li><p><a class="reference internal" href="#advantages" id="id10">Advantages</a></p></li>
-<li><p><a class="reference internal" href="#limitations" id="id11">Limitations</a></p></li>
-<li><p><a class="reference internal" href="#solutions-to-rnn-limitations" id="id12">Solutions to RNN Limitations</a></p></li>
-<li><p><a class="reference internal" href="#common-applications" id="id13">Common Applications</a></p></li>
+<li><p><a class="reference internal" href="#why-rnn" id="id2">Why RNN?</a></p></li>
+<li><p><a class="reference internal" href="#key-idea" id="id3">Key Idea</a></p></li>
+<li><p><a class="reference internal" href="#mathematical-representation" id="id4">Mathematical Representation</a></p></li>
+<li><p><a class="reference internal" href="#how-it-works" id="id5">How It Works</a></p></li>
+<li><p><a class="reference internal" href="#example-sentiment-analysis" id="id6">Example: Sentiment Analysis</a></p></li>
+<li><p><a class="reference internal" href="#types-of-rnn-architectures" id="id7">Types of RNN Architectures</a></p></li>
+<li><p><a class="reference internal" href="#advantages" id="id8">Advantages</a></p></li>
+<li><p><a class="reference internal" href="#limitations" id="id9">Limitations</a></p></li>
+<li><p><a class="reference internal" href="#solutions-to-rnn-limitations" id="id10">Solutions to RNN Limitations</a></p></li>
+<li><p><a class="reference internal" href="#common-applications" id="id11">Common Applications</a></p></li>
 </ul>
 </li>
 </ul>
 </nav>
 <section id="rnn">
-<h1><a class="toc-backref" href="#id2" role="doc-backlink">RNN</a><a class="headerlink" href="#rnn" title="Link to this heading">#</a></h1>
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">RNN</a><a class="headerlink" href="#rnn" title="Link to this heading">#</a></h1>
 <p><strong>Recurrent Neural Network (RNN)</strong> is a type of neural network <strong>designed to process sequential data</strong>, such as text, speech, time series, or videos.
 It differs from a standard neural network (ANN) because it <strong>remembers previous inputs</strong> using an internal <strong>hidden state (memory)</strong>.</p>
 <hr class="docutils" />
 <section id="why-rnn">
-<h2><a class="toc-backref" href="#id3" role="doc-backlink">Why RNN?</a><a class="headerlink" href="#why-rnn" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Why RNN?</a><a class="headerlink" href="#why-rnn" title="Link to this heading">#</a></h2>
 <p>In many problems, <strong>context and order</strong> of inputs matter.
 For example:</p>
 <div class="pst-scrollable-table-container"><table class="table">
@@ -599,7 +603,7 @@ RNNs, however, can use <strong>previous words (context)</strong> to understand t
 </section>
 <hr class="docutils" />
 <section id="key-idea">
-<h2><a class="toc-backref" href="#id4" role="doc-backlink">Key Idea</a><a class="headerlink" href="#key-idea" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Key Idea</a><a class="headerlink" href="#key-idea" title="Link to this heading">#</a></h2>
 <p>RNNs introduce a <strong>loop (recurrence)</strong> that allows information to <strong>persist</strong> across time steps.</p>
 <p>At each time step:</p>
 <ul class="simple">
@@ -612,12 +616,11 @@ RNNs, however, can use <strong>previous words (context)</strong> to understand t
       feedback        feedback
 </pre></div>
 </div>
+<p><img alt="alt text" src="../_images/rnn.png" /></p>
 </section>
-</section>
-<section id="id1">
-<h1><a class="toc-backref" href="#id5" role="doc-backlink"><img alt="alt text" src="../_images/rnn.png" /></a><a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<hr class="docutils" />
 <section id="mathematical-representation">
-<h2><a class="toc-backref" href="#id6" role="doc-backlink">Mathematical Representation</a><a class="headerlink" href="#mathematical-representation" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Mathematical Representation</a><a class="headerlink" href="#mathematical-representation" title="Link to this heading">#</a></h2>
 <p>At time step <span class="math notranslate nohighlight">\(t\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -668,7 +671,7 @@ y_t = g(W_y h_t + b_y)
 </section>
 <hr class="docutils" />
 <section id="how-it-works">
-<h2><a class="toc-backref" href="#id7" role="doc-backlink">How It Works</a><a class="headerlink" href="#how-it-works" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">How It Works</a><a class="headerlink" href="#how-it-works" title="Link to this heading">#</a></h2>
 <ol class="arabic">
 <li><p><strong>Input Sequence:</strong>
 Feed one input at a time — for example, words in a sentence:</p>
@@ -695,7 +698,7 @@ At the end, RNN produces an output (e.g., sentiment label 0 or 1).</p></li>
 </section>
 <hr class="docutils" />
 <section id="example-sentiment-analysis">
-<h2><a class="toc-backref" href="#id8" role="doc-backlink">Example: Sentiment Analysis</a><a class="headerlink" href="#example-sentiment-analysis" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">Example: Sentiment Analysis</a><a class="headerlink" href="#example-sentiment-analysis" title="Link to this heading">#</a></h2>
 <p>For “The food is good”:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -728,7 +731,7 @@ At the end, RNN produces an output (e.g., sentiment label 0 or 1).</p></li>
 </section>
 <hr class="docutils" />
 <section id="types-of-rnn-architectures">
-<h2><a class="toc-backref" href="#id9" role="doc-backlink">Types of RNN Architectures</a><a class="headerlink" href="#types-of-rnn-architectures" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">Types of RNN Architectures</a><a class="headerlink" href="#types-of-rnn-architectures" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Type</p></th>
@@ -755,14 +758,14 @@ At the end, RNN produces an output (e.g., sentiment label 0 or 1).</p></li>
 </section>
 <hr class="docutils" />
 <section id="advantages">
-<h2><a class="toc-backref" href="#id10" role="doc-backlink">Advantages</a><a class="headerlink" href="#advantages" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">Advantages</a><a class="headerlink" href="#advantages" title="Link to this heading">#</a></h2>
 <p>✅ Maintains <strong>temporal (sequence) relationships</strong>
 ✅ Works well with <strong>variable-length inputs</strong>
 ✅ Learns <strong>context</strong> through hidden state</p>
 </section>
 <hr class="docutils" />
 <section id="limitations">
-<h2><a class="toc-backref" href="#id11" role="doc-backlink">Limitations</a><a class="headerlink" href="#limitations" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">Limitations</a><a class="headerlink" href="#limitations" title="Link to this heading">#</a></h2>
 <p>❌ <strong>Vanishing Gradient Problem:</strong>
 Gradients shrink as they are propagated back through many time steps — the network “forgets” long-term dependencies.</p>
 <p>❌ <strong>Exploding Gradient Problem:</strong>
@@ -772,7 +775,7 @@ Sequential processing prevents parallelization.</p>
 </section>
 <hr class="docutils" />
 <section id="solutions-to-rnn-limitations">
-<h2><a class="toc-backref" href="#id12" role="doc-backlink">Solutions to RNN Limitations</a><a class="headerlink" href="#solutions-to-rnn-limitations" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">Solutions to RNN Limitations</a><a class="headerlink" href="#solutions-to-rnn-limitations" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Variant</p></th>
@@ -798,7 +801,7 @@ Sequential processing prevents parallelization.</p>
 </section>
 <hr class="docutils" />
 <section id="common-applications">
-<h2><a class="toc-backref" href="#id13" role="doc-backlink">Common Applications</a><a class="headerlink" href="#common-applications" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">Common Applications</a><a class="headerlink" href="#common-applications" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Text generation (e.g., writing assistants)</p></li>
 <li><p>Sentiment analysis</p></li>
@@ -928,12 +931,8 @@ Sequential processing prevents parallelization.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">RNN</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-rnn">Why RNN?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-idea">Key Idea</a></li>
-</ul>
-</li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-representation">Mathematical Representation</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-it-works">How It Works</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-sentiment-analysis">Example: Sentiment Analysis</a></li>
@@ -943,9 +942,6 @@ Sequential processing prevents parallelization.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions-to-rnn-limitations">Solutions to RNN Limitations</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#common-applications">Common Applications</a></li>
 </ul>
-</li>
-</ul>
-
   </nav></div>
 
 </div></div>
