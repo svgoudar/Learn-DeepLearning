@@ -275,8 +275,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../transformers/01_part.html">Architecture</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../transformers/02_part.html">The Transformer Encoder Layer (Deep Explanation)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../transformers/03_part.html">Positional Encoding</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../transformers/04_part.html"><strong>Residual Connection + Layer Normalization</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../transformers/05_part.html"><strong>Transformer Decoder Layer</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../transformers/04_part.html">Residual Connection + Layer Normalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../transformers/05_part.html">Transformer Decoder Layer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../transformers/06_part.html">Demonstration</a></li>
 </ul>
 </details></li>
@@ -706,7 +706,7 @@ You can see that \)</span>h_t<span class="math notranslate nohighlight">\( becom
 <h2><a class="toc-backref" href="#id8" role="doc-backlink">Geometric / Functional Intuition</a><a class="headerlink" href="#geometric-functional-intuition" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(W_x x_t\)</span> → captures <strong>current input information</strong>.</p></li>
-<li><p>$W_h h_{t-1}# → brings <strong>past memory</strong> forward.</p></li>
+<li><p><span class="math notranslate nohighlight">\(W_h h_{t-1}\)</span> → brings <strong>past memory</strong> forward.</p></li>
 <li><p>Activation <span class="math notranslate nohighlight">\(f(\cdot)\)</span> → squashes combined signal, deciding how much of past and present to keep.</p></li>
 <li><p>This recurrence lets the network <strong>learn patterns over time</strong>, like “not good” → negative, “very good” → positive.</p></li>
 </ul>
