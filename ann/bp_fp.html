@@ -32,19 +32,19 @@
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=4c969af8" />
-    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css?v=b4b7a797" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-examples.css?v=e236af4b" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.custom.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.bundle.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-shadow.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-punk.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-noir.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-light.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-borderless.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/micromodal.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.custom.css?v=7bc2f056" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.bundle.min.css?v=37217874" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-shadow.min.css?v=6227e517" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-punk.min.css?v=94669e23" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-noir.min.css?v=21a39f42" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-light.min.css?v=a18b2449" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-borderless.min.css?v=dbff53e4" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/micromodal.css?v=d7bf34ee" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=40389e5b" />
   
@@ -62,9 +62,9 @@
     <script src="../_static/copybutton.js?v=7f8ff830"></script>
     <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script src="../_static/tabs.js?v=3ee01567"></script>
-    <script src="../_static/js/hoverxref.js"></script>
-    <script src="../_static/js/tooltipster.bundle.min.js"></script>
-    <script src="../_static/js/micromodal.min.js"></script>
+    <script src="../_static/js/hoverxref.js?v=c95ade4f"></script>
+    <script src="../_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
+    <script src="../_static/js/micromodal.min.js?v=04d6302d"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
@@ -533,23 +533,56 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Backward &amp; Forward Propogation</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-propagation-the-prediction-phase"><strong>Forward Propagation — the prediction phase</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-single-neuron">🔹 Example: single neuron</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#input-layer">Input Layer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#weighted-sum-linear-transformation">Weighted Sum (Linear Transformation)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apply-activation-function">Apply Activation Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pass-activations-forward">Pass Activations Forward</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output-layer">Output Layer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-loss">Compute Loss</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-forward-propagation-steps">Summary of Forward Propagation Steps</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-single-neuron">Example: single neuron</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-function">Loss function</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition">Intuition</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-propagation-the-learning-phase"><strong>Backward Propagation — the learning phase</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#goal">Goal</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-chain-rule-core-idea">The Chain Rule (core idea)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#backpropagation-steps">Backpropagation steps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-propagation-weight-updation"><strong>Backward Propagation (Weight Updation)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#steps-in-backpropagation">Steps in Backpropagation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-pass">1. Forward Pass</a></li>
 </ul>
 </li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#l-text-loss-y-hat-y"><span class="math notranslate nohighlight">\(L = \text{Loss}(y, \hat{y})\)</span></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-error-at-output-layer">2. Compute Error at Output Layer</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#if-using-cross-entropy-with-softmax-the-gradient-is-simply-frac-partial-l-partial-z-l-hat-y-y">If using <strong>Cross Entropy with Softmax</strong>, the gradient is simply:
+$<span class="math notranslate nohighlight">\(
+\frac{\partial L}{\partial z^{(L)}} = \hat{y} - y
+\)</span>$</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-gradient-for-each-layer-chain-rule">3. Compute Gradient for Each Layer (Chain Rule)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-gradients-for-weights-and-biases">4. Compute Gradients for Weights and Biases</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#update-parameters-gradient-descent">5. Update Parameters (Gradient Descent)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#repeat"><strong>6. Repeat</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intuitive-analogy">Intuitive Analogy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goal">Goal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-chain-rule-core-idea">The Chain Rule (core idea)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backpropagation-steps">Backpropagation steps</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intuitive-understanding">Intuitive Understanding</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-simplified">Example (simplified)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#full-workflow"><strong>Full Workflow</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition-from-optimization"><strong>Intuition from Optimization</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#full-workflow"><strong>Full Workflow</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition-from-optimization">Intuition from Optimization</a></li>
 </ul>
+</li>
+</ul>
+</li>
+</ul>
+
             </nav>
         </div>
     </div>
@@ -563,32 +596,65 @@ document.write(`
   <nav class="contents" id="contents" role="doc-toc">
 <p class="topic-title">Contents</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#backward-forward-propogation" id="id1">Backward &amp; Forward Propogation</a></p>
+<li><p><a class="reference internal" href="#backward-forward-propogation" id="id2">Backward &amp; Forward Propogation</a></p>
 <ul>
-<li><p><a class="reference internal" href="#forward-propagation-the-prediction-phase" id="id2"><strong>Forward Propagation — the prediction phase</strong></a></p>
+<li><p><a class="reference internal" href="#forward-propagation-the-prediction-phase" id="id3"><strong>Forward Propagation — the prediction phase</strong></a></p>
 <ul>
-<li><p><a class="reference internal" href="#example-single-neuron" id="id3">🔹 Example: single neuron</a></p></li>
-<li><p><a class="reference internal" href="#loss-function" id="id4">Loss function</a></p></li>
-<li><p><a class="reference internal" href="#intuition" id="id5">Intuition</a></p></li>
+<li><p><a class="reference internal" href="#input-layer" id="id4">Input Layer</a></p></li>
+<li><p><a class="reference internal" href="#weighted-sum-linear-transformation" id="id5">Weighted Sum (Linear Transformation)</a></p></li>
+<li><p><a class="reference internal" href="#apply-activation-function" id="id6">Apply Activation Function</a></p></li>
+<li><p><a class="reference internal" href="#pass-activations-forward" id="id7">Pass Activations Forward</a></p></li>
+<li><p><a class="reference internal" href="#output-layer" id="id8">Output Layer</a></p></li>
+<li><p><a class="reference internal" href="#compute-loss" id="id9">Compute Loss</a></p></li>
+<li><p><a class="reference internal" href="#summary-of-forward-propagation-steps" id="id10">Summary of Forward Propagation Steps</a></p></li>
+<li><p><a class="reference internal" href="#example-single-neuron" id="id11">Example: single neuron</a></p></li>
+<li><p><a class="reference internal" href="#loss-function" id="id12">Loss function</a></p></li>
+<li><p><a class="reference internal" href="#intuition" id="id13">Intuition</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#backward-propagation-the-learning-phase" id="id6"><strong>Backward Propagation — the learning phase</strong></a></p>
+<li><p><a class="reference internal" href="#backward-propagation-weight-updation" id="id14"><strong>Backward Propagation (Weight Updation)</strong></a></p>
 <ul>
-<li><p><a class="reference internal" href="#goal" id="id7">Goal</a></p></li>
-<li><p><a class="reference internal" href="#the-chain-rule-core-idea" id="id8">The Chain Rule (core idea)</a></p></li>
-<li><p><a class="reference internal" href="#backpropagation-steps" id="id9">Backpropagation steps</a></p></li>
+<li><p><a class="reference internal" href="#id1" id="id15">Intuition</a></p></li>
+<li><p><a class="reference internal" href="#steps-in-backpropagation" id="id16">Steps in Backpropagation</a></p>
+<ul>
+<li><p><a class="reference internal" href="#forward-pass" id="id17">1. Forward Pass</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#intuitive-understanding" id="id10">Intuitive Understanding</a></p></li>
-<li><p><a class="reference internal" href="#example-simplified" id="id11">Example (simplified)</a></p></li>
-<li><p><a class="reference internal" href="#full-workflow" id="id12"><strong>Full Workflow</strong></a></p></li>
-<li><p><a class="reference internal" href="#intuition-from-optimization" id="id13"><strong>Intuition from Optimization</strong></a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#l-text-loss-y-hat-y" id="id18"><span class="math notranslate nohighlight">\(L = \text{Loss}(y, \hat{y})\)</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#compute-error-at-output-layer" id="id19">2. Compute Error at Output Layer</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#if-using-cross-entropy-with-softmax-the-gradient-is-simply-frac-partial-l-partial-z-l-hat-y-y" id="id20">If using <strong>Cross Entropy with Softmax</strong>, the gradient is simply:
+$<span class="math notranslate nohighlight">\(
+\frac{\partial L}{\partial z^{(L)}} = \hat{y} - y
+\)</span>$</a></p>
+<ul>
+<li><p><a class="reference internal" href="#compute-gradient-for-each-layer-chain-rule" id="id21">3. Compute Gradient for Each Layer (Chain Rule)</a></p></li>
+<li><p><a class="reference internal" href="#compute-gradients-for-weights-and-biases" id="id22">4. Compute Gradients for Weights and Biases</a></p></li>
+<li><p><a class="reference internal" href="#update-parameters-gradient-descent" id="id23">5. Update Parameters (Gradient Descent)</a></p></li>
+<li><p><a class="reference internal" href="#repeat" id="id24"><strong>6. Repeat</strong></a></p></li>
+<li><p><a class="reference internal" href="#intuitive-analogy" id="id25">Intuitive Analogy</a></p></li>
+<li><p><a class="reference internal" href="#goal" id="id26">Goal</a></p></li>
+<li><p><a class="reference internal" href="#the-chain-rule-core-idea" id="id27">The Chain Rule (core idea)</a></p></li>
+<li><p><a class="reference internal" href="#backpropagation-steps" id="id28">Backpropagation steps</a></p></li>
+<li><p><a class="reference internal" href="#intuitive-understanding" id="id29">Intuitive Understanding</a></p></li>
+<li><p><a class="reference internal" href="#example-simplified" id="id30">Example (simplified)</a></p></li>
+<li><p><a class="reference internal" href="#full-workflow" id="id31"><strong>Full Workflow</strong></a></p>
+<ul>
+<li><p><a class="reference internal" href="#intuition-from-optimization" id="id32">Intuition from Optimization</a></p></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </nav>
 <section id="backward-forward-propogation">
-<h1><a class="toc-backref" href="#id1" role="doc-backlink">Backward &amp; Forward Propogation</a><a class="headerlink" href="#backward-forward-propogation" title="Link to this heading">#</a></h1>
+<h1><a class="toc-backref" href="#id2" role="doc-backlink">Backward &amp; Forward Propogation</a><a class="headerlink" href="#backward-forward-propogation" title="Link to this heading">#</a></h1>
 <p>Forward and backward propagation are the <strong>core mechanics</strong> of how neural networks learn.
 They are simply:</p>
 <ul class="simple">
@@ -598,10 +664,144 @@ They are simply:</p>
 <p>Let’s go step-by-step with both <strong>mathematical intuition</strong> and <strong>conceptual explanation.</strong></p>
 <hr class="docutils" />
 <section id="forward-propagation-the-prediction-phase">
-<h2><a class="toc-backref" href="#id2" role="doc-backlink"><strong>Forward Propagation — the prediction phase</strong></a><a class="headerlink" href="#forward-propagation-the-prediction-phase" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id3" role="doc-backlink"><strong>Forward Propagation — the prediction phase</strong></a><a class="headerlink" href="#forward-propagation-the-prediction-phase" title="Link to this heading">#</a></h2>
 <p>The <strong>forward pass</strong> means feeding input data through the network <strong>layer by layer</strong> to produce an output.</p>
+<p>Forward propagation in a <strong>neural network</strong> is the process of passing input data through the model to generate an output (prediction).
+Here are the <strong>core steps</strong>, both intuitively and mathematically:</p>
+<p><img alt="alt text" src="../_images/fp.png" /></p>
+<hr class="docutils" />
+<section id="input-layer">
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">Input Layer</a><a class="headerlink" href="#input-layer" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The model receives input features <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+<li><p>Example: if predicting house price → inputs might be area, rooms, and location features.
+$<span class="math notranslate nohighlight">\(
+X = [x_1, x_2, x_3, \dots, x_n]
+\)</span>$</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="weighted-sum-linear-transformation">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">Weighted Sum (Linear Transformation)</a><a class="headerlink" href="#weighted-sum-linear-transformation" title="Link to this heading">#</a></h3>
+<p>Each neuron in the next layer computes a <strong>weighted sum</strong> of its inputs plus a bias:</p>
+<div class="math notranslate nohighlight">
+\[
+z = W \cdot X + b
+\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(W\)</span> = weight matrix</p></li>
+<li><p><span class="math notranslate nohighlight">\(b\)</span> = bias vector</p></li>
+<li><p><span class="math notranslate nohighlight">\(z\)</span> = net input to the neuron</p></li>
+</ul>
+<p><strong>Intuition:</strong>
+Each neuron learns “how much importance” (weight) to give each feature.</p>
+</section>
+<hr class="docutils" />
+<section id="apply-activation-function">
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">Apply Activation Function</a><a class="headerlink" href="#apply-activation-function" title="Link to this heading">#</a></h3>
+<p>Each neuron’s linear output <span class="math notranslate nohighlight">\(z\)</span> is passed through a <strong>non-linear activation</strong> function <span class="math notranslate nohighlight">\(f(z)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+a = f(z)
+\]</div>
+<p>Common activation functions:</p>
+<ul class="simple">
+<li><p><strong>ReLU:</strong> <span class="math notranslate nohighlight">\(f(z) = \max(0, z)\)</span></p></li>
+<li><p><strong>Sigmoid:</strong> <span class="math notranslate nohighlight">\(f(z) = \frac{1}{1 + e^{-z}}\)</span></p></li>
+<li><p><strong>Tanh:</strong> <span class="math notranslate nohighlight">\(f(z) = \tanh(z)\)</span></p></li>
+<li><p><strong>Softmax:</strong> converts output to probabilities (used in classification)</p></li>
+</ul>
+<p><strong>Purpose:</strong>
+Introduces non-linearity → allows the network to learn complex, non-linear relationships.</p>
+</section>
+<hr class="docutils" />
+<section id="pass-activations-forward">
+<h3><a class="toc-backref" href="#id7" role="doc-backlink">Pass Activations Forward</a><a class="headerlink" href="#pass-activations-forward" title="Link to this heading">#</a></h3>
+<p>The activated outputs <span class="math notranslate nohighlight">\(a\)</span> from one layer become the <strong>inputs</strong> to the next layer:
+$<span class="math notranslate nohighlight">\(
+a^{(l)} = f(W^{(l)} a^{(l-1)} + b^{(l)})
+\)</span>$</p>
+<p>This continues <strong>layer by layer</strong>, from input → hidden → output.</p>
+</section>
+<hr class="docutils" />
+<section id="output-layer">
+<h3><a class="toc-backref" href="#id8" role="doc-backlink">Output Layer</a><a class="headerlink" href="#output-layer" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The final layer produces predictions:</p>
+<ul>
+<li><p>For <strong>regression:</strong> direct numeric output</p></li>
+<li><p>For <strong>classification:</strong> use Softmax or Sigmoid to get probabilities</p></li>
+</ul>
+</li>
+</ul>
+<p>Example (binary classification):</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{y} = \sigma(W^{(L)} a^{(L-1)} + b^{(L)})
+\]</div>
+</section>
+<hr class="docutils" />
+<section id="compute-loss">
+<h3><a class="toc-backref" href="#id9" role="doc-backlink">Compute Loss</a><a class="headerlink" href="#compute-loss" title="Link to this heading">#</a></h3>
+<p>Compare predicted output <span class="math notranslate nohighlight">\(\hat{y}\)</span> with actual output <span class="math notranslate nohighlight">\(y\)</span> using a <strong>loss function</strong>:</p>
+<p>Examples:</p>
+<ul class="simple">
+<li><p><strong>MSE (Mean Squared Error):</strong> for regression
+$<span class="math notranslate nohighlight">\(
+L = \frac{1}{m}\sum (y - \hat{y})^2
+\)</span>$</p></li>
+<li><p><strong>Cross-Entropy Loss:</strong> for classification
+$<span class="math notranslate nohighlight">\(
+L = -\frac{1}{m}\sum [y\log(\hat{y}) + (1-y)\log(1-\hat{y})]
+\)</span>$</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="summary-of-forward-propagation-steps">
+<h3><a class="toc-backref" href="#id10" role="doc-backlink">Summary of Forward Propagation Steps</a><a class="headerlink" href="#summary-of-forward-propagation-steps" title="Link to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Step</p></th>
+<th class="head"><p>Operation</p></th>
+<th class="head"><p>Formula</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Input features</p></td>
+<td><p><span class="math notranslate nohighlight">\(X\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Linear transformation</p></td>
+<td><p><span class="math notranslate nohighlight">\(z = W \cdot X + b\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Activation</p></td>
+<td><p><span class="math notranslate nohighlight">\(a = f(z)\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Pass to next layer</p></td>
+<td><p><span class="math notranslate nohighlight">\(a^{(l)} = f(W^{(l)}a^{(l-1)} + b^{(l)})\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>Output prediction</p></td>
+<td><p><span class="math notranslate nohighlight">\(\hat{y} = f(z^{(L)})\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>Compute loss</p></td>
+<td><p><span class="math notranslate nohighlight">\(L(y, \hat{y})\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+<p><strong>In essence:</strong>
+Forward propagation = taking data, multiplying by weights, adding biases, applying activation, and producing predictions.</p>
+<p>Would you like me to visualize this with a simple <strong>PyTorch example and flow diagram</strong> next?</p>
+</section>
 <section id="example-single-neuron">
-<h3><a class="toc-backref" href="#id3" role="doc-backlink">🔹 Example: single neuron</a><a class="headerlink" href="#example-single-neuron" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id11" role="doc-backlink">Example: single neuron</a><a class="headerlink" href="#example-single-neuron" title="Link to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[
 y = f(Wx + b)
@@ -617,30 +817,30 @@ y = f(Wx + b)
 <p>For multiple layers:
 $<span class="math notranslate nohighlight">\(
 a^{(l)} = f(W^{(l)} a^{(l-1)} + b^{(l)})
-\)</span>$
-Each layer takes the previous layer’s output (a^{(l-1)}) as its input.</p>
+\)</span>$</p>
+<p>Each layer takes the previous layer’s output <span class="math notranslate nohighlight">\(a^{(l-1)}\)</span> as its input.</p>
 <p>The final layer produces:
 $<span class="math notranslate nohighlight">\(
 \hat{y} = a^{(L)} = f(W^{(L)} a^{(L-1)} + b^{(L)})
 \)</span>$</p>
-<p>This gives a <strong>prediction</strong> (\hat{y}).</p>
+<p>This gives a <strong>prediction</strong> <span class="math notranslate nohighlight">\(\hat{y}\)</span>.</p>
 </section>
 <hr class="docutils" />
 <section id="loss-function">
-<h3><a class="toc-backref" href="#id4" role="doc-backlink">Loss function</a><a class="headerlink" href="#loss-function" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id12" role="doc-backlink">Loss function</a><a class="headerlink" href="#loss-function" title="Link to this heading">#</a></h3>
 <p>To measure how wrong the prediction is, we use a <strong>loss function</strong>:
 $<span class="math notranslate nohighlight">\(
 L = \text{Loss}(\hat{y}, y_{\text{true}})
 \)</span>$
 Examples:</p>
 <ul class="simple">
-<li><p>MSE (for regression): (L = \frac{1}{2}(y - \hat{y})^2)</p></li>
+<li><p>MSE (for regression): <span class="math notranslate nohighlight">\(L = \frac{1}{2}(y - \hat{y})^2\)</span></p></li>
 <li><p>Cross-entropy (for classification)</p></li>
 </ul>
 </section>
 <hr class="docutils" />
 <section id="intuition">
-<h3><a class="toc-backref" href="#id5" role="doc-backlink">Intuition</a><a class="headerlink" href="#intuition" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id13" role="doc-backlink">Intuition</a><a class="headerlink" href="#intuition" title="Link to this heading">#</a></h3>
 <p>Think of forward propagation like running a factory:</p>
 <ol class="arabic simple">
 <li><p>Input → passes through several machines (layers)</p></li>
@@ -652,13 +852,159 @@ Examples:</p>
 </section>
 </section>
 <hr class="docutils" />
-<section id="backward-propagation-the-learning-phase">
-<h2><a class="toc-backref" href="#id6" role="doc-backlink"><strong>Backward Propagation — the learning phase</strong></a><a class="headerlink" href="#backward-propagation-the-learning-phase" title="Link to this heading">#</a></h2>
+<section id="backward-propagation-weight-updation">
+<h2><a class="toc-backref" href="#id14" role="doc-backlink"><strong>Backward Propagation (Weight Updation)</strong></a><a class="headerlink" href="#backward-propagation-weight-updation" title="Link to this heading">#</a></h2>
 <p>Once the network computes the error, it must <strong>learn how to reduce it</strong>.
 This happens by computing <strong>gradients</strong> and updating the weights.</p>
+<p><img alt="alt text" src="../_images/bp.png" /></p>
+<p><strong>Backward propagation (Backpropagation)</strong> is the process by which a neural network <strong>learns</strong> — it computes gradients of the loss function with respect to weights and biases, then <strong>updates</strong> them to minimize the loss.</p>
 <hr class="docutils" />
+<section id="id1">
+<h3><a class="toc-backref" href="#id15" role="doc-backlink">Intuition</a><a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<p>Think of forward propagation as <strong>prediction</strong>, and backpropagation as <strong>correction</strong>.</p>
+<ul class="simple">
+<li><p>Forward pass → predict output</p></li>
+<li><p>Compare prediction with actual output → compute loss</p></li>
+<li><p>Backward pass → calculate how each weight contributed to that loss</p></li>
+<li><p>Update weights to reduce the error next time</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="steps-in-backpropagation">
+<h3><a class="toc-backref" href="#id16" role="doc-backlink">Steps in Backpropagation</a><a class="headerlink" href="#steps-in-backpropagation" title="Link to this heading">#</a></h3>
+<p>Let’s break it down systematically:</p>
+<hr class="docutils" />
+<section id="forward-pass">
+<h4><a class="toc-backref" href="#id17" role="doc-backlink">1. Forward Pass</a><a class="headerlink" href="#forward-pass" title="Link to this heading">#</a></h4>
+<p>Compute outputs using current weights:</p>
+<div class="math notranslate nohighlight">
+\[
+z^{(l)} = W^{(l)} a^{(l-1)} + b^{(l)}
+[a^{(l)} = f(z^{(l)})]
+\hat{y} = a^{(L)}
+\]</div>
+<p>Then compute the <strong>loss</strong>:</p>
+</section>
+</section>
+</section>
+</section>
+<section id="l-text-loss-y-hat-y">
+<h1><a class="toc-backref" href="#id18" role="doc-backlink"><span class="math notranslate nohighlight">\(L = \text{Loss}(y, \hat{y})\)</span></a><a class="headerlink" href="#l-text-loss-y-hat-y" title="Link to this heading">#</a></h1>
+<section id="compute-error-at-output-layer">
+<h2><a class="toc-backref" href="#id19" role="doc-backlink">2. Compute Error at Output Layer</a><a class="headerlink" href="#compute-error-at-output-layer" title="Link to this heading">#</a></h2>
+<p>We calculate how far the prediction is from the target.</p>
+<p>For example, if using <strong>Mean Squared Error (MSE)</strong>:
+$<span class="math notranslate nohighlight">\(
+\frac{\partial L}{\partial a^{(L)}} = \hat{y} - y
+\)</span>$</p>
+</section>
+</section>
+<section id="if-using-cross-entropy-with-softmax-the-gradient-is-simply-frac-partial-l-partial-z-l-hat-y-y">
+<h1><a class="toc-backref" href="#id20" role="doc-backlink">If using <strong>Cross Entropy with Softmax</strong>, the gradient is simply:
+$<span class="math notranslate nohighlight">\(
+\frac{\partial L}{\partial z^{(L)}} = \hat{y} - y
+\)</span>$</a><a class="headerlink" href="#if-using-cross-entropy-with-softmax-the-gradient-is-simply-frac-partial-l-partial-z-l-hat-y-y" title="Link to this heading">#</a></h1>
+<section id="compute-gradient-for-each-layer-chain-rule">
+<h2><a class="toc-backref" href="#id21" role="doc-backlink">3. Compute Gradient for Each Layer (Chain Rule)</a><a class="headerlink" href="#compute-gradient-for-each-layer-chain-rule" title="Link to this heading">#</a></h2>
+<p>The key formula in backpropagation:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial L}{\partial W^{(l)}} = \frac{\partial L}{\partial z^{(l)}} \cdot \frac{\partial z^{(l)}}{\partial W^{(l)}}
+\]</div>
+<p>Using <strong>chain rule</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial L}{\partial z^{(l)}} = \frac{\partial L}{\partial a^{(l)}} \cdot f'(z^{(l)})
+\]</div>
+<p>Then propagate the error backward:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial L}{\partial a^{(l-1)}} = (W^{(l)})^T \cdot \frac{\partial L}{\partial z^{(l)}}
+\]</div>
+<hr class="docutils" />
+</section>
+<section id="compute-gradients-for-weights-and-biases">
+<h2><a class="toc-backref" href="#id22" role="doc-backlink">4. Compute Gradients for Weights and Biases</a><a class="headerlink" href="#compute-gradients-for-weights-and-biases" title="Link to this heading">#</a></h2>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial L}{\partial W^{(l)}} = \frac{\partial L}{\partial z^{(l)}} \cdot (a^{(l-1)})^T
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial L}{\partial b^{(l)}} = \frac{\partial L}{\partial z^{(l)}}
+\]</div>
+<hr class="docutils" />
+</section>
+<section id="update-parameters-gradient-descent">
+<h2><a class="toc-backref" href="#id23" role="doc-backlink">5. Update Parameters (Gradient Descent)</a><a class="headerlink" href="#update-parameters-gradient-descent" title="Link to this heading">#</a></h2>
+<p>Weights and biases are adjusted <strong>opposite to the gradient</strong> to reduce loss:</p>
+<div class="math notranslate nohighlight">
+\[
+W^{(l)} = W^{(l)} - \eta \cdot \frac{\partial L}{\partial W^{(l)}}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+b^{(l)} = b^{(l)} - \eta \cdot \frac{\partial L}{\partial b^{(l)}}
+\]</div>
+<p>Where
+<span class="math notranslate nohighlight">\(\eta\)</span> = learning rate (small constant controlling step size)</p>
+<hr class="docutils" />
+</section>
+<section id="repeat">
+<h2><a class="toc-backref" href="#id24" role="doc-backlink"><strong>6. Repeat</strong></a><a class="headerlink" href="#repeat" title="Link to this heading">#</a></h2>
+<p>Repeat forward → backward → update until loss converges or accuracy stabilizes.</p>
+<hr class="docutils" />
+<p><strong>Summary Table</strong></p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Step</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Formula</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Forward pass</p></td>
+<td><p><span class="math notranslate nohighlight">\(a^{(l)} = f(W^{(l)}a^{(l-1)} + b^{(l)})\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Compute loss</p></td>
+<td><p><span class="math notranslate nohighlight">\(L(y, \hat{y})\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Output error</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{\partial L}{\partial a^{(L)}}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Backpropagate error</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{\partial L}{\partial z^{(l)}} = \frac{\partial L}{\partial a^{(l)}} \cdot f'(z^{(l)})\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>Compute gradients</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{\partial L}{\partial W^{(l)}} = \frac{\partial L}{\partial z^{(l)}} \cdot (a^{(l-1)})^T\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>Update parameters</p></td>
+<td><p><span class="math notranslate nohighlight">\(W^{(l)} = W^{(l)} - \eta \frac{\partial L}{\partial W^{(l)}}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+</section>
+<section id="intuitive-analogy">
+<h2><a class="toc-backref" href="#id25" role="doc-backlink">Intuitive Analogy</a><a class="headerlink" href="#intuitive-analogy" title="Link to this heading">#</a></h2>
+<p>Imagine shooting arrows at a target:</p>
+<ul class="simple">
+<li><p>Forward pass → shoot the arrow (prediction).</p></li>
+<li><p>Compute loss → measure how far you missed.</p></li>
+<li><p>Backpropagation → learn <em>how much to adjust your aim</em>.</p></li>
+<li><p>Update weights → aim better next time.</p></li>
+</ul>
+<hr class="docutils" />
+</section>
 <section id="goal">
-<h3><a class="toc-backref" href="#id7" role="doc-backlink">Goal</a><a class="headerlink" href="#goal" title="Link to this heading">#</a></h3>
+<h2><a class="toc-backref" href="#id26" role="doc-backlink">Goal</a><a class="headerlink" href="#goal" title="Link to this heading">#</a></h2>
 <p>Find how each weight contributed to the error:
 $<span class="math notranslate nohighlight">\(
 \frac{\partial L}{\partial W^{(l)}}
@@ -666,12 +1012,12 @@ $<span class="math notranslate nohighlight">\(
 <p>Then update each weight to reduce the loss:
 $<span class="math notranslate nohighlight">\(
 W^{(l)} = W^{(l)} - \eta \frac{\partial L}{\partial W^{(l)}}
-\)</span>$
-where (\eta) is the <strong>learning rate</strong>.</p>
-</section>
+\)</span>$</p>
+<p>where <span class="math notranslate nohighlight">\(\eta\)</span> is the <strong>learning rate</strong>.</p>
 <hr class="docutils" />
+</section>
 <section id="the-chain-rule-core-idea">
-<h3><a class="toc-backref" href="#id8" role="doc-backlink">The Chain Rule (core idea)</a><a class="headerlink" href="#the-chain-rule-core-idea" title="Link to this heading">#</a></h3>
+<h2><a class="toc-backref" href="#id27" role="doc-backlink">The Chain Rule (core idea)</a><a class="headerlink" href="#the-chain-rule-core-idea" title="Link to this heading">#</a></h2>
 <p>Because each layer depends on the previous one, we use the <strong>chain rule</strong> of calculus:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -683,10 +1029,10 @@ where (\eta) is the <strong>learning rate</strong>.</p>
 <li><p><span class="math notranslate nohighlight">\(z^{(l)} = W^{(l)} a^{(l-1)} + b^{(l)}\)</span></p></li>
 </ul>
 <p>This “chain” allows the loss gradient to flow <strong>backward</strong> through the network.</p>
-</section>
 <hr class="docutils" />
+</section>
 <section id="backpropagation-steps">
-<h3><a class="toc-backref" href="#id9" role="doc-backlink">Backpropagation steps</a><a class="headerlink" href="#backpropagation-steps" title="Link to this heading">#</a></h3>
+<h2><a class="toc-backref" href="#id28" role="doc-backlink">Backpropagation steps</a><a class="headerlink" href="#backpropagation-steps" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p><strong>Compute loss gradient at output layer:</strong>
 $<span class="math notranslate nohighlight">\(
@@ -708,11 +1054,10 @@ W^{(l)} \leftarrow W^{(l)} - \eta \frac{\partial L}{\partial W^{(l)}}
 b^{(l)} \leftarrow b^{(l)} - \eta \frac{\partial L}{\partial b^{(l)}}
 \)</span>$</p></li>
 </ol>
-</section>
-</section>
 <hr class="docutils" />
+</section>
 <section id="intuitive-understanding">
-<h2><a class="toc-backref" href="#id10" role="doc-backlink">Intuitive Understanding</a><a class="headerlink" href="#intuitive-understanding" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id29" role="doc-backlink">Intuitive Understanding</a><a class="headerlink" href="#intuitive-understanding" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>Forward pass:</strong> make a prediction.
 (Information flows <strong>forward</strong>.)</p></li>
@@ -724,10 +1069,10 @@ b^{(l)} \leftarrow b^{(l)} - \eta \frac{\partial L}{\partial b^{(l)}}
 <div><p>The network first guesses → measures how bad the guess is → adjusts itself to guess better next time.</p>
 </div></blockquote>
 <p>Each weight learns <strong>how much it contributed</strong> to the total error.</p>
-</section>
 <hr class="docutils" />
+</section>
 <section id="example-simplified">
-<h2><a class="toc-backref" href="#id11" role="doc-backlink">Example (simplified)</a><a class="headerlink" href="#example-simplified" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id30" role="doc-backlink">Example (simplified)</a><a class="headerlink" href="#example-simplified" title="Link to this heading">#</a></h2>
 <p>Say:
 $<span class="math notranslate nohighlight">\(
 y = f(Wx + b), \quad f = \text{sigmoid}
@@ -744,7 +1089,7 @@ $<span class="math notranslate nohighlight">\(
 </section>
 <hr class="docutils" />
 <section id="full-workflow">
-<h2><a class="toc-backref" href="#id12" role="doc-backlink"><strong>Full Workflow</strong></a><a class="headerlink" href="#full-workflow" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id31" role="doc-backlink"><strong>Full Workflow</strong></a><a class="headerlink" href="#full-workflow" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Step</p></th>
@@ -776,10 +1121,9 @@ $<span class="math notranslate nohighlight">\(
 </tbody>
 </table>
 </div>
-</section>
 <hr class="docutils" />
 <section id="intuition-from-optimization">
-<h2><a class="toc-backref" href="#id13" role="doc-backlink"><strong>Intuition from Optimization</strong></a><a class="headerlink" href="#intuition-from-optimization" title="Link to this heading">#</a></h2>
+<h3><a class="toc-backref" href="#id32" role="doc-backlink">Intuition from Optimization</a><a class="headerlink" href="#intuition-from-optimization" title="Link to this heading">#</a></h3>
 <p>Neural networks are just <strong>nonlinear functions</strong>:
 $<span class="math notranslate nohighlight">\(
 \hat{y} = f(X; W)
@@ -921,6 +1265,7 @@ Loss (old) = 0.121629, Loss (new) = 0.119594
 </div>
 </section>
 </section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -968,23 +1313,56 @@ Loss (old) = 0.121629, Loss (new) = 0.119594
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Backward &amp; Forward Propogation</a><ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-propagation-the-prediction-phase"><strong>Forward Propagation — the prediction phase</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-single-neuron">🔹 Example: single neuron</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#input-layer">Input Layer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#weighted-sum-linear-transformation">Weighted Sum (Linear Transformation)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apply-activation-function">Apply Activation Function</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pass-activations-forward">Pass Activations Forward</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output-layer">Output Layer</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-loss">Compute Loss</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-forward-propagation-steps">Summary of Forward Propagation Steps</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-single-neuron">Example: single neuron</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-function">Loss function</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition">Intuition</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-propagation-the-learning-phase"><strong>Backward Propagation — the learning phase</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#goal">Goal</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-chain-rule-core-idea">The Chain Rule (core idea)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#backpropagation-steps">Backpropagation steps</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-propagation-weight-updation"><strong>Backward Propagation (Weight Updation)</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#steps-in-backpropagation">Steps in Backpropagation</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-pass">1. Forward Pass</a></li>
 </ul>
 </li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#l-text-loss-y-hat-y"><span class="math notranslate nohighlight">\(L = \text{Loss}(y, \hat{y})\)</span></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-error-at-output-layer">2. Compute Error at Output Layer</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#if-using-cross-entropy-with-softmax-the-gradient-is-simply-frac-partial-l-partial-z-l-hat-y-y">If using <strong>Cross Entropy with Softmax</strong>, the gradient is simply:
+$<span class="math notranslate nohighlight">\(
+\frac{\partial L}{\partial z^{(L)}} = \hat{y} - y
+\)</span>$</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-gradient-for-each-layer-chain-rule">3. Compute Gradient for Each Layer (Chain Rule)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-gradients-for-weights-and-biases">4. Compute Gradients for Weights and Biases</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#update-parameters-gradient-descent">5. Update Parameters (Gradient Descent)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#repeat"><strong>6. Repeat</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intuitive-analogy">Intuitive Analogy</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#goal">Goal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-chain-rule-core-idea">The Chain Rule (core idea)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backpropagation-steps">Backpropagation steps</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intuitive-understanding">Intuitive Understanding</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-simplified">Example (simplified)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#full-workflow"><strong>Full Workflow</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition-from-optimization"><strong>Intuition from Optimization</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#full-workflow"><strong>Full Workflow</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition-from-optimization">Intuition from Optimization</a></li>
 </ul>
+</li>
+</ul>
+</li>
+</ul>
+
   </nav></div>
 
 </div></div>
