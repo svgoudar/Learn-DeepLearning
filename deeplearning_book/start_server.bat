@@ -1,1 +1,1 @@
-python -m http.server 8001 -d _build\html
+python312 -m http.server 8001 -d _build\html
