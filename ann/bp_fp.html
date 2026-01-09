@@ -1,12 +1,13 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Backward &amp; Forward Propogation &#8212; Machine Learning Handbook</title>
   
@@ -28,53 +29,55 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=4c969af8" />
-    <link rel="stylesheet" type="text/css" href="../_static/proof.css?v=b4b7a797" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-examples.css?v=e236af4b" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.custom.css?v=7bc2f056" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.bundle.min.css?v=37217874" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-shadow.min.css?v=6227e517" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-punk.min.css?v=94669e23" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-noir.min.css?v=21a39f42" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-light.min.css?v=a18b2449" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-borderless.min.css?v=dbff53e4" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/micromodal.css?v=d7bf34ee" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=40389e5b" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-examples.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.bundle.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-shadow.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-punk.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-noir.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-light.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-borderless.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/micromodal.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../_static/jquery.js?v=5d32c60e"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../_static/copybutton.js?v=7f8ff830"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
-    <script src="../_static/tabs.js?v=3ee01567"></script>
-    <script src="../_static/js/hoverxref.js?v=c95ade4f"></script>
-    <script src="../_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
-    <script src="../_static/js/micromodal.min.js?v=04d6302d"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/tabs.js"></script>
+    <script src="../_static/js/hoverxref.js"></script>
+    <script src="../_static/js/tooltipster.bundle.min.js"></script>
+    <script src="../_static/js/micromodal.min.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ann/bp_fp';</script>
@@ -178,18 +181,7 @@
   
   
 </a></div>
-        <div class="sidebar-primary-item">
-
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -202,11 +194,28 @@
         <ul class="nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="overview.html">Artificial Neural Network (ANN)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="neural_network/overview.html">Neural Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="neural_network/00_part.html">Biological Neuron vs Artificial Neuron</a></li>
 <li class="toctree-l3"><a class="reference internal" href="neural_network/01_part.html">Intuition</a></li>
 <li class="toctree-l3"><a class="reference internal" href="neural_network/02_part.html">Problem Statement</a></li>
-<li class="toctree-l3"><a class="reference internal" href="neural_network/03_part.html">Perceptron</a></li>
+<li class="toctree-l3"><a class="reference internal" href="neural_network/03.01_part.html">Multi-Layer Perceptron (MLP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="neural_network/03_part.html">Perceptron Model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="neural_network/04_part.html">Multi-Layer Neural Networks</a></li>
 <li class="toctree-l3"><a class="reference internal" href="neural_network/05_part.html">Vanishing Gradient Problem in Deep Learning</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="training/overview.html">Training</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="training/01_part.html">Data Ingestion Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="training/02_part.html">Model Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="training/03_part.html">Loss Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="training/04_part.html">Optimizers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="training/05_part.html">Training Loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="training/06_part.html">Forward Propagation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="training/07_part.html">Backpropagation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="training/08_part.html">Weight Updation and the Chain Rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="training/09_part.html">Batch and Epoch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="training/10_part.html">Validation and Metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="training/11_part.html">Variants of Training in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="training/12_part.html">Training Failure Modes, Convergence Diagnostics, and Optimization Dynamics</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="cost_loss_function/overview.html">Loss Function vs Cost Function</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -214,6 +223,16 @@
 <li class="toctree-l3"><a class="reference internal" href="cost_loss_function/02_part.html">Loss Functions for Regression in Neural Networks</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cost_loss_function/03_part.html">Loss Functions for Classification</a></li>
 <li class="toctree-l3"><a class="reference internal" href="cost_loss_function/04_part.html">Choice of Loss Function</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="activation/overview.html">Activation Function</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="activation/01_part.html">Sigmoid Activation Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="activation/02_part.html">Tanh Activation Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="activation/03_part.html">ReLU</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="activation/04_part.html">ELU (Exponential Linear Unit)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="activation/05_part.html">Softmax Activation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="activation/06_part.html">Activation choice</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="optimizers/overview.html">Optmizers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -275,8 +294,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../transformers/01_part.html">Architecture</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../transformers/02_part.html">The Transformer Encoder Layer (Deep Explanation)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../transformers/03_part.html">Positional Encoding</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../transformers/04_part.html"><strong>Residual Connection + Layer Normalization</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../transformers/05_part.html"><strong>Transformer Decoder Layer</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../transformers/04_part.html">Residual Connection + Layer Normalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../transformers/05_part.html">Transformer Decoder Layer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../transformers/06_part.html">Demonstration</a></li>
 </ul>
 </details></li>
@@ -336,9 +355,9 @@
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</button></div>
+</label></div>
       
     </div>
   
@@ -363,14 +382,14 @@
       
       <li><a href="https://colab.research.google.com/github/svgoudar/Learn-DeepLearning/blob/master/ann/bp_fp.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
-   title="Launch on Colab"
+   title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
 <span class="btn__icon-container">
   
-    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+    <img src="../_static/images/logo_colab.png">
   </span>
 <span class="btn__text-container">Colab</span>
 </a>
@@ -510,9 +529,9 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</button>
+</label>
 </div></div>
       
     </div>
@@ -593,7 +612,7 @@ $<span class="math notranslate nohighlight">\(
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <nav class="contents" id="contents" role="doc-toc">
+  <div class="contents topic" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#backward-forward-propogation" id="id2">Backward &amp; Forward Propogation</a></p>
@@ -652,9 +671,9 @@ $<span class="math notranslate nohighlight">\(
 </ul>
 </li>
 </ul>
-</nav>
+</div>
 <section id="backward-forward-propogation">
-<h1><a class="toc-backref" href="#id2" role="doc-backlink">Backward &amp; Forward Propogation</a><a class="headerlink" href="#backward-forward-propogation" title="Link to this heading">#</a></h1>
+<h1><a class="toc-backref" href="#id2">Backward &amp; Forward Propogation</a><a class="headerlink" href="#backward-forward-propogation" title="Permalink to this heading">#</a></h1>
 <p>Forward and backward propagation are the <strong>core mechanics</strong> of how neural networks learn.
 They are simply:</p>
 <ul class="simple">
@@ -664,14 +683,14 @@ They are simply:</p>
 <p>Let’s go step-by-step with both <strong>mathematical intuition</strong> and <strong>conceptual explanation.</strong></p>
 <hr class="docutils" />
 <section id="forward-propagation-the-prediction-phase">
-<h2><a class="toc-backref" href="#id3" role="doc-backlink"><strong>Forward Propagation — the prediction phase</strong></a><a class="headerlink" href="#forward-propagation-the-prediction-phase" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id3"><strong>Forward Propagation — the prediction phase</strong></a><a class="headerlink" href="#forward-propagation-the-prediction-phase" title="Permalink to this heading">#</a></h2>
 <p>The <strong>forward pass</strong> means feeding input data through the network <strong>layer by layer</strong> to produce an output.</p>
 <p>Forward propagation in a <strong>neural network</strong> is the process of passing input data through the model to generate an output (prediction).
 Here are the <strong>core steps</strong>, both intuitively and mathematically:</p>
 <p><img alt="alt text" src="../_images/fp.png" /></p>
 <hr class="docutils" />
 <section id="input-layer">
-<h3><a class="toc-backref" href="#id4" role="doc-backlink">Input Layer</a><a class="headerlink" href="#input-layer" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id4">Input Layer</a><a class="headerlink" href="#input-layer" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>The model receives input features <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
 <li><p>Example: if predicting house price → inputs might be area, rooms, and location features.
@@ -682,7 +701,7 @@ X = [x_1, x_2, x_3, \dots, x_n]
 </section>
 <hr class="docutils" />
 <section id="weighted-sum-linear-transformation">
-<h3><a class="toc-backref" href="#id5" role="doc-backlink">Weighted Sum (Linear Transformation)</a><a class="headerlink" href="#weighted-sum-linear-transformation" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id5">Weighted Sum (Linear Transformation)</a><a class="headerlink" href="#weighted-sum-linear-transformation" title="Permalink to this heading">#</a></h3>
 <p>Each neuron in the next layer computes a <strong>weighted sum</strong> of its inputs plus a bias:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -699,7 +718,7 @@ Each neuron learns “how much importance” (weight) to give each feature.</p>
 </section>
 <hr class="docutils" />
 <section id="apply-activation-function">
-<h3><a class="toc-backref" href="#id6" role="doc-backlink">Apply Activation Function</a><a class="headerlink" href="#apply-activation-function" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id6">Apply Activation Function</a><a class="headerlink" href="#apply-activation-function" title="Permalink to this heading">#</a></h3>
 <p>Each neuron’s linear output <span class="math notranslate nohighlight">\(z\)</span> is passed through a <strong>non-linear activation</strong> function <span class="math notranslate nohighlight">\(f(z)\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -717,7 +736,7 @@ Introduces non-linearity → allows the network to learn complex, non-linear rel
 </section>
 <hr class="docutils" />
 <section id="pass-activations-forward">
-<h3><a class="toc-backref" href="#id7" role="doc-backlink">Pass Activations Forward</a><a class="headerlink" href="#pass-activations-forward" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id7">Pass Activations Forward</a><a class="headerlink" href="#pass-activations-forward" title="Permalink to this heading">#</a></h3>
 <p>The activated outputs <span class="math notranslate nohighlight">\(a\)</span> from one layer become the <strong>inputs</strong> to the next layer:
 $<span class="math notranslate nohighlight">\(
 a^{(l)} = f(W^{(l)} a^{(l-1)} + b^{(l)})
@@ -726,7 +745,7 @@ a^{(l)} = f(W^{(l)} a^{(l-1)} + b^{(l)})
 </section>
 <hr class="docutils" />
 <section id="output-layer">
-<h3><a class="toc-backref" href="#id8" role="doc-backlink">Output Layer</a><a class="headerlink" href="#output-layer" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id8">Output Layer</a><a class="headerlink" href="#output-layer" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>The final layer produces predictions:</p>
 <ul>
@@ -743,7 +762,7 @@ a^{(l)} = f(W^{(l)} a^{(l-1)} + b^{(l)})
 </section>
 <hr class="docutils" />
 <section id="compute-loss">
-<h3><a class="toc-backref" href="#id9" role="doc-backlink">Compute Loss</a><a class="headerlink" href="#compute-loss" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id9">Compute Loss</a><a class="headerlink" href="#compute-loss" title="Permalink to this heading">#</a></h3>
 <p>Compare predicted output <span class="math notranslate nohighlight">\(\hat{y}\)</span> with actual output <span class="math notranslate nohighlight">\(y\)</span> using a <strong>loss function</strong>:</p>
 <p>Examples:</p>
 <ul class="simple">
@@ -759,8 +778,8 @@ L = -\frac{1}{m}\sum [y\log(\hat{y}) + (1-y)\log(1-\hat{y})]
 </section>
 <hr class="docutils" />
 <section id="summary-of-forward-propagation-steps">
-<h3><a class="toc-backref" href="#id10" role="doc-backlink">Summary of Forward Propagation Steps</a><a class="headerlink" href="#summary-of-forward-propagation-steps" title="Link to this heading">#</a></h3>
-<div class="pst-scrollable-table-container"><table class="table">
+<h3><a class="toc-backref" href="#id10">Summary of Forward Propagation Steps</a><a class="headerlink" href="#summary-of-forward-propagation-steps" title="Permalink to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Step</p></th>
 <th class="head"><p>Operation</p></th>
@@ -801,7 +820,7 @@ Forward propagation = taking data, multiplying by weights, adding biases, applyi
 <p>Would you like me to visualize this with a simple <strong>PyTorch example and flow diagram</strong> next?</p>
 </section>
 <section id="example-single-neuron">
-<h3><a class="toc-backref" href="#id11" role="doc-backlink">Example: single neuron</a><a class="headerlink" href="#example-single-neuron" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id11">Example: single neuron</a><a class="headerlink" href="#example-single-neuron" title="Permalink to this heading">#</a></h3>
 <div class="math notranslate nohighlight">
 \[
 y = f(Wx + b)
@@ -827,7 +846,7 @@ $<span class="math notranslate nohighlight">\(
 </section>
 <hr class="docutils" />
 <section id="loss-function">
-<h3><a class="toc-backref" href="#id12" role="doc-backlink">Loss function</a><a class="headerlink" href="#loss-function" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id12">Loss function</a><a class="headerlink" href="#loss-function" title="Permalink to this heading">#</a></h3>
 <p>To measure how wrong the prediction is, we use a <strong>loss function</strong>:
 $<span class="math notranslate nohighlight">\(
 L = \text{Loss}(\hat{y}, y_{\text{true}})
@@ -840,7 +859,7 @@ Examples:</p>
 </section>
 <hr class="docutils" />
 <section id="intuition">
-<h3><a class="toc-backref" href="#id13" role="doc-backlink">Intuition</a><a class="headerlink" href="#intuition" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id13">Intuition</a><a class="headerlink" href="#intuition" title="Permalink to this heading">#</a></h3>
 <p>Think of forward propagation like running a factory:</p>
 <ol class="arabic simple">
 <li><p>Input → passes through several machines (layers)</p></li>
@@ -853,14 +872,14 @@ Examples:</p>
 </section>
 <hr class="docutils" />
 <section id="backward-propagation-weight-updation">
-<h2><a class="toc-backref" href="#id14" role="doc-backlink"><strong>Backward Propagation (Weight Updation)</strong></a><a class="headerlink" href="#backward-propagation-weight-updation" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id14"><strong>Backward Propagation (Weight Updation)</strong></a><a class="headerlink" href="#backward-propagation-weight-updation" title="Permalink to this heading">#</a></h2>
 <p>Once the network computes the error, it must <strong>learn how to reduce it</strong>.
 This happens by computing <strong>gradients</strong> and updating the weights.</p>
 <p><img alt="alt text" src="../_images/bp.png" /></p>
 <p><strong>Backward propagation (Backpropagation)</strong> is the process by which a neural network <strong>learns</strong> — it computes gradients of the loss function with respect to weights and biases, then <strong>updates</strong> them to minimize the loss.</p>
 <hr class="docutils" />
 <section id="id1">
-<h3><a class="toc-backref" href="#id15" role="doc-backlink">Intuition</a><a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id15">Intuition</a><a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
 <p>Think of forward propagation as <strong>prediction</strong>, and backpropagation as <strong>correction</strong>.</p>
 <ul class="simple">
 <li><p>Forward pass → predict output</p></li>
@@ -871,11 +890,11 @@ This happens by computing <strong>gradients</strong> and updating the weights.</
 </section>
 <hr class="docutils" />
 <section id="steps-in-backpropagation">
-<h3><a class="toc-backref" href="#id16" role="doc-backlink">Steps in Backpropagation</a><a class="headerlink" href="#steps-in-backpropagation" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id16">Steps in Backpropagation</a><a class="headerlink" href="#steps-in-backpropagation" title="Permalink to this heading">#</a></h3>
 <p>Let’s break it down systematically:</p>
 <hr class="docutils" />
 <section id="forward-pass">
-<h4><a class="toc-backref" href="#id17" role="doc-backlink">1. Forward Pass</a><a class="headerlink" href="#forward-pass" title="Link to this heading">#</a></h4>
+<h4><a class="toc-backref" href="#id17">1. Forward Pass</a><a class="headerlink" href="#forward-pass" title="Permalink to this heading">#</a></h4>
 <p>Compute outputs using current weights:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -889,9 +908,9 @@ z^{(l)} = W^{(l)} a^{(l-1)} + b^{(l)}
 </section>
 </section>
 <section id="l-text-loss-y-hat-y">
-<h1><a class="toc-backref" href="#id18" role="doc-backlink"><span class="math notranslate nohighlight">\(L = \text{Loss}(y, \hat{y})\)</span></a><a class="headerlink" href="#l-text-loss-y-hat-y" title="Link to this heading">#</a></h1>
+<h1><a class="toc-backref" href="#id18"><span class="math notranslate nohighlight">\(L = \text{Loss}(y, \hat{y})\)</span></a><a class="headerlink" href="#l-text-loss-y-hat-y" title="Permalink to this heading">#</a></h1>
 <section id="compute-error-at-output-layer">
-<h2><a class="toc-backref" href="#id19" role="doc-backlink">2. Compute Error at Output Layer</a><a class="headerlink" href="#compute-error-at-output-layer" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id19">2. Compute Error at Output Layer</a><a class="headerlink" href="#compute-error-at-output-layer" title="Permalink to this heading">#</a></h2>
 <p>We calculate how far the prediction is from the target.</p>
 <p>For example, if using <strong>Mean Squared Error (MSE)</strong>:
 $<span class="math notranslate nohighlight">\(
@@ -900,12 +919,12 @@ $<span class="math notranslate nohighlight">\(
 </section>
 </section>
 <section id="if-using-cross-entropy-with-softmax-the-gradient-is-simply-frac-partial-l-partial-z-l-hat-y-y">
-<h1><a class="toc-backref" href="#id20" role="doc-backlink">If using <strong>Cross Entropy with Softmax</strong>, the gradient is simply:
+<h1><a class="toc-backref" href="#id20">If using <strong>Cross Entropy with Softmax</strong>, the gradient is simply:
 $<span class="math notranslate nohighlight">\(
 \frac{\partial L}{\partial z^{(L)}} = \hat{y} - y
-\)</span>$</a><a class="headerlink" href="#if-using-cross-entropy-with-softmax-the-gradient-is-simply-frac-partial-l-partial-z-l-hat-y-y" title="Link to this heading">#</a></h1>
+\)</span>$</a><a class="headerlink" href="#if-using-cross-entropy-with-softmax-the-gradient-is-simply-frac-partial-l-partial-z-l-hat-y-y" title="Permalink to this heading">#</a></h1>
 <section id="compute-gradient-for-each-layer-chain-rule">
-<h2><a class="toc-backref" href="#id21" role="doc-backlink">3. Compute Gradient for Each Layer (Chain Rule)</a><a class="headerlink" href="#compute-gradient-for-each-layer-chain-rule" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id21">3. Compute Gradient for Each Layer (Chain Rule)</a><a class="headerlink" href="#compute-gradient-for-each-layer-chain-rule" title="Permalink to this heading">#</a></h2>
 <p>The key formula in backpropagation:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -924,7 +943,7 @@ $<span class="math notranslate nohighlight">\(
 <hr class="docutils" />
 </section>
 <section id="compute-gradients-for-weights-and-biases">
-<h2><a class="toc-backref" href="#id22" role="doc-backlink">4. Compute Gradients for Weights and Biases</a><a class="headerlink" href="#compute-gradients-for-weights-and-biases" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id22">4. Compute Gradients for Weights and Biases</a><a class="headerlink" href="#compute-gradients-for-weights-and-biases" title="Permalink to this heading">#</a></h2>
 <div class="math notranslate nohighlight">
 \[
 \frac{\partial L}{\partial W^{(l)}} = \frac{\partial L}{\partial z^{(l)}} \cdot (a^{(l-1)})^T
@@ -936,7 +955,7 @@ $<span class="math notranslate nohighlight">\(
 <hr class="docutils" />
 </section>
 <section id="update-parameters-gradient-descent">
-<h2><a class="toc-backref" href="#id23" role="doc-backlink">5. Update Parameters (Gradient Descent)</a><a class="headerlink" href="#update-parameters-gradient-descent" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id23">5. Update Parameters (Gradient Descent)</a><a class="headerlink" href="#update-parameters-gradient-descent" title="Permalink to this heading">#</a></h2>
 <p>Weights and biases are adjusted <strong>opposite to the gradient</strong> to reduce loss:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -951,11 +970,11 @@ b^{(l)} = b^{(l)} - \eta \cdot \frac{\partial L}{\partial b^{(l)}}
 <hr class="docutils" />
 </section>
 <section id="repeat">
-<h2><a class="toc-backref" href="#id24" role="doc-backlink"><strong>6. Repeat</strong></a><a class="headerlink" href="#repeat" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id24"><strong>6. Repeat</strong></a><a class="headerlink" href="#repeat" title="Permalink to this heading">#</a></h2>
 <p>Repeat forward → backward → update until loss converges or accuracy stabilizes.</p>
 <hr class="docutils" />
 <p><strong>Summary Table</strong></p>
-<div class="pst-scrollable-table-container"><table class="table">
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Step</p></th>
 <th class="head"><p>Description</p></th>
@@ -993,7 +1012,7 @@ b^{(l)} = b^{(l)} - \eta \cdot \frac{\partial L}{\partial b^{(l)}}
 <hr class="docutils" />
 </section>
 <section id="intuitive-analogy">
-<h2><a class="toc-backref" href="#id25" role="doc-backlink">Intuitive Analogy</a><a class="headerlink" href="#intuitive-analogy" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id25">Intuitive Analogy</a><a class="headerlink" href="#intuitive-analogy" title="Permalink to this heading">#</a></h2>
 <p>Imagine shooting arrows at a target:</p>
 <ul class="simple">
 <li><p>Forward pass → shoot the arrow (prediction).</p></li>
@@ -1004,7 +1023,7 @@ b^{(l)} = b^{(l)} - \eta \cdot \frac{\partial L}{\partial b^{(l)}}
 <hr class="docutils" />
 </section>
 <section id="goal">
-<h2><a class="toc-backref" href="#id26" role="doc-backlink">Goal</a><a class="headerlink" href="#goal" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id26">Goal</a><a class="headerlink" href="#goal" title="Permalink to this heading">#</a></h2>
 <p>Find how each weight contributed to the error:
 $<span class="math notranslate nohighlight">\(
 \frac{\partial L}{\partial W^{(l)}}
@@ -1017,7 +1036,7 @@ W^{(l)} = W^{(l)} - \eta \frac{\partial L}{\partial W^{(l)}}
 <hr class="docutils" />
 </section>
 <section id="the-chain-rule-core-idea">
-<h2><a class="toc-backref" href="#id27" role="doc-backlink">The Chain Rule (core idea)</a><a class="headerlink" href="#the-chain-rule-core-idea" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id27">The Chain Rule (core idea)</a><a class="headerlink" href="#the-chain-rule-core-idea" title="Permalink to this heading">#</a></h2>
 <p>Because each layer depends on the previous one, we use the <strong>chain rule</strong> of calculus:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1032,7 +1051,7 @@ W^{(l)} = W^{(l)} - \eta \frac{\partial L}{\partial W^{(l)}}
 <hr class="docutils" />
 </section>
 <section id="backpropagation-steps">
-<h2><a class="toc-backref" href="#id28" role="doc-backlink">Backpropagation steps</a><a class="headerlink" href="#backpropagation-steps" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id28">Backpropagation steps</a><a class="headerlink" href="#backpropagation-steps" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p><strong>Compute loss gradient at output layer:</strong>
 $<span class="math notranslate nohighlight">\(
@@ -1057,7 +1076,7 @@ b^{(l)} \leftarrow b^{(l)} - \eta \frac{\partial L}{\partial b^{(l)}}
 <hr class="docutils" />
 </section>
 <section id="intuitive-understanding">
-<h2><a class="toc-backref" href="#id29" role="doc-backlink">Intuitive Understanding</a><a class="headerlink" href="#intuitive-understanding" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id29">Intuitive Understanding</a><a class="headerlink" href="#intuitive-understanding" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>Forward pass:</strong> make a prediction.
 (Information flows <strong>forward</strong>.)</p></li>
@@ -1072,7 +1091,7 @@ b^{(l)} \leftarrow b^{(l)} - \eta \frac{\partial L}{\partial b^{(l)}}
 <hr class="docutils" />
 </section>
 <section id="example-simplified">
-<h2><a class="toc-backref" href="#id30" role="doc-backlink">Example (simplified)</a><a class="headerlink" href="#example-simplified" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id30">Example (simplified)</a><a class="headerlink" href="#example-simplified" title="Permalink to this heading">#</a></h2>
 <p>Say:
 $<span class="math notranslate nohighlight">\(
 y = f(Wx + b), \quad f = \text{sigmoid}
@@ -1089,8 +1108,8 @@ $<span class="math notranslate nohighlight">\(
 </section>
 <hr class="docutils" />
 <section id="full-workflow">
-<h2><a class="toc-backref" href="#id31" role="doc-backlink"><strong>Full Workflow</strong></a><a class="headerlink" href="#full-workflow" title="Link to this heading">#</a></h2>
-<div class="pst-scrollable-table-container"><table class="table">
+<h2><a class="toc-backref" href="#id31"><strong>Full Workflow</strong></a><a class="headerlink" href="#full-workflow" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Step</p></th>
 <th class="head"><p>Name</p></th>
@@ -1123,7 +1142,7 @@ $<span class="math notranslate nohighlight">\(
 </div>
 <hr class="docutils" />
 <section id="intuition-from-optimization">
-<h3><a class="toc-backref" href="#id32" role="doc-backlink">Intuition from Optimization</a><a class="headerlink" href="#intuition-from-optimization" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id32">Intuition from Optimization</a><a class="headerlink" href="#intuition-from-optimization" title="Permalink to this heading">#</a></h3>
 <p>Neural networks are just <strong>nonlinear functions</strong>:
 $<span class="math notranslate nohighlight">\(
 \hat{y} = f(X; W)
@@ -1135,7 +1154,7 @@ W^* = \arg\min_W L(f(X; W), y)
 Backpropagation gives the <strong>direction of steepest descent</strong>, and gradient descent updates the parameters in that direction.</p>
 <hr class="docutils" />
 <p><strong>Key Points Summary</strong></p>
-<div class="pst-scrollable-table-container"><table class="table">
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Concept</p></th>
 <th class="head"><p>Description</p></th>
@@ -1386,7 +1405,7 @@ By svgoudar
 
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2022.
       <br/>
     
   </p>

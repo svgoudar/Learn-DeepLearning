@@ -82,7 +82,7 @@ function reLoadSphinxTabs() {
 function getEmbedURL(url) {
     var params = {
         'doctool': 'sphinx',
-        'doctoolversion': '7.4.7',
+        'doctoolversion': '5.0.2',
         'url': url,
     }
     console.debug('Data: ' + JSON.stringify(params));

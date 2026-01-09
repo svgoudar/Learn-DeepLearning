@@ -1,12 +1,13 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Training &amp; Hyper-Parameter Tuning &#8212; Machine Learning Handbook</title>
   
@@ -28,53 +29,55 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=4c969af8" />
-    <link rel="stylesheet" type="text/css" href="../_static/proof.css?v=b4b7a797" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-examples.css?v=e236af4b" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.custom.css?v=7bc2f056" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.bundle.min.css?v=37217874" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-shadow.min.css?v=6227e517" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-punk.min.css?v=94669e23" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-noir.min.css?v=21a39f42" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-light.min.css?v=a18b2449" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-borderless.min.css?v=dbff53e4" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/micromodal.css?v=d7bf34ee" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=40389e5b" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-examples.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.bundle.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-shadow.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-punk.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-noir.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-light.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-borderless.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/micromodal.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../_static/jquery.js?v=5d32c60e"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../_static/copybutton.js?v=7f8ff830"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
-    <script src="../_static/tabs.js?v=3ee01567"></script>
-    <script src="../_static/js/hoverxref.js?v=c95ade4f"></script>
-    <script src="../_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
-    <script src="../_static/js/micromodal.min.js?v=04d6302d"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/tabs.js"></script>
+    <script src="../_static/js/hoverxref.js"></script>
+    <script src="../_static/js/tooltipster.bundle.min.js"></script>
+    <script src="../_static/js/micromodal.min.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ffn/03_part';</script>
@@ -178,18 +181,7 @@
   
   
 </a></div>
-        <div class="sidebar-primary-item">
-
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -202,11 +194,28 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../ann/overview.html">Artificial Neural Network (ANN)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ann/neural_network/overview.html">Neural Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ann/neural_network/00_part.html">Biological Neuron vs Artificial Neuron</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ann/neural_network/01_part.html">Intuition</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ann/neural_network/02_part.html">Problem Statement</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../ann/neural_network/03_part.html">Perceptron</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/neural_network/03.01_part.html">Multi-Layer Perceptron (MLP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/neural_network/03_part.html">Perceptron Model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ann/neural_network/04_part.html">Multi-Layer Neural Networks</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ann/neural_network/05_part.html">Vanishing Gradient Problem in Deep Learning</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ann/training/overview.html">Training</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ann/training/01_part.html">Data Ingestion Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/training/02_part.html">Model Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/training/03_part.html">Loss Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/training/04_part.html">Optimizers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/training/05_part.html">Training Loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/training/06_part.html">Forward Propagation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/training/07_part.html">Backpropagation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/training/08_part.html">Weight Updation and the Chain Rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/training/09_part.html">Batch and Epoch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/training/10_part.html">Validation and Metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/training/11_part.html">Variants of Training in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/training/12_part.html">Training Failure Modes, Convergence Diagnostics, and Optimization Dynamics</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ann/cost_loss_function/overview.html">Loss Function vs Cost Function</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -214,6 +223,16 @@
 <li class="toctree-l3"><a class="reference internal" href="../ann/cost_loss_function/02_part.html">Loss Functions for Regression in Neural Networks</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ann/cost_loss_function/03_part.html">Loss Functions for Classification</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ann/cost_loss_function/04_part.html">Choice of Loss Function</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../ann/activation/overview.html">Activation Function</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../ann/activation/01_part.html">Sigmoid Activation Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/activation/02_part.html">Tanh Activation Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/activation/03_part.html">ReLU</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../ann/activation/04_part.html">ELU (Exponential Linear Unit)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/activation/05_part.html">Softmax Activation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/activation/06_part.html">Activation choice</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ann/optimizers/overview.html">Optmizers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -275,8 +294,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../transformers/01_part.html">Architecture</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../transformers/02_part.html">The Transformer Encoder Layer (Deep Explanation)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../transformers/03_part.html">Positional Encoding</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../transformers/04_part.html"><strong>Residual Connection + Layer Normalization</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../transformers/05_part.html"><strong>Transformer Decoder Layer</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../transformers/04_part.html">Residual Connection + Layer Normalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../transformers/05_part.html">Transformer Decoder Layer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../transformers/06_part.html">Demonstration</a></li>
 </ul>
 </details></li>
@@ -336,9 +355,9 @@
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</button></div>
+</label></div>
       
     </div>
   
@@ -363,14 +382,14 @@
       
       <li><a href="https://colab.research.google.com/github/svgoudar/Learn-DeepLearning/blob/master/ffn/03_part.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
-   title="Launch on Colab"
+   title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
 <span class="btn__icon-container">
   
-    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+    <img src="../_static/images/logo_colab.png">
   </span>
 <span class="btn__text-container">Colab</span>
 </a>
@@ -510,9 +529,9 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</button>
+</label>
 </div></div>
       
     </div>
@@ -572,7 +591,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <nav class="contents" id="contents" role="doc-toc">
+  <div class="contents topic" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#training-hyper-parameter-tuning" id="id1">Training &amp; Hyper-Parameter Tuning</a></p>
@@ -611,16 +630,16 @@ document.write(`
 </ul>
 </li>
 </ul>
-</nav>
+</div>
 <section id="training-hyper-parameter-tuning">
-<h1><a class="toc-backref" href="#id1" role="doc-backlink">Training &amp; Hyper-Parameter Tuning</a><a class="headerlink" href="#training-hyper-parameter-tuning" title="Link to this heading">#</a></h1>
+<h1><a class="toc-backref" href="#id1">Training &amp; Hyper-Parameter Tuning</a><a class="headerlink" href="#training-hyper-parameter-tuning" title="Permalink to this heading">#</a></h1>
 <section id="training">
-<h2><a class="toc-backref" href="#id2" role="doc-backlink">Training</a><a class="headerlink" href="#training" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id2">Training</a><a class="headerlink" href="#training" title="Permalink to this heading">#</a></h2>
 <p>Training an FNN means <strong>learning optimal parameters (weights and biases)</strong> so that the network can map input data (x) to correct outputs (y).</p>
 <p>The training follows a well-defined workflow:</p>
 <hr class="docutils" />
 <section id="initialize-parameters">
-<h3><a class="toc-backref" href="#id3" role="doc-backlink">Initialize Parameters</a><a class="headerlink" href="#initialize-parameters" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id3">Initialize Parameters</a><a class="headerlink" href="#initialize-parameters" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Randomly initialize weights <span class="math notranslate nohighlight">\(W^{(l)}\)</span> (small random numbers, not all zeros).</p></li>
 <li><p>Initialize biases <span class="math notranslate nohighlight">\(b^{(l)} = 0\)</span>.</p>
@@ -638,7 +657,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="forward-propagation">
-<h3><a class="toc-backref" href="#id4" role="doc-backlink">Forward Propagation</a><a class="headerlink" href="#forward-propagation" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id4">Forward Propagation</a><a class="headerlink" href="#forward-propagation" title="Permalink to this heading">#</a></h3>
 <p>Each layer computes:
 $<span class="math notranslate nohighlight">\(
 z^{(l)} = W^{(l)} a^{(l-1)} + b^{(l)}
@@ -650,7 +669,7 @@ a^{(l)} = f(z^{(l)})
 </section>
 <hr class="docutils" />
 <section id="compute-loss">
-<h3><a class="toc-backref" href="#id5" role="doc-backlink">Compute Loss</a><a class="headerlink" href="#compute-loss" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id5">Compute Loss</a><a class="headerlink" href="#compute-loss" title="Permalink to this heading">#</a></h3>
 <p>The <strong>loss function</strong> measures how far predictions are from true outputs:
 $<span class="math notranslate nohighlight">\(
 L = \text{Loss}(y, \hat{y})
@@ -669,7 +688,7 @@ L = -\frac{1}{m}\sum y \log(\hat{y})
 </section>
 <hr class="docutils" />
 <section id="backpropagation-gradient-computation">
-<h3><a class="toc-backref" href="#id6" role="doc-backlink">Backpropagation (Gradient Computation)</a><a class="headerlink" href="#backpropagation-gradient-computation" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id6">Backpropagation (Gradient Computation)</a><a class="headerlink" href="#backpropagation-gradient-computation" title="Permalink to this heading">#</a></h3>
 <p>Compute partial derivatives of loss (L) w.r.t. all parameters using <strong>chain rule</strong>:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -684,7 +703,7 @@ L = -\frac{1}{m}\sum y \log(\hat{y})
 </section>
 <hr class="docutils" />
 <section id="parameter-update">
-<h3><a class="toc-backref" href="#id7" role="doc-backlink">Parameter Update</a><a class="headerlink" href="#parameter-update" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id7">Parameter Update</a><a class="headerlink" href="#parameter-update" title="Permalink to this heading">#</a></h3>
 <p>Weights and biases are updated using <strong>gradient descent</strong>:</p>
 <div class="math notranslate nohighlight">
 \[
@@ -702,7 +721,7 @@ b^{(l)} := b^{(l)} - \eta \frac{\partial L}{\partial b^{(l)}}
 </section>
 <hr class="docutils" />
 <section id="iterate-epochs">
-<h3><a class="toc-backref" href="#id8" role="doc-backlink">Iterate (Epochs)</a><a class="headerlink" href="#iterate-epochs" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id8">Iterate (Epochs)</a><a class="headerlink" href="#iterate-epochs" title="Permalink to this heading">#</a></h3>
 <p>Repeat:</p>
 <ul class="simple">
 <li><p>Forward pass</p></li>
@@ -719,7 +738,7 @@ Training continues until:</p>
 </section>
 <hr class="docutils" />
 <section id="evaluate-and-validate">
-<h3><a class="toc-backref" href="#id9" role="doc-backlink">Evaluate and Validate</a><a class="headerlink" href="#evaluate-and-validate" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id9">Evaluate and Validate</a><a class="headerlink" href="#evaluate-and-validate" title="Permalink to this heading">#</a></h3>
 <p>After each epoch:</p>
 <ul class="simple">
 <li><p>Compute <strong>validation loss</strong> to monitor overfitting.</p></li>
@@ -728,7 +747,7 @@ Training continues until:</p>
 <p>Use early stopping if necessary.</p>
 <hr class="docutils" />
 <p><strong>Key Intuition</strong></p>
-<div class="pst-scrollable-table-container"><table class="table">
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Step</p></th>
 <th class="head"><p>Purpose</p></th>
@@ -757,12 +776,12 @@ Training continues until:</p>
 </section>
 <hr class="docutils" />
 <section id="huperparameter-tuning-stratergies">
-<h2><a class="toc-backref" href="#id10" role="doc-backlink">Huperparameter Tuning Stratergies</a><a class="headerlink" href="#huperparameter-tuning-stratergies" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id10">Huperparameter Tuning Stratergies</a><a class="headerlink" href="#huperparameter-tuning-stratergies" title="Permalink to this heading">#</a></h2>
 <p>Hyperparameters are <strong>external settings</strong> (not learned) that control model behavior and training efficiency.</p>
 <hr class="docutils" />
 <section id="common-hyperparameters-in-fnn">
-<h3><a class="toc-backref" href="#id11" role="doc-backlink">Common Hyperparameters in FNN</a><a class="headerlink" href="#common-hyperparameters-in-fnn" title="Link to this heading">#</a></h3>
-<div class="pst-scrollable-table-container"><table class="table">
+<h3><a class="toc-backref" href="#id11">Common Hyperparameters in FNN</a><a class="headerlink" href="#common-hyperparameters-in-fnn" title="Permalink to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Category</p></th>
 <th class="head"><p>Hyperparameter</p></th>
@@ -821,9 +840,9 @@ Training continues until:</p>
 </section>
 <hr class="docutils" />
 <section id="tuning-strategies">
-<h2><a class="toc-backref" href="#id12" role="doc-backlink">Tuning Strategies</a><a class="headerlink" href="#tuning-strategies" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id12">Tuning Strategies</a><a class="headerlink" href="#tuning-strategies" title="Permalink to this heading">#</a></h2>
 <section id="a-grid-search">
-<h3><a class="toc-backref" href="#id13" role="doc-backlink">(a) Grid Search</a><a class="headerlink" href="#a-grid-search" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id13">(a) Grid Search</a><a class="headerlink" href="#a-grid-search" title="Permalink to this heading">#</a></h3>
 <ul>
 <li><p>Try all combinations of hyperparameters.</p></li>
 <li><p>Example:</p>
@@ -840,7 +859,7 @@ neurons = [64, 128, 256]
 </section>
 <hr class="docutils" />
 <section id="b-random-search">
-<h3><a class="toc-backref" href="#id14" role="doc-backlink">(b) Random Search</a><a class="headerlink" href="#b-random-search" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id14">(b) Random Search</a><a class="headerlink" href="#b-random-search" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Randomly select hyperparameter combinations.</p></li>
 <li><p>Usually faster and often as effective as grid search.</p></li>
@@ -849,7 +868,7 @@ neurons = [64, 128, 256]
 </section>
 <hr class="docutils" />
 <section id="c-bayesian-optimization">
-<h3><a class="toc-backref" href="#id15" role="doc-backlink">(c) Bayesian Optimization</a><a class="headerlink" href="#c-bayesian-optimization" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id15">(c) Bayesian Optimization</a><a class="headerlink" href="#c-bayesian-optimization" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Builds a probabilistic model of performance across hyperparameter space.</p></li>
 <li><p>Chooses next set of hyperparameters based on previous results.</p></li>
@@ -859,7 +878,7 @@ neurons = [64, 128, 256]
 </section>
 <hr class="docutils" />
 <section id="d-learning-rate-scheduling">
-<h3><a class="toc-backref" href="#id16" role="doc-backlink">(d) Learning Rate Scheduling</a><a class="headerlink" href="#d-learning-rate-scheduling" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id16">(d) Learning Rate Scheduling</a><a class="headerlink" href="#d-learning-rate-scheduling" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Start with higher learning rate and gradually reduce.</p></li>
 <li><p>Schedulers:</p>
@@ -874,7 +893,7 @@ neurons = [64, 128, 256]
 </section>
 <hr class="docutils" />
 <section id="e-early-stopping">
-<h3><a class="toc-backref" href="#id17" role="doc-backlink">(e) Early Stopping</a><a class="headerlink" href="#e-early-stopping" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id17">(e) Early Stopping</a><a class="headerlink" href="#e-early-stopping" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Monitor validation loss.</p></li>
 <li><p>Stop training when it stops improving.</p></li>
@@ -883,7 +902,7 @@ neurons = [64, 128, 256]
 </section>
 <hr class="docutils" />
 <section id="f-cross-validation">
-<h3><a class="toc-backref" href="#id18" role="doc-backlink">(f) Cross-Validation</a><a class="headerlink" href="#f-cross-validation" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id18">(f) Cross-Validation</a><a class="headerlink" href="#f-cross-validation" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Split data into ( k ) folds (e.g., 5-fold).</p></li>
 <li><p>Train on ( k-1 ) folds, validate on 1.</p></li>
@@ -893,7 +912,7 @@ neurons = [64, 128, 256]
 </section>
 <hr class="docutils" />
 <section id="regularization-techniques">
-<h2><a class="toc-backref" href="#id19" role="doc-backlink">Regularization Techniques</a><a class="headerlink" href="#regularization-techniques" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id19">Regularization Techniques</a><a class="headerlink" href="#regularization-techniques" title="Permalink to this heading">#</a></h2>
 <p>To prevent overfitting:</p>
 <ul class="simple">
 <li><p><strong>L2 regularization (weight decay):</strong>
@@ -907,8 +926,8 @@ L' = L + \lambda \sum W^2
 </section>
 <hr class="docutils" />
 <section id="optimizer-tuning">
-<h2><a class="toc-backref" href="#id20" role="doc-backlink">Optimizer Tuning</a><a class="headerlink" href="#optimizer-tuning" title="Link to this heading">#</a></h2>
-<div class="pst-scrollable-table-container"><table class="table">
+<h2><a class="toc-backref" href="#id20">Optimizer Tuning</a><a class="headerlink" href="#optimizer-tuning" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Optimizer</p></th>
 <th class="head"><p>Description</p></th>
@@ -939,7 +958,7 @@ L' = L + \lambda \sum W^2
 </section>
 <hr class="docutils" />
 <section id="practical-workflow-for-tuning">
-<h2><a class="toc-backref" href="#id21" role="doc-backlink">Practical Workflow for Tuning</a><a class="headerlink" href="#practical-workflow-for-tuning" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id21">Practical Workflow for Tuning</a><a class="headerlink" href="#practical-workflow-for-tuning" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Start with baseline FNN (simple structure).</p></li>
 <li><p>Tune learning rate → use learning rate finder.</p></li>
@@ -952,8 +971,8 @@ L' = L + \lambda \sum W^2
 </section>
 <hr class="docutils" />
 <section id="example-workflow-summary">
-<h2><a class="toc-backref" href="#id22" role="doc-backlink">Example Workflow Summary</a><a class="headerlink" href="#example-workflow-summary" title="Link to this heading">#</a></h2>
-<div class="pst-scrollable-table-container"><table class="table">
+<h2><a class="toc-backref" href="#id22">Example Workflow Summary</a><a class="headerlink" href="#example-workflow-summary" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Phase</p></th>
 <th class="head"><p>Action</p></th>
@@ -991,7 +1010,7 @@ L' = L + \lambda \sum W^2
 </section>
 <hr class="docutils" />
 <section id="key-principles">
-<h2><a class="toc-backref" href="#id23" role="doc-backlink">Key Principles</a><a class="headerlink" href="#key-principles" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id23">Key Principles</a><a class="headerlink" href="#key-principles" title="Permalink to this heading">#</a></h2>
 <p>✅ Start simple, scale up gradually
 ✅ Use validation loss as your tuning signal
 ✅ Use <strong>learning rate warm-up &amp; decay</strong>
@@ -1121,7 +1140,7 @@ By svgoudar
 
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2022.
       <br/>
     
   </p>

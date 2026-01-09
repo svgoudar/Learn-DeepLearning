@@ -1,14 +1,15 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../../" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Adadelta and RMSProp &#8212; Machine Learning Handbook</title>
+    <title>Adadelta Optimizer in Deep Learning &#8212; Machine Learning Handbook</title>
   
   
   
@@ -28,59 +29,61 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=4c969af8" />
-    <link rel="stylesheet" type="text/css" href="../../_static/proof.css?v=b4b7a797" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-examples.css?v=e236af4b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.custom.css?v=7bc2f056" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.bundle.min.css?v=37217874" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-shadow.min.css?v=6227e517" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-punk.min.css?v=94669e23" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-noir.min.css?v=21a39f42" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-light.min.css?v=a18b2449" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-borderless.min.css?v=dbff53e4" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/micromodal.css?v=d7bf34ee" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=40389e5b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-examples.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.bundle.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-shadow.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-punk.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-noir.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-light.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-borderless.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/micromodal.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../../_static/jquery.js?v=5d32c60e"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../../_static/copybutton.js?v=7f8ff830"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
-    <script src="../../_static/tabs.js?v=3ee01567"></script>
-    <script src="../../_static/js/hoverxref.js?v=c95ade4f"></script>
-    <script src="../../_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
-    <script src="../../_static/js/micromodal.min.js?v=04d6302d"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../_static/tabs.js"></script>
+    <script src="../../_static/js/hoverxref.js"></script>
+    <script src="../../_static/js/tooltipster.bundle.min.js"></script>
+    <script src="../../_static/js/micromodal.min.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ann/optimizers/06_part';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Adam Optmizers" href="07_part.html" />
+    <link rel="next" title="RMSProp Optimizer in Deep Learning" href="07_part.html" />
     <link rel="prev" title="Adagrad Optimizer" href="05_part.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -178,18 +181,7 @@
   
   
 </a></div>
-        <div class="sidebar-primary-item">
-
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -202,11 +194,34 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../overview.html">Artificial Neural Network (ANN)</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 has-children"><a class="reference internal" href="../neural_network/overview.html">Neural Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../neural_network/01_part.html">Intuition</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../neural_network/02_part.html">Problem Statement</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../neural_network/03_part.html">Perceptron</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../neural_network/04_part.html">Multi-Layer Neural Networks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../neural_network/00_part.html">Biological Neuron vs Artificial Neuron</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../neural_network/01_part.html">Neuron</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../neural_network/02_part.html">Neural Network House Price Prediction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../neural_network/03_part.html">Perceptron Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../neural_network/04_part.html">Multi-Layer Perceptron (MLP)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../neural_network/05_part.html">Vanishing Gradient Problem in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../neural_network/06_part.html">Vanishing Gradient Problem</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../gradient_descent/overview.html">Gradient Descent</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../gradient_descent/01_part.html">Batch Gradient Descent in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gradient_descent/02_part.html">Mini-Batch Gradient Descent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gradient_descent/03_part.html">Stochastic Gradient Descent (SGD)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../training/overview.html">Training</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../training/01_part.html">Data Ingestion Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/02_part.html">Model Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/03_part.html">Loss Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/04_part.html">Optimizers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/05_part.html">Training Loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/06_part.html">Forward Propagation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/07_part.html">Backpropagation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/08_part.html">Weight Updation and the Chain Rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/09_part.html">Batch and Epoch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/10_part.html">Validation and Metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/11_part.html">Variants of Training in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/12_part.html">Training Failure Modes, Convergence Diagnostics, and Optimization Dynamics</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../cost_loss_function/overview.html">Loss Function vs Cost Function</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -216,21 +231,33 @@
 <li class="toctree-l3"><a class="reference internal" href="../cost_loss_function/04_part.html">Choice of Loss Function</a></li>
 </ul>
 </details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../activation/overview.html">Activation Function</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../activation/01_part.html">Sigmoid Activation Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../activation/02_part.html">Tanh Activation Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../activation/03_part.html">ReLU</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../activation/04_part.html">Exponential Linear Unit (ELU / Exponential ReLU) in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../activation/05_part.html">Softmax Activation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../activation/06_part.html">Activation choice</a></li>
+</ul>
+</details></li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="overview.html">Optmizers</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="01_part.html">Gradient Descent Optimizer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="02_part.html">Stochastic Gradient Descent (SGD) Optimizer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="03_part.html">Mini-batch Stochastic Gradient Descent</a></li>
-<li class="toctree-l3"><a class="reference internal" href="04_part.html">SGD with Momentum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="01_part.html">Gradient Descent Optimizer in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="02_part.html">Stochastic Gradient Descent (SGD) Optimizer in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="03_part.html">Mini-Batch Gradient Descent Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="04_part.html">Momentum</a></li>
 <li class="toctree-l3"><a class="reference internal" href="05_part.html">Adagrad Optimizer</a></li>
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">Adadelta and RMSProp</a></li>
-<li class="toctree-l3"><a class="reference internal" href="07_part.html">Adam Optmizers</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Adadelta Optimizer in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="07_part.html">RMSProp Optimizer in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="08_part.html">Adam Optimizer</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../techniques/01_part.html">Exploding Gradient Problem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../techniques/02_part.html">Weight Initializing Techniques</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../techniques/03_part.html">Dropout Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../techniques/02_part.html">Weight Initialization in Deep Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../techniques/03_part.html">Weight Initialization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../techniques/04_part.html">Optmization Techniques</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../techniques/05_part.html">Regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../techniques/06_part.html">Learning Rate Scheduling</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../cnn/overview.html">CNN (Convolution Neural Network)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -275,8 +302,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../transformers/01_part.html">Architecture</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../transformers/02_part.html">The Transformer Encoder Layer (Deep Explanation)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../transformers/03_part.html">Positional Encoding</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../transformers/04_part.html"><strong>Residual Connection + Layer Normalization</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../transformers/05_part.html"><strong>Transformer Decoder Layer</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/04_part.html">Residual Connection + Layer Normalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/05_part.html">Transformer Decoder Layer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../transformers/06_part.html">Demonstration</a></li>
 </ul>
 </details></li>
@@ -336,9 +363,9 @@
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</button></div>
+</label></div>
       
     </div>
   
@@ -363,14 +390,14 @@
       
       <li><a href="https://colab.research.google.com/github/svgoudar/Learn-DeepLearning/blob/master/ann/optimizers/06_part.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
-   title="Launch on Colab"
+   title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
 <span class="btn__icon-container">
   
-    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+    <img src="../../_static/images/logo_colab.png">
   </span>
 <span class="btn__text-container">Colab</span>
 </a>
@@ -510,9 +537,9 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</button>
+</label>
 </div></div>
       
     </div>
@@ -523,7 +550,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Adadelta and RMSProp</h1>
+    <h1>Adadelta Optimizer in Deep Learning</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -533,10 +560,17 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-recap"><strong>Problem Recap</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adadelta-rmsprop-solution"><strong>Adadelta &amp; RMSProp Solution</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formula"><strong>Formula</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#differences-between-adadelta-rmsprop"><strong>Differences Between Adadelta &amp; RMSProp</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation">Motivation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-mechanism">Core Mechanism</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition">Intuition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-workflow">Training Workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-demonstration">PyTorch Demonstration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameters">Hyperparameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variants-and-relations">Variants and Relations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-to-use-adadelta">When to Use Adadelta</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-insight">Key Insight</a></li>
 </ul>
             </nav>
         </div>
@@ -548,87 +582,257 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <nav class="contents" id="contents" role="doc-toc">
+  <div class="contents topic" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#adadelta-and-rmsprop" id="id1">Adadelta and RMSProp</a></p>
+<li><p><a class="reference internal" href="#adadelta-optimizer-in-deep-learning" id="id1">Adadelta Optimizer in Deep Learning</a></p>
 <ul>
-<li><p><a class="reference internal" href="#problem-recap" id="id2"><strong>Problem Recap</strong></a></p></li>
-<li><p><a class="reference internal" href="#adadelta-rmsprop-solution" id="id3"><strong>Adadelta &amp; RMSProp Solution</strong></a></p></li>
-<li><p><a class="reference internal" href="#formula" id="id4"><strong>Formula</strong></a></p></li>
-<li><p><a class="reference internal" href="#differences-between-adadelta-rmsprop" id="id5"><strong>Differences Between Adadelta &amp; RMSProp</strong></a></p></li>
+<li><p><a class="reference internal" href="#overview" id="id2">Overview</a></p></li>
+<li><p><a class="reference internal" href="#motivation" id="id3">Motivation</a></p></li>
+<li><p><a class="reference internal" href="#core-mechanism" id="id4">Core Mechanism</a></p></li>
+<li><p><a class="reference internal" href="#intuition" id="id5">Intuition</a></p></li>
+<li><p><a class="reference internal" href="#training-workflow" id="id6">Training Workflow</a></p></li>
+<li><p><a class="reference internal" href="#pytorch-demonstration" id="id7">PyTorch Demonstration</a></p></li>
+<li><p><a class="reference internal" href="#hyperparameters" id="id8">Hyperparameters</a></p></li>
+<li><p><a class="reference internal" href="#variants-and-relations" id="id9">Variants and Relations</a></p></li>
+<li><p><a class="reference internal" href="#when-to-use-adadelta" id="id10">When to Use Adadelta</a></p></li>
+<li><p><a class="reference internal" href="#summary" id="id11">Summary</a></p></li>
+<li><p><a class="reference internal" href="#key-insight" id="id12">Key Insight</a></p></li>
 </ul>
 </li>
 </ul>
-</nav>
-<section id="adadelta-and-rmsprop">
-<h1><a class="toc-backref" href="#id1" role="doc-backlink">Adadelta and RMSProp</a><a class="headerlink" href="#adadelta-and-rmsprop" title="Link to this heading">#</a></h1>
-<hr class="docutils" />
-<section id="problem-recap">
-<h2><a class="toc-backref" href="#id2" role="doc-backlink"><strong>Problem Recap</strong></a><a class="headerlink" href="#problem-recap" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><strong>Adagrad</strong> introduced dynamic learning rate:
-$<span class="math notranslate nohighlight">\(
-\eta_t = \frac{\eta}{\sqrt{\alpha_t} + \epsilon}
-\)</span>$</p></li>
-<li><p><strong>Issue:</strong> In deep networks, <span class="math notranslate nohighlight">\(\alpha_t\)</span> (sum of squared gradients) can become <strong>very large</strong> → <span class="math notranslate nohighlight">\(\eta_t\)</span> becomes <strong>almost zero</strong> → weight updates stop → learning stalls.</p></li>
-</ul>
+</div>
+<section id="adadelta-optimizer-in-deep-learning">
+<h1><a class="toc-backref" href="#id1">Adadelta Optimizer in Deep Learning</a><a class="headerlink" href="#adadelta-optimizer-in-deep-learning" title="Permalink to this heading">#</a></h1>
+<section id="overview">
+<h2><a class="toc-backref" href="#id2">Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<p><strong>Adadelta</strong> is an adaptive learning rate optimization algorithm designed to overcome the major limitation of <strong>Adagrad</strong>—its aggressively decreasing learning rate.
+Adadelta dynamically adjusts learning rates <strong>per parameter</strong>, based on a window of recent gradients, eliminating the need to manually choose a global learning rate.</p>
 </section>
 <hr class="docutils" />
-<section id="adadelta-rmsprop-solution">
-<h2><a class="toc-backref" href="#id3" role="doc-backlink"><strong>Adadelta &amp; RMSProp Solution</strong></a><a class="headerlink" href="#adadelta-rmsprop-solution" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Goal: Prevent learning rate from shrinking too much.</p></li>
-<li><p>Key ideas:</p>
-<ol class="arabic simple">
-<li><p>Use <strong>exponential weighted average (EWA)</strong> of past squared gradients instead of raw sum.</p></li>
-<li><p>Restrict extreme growth of gradient history.</p></li>
-</ol>
-</li>
-</ul>
+<section id="motivation">
+<h2><a class="toc-backref" href="#id3">Motivation</a><a class="headerlink" href="#motivation" title="Permalink to this heading">#</a></h2>
+<p>Adagrad accumulates squared gradients:</p>
+<div class="math notranslate nohighlight">
+\[
+G_t = \sum_{i=1}^t g_i^2
+\]</div>
+<p>This causes the effective learning rate:</p>
+<div class="math notranslate nohighlight">
+\[
+\eta_t = \frac{\eta}{\sqrt{G_t + \epsilon}}
+\]</div>
+<p>to shrink continuously → learning stalls.</p>
+<p><strong>Adadelta fixes this</strong> by keeping only an <strong>exponentially decaying average</strong> of past squared gradients.</p>
 </section>
 <hr class="docutils" />
-<section id="formula">
-<h2><a class="toc-backref" href="#id4" role="doc-backlink"><strong>Formula</strong></a><a class="headerlink" href="#formula" title="Link to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p>Compute smoothed squared gradient:
-$<span class="math notranslate nohighlight">\(
-sdw_t = \beta \cdot sdw_{t-1} + (1 - \beta) \cdot \left(\frac{\partial L}{\partial w_{t-1}}\right)^2
-\)</span>$</p></li>
-</ol>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\beta\)</span> = smoothing factor (e.g., 0.95)</p></li>
-<li><p>This keeps the gradient history from exploding.</p></li>
-</ul>
-<ol class="arabic simple" start="2">
-<li><p>Update weight with <strong>dynamic learning rate</strong>:
-$<span class="math notranslate nohighlight">\(
-w_t = w_{t-1} - \frac{\eta}{\sqrt{sdw_t} + \epsilon} \cdot \frac{\partial L}{\partial w_{t-1}}
-\)</span>$</p></li>
-</ol>
-<hr class="docutils" />
-<p><strong>Key Points</strong></p>
-<ul class="simple">
-<li><p><strong>Dynamic Learning Rate:</strong> Like Adagrad, but avoids shrinking too much.</p></li>
-<li><p><strong>Smoothing:</strong> Exponential weighted average reduces noise in gradient updates.</p></li>
-<li><p><strong>Initialization:</strong> (sdw_0 = 0) at the start.</p></li>
-<li><p><strong>Difference between Adadelta &amp; RMSProp:</strong> Minor variations in implementation; conceptually the same.</p></li>
-</ul>
-<hr class="docutils" />
-<p><strong>Benefits</strong></p>
-<ol class="arabic simple">
-<li><p>Prevents learning rate from becoming too small (unlike Adagrad).</p></li>
-<li><p>Smooths gradient updates → more stable convergence.</p></li>
-<li><p>Works well in deep neural networks.</p></li>
-</ol>
+<section id="core-mechanism">
+<h2><a class="toc-backref" href="#id4">Core Mechanism</a><a class="headerlink" href="#core-mechanism" title="Permalink to this heading">#</a></h2>
+<p>Adadelta maintains two running averages:</p>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Symbol</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(E[g^2]_t\)</span></p></td>
+<td><p>Decaying average of squared gradients</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(E[\Delta \theta^2]_t\)</span></p></td>
+<td><p>Decaying average of squared parameter updates</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Update rules:</p>
+<div class="math notranslate nohighlight">
+\[
+E[g^2]*t = \rho E[g^2]*{t-1} + (1 - \rho) g_t^2
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\Delta \theta_t = - \frac{\sqrt{E[\Delta \theta^2]_{t-1} + \epsilon}}
+{\sqrt{E[g^2]_t + \epsilon}} g_t
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+E[\Delta \theta^2]*t = \rho E[\Delta \theta^2]*{t-1} + (1 - \rho)(\Delta \theta_t)^2
+\]</div>
 </section>
 <hr class="docutils" />
-<section id="differences-between-adadelta-rmsprop">
-<h2><a class="toc-backref" href="#id5" role="doc-backlink"><strong>Differences Between Adadelta &amp; RMSProp</strong></a><a class="headerlink" href="#differences-between-adadelta-rmsprop" title="Link to this heading">#</a></h2>
+<section id="intuition">
+<h2><a class="toc-backref" href="#id5">Intuition</a><a class="headerlink" href="#intuition" title="Permalink to this heading">#</a></h2>
+<p>Adadelta adapts each parameter’s step size based on:</p>
 <ul class="simple">
-<li><p><strong>RMSProp</strong>: Standard use of smoothed squared gradients in denominator.</p></li>
-<li><p><strong>Adadelta</strong>: Further modifies the update to remove the need for a global learning rate (\eta) by also tracking previous parameter updates (adaptive step size).</p></li>
+<li><p>How large recent gradients have been</p></li>
+<li><p>How large previous updates were</p></li>
 </ul>
+<p>This creates <strong>unit-consistent updates</strong> and prevents learning rates from shrinking to zero.</p>
+</section>
+<hr class="docutils" />
+<section id="training-workflow">
+<h2><a class="toc-backref" href="#id6">Training Workflow</a><a class="headerlink" href="#training-workflow" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Step</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Forward</p></td>
+<td><p>Compute predictions</p></td>
+</tr>
+<tr class="row-odd"><td><p>Backward</p></td>
+<td><p>Compute gradients</p></td>
+</tr>
+<tr class="row-even"><td><p>Statistics update</p></td>
+<td><p>Update moving averages</p></td>
+</tr>
+<tr class="row-odd"><td><p>Adaptive step</p></td>
+<td><p>Compute per-parameter update</p></td>
+</tr>
+<tr class="row-even"><td><p>Parameter update</p></td>
+<td><p>Apply update</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="pytorch-demonstration">
+<h2><a class="toc-backref" href="#id7">PyTorch Demonstration</a><a class="headerlink" href="#pytorch-demonstration" title="Permalink to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.optim</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">optim</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+    <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">64</span><span class="p">),</span>
+    <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+    <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="p">)</span>
+
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">optim</span><span class="o">.</span><span class="n">Adadelta</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">rho</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">)</span>
+<span class="n">loss_fn</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="mi">128</span><span class="p">,))</span>
+
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="hyperparameters">
+<h2><a class="toc-backref" href="#id8">Hyperparameters</a><a class="headerlink" href="#hyperparameters" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Role</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">rho</span></code></p></td>
+<td><p>Decay rate for moving averages (default 0.9)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">eps</span></code></p></td>
+<td><p>Numerical stability constant</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">lr</span></code></p></td>
+<td><p>Usually left at default (1.0)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="variants-and-relations">
+<h2><a class="toc-backref" href="#id9">Variants and Relations</a><a class="headerlink" href="#variants-and-relations" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Optimizer</p></th>
+<th class="head"><p>Key Difference</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Adagrad</p></td>
+<td><p>Accumulates all gradients</p></td>
+</tr>
+<tr class="row-odd"><td><p>RMSProp</p></td>
+<td><p>Keeps only squared gradient average</p></td>
+</tr>
+<tr class="row-even"><td><p>Adam</p></td>
+<td><p>Adds momentum on gradients</p></td>
+</tr>
+<tr class="row-odd"><td><p>Adadelta</p></td>
+<td><p>RMSProp + update history</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="when-to-use-adadelta">
+<h2><a class="toc-backref" href="#id10">When to Use Adadelta</a><a class="headerlink" href="#when-to-use-adadelta" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Scenario</p></th>
+<th class="head"><p>Reason</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>No tuning of learning rate</p></td>
+<td><p>Learning rate-free</p></td>
+</tr>
+<tr class="row-odd"><td><p>Sparse features</p></td>
+<td><p>Handles sparse updates well</p></td>
+</tr>
+<tr class="row-even"><td><p>Noisy gradients</p></td>
+<td><p>Smooth adaptive steps</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h2><a class="toc-backref" href="#id11">Summary</a><a class="headerlink" href="#summary" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Adadelta</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Adaptive learning</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Per-parameter scaling</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>Manual LR needed</p></td>
+<td><p>No</p></td>
+</tr>
+<tr class="row-odd"><td><p>Memory cost</p></td>
+<td><p>Moderate</p></td>
+</tr>
+<tr class="row-even"><td><p>Convergence stability</p></td>
+<td><p>High</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="key-insight">
+<h2><a class="toc-backref" href="#id12">Key Insight</a><a class="headerlink" href="#key-insight" title="Permalink to this heading">#</a></h2>
+<blockquote>
+<div><p><strong>Adadelta automatically balances gradient magnitudes and update magnitudes, enabling stable learning without explicit learning rate tuning.</strong></p>
+</div></blockquote>
 </section>
 </section>
 
@@ -676,7 +880,7 @@ w_t = w_{t-1} - \frac{\eta}{\sqrt{sdw_t} + \epsilon} \cdot \frac{\partial L}{\pa
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Adam Optmizers</p>
+        <p class="prev-next-title">RMSProp Optimizer in Deep Learning</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -696,10 +900,17 @@ w_t = w_{t-1} - \frac{\eta}{\sqrt{sdw_t} + \epsilon} \cdot \frac{\partial L}{\pa
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-recap"><strong>Problem Recap</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#adadelta-rmsprop-solution"><strong>Adadelta &amp; RMSProp Solution</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formula"><strong>Formula</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#differences-between-adadelta-rmsprop"><strong>Differences Between Adadelta &amp; RMSProp</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#motivation">Motivation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-mechanism">Core Mechanism</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition">Intuition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-workflow">Training Workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-demonstration">PyTorch Demonstration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameters">Hyperparameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variants-and-relations">Variants and Relations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-to-use-adadelta">When to Use Adadelta</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-insight">Key Insight</a></li>
 </ul>
   </nav></div>
 
@@ -724,7 +935,7 @@ By svgoudar
 
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2022.
       <br/>
     
   </p>

@@ -1,14 +1,15 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../../" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Intuition &#8212; Machine Learning Handbook</title>
+    <title>Neuron &#8212; Machine Learning Handbook</title>
   
   
   
@@ -28,60 +29,62 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=4c969af8" />
-    <link rel="stylesheet" type="text/css" href="../../_static/proof.css?v=b4b7a797" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-examples.css?v=e236af4b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.custom.css?v=7bc2f056" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.bundle.min.css?v=37217874" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-shadow.min.css?v=6227e517" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-punk.min.css?v=94669e23" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-noir.min.css?v=21a39f42" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-light.min.css?v=a18b2449" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-borderless.min.css?v=dbff53e4" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/micromodal.css?v=d7bf34ee" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=40389e5b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-examples.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.bundle.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-shadow.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-punk.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-noir.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-light.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-borderless.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/micromodal.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../../_static/jquery.js?v=5d32c60e"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../../_static/copybutton.js?v=7f8ff830"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
-    <script src="../../_static/tabs.js?v=3ee01567"></script>
-    <script src="../../_static/js/hoverxref.js?v=c95ade4f"></script>
-    <script src="../../_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
-    <script src="../../_static/js/micromodal.min.js?v=04d6302d"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../_static/tabs.js"></script>
+    <script src="../../_static/js/hoverxref.js"></script>
+    <script src="../../_static/js/tooltipster.bundle.min.js"></script>
+    <script src="../../_static/js/micromodal.min.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ann/neural_network/01_part';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Problem Statement" href="02_part.html" />
-    <link rel="prev" title="Neural Network" href="overview.html" />
+    <link rel="next" title="Neural Network House Price Prediction" href="02_part.html" />
+    <link rel="prev" title="Biological Neuron vs Artificial Neuron" href="00_part.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -178,18 +181,7 @@
   
   
 </a></div>
-        <div class="sidebar-primary-item">
-
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -202,11 +194,34 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../overview.html">Artificial Neural Network (ANN)</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="overview.html">Neural Network</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">Intuition</a></li>
-<li class="toctree-l3"><a class="reference internal" href="02_part.html">Problem Statement</a></li>
-<li class="toctree-l3"><a class="reference internal" href="03_part.html">Perceptron</a></li>
-<li class="toctree-l3"><a class="reference internal" href="04_part.html">Multi-Layer Neural Networks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="00_part.html">Biological Neuron vs Artificial Neuron</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Neuron</a></li>
+<li class="toctree-l3"><a class="reference internal" href="02_part.html">Neural Network House Price Prediction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="03_part.html">Perceptron Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="04_part.html">Multi-Layer Perceptron (MLP)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="05_part.html">Vanishing Gradient Problem in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="06_part.html">Vanishing Gradient Problem</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../gradient_descent/overview.html">Gradient Descent</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../gradient_descent/01_part.html">Batch Gradient Descent in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gradient_descent/02_part.html">Mini-Batch Gradient Descent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gradient_descent/03_part.html">Stochastic Gradient Descent (SGD)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../training/overview.html">Training</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../training/01_part.html">Data Ingestion Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/02_part.html">Model Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/03_part.html">Loss Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/04_part.html">Optimizers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/05_part.html">Training Loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/06_part.html">Forward Propagation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/07_part.html">Backpropagation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/08_part.html">Weight Updation and the Chain Rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/09_part.html">Batch and Epoch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/10_part.html">Validation and Metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/11_part.html">Variants of Training in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/12_part.html">Training Failure Modes, Convergence Diagnostics, and Optimization Dynamics</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../cost_loss_function/overview.html">Loss Function vs Cost Function</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -216,21 +231,33 @@
 <li class="toctree-l3"><a class="reference internal" href="../cost_loss_function/04_part.html">Choice of Loss Function</a></li>
 </ul>
 </details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../activation/overview.html">Activation Function</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../activation/01_part.html">Sigmoid Activation Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../activation/02_part.html">Tanh Activation Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../activation/03_part.html">ReLU</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../activation/04_part.html">Exponential Linear Unit (ELU / Exponential ReLU) in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../activation/05_part.html">Softmax Activation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../activation/06_part.html">Activation choice</a></li>
+</ul>
+</details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../optimizers/overview.html">Optmizers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../optimizers/01_part.html">Gradient Descent Optimizer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../optimizers/02_part.html">Stochastic Gradient Descent (SGD) Optimizer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../optimizers/03_part.html">Mini-batch Stochastic Gradient Descent</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../optimizers/04_part.html">SGD with Momentum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/01_part.html">Gradient Descent Optimizer in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/02_part.html">Stochastic Gradient Descent (SGD) Optimizer in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/03_part.html">Mini-Batch Gradient Descent Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/04_part.html">Momentum</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../optimizers/05_part.html">Adagrad Optimizer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../optimizers/06_part.html">Adadelta and RMSProp</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../optimizers/07_part.html">Adam Optmizers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/06_part.html">Adadelta Optimizer in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/07_part.html">RMSProp Optimizer in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/08_part.html">Adam Optimizer</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../techniques/01_part.html">Exploding Gradient Problem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../techniques/02_part.html">Weight Initializing Techniques</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../techniques/03_part.html">Dropout Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../techniques/02_part.html">Weight Initialization in Deep Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../techniques/03_part.html">Weight Initialization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../techniques/04_part.html">Optmization Techniques</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../techniques/05_part.html">Regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../techniques/06_part.html">Learning Rate Scheduling</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../cnn/overview.html">CNN (Convolution Neural Network)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -275,8 +302,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../transformers/01_part.html">Architecture</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../transformers/02_part.html">The Transformer Encoder Layer (Deep Explanation)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../transformers/03_part.html">Positional Encoding</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../transformers/04_part.html"><strong>Residual Connection + Layer Normalization</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../transformers/05_part.html"><strong>Transformer Decoder Layer</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/04_part.html">Residual Connection + Layer Normalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/05_part.html">Transformer Decoder Layer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../transformers/06_part.html">Demonstration</a></li>
 </ul>
 </details></li>
@@ -336,9 +363,9 @@
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</button></div>
+</label></div>
       
     </div>
   
@@ -363,14 +390,14 @@
       
       <li><a href="https://colab.research.google.com/github/svgoudar/Learn-DeepLearning/blob/master/ann/neural_network/01_part.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
-   title="Launch on Colab"
+   title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
 <span class="btn__icon-container">
   
-    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+    <img src="../../_static/images/logo_colab.png">
   </span>
 <span class="btn__text-container">Colab</span>
 </a>
@@ -510,9 +537,9 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</button>
+</label>
 </div></div>
       
     </div>
@@ -523,7 +550,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Intuition</h1>
+    <h1>Neuron</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -533,15 +560,54 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-intuition">Mathematical Intuition</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#neuron-as-a-function">Neuron as a Function</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#layers-as-function-composition">Layers as Function Composition</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-weights-training">Learning Weights (Training)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#non-linearity-is-key">Non-Linearity is Key</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geometric-intuition">Geometric Intuition</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-intuition">Summary of Intuition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-model-of-a-neuron">Mathematical Model of a Neuron</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geometric-intuition">Geometric Intuition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-activation-function-is-essential">Why the Activation Function Is Essential</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-how-a-neuron-adapts">Learning: How a Neuron Adapts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#single-neuron-demonstration-in-pytorch">Single Neuron Demonstration in PyTorch</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-a-single-neuron">Training a Single Neuron</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neuron-capacity-and-expressiveness">Neuron Capacity and Expressiveness</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variants-of-neurons-in-modern-deep-learning">Variants of Neurons in Modern Deep Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conceptual-summary">Conceptual Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-failure-modes-theory-causes-and-practical-implications">Neural Failure Modes — Theory, Causes, and Practical Implications</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#high-level-taxonomy-of-neural-failure-modes">High-Level Taxonomy of Neural Failure Modes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-failure-modes">Data Failure Modes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-bias">Dataset Bias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#label-noise">Label Noise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coverage-gaps">Coverage Gaps</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-failure-modes">Optimization Failure Modes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vanishing-exploding-gradients">Vanishing / Exploding Gradients</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#poor-initialization">Poor Initialization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#saddle-points-and-flat-minima">Saddle Points and Flat Minima</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#representation-failure-modes">Representation Failure Modes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#underfitting">Underfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting">Overfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shortcut-learning">Shortcut Learning</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#robustness-failure-modes">Robustness Failure Modes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adversarial-sensitivity">Adversarial Sensitivity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#brittleness-to-noise">Brittleness to Noise</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribution-shift-failures">Distribution Shift Failures</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objective-and-evaluation-failures">Objective and Evaluation Failures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#proxy-loss-failure">Proxy Loss Failure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metric-gaming">Metric Gaming</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deployment-and-feedback-loop-failures">Deployment and Feedback Loop Failures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feedback-loops">Feedback Loops</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#automation-bias">Automation Bias</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#failure-mode-diagnostics">Failure Mode Diagnostics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mitigation-strategies">Mitigation Strategies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-insight">Core Insight</a></li>
 </ul>
             </nav>
         </div>
@@ -553,190 +619,563 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <nav class="contents" id="contents" role="doc-toc">
+  <div class="contents topic" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#intuition" id="id1">Intuition</a></p>
+<li><p><a class="reference internal" href="#neuron" id="id1">Neuron</a></p>
 <ul>
-<li><p><a class="reference internal" href="#mathematical-intuition" id="id2">Mathematical Intuition</a></p>
+<li><p><a class="reference internal" href="#mathematical-model-of-a-neuron" id="id2">Mathematical Model of a Neuron</a></p></li>
+<li><p><a class="reference internal" href="#geometric-intuition" id="id3">Geometric Intuition</a></p></li>
+<li><p><a class="reference internal" href="#why-the-activation-function-is-essential" id="id4">Why the Activation Function Is Essential</a></p></li>
+<li><p><a class="reference internal" href="#learning-how-a-neuron-adapts" id="id5">Learning: How a Neuron Adapts</a></p></li>
+<li><p><a class="reference internal" href="#single-neuron-demonstration-in-pytorch" id="id6">Single Neuron Demonstration in PyTorch</a></p></li>
+<li><p><a class="reference internal" href="#training-a-single-neuron" id="id7">Training a Single Neuron</a></p></li>
+<li><p><a class="reference internal" href="#neuron-capacity-and-expressiveness" id="id8">Neuron Capacity and Expressiveness</a></p></li>
+<li><p><a class="reference internal" href="#variants-of-neurons-in-modern-deep-learning" id="id9">Variants of Neurons in Modern Deep Learning</a></p></li>
+<li><p><a class="reference internal" href="#conceptual-summary" id="id10">Conceptual Summary</a></p></li>
+<li><p><a class="reference internal" href="#neural-failure-modes-theory-causes-and-practical-implications" id="id11">Neural Failure Modes — Theory, Causes, and Practical Implications</a></p></li>
+<li><p><a class="reference internal" href="#high-level-taxonomy-of-neural-failure-modes" id="id12">High-Level Taxonomy of Neural Failure Modes</a></p></li>
+<li><p><a class="reference internal" href="#data-failure-modes" id="id13">Data Failure Modes</a></p>
 <ul>
-<li><p><a class="reference internal" href="#neuron-as-a-function" id="id3">Neuron as a Function</a></p></li>
-<li><p><a class="reference internal" href="#layers-as-function-composition" id="id4">Layers as Function Composition</a></p></li>
-<li><p><a class="reference internal" href="#learning-weights-training" id="id5">Learning Weights (Training)</a></p></li>
-<li><p><a class="reference internal" href="#non-linearity-is-key" id="id6">Non-Linearity is Key</a></p></li>
-<li><p><a class="reference internal" href="#geometric-intuition" id="id7">Geometric Intuition</a></p></li>
-<li><p><a class="reference internal" href="#summary-of-intuition" id="id8">Summary of Intuition</a></p></li>
+<li><p><a class="reference internal" href="#dataset-bias" id="id14">Dataset Bias</a></p></li>
+<li><p><a class="reference internal" href="#label-noise" id="id15">Label Noise</a></p></li>
+<li><p><a class="reference internal" href="#coverage-gaps" id="id16">Coverage Gaps</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#optimization-failure-modes" id="id17">Optimization Failure Modes</a></p>
+<ul>
+<li><p><a class="reference internal" href="#vanishing-exploding-gradients" id="id18">Vanishing / Exploding Gradients</a></p></li>
+<li><p><a class="reference internal" href="#poor-initialization" id="id19">Poor Initialization</a></p></li>
+<li><p><a class="reference internal" href="#saddle-points-and-flat-minima" id="id20">Saddle Points and Flat Minima</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#representation-failure-modes" id="id21">Representation Failure Modes</a></p>
+<ul>
+<li><p><a class="reference internal" href="#underfitting" id="id22">Underfitting</a></p></li>
+<li><p><a class="reference internal" href="#overfitting" id="id23">Overfitting</a></p></li>
+<li><p><a class="reference internal" href="#shortcut-learning" id="id24">Shortcut Learning</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#robustness-failure-modes" id="id25">Robustness Failure Modes</a></p>
+<ul>
+<li><p><a class="reference internal" href="#adversarial-sensitivity" id="id26">Adversarial Sensitivity</a></p></li>
+<li><p><a class="reference internal" href="#brittleness-to-noise" id="id27">Brittleness to Noise</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#distribution-shift-failures" id="id28">Distribution Shift Failures</a></p></li>
+<li><p><a class="reference internal" href="#objective-and-evaluation-failures" id="id29">Objective and Evaluation Failures</a></p>
+<ul>
+<li><p><a class="reference internal" href="#proxy-loss-failure" id="id30">Proxy Loss Failure</a></p></li>
+<li><p><a class="reference internal" href="#metric-gaming" id="id31">Metric Gaming</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#deployment-and-feedback-loop-failures" id="id32">Deployment and Feedback Loop Failures</a></p>
+<ul>
+<li><p><a class="reference internal" href="#feedback-loops" id="id33">Feedback Loops</a></p></li>
+<li><p><a class="reference internal" href="#automation-bias" id="id34">Automation Bias</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#failure-mode-diagnostics" id="id35">Failure Mode Diagnostics</a></p></li>
+<li><p><a class="reference internal" href="#mitigation-strategies" id="id36">Mitigation Strategies</a></p></li>
+<li><p><a class="reference internal" href="#core-insight" id="id37">Core Insight</a></p></li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-</nav>
-<section class="tex2jax_ignore mathjax_ignore" id="intuition">
-<h1><a class="toc-backref" href="#id1" role="doc-backlink">Intuition</a><a class="headerlink" href="#intuition" title="Link to this heading">#</a></h1>
-<p>Think of a neural network as a <strong>function approximator</strong>.</p>
-<ul class="simple">
-<li><p>It learns to map <strong>inputs</strong> (x) to <strong>outputs</strong> (y).</p></li>
-<li><p>It’s inspired by the brain: neurons receive signals, process them, and send outputs to other neurons.</p></li>
-</ul>
-<p><strong>Example – House Price Prediction</strong>:</p>
-<ul class="simple">
-<li><p>Input: house size, number of bedrooms, zip code, neighborhood wealth</p></li>
-<li><p>Output: predicted house price</p></li>
-<li><p>A neuron can combine these inputs in some way and output an intermediate concept (e.g., “family size” or “neighborhood quality”)</p></li>
-<li><p>Multiple neurons in <strong>hidden layers</strong> can combine simple concepts to learn <strong>complex relationships</strong></p></li>
-</ul>
-<p><strong>Key idea:</strong> Each neuron is like a <strong>mini-function</strong>. Stacking many neurons allows the network to represent highly complicated functions.</p>
+</div>
+<section id="neuron">
+<h1><a class="toc-backref" href="#id1">Neuron</a><a class="headerlink" href="#neuron" title="Permalink to this heading">#</a></h1>
+<p>Deep learning models are built from a single fundamental unit: <strong>the artificial neuron</strong>.</p>
+<p>The neuron is inspired by biological neurons:</p>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Biological Neuron</p></th>
+<th class="head"><p>Artificial Neuron</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Dendrites receive signals</p></td>
+<td><p>Inputs <span class="math notranslate nohighlight">\(x_1, x_2, ..., x_n\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Synapse strength</p></td>
+<td><p>Weights <span class="math notranslate nohighlight">\(w_1, w_2, ..., w_n\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Cell body sums signals</p></td>
+<td><p>Weighted sum</p></td>
+</tr>
+<tr class="row-odd"><td><p>Firing threshold</p></td>
+<td><p>Bias</p></td>
+</tr>
+<tr class="row-even"><td><p>Output spike</p></td>
+<td><p>Activation function</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>The artificial neuron abstracts this behavior mathematically.</p>
 <hr class="docutils" />
-<section id="mathematical-intuition">
-<h2><a class="toc-backref" href="#id2" role="doc-backlink">Mathematical Intuition</a><a class="headerlink" href="#mathematical-intuition" title="Link to this heading">#</a></h2>
-<section id="neuron-as-a-function">
-<h3><a class="toc-backref" href="#id3" role="doc-backlink">Neuron as a Function</a><a class="headerlink" href="#neuron-as-a-function" title="Link to this heading">#</a></h3>
-<p>A single neuron computes:</p>
+<section id="mathematical-model-of-a-neuron">
+<h2><a class="toc-backref" href="#id2">Mathematical Model of a Neuron</a><a class="headerlink" href="#mathematical-model-of-a-neuron" title="Permalink to this heading">#</a></h2>
+<p>A neuron performs three operations:</p>
+<ol class="arabic simple">
+<li><p><strong>Linear combination</strong></p></li>
+<li><p><strong>Bias shift</strong></p></li>
+<li><p><strong>Nonlinear activation</strong></p></li>
+</ol>
 <div class="math notranslate nohighlight">
 \[
 z = \sum_{i=1}^{n} w_i x_i + b
 \]</div>
 <div class="math notranslate nohighlight">
 \[
-a = f(z)
+y = \phi(z)
 \]</div>
 <p>Where:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(x_i\)</span> = input features</p></li>
-<li><p><span class="math notranslate nohighlight">\(w_i\)</span> = weights (importance of each input)</p></li>
-<li><p><span class="math notranslate nohighlight">\(b\)</span> = bias (shifts the output)</p></li>
-<li><p><span class="math notranslate nohighlight">\(f\)</span> = activation function (introduces non-linearity)</p></li>
-<li><p><span class="math notranslate nohighlight">\(a\)</span> = output of neuron</p></li>
-</ul>
-<p><strong>Interpretation:</strong></p>
-<ul class="simple">
-<li><p>The neuron <strong>linearly combines inputs</strong> <span class="math notranslate nohighlight">\((w_i x_i)\)</span>, then <strong>non-linearly transforms</strong> the result with <span class="math notranslate nohighlight">\(f\)</span> to create richer patterns.</p></li>
-</ul>
-</section>
-<hr class="docutils" />
-<section id="layers-as-function-composition">
-<h3><a class="toc-backref" href="#id4" role="doc-backlink">Layers as Function Composition</a><a class="headerlink" href="#layers-as-function-composition" title="Link to this heading">#</a></h3>
-<p>A network with <strong>two layers</strong>:</p>
-<div class="math notranslate nohighlight">
-\[
-a^{(1)} = f_1(W^{(1)} x + b^{(1)})
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-y = f_2(W^{(2)} a^{(1)} + b^{(2)})
-\]</div>
-<p>Where:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(W^{(1)}, W^{(2)}\)</span> = weight matrices for layers 1 and 2</p></li>
-<li><p><span class="math notranslate nohighlight">\(b^{(1)}, b^{(2)}\)</span> = bias vectors</p></li>
-<li><p><span class="math notranslate nohighlight">\(f_1, f_2\)</span> = activation functions</p></li>
-<li><p><span class="math notranslate nohighlight">\(a^{(1)}\)</span> = output of first (hidden) layer</p></li>
-<li><p><span class="math notranslate nohighlight">\(y\)</span> = final output</p></li>
-</ul>
-<p><strong>Interpretation:</strong></p>
-<ul class="simple">
-<li><p>Each layer transforms the input space into a new representation.</p></li>
-<li><p>Stacking layers allows the network to <strong>learn hierarchical features</strong> (e.g., pixels → edges → shapes → objects in images).</p></li>
-</ul>
-</section>
-<hr class="docutils" />
-<section id="learning-weights-training">
-<h3><a class="toc-backref" href="#id5" role="doc-backlink">Learning Weights (Training)</a><a class="headerlink" href="#learning-weights-training" title="Link to this heading">#</a></h3>
-<ol class="arabic simple">
-<li><p><strong>Forward Propagation:</strong> Compute predicted output <span class="math notranslate nohighlight">\(\hat{y}\)</span> from inputs.</p></li>
-<li><p><strong>Compute Loss:</strong> Measure error between predicted <span class="math notranslate nohighlight">\(\hat{y}\)</span> and true output <span class="math notranslate nohighlight">\(y\)</span>:
-$<span class="math notranslate nohighlight">\(
-\text{Loss} = L(\hat{y}, y)
-\)</span>$</p></li>
-</ol>
-<ul class="simple">
-<li><p>Example: MSE for regression: $<span class="math notranslate nohighlight">\(L = \frac{1}{N}\sum (\hat{y}_i - y_i)^2\)</span>$</p></li>
-</ul>
-<ol class="arabic simple" start="3">
-<li><p><strong>Backpropagation:</strong> Compute gradients of loss w.r.t weights:
-$<span class="math notranslate nohighlight">\(
-\frac{\partial L}{\partial w_i}
-\)</span>$</p></li>
-<li><p><strong>Update Weights (Gradient Descent):</strong>
-$<span class="math notranslate nohighlight">\(
-w_i \leftarrow w_i - \eta \frac{\partial L}{\partial w_i}
-\)</span>$</p></li>
-</ol>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\eta\)</span> = learning rate</p></li>
-</ul>
-<p><strong>Interpretation:</strong></p>
-<ul class="simple">
-<li><p>The network <strong>learns by adjusting weights</strong> to reduce the difference between predicted and true outputs.</p></li>
-</ul>
-</section>
-<hr class="docutils" />
-<section id="non-linearity-is-key">
-<h3><a class="toc-backref" href="#id6" role="doc-backlink">Non-Linearity is Key</a><a class="headerlink" href="#non-linearity-is-key" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Without activation functions, multiple layers collapse into a <strong>single linear transformation</strong>.</p></li>
-<li><p>Non-linear activations (ReLU, sigmoid, tanh) allow the network to approximate <strong>any continuous function</strong>.</p></li>
-<li><p><strong>Mathematical insight:</strong> A sufficiently large neural network with non-linear activations is a <strong>universal function approximator</strong>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_i\)</span> → input features</p></li>
+<li><p><span class="math notranslate nohighlight">\(w_i\)</span> → learnable weights</p></li>
+<li><p><span class="math notranslate nohighlight">\(b\)</span> → learnable bias</p></li>
+<li><p><span class="math notranslate nohighlight">\(\phi(\cdot)\)</span> → activation function</p></li>
+<li><p><span class="math notranslate nohighlight">\(y\)</span> → neuron output</p></li>
 </ul>
 </section>
 <hr class="docutils" />
 <section id="geometric-intuition">
-<h3><a class="toc-backref" href="#id7" role="doc-backlink">Geometric Intuition</a><a class="headerlink" href="#geometric-intuition" title="Link to this heading">#</a></h3>
+<h2><a class="toc-backref" href="#id3">Geometric Intuition</a><a class="headerlink" href="#geometric-intuition" title="Permalink to this heading">#</a></h2>
+<p>A neuron learns a <strong>decision surface</strong>.</p>
 <ul class="simple">
-<li><p>Each neuron can be seen as defining a <strong>hyperplane</strong> in input space.</p></li>
-<li><p>The activation determines <strong>which side of the hyperplane is “activated”</strong>.</p></li>
-<li><p>Combining many neurons creates complex <strong>decision boundaries</strong> for classification or mapping functions for regression.</p></li>
+<li><p>Without activation: the neuron represents a <strong>hyperplane</strong></p></li>
+<li><p>With activation: it becomes a <strong>nonlinear decision function</strong></p></li>
 </ul>
+<p>For two inputs:</p>
+<div class="math notranslate nohighlight">
+\[
+w_1 x_1 + w_2 x_2 + b = 0
+\]</div>
+<p>This equation is a line that the neuron learns to place optimally to separate data.</p>
 </section>
 <hr class="docutils" />
-<section id="summary-of-intuition">
-<h3><a class="toc-backref" href="#id8" role="doc-backlink">Summary of Intuition</a><a class="headerlink" href="#summary-of-intuition" title="Link to this heading">#</a></h3>
-<div class="pst-scrollable-table-container"><table class="table">
+<section id="why-the-activation-function-is-essential">
+<h2><a class="toc-backref" href="#id4">Why the Activation Function Is Essential</a><a class="headerlink" href="#why-the-activation-function-is-essential" title="Permalink to this heading">#</a></h2>
+<p>Without activation, stacking neurons collapses to a single linear model.</p>
+<p>Activation introduces <strong>nonlinearity</strong>, allowing:</p>
+<ul class="simple">
+<li><p>curved decision boundaries</p></li>
+<li><p>hierarchical feature learning</p></li>
+<li><p>universal approximation</p></li>
+</ul>
+<p>Common activations:</p>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
 <thead>
-<tr class="row-odd"><th class="head"><p>Aspect</p></th>
-<th class="head"><p>Intuition</p></th>
-<th class="head"><p>Math</p></th>
+<tr class="row-odd"><th class="head"><p>Activation</p></th>
+<th class="head"><p>Purpose</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>Neuron</p></td>
-<td><p>Mini-function combining inputs</p></td>
-<td><p>(a = f(\sum w_i x_i + b))</p></td>
+<tr class="row-even"><td><p>ReLU</p></td>
+<td><p>Sparse, fast training</p></td>
 </tr>
-<tr class="row-odd"><td><p>Layer</p></td>
-<td><p>Transform features into higher-level representations</p></td>
-<td><p>(a^{(l)} = f(W^{(l)} a^{(l-1)} + b^{(l)}))</p></td>
+<tr class="row-odd"><td><p>Sigmoid</p></td>
+<td><p>Probabilistic output</p></td>
 </tr>
-<tr class="row-even"><td><p>Network</p></td>
-<td><p>Function approximator mapping x → y</p></td>
-<td><p>Composition of layers</p></td>
+<tr class="row-even"><td><p>Tanh</p></td>
+<td><p>Zero-centered representation</p></td>
 </tr>
-<tr class="row-odd"><td><p>Learning</p></td>
-<td><p>Adjust weights to minimize error</p></td>
-<td><p>Gradient descent/backprop</p></td>
-</tr>
-<tr class="row-even"><td><p>Non-linearity</p></td>
-<td><p>Capture complex patterns</p></td>
-<td><p>Activation functions (ReLU, Sigmoid)</p></td>
-</tr>
-<tr class="row-odd"><td><p>Depth</p></td>
-<td><p>Hierarchical feature learning</p></td>
-<td><p>Multiple layers = hierarchical function composition</p></td>
+<tr class="row-odd"><td><p>GELU</p></td>
+<td><p>Smooth modern alternative</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<hr class="docutils" />
-<p><strong>Key Takeaways:</strong></p>
-<ol class="arabic simple">
-<li><p>Neural networks are <strong>composable functions</strong>.</p></li>
-<li><p>Each neuron performs a <strong>linear combination + non-linear activation</strong>.</p></li>
-<li><p>Stacking neurons (layers) allows modeling <strong>complex functions</strong>.</p></li>
-<li><p>Training adjusts weights to <strong>fit the data</strong> using gradient-based optimization.</p></li>
-<li><p>Non-linearity is critical to avoid networks reducing to a simple linear function.</p></li>
-</ol>
 </section>
+<hr class="docutils" />
+<section id="learning-how-a-neuron-adapts">
+<h2><a class="toc-backref" href="#id5">Learning: How a Neuron Adapts</a><a class="headerlink" href="#learning-how-a-neuron-adapts" title="Permalink to this heading">#</a></h2>
+<p>Training modifies <span class="math notranslate nohighlight">\(w\)</span> and <span class="math notranslate nohighlight">\(b\)</span> so that neuron output matches the target.</p>
+<p>Gradient descent update:</p>
+<div class="math notranslate nohighlight">
+\[
+w \leftarrow w - \eta \frac{\partial L}{\partial w}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+b \leftarrow b - \eta \frac{\partial L}{\partial b}
+\]</div>
+<p>Each neuron learns <strong>which inputs matter and how strongly</strong>.</p>
+</section>
+<hr class="docutils" />
+<section id="single-neuron-demonstration-in-pytorch">
+<h2><a class="toc-backref" href="#id6">Single Neuron Demonstration in PyTorch</a><a class="headerlink" href="#single-neuron-demonstration-in-pytorch" title="Permalink to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
+
+<span class="c1"># Single neuron model</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Neuron</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">linear</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">sigmoid</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">linear</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">Neuron</span><span class="p">()</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">]])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Output:&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>This implements:</p>
+<div class="math notranslate nohighlight">
+\[
+y = \sigma(w_1 x_1 + w_2 x_2 + b)
+\]</div>
+</section>
+<hr class="docutils" />
+<section id="training-a-single-neuron">
+<h2><a class="toc-backref" href="#id7">Training a Single Neuron</a><a class="headerlink" href="#training-a-single-neuron" title="Permalink to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">loss_fn</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">BCELoss</span><span class="p">()</span>
+
+<span class="c1"># Dummy dataset: AND logic</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mf">0.</span><span class="p">,</span><span class="mf">0.</span><span class="p">],[</span><span class="mf">0.</span><span class="p">,</span><span class="mf">1.</span><span class="p">],[</span><span class="mf">1.</span><span class="p">,</span><span class="mf">0.</span><span class="p">],[</span><span class="mf">1.</span><span class="p">,</span><span class="mf">1.</span><span class="p">]])</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mf">0.</span><span class="p">],[</span><span class="mf">0.</span><span class="p">],[</span><span class="mf">0.</span><span class="p">],[</span><span class="mf">1.</span><span class="p">]])</span>
+
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+    <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Trained output:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>The neuron learns a logical function purely by adjusting its parameters.</p>
+</section>
+<hr class="docutils" />
+<section id="neuron-capacity-and-expressiveness">
+<h2><a class="toc-backref" href="#id8">Neuron Capacity and Expressiveness</a><a class="headerlink" href="#neuron-capacity-and-expressiveness" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Model</p></th>
+<th class="head"><p>Expressive Power</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Single neuron</p></td>
+<td><p>Linear decision boundary</p></td>
+</tr>
+<tr class="row-odd"><td><p>1 hidden layer</p></td>
+<td><p>Any continuous function (universal approximation)</p></td>
+</tr>
+<tr class="row-even"><td><p>Deep network</p></td>
+<td><p>Efficient hierarchical feature learning</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A single neuron is weak; its power emerges when composed into layers.</p>
+</section>
+<hr class="docutils" />
+<section id="variants-of-neurons-in-modern-deep-learning">
+<h2><a class="toc-backref" href="#id9">Variants of Neurons in Modern Deep Learning</a><a class="headerlink" href="#variants-of-neurons-in-modern-deep-learning" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variant</p></th>
+<th class="head"><p>Key Idea</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Dense neuron</p></td>
+<td><p>Standard fully-connected</p></td>
+</tr>
+<tr class="row-odd"><td><p>Convolutional neuron</p></td>
+<td><p>Local receptive field</p></td>
+</tr>
+<tr class="row-even"><td><p>LSTM neuron</p></td>
+<td><p>Memory with gates</p></td>
+</tr>
+<tr class="row-odd"><td><p>Transformer attention head</p></td>
+<td><p>Dynamic weighted aggregation</p></td>
+</tr>
+<tr class="row-even"><td><p>Spiking neuron</p></td>
+<td><p>Event-driven temporal modeling</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>All preserve the same core principle:
+<strong>weighted sum → bias → nonlinearity</strong></p>
+</section>
+<hr class="docutils" />
+<section id="conceptual-summary">
+<h2><a class="toc-backref" href="#id10">Conceptual Summary</a><a class="headerlink" href="#conceptual-summary" title="Permalink to this heading">#</a></h2>
+<p>A neuron is a <strong>learnable feature detector</strong>.</p>
+<p>It answers:</p>
+<blockquote>
+<div><p>“How much does this pattern exist in the input?”</p>
+</div></blockquote>
+<p>Deep networks form hierarchies of neurons where each layer learns increasingly abstract concepts from raw data.</p>
+<p>This simple unit is the foundation of all deep learning systems.</p>
+</section>
+<section id="neural-failure-modes-theory-causes-and-practical-implications">
+<h2><a class="toc-backref" href="#id11">Neural Failure Modes — Theory, Causes, and Practical Implications</a><a class="headerlink" href="#neural-failure-modes-theory-causes-and-practical-implications" title="Permalink to this heading">#</a></h2>
+<p>Neural failure modes are systematic ways in which neural networks <strong>break, degrade, or behave incorrectly</strong> despite appearing to perform well during training.</p>
+<p>Understanding them is essential for building reliable deep learning systems.</p>
+<p>A <strong>failure mode</strong> is a predictable pattern of model error caused by:</p>
+<ul class="simple">
+<li><p>data issues,</p></li>
+<li><p>optimization issues,</p></li>
+<li><p>representation limits, or</p></li>
+<li><p>deployment mismatch.</p></li>
+</ul>
+<p>Failures usually emerge <strong>not from bugs</strong>, but from correct execution of flawed assumptions.</p>
+</section>
+<hr class="docutils" />
+<section id="high-level-taxonomy-of-neural-failure-modes">
+<h2><a class="toc-backref" href="#id12">High-Level Taxonomy of Neural Failure Modes</a><a class="headerlink" href="#high-level-taxonomy-of-neural-failure-modes" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Category</p></th>
+<th class="head"><p>Core Problem</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Data failures</p></td>
+<td><p>Training data misrepresents reality</p></td>
+</tr>
+<tr class="row-odd"><td><p>Optimization failures</p></td>
+<td><p>Training dynamics collapse</p></td>
+</tr>
+<tr class="row-even"><td><p>Generalization failures</p></td>
+<td><p>Model memorizes instead of learns</p></td>
+</tr>
+<tr class="row-odd"><td><p>Representation failures</p></td>
+<td><p>Model lacks expressive structure</p></td>
+</tr>
+<tr class="row-even"><td><p>Robustness failures</p></td>
+<td><p>Small perturbations break behavior</p></td>
+</tr>
+<tr class="row-odd"><td><p>Distribution shift failures</p></td>
+<td><p>World changes after training</p></td>
+</tr>
+<tr class="row-even"><td><p>Objective failures</p></td>
+<td><p>Loss ≠ real goal</p></td>
+</tr>
+<tr class="row-odd"><td><p>Interpretability failures</p></td>
+<td><p>Model behaves unpredictably</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="data-failure-modes">
+<h2><a class="toc-backref" href="#id13">Data Failure Modes</a><a class="headerlink" href="#data-failure-modes" title="Permalink to this heading">#</a></h2>
+<section id="dataset-bias">
+<h3><a class="toc-backref" href="#id14">Dataset Bias</a><a class="headerlink" href="#dataset-bias" title="Permalink to this heading">#</a></h3>
+<p>Model learns spurious correlations.</p>
+<p>Example:
+Classifying wolves vs dogs using background snow instead of animal features.</p>
+</section>
+<section id="label-noise">
+<h3><a class="toc-backref" href="#id15">Label Noise</a><a class="headerlink" href="#label-noise" title="Permalink to this heading">#</a></h3>
+<p>Incorrect labels inject contradictory gradients, destabilizing learning.</p>
+</section>
+<section id="coverage-gaps">
+<h3><a class="toc-backref" href="#id16">Coverage Gaps</a><a class="headerlink" href="#coverage-gaps" title="Permalink to this heading">#</a></h3>
+<p>Training data misses rare but critical scenarios.</p>
+<p>Autonomous driving example: no examples of overturned trucks → catastrophic failure.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="optimization-failure-modes">
+<h2><a class="toc-backref" href="#id17">Optimization Failure Modes</a><a class="headerlink" href="#optimization-failure-modes" title="Permalink to this heading">#</a></h2>
+<section id="vanishing-exploding-gradients">
+<h3><a class="toc-backref" href="#id18">Vanishing / Exploding Gradients</a><a class="headerlink" href="#vanishing-exploding-gradients" title="Permalink to this heading">#</a></h3>
+<p>Gradients become too small or too large in deep networks.</p>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Symptom</p></th>
+<th class="head"><p>Effect</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Vanishing</p></td>
+<td><p>Early layers stop learning</p></td>
+</tr>
+<tr class="row-odd"><td><p>Exploding</p></td>
+<td><p>Training becomes unstable</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="poor-initialization">
+<h3><a class="toc-backref" href="#id19">Poor Initialization</a><a class="headerlink" href="#poor-initialization" title="Permalink to this heading">#</a></h3>
+<p>Leads to slow convergence or dead neurons.</p>
+</section>
+<section id="saddle-points-and-flat-minima">
+<h3><a class="toc-backref" href="#id20">Saddle Points and Flat Minima</a><a class="headerlink" href="#saddle-points-and-flat-minima" title="Permalink to this heading">#</a></h3>
+<p>Gradient descent stalls in regions with near-zero curvature.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="representation-failure-modes">
+<h2><a class="toc-backref" href="#id21">Representation Failure Modes</a><a class="headerlink" href="#representation-failure-modes" title="Permalink to this heading">#</a></h2>
+<section id="underfitting">
+<h3><a class="toc-backref" href="#id22">Underfitting</a><a class="headerlink" href="#underfitting" title="Permalink to this heading">#</a></h3>
+<p>Model capacity too small to represent target function.</p>
+</section>
+<section id="overfitting">
+<h3><a class="toc-backref" href="#id23">Overfitting</a><a class="headerlink" href="#overfitting" title="Permalink to this heading">#</a></h3>
+<p>Model memorizes training set but fails on unseen data.</p>
+</section>
+<section id="shortcut-learning">
+<h3><a class="toc-backref" href="#id24">Shortcut Learning</a><a class="headerlink" href="#shortcut-learning" title="Permalink to this heading">#</a></h3>
+<p>Model exploits unintended correlations.</p>
+<p>Example:
+Predicting disease from hospital watermark instead of medical content.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="robustness-failure-modes">
+<h2><a class="toc-backref" href="#id25">Robustness Failure Modes</a><a class="headerlink" href="#robustness-failure-modes" title="Permalink to this heading">#</a></h2>
+<section id="adversarial-sensitivity">
+<h3><a class="toc-backref" href="#id26">Adversarial Sensitivity</a><a class="headerlink" href="#adversarial-sensitivity" title="Permalink to this heading">#</a></h3>
+<p>Tiny perturbations change predictions.</p>
+<div class="math notranslate nohighlight">
+\[
+x \rightarrow x + \epsilon \quad \Rightarrow \quad f(x) \ne f(x + \epsilon)
+\]</div>
+</section>
+<section id="brittleness-to-noise">
+<h3><a class="toc-backref" href="#id27">Brittleness to Noise</a><a class="headerlink" href="#brittleness-to-noise" title="Permalink to this heading">#</a></h3>
+<p>Sensor noise, compression artifacts, or lighting changes cause failures.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="distribution-shift-failures">
+<h2><a class="toc-backref" href="#id28">Distribution Shift Failures</a><a class="headerlink" href="#distribution-shift-failures" title="Permalink to this heading">#</a></h2>
+<p>Model assumes data distribution remains stationary.</p>
+<p>Types of shift:</p>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Shift Type</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Covariate shift</p></td>
+<td><p>Input distribution changes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Label shift</p></td>
+<td><p>Output frequencies change</p></td>
+</tr>
+<tr class="row-even"><td><p>Concept drift</p></td>
+<td><p>Relationship between X and Y changes</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Example:
+Credit model trained before recession fails after economic collapse.</p>
+</section>
+<hr class="docutils" />
+<section id="objective-and-evaluation-failures">
+<h2><a class="toc-backref" href="#id29">Objective and Evaluation Failures</a><a class="headerlink" href="#objective-and-evaluation-failures" title="Permalink to this heading">#</a></h2>
+<section id="proxy-loss-failure">
+<h3><a class="toc-backref" href="#id30">Proxy Loss Failure</a><a class="headerlink" href="#proxy-loss-failure" title="Permalink to this heading">#</a></h3>
+<p>Optimized loss function does not reflect real objective.</p>
+<p>Example:
+Click-through optimization leads to clickbait.</p>
+</section>
+<section id="metric-gaming">
+<h3><a class="toc-backref" href="#id31">Metric Gaming</a><a class="headerlink" href="#metric-gaming" title="Permalink to this heading">#</a></h3>
+<p>Model maximizes benchmark score while degrading real-world performance.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="deployment-and-feedback-loop-failures">
+<h2><a class="toc-backref" href="#id32">Deployment and Feedback Loop Failures</a><a class="headerlink" href="#deployment-and-feedback-loop-failures" title="Permalink to this heading">#</a></h2>
+<section id="feedback-loops">
+<h3><a class="toc-backref" href="#id33">Feedback Loops</a><a class="headerlink" href="#feedback-loops" title="Permalink to this heading">#</a></h3>
+<p>Model predictions influence future data.</p>
+<p>Example:
+Predictive policing concentrates policing, reinforcing its own bias.</p>
+</section>
+<section id="automation-bias">
+<h3><a class="toc-backref" href="#id34">Automation Bias</a><a class="headerlink" href="#automation-bias" title="Permalink to this heading">#</a></h3>
+<p>Humans over-trust incorrect model outputs.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="failure-mode-diagnostics">
+<h2><a class="toc-backref" href="#id35">Failure Mode Diagnostics</a><a class="headerlink" href="#failure-mode-diagnostics" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Signal</p></th>
+<th class="head"><p>Interpretation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Training ↑ / Validation ↓</p></td>
+<td><p>Overfitting</p></td>
+</tr>
+<tr class="row-odd"><td><p>Both ↓</p></td>
+<td><p>Underfitting</p></td>
+</tr>
+<tr class="row-even"><td><p>High accuracy + odd errors</p></td>
+<td><p>Spurious correlations</p></td>
+</tr>
+<tr class="row-odd"><td><p>Good lab performance, bad field</p></td>
+<td><p>Distribution shift</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="mitigation-strategies">
+<h2><a class="toc-backref" href="#id36">Mitigation Strategies</a><a class="headerlink" href="#mitigation-strategies" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Failure</p></th>
+<th class="head"><p>Mitigation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Overfitting</p></td>
+<td><p>Regularization, augmentation</p></td>
+</tr>
+<tr class="row-odd"><td><p>Shortcut learning</p></td>
+<td><p>Better data, counterfactuals</p></td>
+</tr>
+<tr class="row-even"><td><p>Distribution shift</p></td>
+<td><p>Continuous retraining</p></td>
+</tr>
+<tr class="row-odd"><td><p>Adversarial fragility</p></td>
+<td><p>Robust training</p></td>
+</tr>
+<tr class="row-even"><td><p>Data bias</p></td>
+<td><p>Dataset audits</p></td>
+</tr>
+<tr class="row-odd"><td><p>Objective mismatch</p></td>
+<td><p>Redesign loss + metrics</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="core-insight">
+<h2><a class="toc-backref" href="#id37">Core Insight</a><a class="headerlink" href="#core-insight" title="Permalink to this heading">#</a></h2>
+<p>Neural networks fail <strong>not because they are wrong</strong>,
+but because they are <strong>perfectly optimized for the wrong world</strong>.</p>
+<p>Understanding failure modes transforms deep learning from experimentation into engineering.</p>
 </section>
 </section>
 
@@ -771,12 +1210,12 @@ w_i \leftarrow w_i - \eta \frac{\partial L}{\partial w_i}
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="overview.html"
+       href="00_part.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Neural Network</p>
+        <p class="prev-next-title">Biological Neuron vs Artificial Neuron</p>
       </div>
     </a>
     <a class="right-next"
@@ -784,7 +1223,7 @@ w_i \leftarrow w_i - \eta \frac{\partial L}{\partial w_i}
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Problem Statement</p>
+        <p class="prev-next-title">Neural Network House Price Prediction</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -804,15 +1243,54 @@ w_i \leftarrow w_i - \eta \frac{\partial L}{\partial w_i}
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-intuition">Mathematical Intuition</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#neuron-as-a-function">Neuron as a Function</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#layers-as-function-composition">Layers as Function Composition</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-weights-training">Learning Weights (Training)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#non-linearity-is-key">Non-Linearity is Key</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#geometric-intuition">Geometric Intuition</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-intuition">Summary of Intuition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-model-of-a-neuron">Mathematical Model of a Neuron</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geometric-intuition">Geometric Intuition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-activation-function-is-essential">Why the Activation Function Is Essential</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-how-a-neuron-adapts">Learning: How a Neuron Adapts</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#single-neuron-demonstration-in-pytorch">Single Neuron Demonstration in PyTorch</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-a-single-neuron">Training a Single Neuron</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neuron-capacity-and-expressiveness">Neuron Capacity and Expressiveness</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variants-of-neurons-in-modern-deep-learning">Variants of Neurons in Modern Deep Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conceptual-summary">Conceptual Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-failure-modes-theory-causes-and-practical-implications">Neural Failure Modes — Theory, Causes, and Practical Implications</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#high-level-taxonomy-of-neural-failure-modes">High-Level Taxonomy of Neural Failure Modes</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#data-failure-modes">Data Failure Modes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-bias">Dataset Bias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#label-noise">Label Noise</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#coverage-gaps">Coverage Gaps</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-failure-modes">Optimization Failure Modes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vanishing-exploding-gradients">Vanishing / Exploding Gradients</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#poor-initialization">Poor Initialization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#saddle-points-and-flat-minima">Saddle Points and Flat Minima</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#representation-failure-modes">Representation Failure Modes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#underfitting">Underfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting">Overfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#shortcut-learning">Shortcut Learning</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#robustness-failure-modes">Robustness Failure Modes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adversarial-sensitivity">Adversarial Sensitivity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#brittleness-to-noise">Brittleness to Noise</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#distribution-shift-failures">Distribution Shift Failures</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#objective-and-evaluation-failures">Objective and Evaluation Failures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#proxy-loss-failure">Proxy Loss Failure</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#metric-gaming">Metric Gaming</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deployment-and-feedback-loop-failures">Deployment and Feedback Loop Failures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feedback-loops">Feedback Loops</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#automation-bias">Automation Bias</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#failure-mode-diagnostics">Failure Mode Diagnostics</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mitigation-strategies">Mitigation Strategies</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-insight">Core Insight</a></li>
 </ul>
   </nav></div>
 
@@ -837,7 +1315,7 @@ By svgoudar
 
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2022.
       <br/>
     
   </p>

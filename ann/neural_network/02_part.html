@@ -1,14 +1,15 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../../" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Problem Statement &#8212; Machine Learning Handbook</title>
+    <title>Neural Network House Price Prediction &#8212; Machine Learning Handbook</title>
   
   
   
@@ -28,60 +29,62 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=4c969af8" />
-    <link rel="stylesheet" type="text/css" href="../../_static/proof.css?v=b4b7a797" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-examples.css?v=e236af4b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.custom.css?v=7bc2f056" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.bundle.min.css?v=37217874" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-shadow.min.css?v=6227e517" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-punk.min.css?v=94669e23" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-noir.min.css?v=21a39f42" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-light.min.css?v=a18b2449" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-borderless.min.css?v=dbff53e4" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/micromodal.css?v=d7bf34ee" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=40389e5b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-examples.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.bundle.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-shadow.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-punk.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-noir.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-light.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-borderless.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/micromodal.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../../_static/jquery.js?v=5d32c60e"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../../_static/copybutton.js?v=7f8ff830"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
-    <script src="../../_static/tabs.js?v=3ee01567"></script>
-    <script src="../../_static/js/hoverxref.js?v=c95ade4f"></script>
-    <script src="../../_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
-    <script src="../../_static/js/micromodal.min.js?v=04d6302d"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../_static/tabs.js"></script>
+    <script src="../../_static/js/hoverxref.js"></script>
+    <script src="../../_static/js/tooltipster.bundle.min.js"></script>
+    <script src="../../_static/js/micromodal.min.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ann/neural_network/02_part';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Perceptron" href="03_part.html" />
-    <link rel="prev" title="Intuition" href="01_part.html" />
+    <link rel="next" title="Perceptron Model" href="03_part.html" />
+    <link rel="prev" title="Neuron" href="01_part.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -178,18 +181,7 @@
   
   
 </a></div>
-        <div class="sidebar-primary-item">
-
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -202,11 +194,34 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../overview.html">Artificial Neural Network (ANN)</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="overview.html">Neural Network</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="01_part.html">Intuition</a></li>
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">Problem Statement</a></li>
-<li class="toctree-l3"><a class="reference internal" href="03_part.html">Perceptron</a></li>
-<li class="toctree-l3"><a class="reference internal" href="04_part.html">Multi-Layer Neural Networks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="00_part.html">Biological Neuron vs Artificial Neuron</a></li>
+<li class="toctree-l3"><a class="reference internal" href="01_part.html">Neuron</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Neural Network House Price Prediction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="03_part.html">Perceptron Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="04_part.html">Multi-Layer Perceptron (MLP)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="05_part.html">Vanishing Gradient Problem in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="06_part.html">Vanishing Gradient Problem</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../gradient_descent/overview.html">Gradient Descent</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../gradient_descent/01_part.html">Batch Gradient Descent in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gradient_descent/02_part.html">Mini-Batch Gradient Descent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gradient_descent/03_part.html">Stochastic Gradient Descent (SGD)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../training/overview.html">Training</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../training/01_part.html">Data Ingestion Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/02_part.html">Model Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/03_part.html">Loss Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/04_part.html">Optimizers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/05_part.html">Training Loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/06_part.html">Forward Propagation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/07_part.html">Backpropagation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/08_part.html">Weight Updation and the Chain Rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/09_part.html">Batch and Epoch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/10_part.html">Validation and Metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/11_part.html">Variants of Training in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/12_part.html">Training Failure Modes, Convergence Diagnostics, and Optimization Dynamics</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../cost_loss_function/overview.html">Loss Function vs Cost Function</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -216,21 +231,33 @@
 <li class="toctree-l3"><a class="reference internal" href="../cost_loss_function/04_part.html">Choice of Loss Function</a></li>
 </ul>
 </details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../activation/overview.html">Activation Function</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../activation/01_part.html">Sigmoid Activation Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../activation/02_part.html">Tanh Activation Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../activation/03_part.html">ReLU</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../activation/04_part.html">Exponential Linear Unit (ELU / Exponential ReLU) in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../activation/05_part.html">Softmax Activation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../activation/06_part.html">Activation choice</a></li>
+</ul>
+</details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../optimizers/overview.html">Optmizers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../optimizers/01_part.html">Gradient Descent Optimizer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../optimizers/02_part.html">Stochastic Gradient Descent (SGD) Optimizer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../optimizers/03_part.html">Mini-batch Stochastic Gradient Descent</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../optimizers/04_part.html">SGD with Momentum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/01_part.html">Gradient Descent Optimizer in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/02_part.html">Stochastic Gradient Descent (SGD) Optimizer in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/03_part.html">Mini-Batch Gradient Descent Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/04_part.html">Momentum</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../optimizers/05_part.html">Adagrad Optimizer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../optimizers/06_part.html">Adadelta and RMSProp</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../optimizers/07_part.html">Adam Optmizers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/06_part.html">Adadelta Optimizer in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/07_part.html">RMSProp Optimizer in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/08_part.html">Adam Optimizer</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../techniques/01_part.html">Exploding Gradient Problem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../techniques/02_part.html">Weight Initializing Techniques</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../techniques/03_part.html">Dropout Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../techniques/02_part.html">Weight Initialization in Deep Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../techniques/03_part.html">Weight Initialization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../techniques/04_part.html">Optmization Techniques</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../techniques/05_part.html">Regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../techniques/06_part.html">Learning Rate Scheduling</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../cnn/overview.html">CNN (Convolution Neural Network)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -275,8 +302,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../transformers/01_part.html">Architecture</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../transformers/02_part.html">The Transformer Encoder Layer (Deep Explanation)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../transformers/03_part.html">Positional Encoding</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../transformers/04_part.html"><strong>Residual Connection + Layer Normalization</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../transformers/05_part.html"><strong>Transformer Decoder Layer</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/04_part.html">Residual Connection + Layer Normalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/05_part.html">Transformer Decoder Layer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../transformers/06_part.html">Demonstration</a></li>
 </ul>
 </details></li>
@@ -336,9 +363,9 @@
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</button></div>
+</label></div>
       
     </div>
   
@@ -363,14 +390,14 @@
       
       <li><a href="https://colab.research.google.com/github/svgoudar/Learn-DeepLearning/blob/master/ann/neural_network/02_part.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
-   title="Launch on Colab"
+   title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
 <span class="btn__icon-container">
   
-    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+    <img src="../../_static/images/logo_colab.png">
   </span>
 <span class="btn__text-container">Colab</span>
 </a>
@@ -510,9 +537,9 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</button>
+</label>
 </div></div>
       
     </div>
@@ -523,7 +550,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Problem Statement</h1>
+    <h1>Neural Network House Price Prediction</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -533,15 +560,28 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input-and-output">Input and Output</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#single-neuron-intuition">Single Neuron Intuition</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hidden-layers-intuition">Hidden Layers Intuition</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activation-functions-intuition">Activation Functions Intuition</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-process-intuition">Training Process Intuition</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geometric-feature-intuition">Geometric/Feature Intuition</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-neural-network-intuition-for-kaggle-housing-price">Summary of Neural Network Intuition for Kaggle Housing Price</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-statement-house-price-prediction">Problem Statement: House Price Prediction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inputs-features">Inputs (Features)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output">Output</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neuron-deep-learning-perspective-intuition">Neuron: Deep Learning Perspective (Intuition)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-form-of-one-neuron">Mathematical Form of One Neuron</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#economic-interpretation">Economic Interpretation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-network-architecture-for-the-task">Neural Network Architecture for the Task</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-workflow">Learning Workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-implementation">PyTorch Implementation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-synthetic">Dataset (Synthetic)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-definition">Model Definition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-loop">Training Loop</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inference">Inference</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-nonlinearity-matters">Why Nonlinearity Matters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variants-of-the-model">Variants of the Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conceptual-summary">Conceptual Summary</a></li>
 </ul>
             </nav>
         </div>
@@ -553,153 +593,304 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <nav class="contents" id="contents" role="doc-toc">
+  <div class="contents topic" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#problem-statement" id="id1">Problem Statement</a></p>
+<li><p><a class="reference internal" href="#neural-network-house-price-prediction" id="id1">Neural Network House Price Prediction</a></p>
 <ul>
-<li><p><a class="reference internal" href="#input-and-output" id="id2">Input and Output</a></p></li>
-<li><p><a class="reference internal" href="#single-neuron-intuition" id="id3">Single Neuron Intuition</a></p></li>
-<li><p><a class="reference internal" href="#hidden-layers-intuition" id="id4">Hidden Layers Intuition</a></p></li>
-<li><p><a class="reference internal" href="#activation-functions-intuition" id="id5">Activation Functions Intuition</a></p></li>
-<li><p><a class="reference internal" href="#training-process-intuition" id="id6">Training Process Intuition</a></p></li>
-<li><p><a class="reference internal" href="#geometric-feature-intuition" id="id7">Geometric/Feature Intuition</a></p>
+<li><p><a class="reference internal" href="#problem-statement-house-price-prediction" id="id2">Problem Statement: House Price Prediction</a></p>
 <ul>
-<li><p><a class="reference internal" href="#summary-of-neural-network-intuition-for-kaggle-housing-price" id="id8">Summary of Neural Network Intuition for Kaggle Housing Price</a></p></li>
+<li><p><a class="reference internal" href="#inputs-features" id="id3">Inputs (Features)</a></p></li>
+<li><p><a class="reference internal" href="#output" id="id4">Output</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#neuron-deep-learning-perspective-intuition" id="id5">Neuron: Deep Learning Perspective (Intuition)</a></p>
+<ul>
+<li><p><a class="reference internal" href="#mathematical-form-of-one-neuron" id="id6">Mathematical Form of One Neuron</a></p></li>
+<li><p><a class="reference internal" href="#economic-interpretation" id="id7">Economic Interpretation</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#neural-network-architecture-for-the-task" id="id8">Neural Network Architecture for the Task</a></p></li>
+<li><p><a class="reference internal" href="#learning-workflow" id="id9">Learning Workflow</a></p></li>
+<li><p><a class="reference internal" href="#pytorch-implementation" id="id10">PyTorch Implementation</a></p>
+<ul>
+<li><p><a class="reference internal" href="#dataset-synthetic" id="id11">Dataset (Synthetic)</a></p></li>
+<li><p><a class="reference internal" href="#model-definition" id="id12">Model Definition</a></p></li>
+<li><p><a class="reference internal" href="#training-loop" id="id13">Training Loop</a></p></li>
+<li><p><a class="reference internal" href="#inference" id="id14">Inference</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#why-nonlinearity-matters" id="id15">Why Nonlinearity Matters</a></p></li>
+<li><p><a class="reference internal" href="#variants-of-the-model" id="id16">Variants of the Model</a></p></li>
+<li><p><a class="reference internal" href="#conceptual-summary" id="id17">Conceptual Summary</a></p></li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-</nav>
-<section class="tex2jax_ignore mathjax_ignore" id="problem-statement">
-<h1><a class="toc-backref" href="#id1" role="doc-backlink">Problem Statement</a><a class="headerlink" href="#problem-statement" title="Link to this heading">#</a></h1>
-<p><strong>Goal:</strong> Predict the sale price of a house based on its features.</p>
-<p><strong>Dataset includes features such as:</strong></p>
-<ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">LotArea</span></code> – size of the lot</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">OverallQual</span></code> – overall material and finish quality</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">YearBuilt</span></code> – year the house was built</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">TotalBsmtSF</span></code> – total basement area</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">GrLivArea</span></code> – above ground living area</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">FullBath</span></code>, <code class="docutils literal notranslate"><span class="pre">BedroomAbvGr</span></code> – number of bathrooms/bedrooms</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">GarageCars</span></code>, <code class="docutils literal notranslate"><span class="pre">GarageArea</span></code> – garage info</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Neighborhood</span></code>, <code class="docutils literal notranslate"><span class="pre">MSZoning</span></code> – categorical info</p></li>
-</ul>
-<p><strong>Target:</strong> <code class="docutils literal notranslate"><span class="pre">SalePrice</span></code></p>
-<p>This is a <strong>regression problem</strong>: predict a continuous value.</p>
-<hr class="docutils" />
-<section id="input-and-output">
-<h2><a class="toc-backref" href="#id2" role="doc-backlink">Input and Output</a><a class="headerlink" href="#input-and-output" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><strong>Input (X):</strong> All the features above (numerical + categorical encoded)</p></li>
-<li><p><strong>Output (y):</strong> SalePrice</p></li>
-</ul>
-<p><strong>Intuition:</strong> Each feature has some influence on the price. For example:</p>
-<ul class="simple">
-<li><p>Bigger living area → higher price</p></li>
-<li><p>Better quality → higher price</p></li>
-<li><p>Neighborhood quality → higher price</p></li>
-</ul>
-<p>A neural network will <strong>learn to combine these features</strong> in a flexible way to predict prices.</p>
-</section>
-<hr class="docutils" />
-<section id="single-neuron-intuition">
-<h2><a class="toc-backref" href="#id3" role="doc-backlink">Single Neuron Intuition</a><a class="headerlink" href="#single-neuron-intuition" title="Link to this heading">#</a></h2>
-<p>Imagine a <strong>single neuron</strong> (very simple network):</p>
-<div class="math notranslate nohighlight">
-\[
-y = w_1 \cdot \text{GrLivArea} + w_2 \cdot \text{LotArea} + b
-\]</div>
-<ul class="simple">
-<li><p>The neuron takes weighted sum of features</p></li>
-<li><p>Outputs the predicted price</p></li>
-</ul>
-<p><strong>Limitation:</strong></p>
-<ul class="simple">
-<li><p>Can only learn <strong>linear relationships</strong> (price = linear combination of features)</p></li>
-<li><p>Real estate prices often have <strong>non-linear relationships</strong> (e.g., price increases faster after certain living area thresholds)</p></li>
-</ul>
-</section>
-<hr class="docutils" />
-<section id="hidden-layers-intuition">
-<h2><a class="toc-backref" href="#id4" role="doc-backlink">Hidden Layers Intuition</a><a class="headerlink" href="#hidden-layers-intuition" title="Link to this heading">#</a></h2>
-<p>Adding <strong>hidden layers</strong> allows the network to learn <strong>non-linear patterns</strong>:</p>
-<p><strong>Example:</strong></p>
-<ul class="simple">
-<li><p>Hidden neuron 1: detects “Large House” = combination of <code class="docutils literal notranslate"><span class="pre">GrLivArea</span></code> + <code class="docutils literal notranslate"><span class="pre">LotArea</span></code></p></li>
-<li><p>Hidden neuron 2: detects “High-Quality Neighborhood” = combination of <code class="docutils literal notranslate"><span class="pre">Neighborhood</span></code> + <code class="docutils literal notranslate"><span class="pre">OverallQual</span></code></p></li>
-<li><p>Hidden neuron 3: detects “Luxury House” = combines hidden neuron 1 + neuron 2</p></li>
-</ul>
-<p>Finally, the <strong>output neuron</strong> combines these abstracted features to predict <code class="docutils literal notranslate"><span class="pre">SalePrice</span></code>.</p>
-<p><strong>Key idea:</strong></p>
-<ul class="simple">
-<li><p>The network learns <strong>intermediate concepts</strong> (like “Luxury House”) automatically from raw features.</p></li>
-<li><p>No need to manually engineer these features; the network discovers patterns.</p></li>
-</ul>
-</section>
-<hr class="docutils" />
-<section id="activation-functions-intuition">
-<h2><a class="toc-backref" href="#id5" role="doc-backlink">Activation Functions Intuition</a><a class="headerlink" href="#activation-functions-intuition" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><strong>ReLU</strong> in hidden layers: captures thresholds (e.g., only houses larger than X sq.ft count as “large”)</p></li>
-<li><p><strong>Output layer</strong> for regression: linear activation (directly predicts continuous <code class="docutils literal notranslate"><span class="pre">SalePrice</span></code>)</p></li>
-</ul>
-</section>
-<hr class="docutils" />
-<section id="training-process-intuition">
-<h2><a class="toc-backref" href="#id6" role="doc-backlink">Training Process Intuition</a><a class="headerlink" href="#training-process-intuition" title="Link to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p>Feed in many examples of house features → predicted prices</p></li>
-<li><p>Compare predictions with actual <code class="docutils literal notranslate"><span class="pre">SalePrice</span></code> → compute <strong>loss</strong> (MSE)</p></li>
-<li><p>Adjust weights using <strong>backpropagation</strong> to reduce error</p></li>
-<li><p>Repeat over many epochs until predictions improve</p></li>
-</ol>
-<p><strong>Intuition:</strong> The network <strong>learns how much each feature contributes</strong> to the final price, including complex interactions.</p>
-</section>
-<hr class="docutils" />
-<section id="geometric-feature-intuition">
-<h2><a class="toc-backref" href="#id7" role="doc-backlink">Geometric/Feature Intuition</a><a class="headerlink" href="#geometric-feature-intuition" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Each hidden neuron defines a <strong>decision boundary</strong> in multi-dimensional feature space.</p></li>
-<li><p>Combining neurons allows <strong>curved, complex surfaces</strong> to fit the target function.</p></li>
-<li><p>This is why neural networks can model <strong>non-linear, real-world relationships</strong> between house features and price.</p></li>
-</ul>
-<hr class="docutils" />
-<section id="summary-of-neural-network-intuition-for-kaggle-housing-price">
-<h3><a class="toc-backref" href="#id8" role="doc-backlink">Summary of Neural Network Intuition for Kaggle Housing Price</a><a class="headerlink" href="#summary-of-neural-network-intuition-for-kaggle-housing-price" title="Link to this heading">#</a></h3>
-<div class="pst-scrollable-table-container"><table class="table">
+</div>
+<section id="neural-network-house-price-prediction">
+<h1><a class="toc-backref" href="#id1">Neural Network House Price Prediction</a><a class="headerlink" href="#neural-network-house-price-prediction" title="Permalink to this heading">#</a></h1>
+<section id="problem-statement-house-price-prediction">
+<h2><a class="toc-backref" href="#id2">Problem Statement: House Price Prediction</a><a class="headerlink" href="#problem-statement-house-price-prediction" title="Permalink to this heading">#</a></h2>
+<p>We want to build a neural network that predicts the <strong>market price of a house</strong> based on measurable features.</p>
+<section id="inputs-features">
+<h3><a class="toc-backref" href="#id3">Inputs (Features)</a><a class="headerlink" href="#inputs-features" title="Permalink to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
 <thead>
-<tr class="row-odd"><th class="head"><p>Concept</p></th>
-<th class="head"><p>Intuition</p></th>
+<tr class="row-odd"><th class="head"><p>Feature</p></th>
+<th class="head"><p>Symbol</p></th>
+<th class="head"><p>Description</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>Input layer</p></td>
-<td><p>Raw house features (<code class="docutils literal notranslate"><span class="pre">GrLivArea</span></code>, <code class="docutils literal notranslate"><span class="pre">Neighborhood</span></code>, etc.)</p></td>
+<tr class="row-even"><td><p>Living Area</p></td>
+<td><p><span class="math notranslate nohighlight">\(x_1\)</span></p></td>
+<td><p>Square footage</p></td>
 </tr>
-<tr class="row-odd"><td><p>Hidden layers</p></td>
-<td><p>Learn abstract concepts like “Large House”, “Luxury Neighborhood”</p></td>
+<tr class="row-odd"><td><p>Bedrooms</p></td>
+<td><p><span class="math notranslate nohighlight">\(x_2\)</span></p></td>
+<td><p>Number of bedrooms</p></td>
 </tr>
-<tr class="row-even"><td><p>Neurons</p></td>
-<td><p>Mini-functions combining inputs, applying non-linearity</p></td>
+<tr class="row-even"><td><p>Bathrooms</p></td>
+<td><p><span class="math notranslate nohighlight">\(x_3\)</span></p></td>
+<td><p>Number of bathrooms</p></td>
 </tr>
-<tr class="row-odd"><td><p>Output</p></td>
-<td><p>Predicted <code class="docutils literal notranslate"><span class="pre">SalePrice</span></code></p></td>
+<tr class="row-odd"><td><p>Age</p></td>
+<td><p><span class="math notranslate nohighlight">\(x_4\)</span></p></td>
+<td><p>Years since construction</p></td>
 </tr>
-<tr class="row-even"><td><p>Training</p></td>
-<td><p>Adjust weights so predicted prices match real prices</p></td>
-</tr>
-<tr class="row-odd"><td><p>Non-linearity</p></td>
-<td><p>Captures complex relationships between features and price</p></td>
+<tr class="row-even"><td><p>Location Score</p></td>
+<td><p><span class="math notranslate nohighlight">\(x_5\)</span></p></td>
+<td><p>Quality of location (1–10)</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<hr class="docutils" />
-<p><strong>Key Takeaway:</strong>
-A neural network doesn’t just sum features—it <strong>discovers patterns and interactions</strong> between them automatically. For housing prices, it can learn subtle patterns like “large but low-quality houses are cheaper than small high-quality houses” without explicitly programming these rules.</p>
 </section>
+<section id="output">
+<h3><a class="toc-backref" href="#id4">Output</a><a class="headerlink" href="#output" title="Permalink to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+y = \text{House Price}
+\]</div>
+<p>This is a <strong>supervised regression problem</strong>:
+$<span class="math notranslate nohighlight">\(
+f_\theta(x_1, x_2, ..., x_5) \approx y
+\)</span>$</p>
+<p>where <span class="math notranslate nohighlight">\(\theta\)</span> are trainable parameters.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="neuron-deep-learning-perspective-intuition">
+<h2><a class="toc-backref" href="#id5">Neuron: Deep Learning Perspective (Intuition)</a><a class="headerlink" href="#neuron-deep-learning-perspective-intuition" title="Permalink to this heading">#</a></h2>
+<p>A <strong>neuron</strong> models a small decision unit that learns:</p>
+<blockquote>
+<div><p><strong>How important is each feature, and how should they combine to estimate price?</strong></p>
+</div></blockquote>
+<section id="mathematical-form-of-one-neuron">
+<h3><a class="toc-backref" href="#id6">Mathematical Form of One Neuron</a><a class="headerlink" href="#mathematical-form-of-one-neuron" title="Permalink to this heading">#</a></h3>
+<div class="math notranslate nohighlight">
+\[
+z = w_1x_1 + w_2x_2 + ... + w_5x_5 + b
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+a = \phi(z)
+\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(w_i\)</span>: learned <strong>importance</strong> of feature <span class="math notranslate nohighlight">\(x_i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(b\)</span>: bias (baseline price offset)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\phi\)</span>: activation function</p></li>
+<li><p><span class="math notranslate nohighlight">\(a\)</span>: neuron output</p></li>
+</ul>
+</section>
+<section id="economic-interpretation">
+<h3><a class="toc-backref" href="#id7">Economic Interpretation</a><a class="headerlink" href="#economic-interpretation" title="Permalink to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Component</p></th>
+<th class="head"><p>Meaning in House Pricing</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(w_1\)</span></p></td>
+<td><p>Price increase per square foot</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(w_2\)</span></p></td>
+<td><p>Added value of a bedroom</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(b\)</span></p></td>
+<td><p>Base land value</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\phi\)</span></p></td>
+<td><p>Market nonlinearity (e.g., diminishing returns)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A <strong>neural network</strong> stacks many such neurons to learn complex market behavior.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="neural-network-architecture-for-the-task">
+<h2><a class="toc-backref" href="#id8">Neural Network Architecture for the Task</a><a class="headerlink" href="#neural-network-architecture-for-the-task" title="Permalink to this heading">#</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[Area, Beds, Baths, Age, Location]
+              ↓
+          Linear Neurons
+              ↓
+         Nonlinear Hidden Layers
+              ↓
+           Price Output
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="learning-workflow">
+<h2><a class="toc-backref" href="#id9">Learning Workflow</a><a class="headerlink" href="#learning-workflow" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Forward pass: predict price</p></li>
+<li><p>Compute error:
+$<span class="math notranslate nohighlight">\(
+\mathcal{L} = | \hat{y} - y |^2
+\)</span>$</p></li>
+<li><p>Backpropagation: compute gradients</p></li>
+<li><p>Update weights with gradient descent</p></li>
+<li><p>Repeat until convergence</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="pytorch-implementation">
+<h2><a class="toc-backref" href="#id10">PyTorch Implementation</a><a class="headerlink" href="#pytorch-implementation" title="Permalink to this heading">#</a></h2>
+<section id="dataset-synthetic">
+<h3><a class="toc-backref" href="#id11">Dataset (Synthetic)</a><a class="headerlink" href="#dataset-synthetic" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">torch</span><span class="w"> </span><span class="kn">import</span> <span class="n">nn</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span>
+    <span class="p">[</span><span class="mi">1200</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">800</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">1500</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">600</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">300</span><span class="p">],</span> <span class="p">[</span><span class="mi">180</span><span class="p">],</span> <span class="p">[</span><span class="mi">420</span><span class="p">],</span> <span class="p">[</span><span class="mi">130</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="model-definition">
+<h3><a class="toc-backref" href="#id12">Model Definition</a><a class="headerlink" href="#model-definition" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">HouseNet</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">net</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">16</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">net</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="training-loop">
+<h3><a class="toc-backref" href="#id13">Training Loop</a><a class="headerlink" href="#training-loop" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">HouseNet</span><span class="p">()</span>
+<span class="n">loss_fn</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">MSELoss</span><span class="p">()</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">loss_fn</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+    <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">epoch</span> <span class="o">%</span> <span class="mi">200</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Epoch </span><span class="si">{</span><span class="n">epoch</span><span class="si">}</span><span class="s2">, Loss </span><span class="si">{</span><span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="inference">
+<h3><a class="toc-backref" href="#id14">Inference</a><a class="headerlink" href="#inference" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">new_house</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">price</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">new_house</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Predicted price:&quot;</span><span class="p">,</span> <span class="n">price</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="why-nonlinearity-matters">
+<h2><a class="toc-backref" href="#id15">Why Nonlinearity Matters</a><a class="headerlink" href="#why-nonlinearity-matters" title="Permalink to this heading">#</a></h2>
+<p>Without activations, the model is only linear:
+$<span class="math notranslate nohighlight">\(
+f(x) = Wx + b
+\)</span>$</p>
+<p>With neurons + nonlinearities:</p>
+<ul class="simple">
+<li><p>Captures market interactions</p></li>
+<li><p>Models diminishing returns</p></li>
+<li><p>Learns feature coupling (e.g., large house in bad location ≠ expensive)</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="variants-of-the-model">
+<h2><a class="toc-backref" href="#id16">Variants of the Model</a><a class="headerlink" href="#variants-of-the-model" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variant</p></th>
+<th class="head"><p>Use Case</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Linear Regression</p></td>
+<td><p>Small, simple datasets</p></td>
+</tr>
+<tr class="row-odd"><td><p>Deep MLP</p></td>
+<td><p>Complex nonlinear markets</p></td>
+</tr>
+<tr class="row-even"><td><p>Regularized Network</p></td>
+<td><p>Overfitting prevention</p></td>
+</tr>
+<tr class="row-odd"><td><p>Ensemble Models</p></td>
+<td><p>Robust pricing</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="conceptual-summary">
+<h2><a class="toc-backref" href="#id17">Conceptual Summary</a><a class="headerlink" href="#conceptual-summary" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Concept</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Neuron</p></td>
+<td><p>Economic micro-model</p></td>
+</tr>
+<tr class="row-odd"><td><p>Weight</p></td>
+<td><p>Feature importance</p></td>
+</tr>
+<tr class="row-even"><td><p>Activation</p></td>
+<td><p>Market nonlinearity</p></td>
+</tr>
+<tr class="row-odd"><td><p>Backpropagation</p></td>
+<td><p>Price-error correction</p></td>
+</tr>
+<tr class="row-even"><td><p>Network</p></td>
+<td><p>Market function approximator</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>This neural system <strong>learns pricing laws directly from data</strong>, rather than requiring hand-crafted economic rules.</p>
 </section>
 </section>
 
@@ -739,7 +930,7 @@ A neural network doesn’t just sum features—it <strong>discovers patterns and
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Intuition</p>
+        <p class="prev-next-title">Neuron</p>
       </div>
     </a>
     <a class="right-next"
@@ -747,7 +938,7 @@ A neural network doesn’t just sum features—it <strong>discovers patterns and
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Perceptron</p>
+        <p class="prev-next-title">Perceptron Model</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -767,15 +958,28 @@ A neural network doesn’t just sum features—it <strong>discovers patterns and
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#input-and-output">Input and Output</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#single-neuron-intuition">Single Neuron Intuition</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hidden-layers-intuition">Hidden Layers Intuition</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activation-functions-intuition">Activation Functions Intuition</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-process-intuition">Training Process Intuition</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#geometric-feature-intuition">Geometric/Feature Intuition</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-of-neural-network-intuition-for-kaggle-housing-price">Summary of Neural Network Intuition for Kaggle Housing Price</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-statement-house-price-prediction">Problem Statement: House Price Prediction</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inputs-features">Inputs (Features)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#output">Output</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neuron-deep-learning-perspective-intuition">Neuron: Deep Learning Perspective (Intuition)</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-form-of-one-neuron">Mathematical Form of One Neuron</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#economic-interpretation">Economic Interpretation</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neural-network-architecture-for-the-task">Neural Network Architecture for the Task</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#learning-workflow">Learning Workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-implementation">PyTorch Implementation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-synthetic">Dataset (Synthetic)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-definition">Model Definition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-loop">Training Loop</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inference">Inference</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-nonlinearity-matters">Why Nonlinearity Matters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variants-of-the-model">Variants of the Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conceptual-summary">Conceptual Summary</a></li>
 </ul>
   </nav></div>
 
@@ -800,7 +1004,7 @@ By svgoudar
 
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2022.
       <br/>
     
   </p>

@@ -1,12 +1,13 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Artificial Neural Network (ANN) &#8212; Machine Learning Handbook</title>
   
@@ -28,53 +29,55 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=4c969af8" />
-    <link rel="stylesheet" type="text/css" href="../_static/proof.css?v=b4b7a797" />
-    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-examples.css?v=e236af4b" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.custom.css?v=7bc2f056" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.bundle.min.css?v=37217874" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-shadow.min.css?v=6227e517" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-punk.min.css?v=94669e23" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-noir.min.css?v=21a39f42" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-light.min.css?v=a18b2449" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-borderless.min.css?v=dbff53e4" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/micromodal.css?v=d7bf34ee" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=40389e5b" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-examples.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.bundle.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-shadow.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-punk.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-noir.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-light.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-borderless.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/micromodal.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../_static/jquery.js?v=5d32c60e"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../_static/copybutton.js?v=7f8ff830"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
-    <script src="../_static/tabs.js?v=3ee01567"></script>
-    <script src="../_static/js/hoverxref.js?v=c95ade4f"></script>
-    <script src="../_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
-    <script src="../_static/js/micromodal.min.js?v=04d6302d"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../_static/tabs.js"></script>
+    <script src="../_static/js/hoverxref.js"></script>
+    <script src="../_static/js/tooltipster.bundle.min.js"></script>
+    <script src="../_static/js/micromodal.min.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../_static/design-tabs.js?v=f930bc37"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ann/overview';</script>
@@ -178,18 +181,7 @@
   
   
 </a></div>
-        <div class="sidebar-primary-item">
-
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -202,11 +194,34 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Artificial Neural Network (ANN)</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="neural_network/overview.html">Neural Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="neural_network/01_part.html">Intuition</a></li>
-<li class="toctree-l3"><a class="reference internal" href="neural_network/02_part.html">Problem Statement</a></li>
-<li class="toctree-l3"><a class="reference internal" href="neural_network/03_part.html">Perceptron</a></li>
-<li class="toctree-l3"><a class="reference internal" href="neural_network/04_part.html">Multi-Layer Neural Networks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="neural_network/00_part.html">Biological Neuron vs Artificial Neuron</a></li>
+<li class="toctree-l3"><a class="reference internal" href="neural_network/01_part.html">Neuron</a></li>
+<li class="toctree-l3"><a class="reference internal" href="neural_network/02_part.html">Neural Network House Price Prediction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="neural_network/03_part.html">Perceptron Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="neural_network/04_part.html">Multi-Layer Perceptron (MLP)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="neural_network/05_part.html">Vanishing Gradient Problem in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="neural_network/06_part.html">Vanishing Gradient Problem</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="gradient_descent/overview.html">Gradient Descent</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="gradient_descent/01_part.html">Batch Gradient Descent in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gradient_descent/02_part.html">Mini-Batch Gradient Descent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gradient_descent/03_part.html">Stochastic Gradient Descent (SGD)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="training/overview.html">Training</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="training/01_part.html">Data Ingestion Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="training/02_part.html">Model Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="training/03_part.html">Loss Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="training/04_part.html">Optimizers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="training/05_part.html">Training Loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="training/06_part.html">Forward Propagation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="training/07_part.html">Backpropagation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="training/08_part.html">Weight Updation and the Chain Rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="training/09_part.html">Batch and Epoch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="training/10_part.html">Validation and Metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="training/11_part.html">Variants of Training in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="training/12_part.html">Training Failure Modes, Convergence Diagnostics, and Optimization Dynamics</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="cost_loss_function/overview.html">Loss Function vs Cost Function</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -216,21 +231,33 @@
 <li class="toctree-l3"><a class="reference internal" href="cost_loss_function/04_part.html">Choice of Loss Function</a></li>
 </ul>
 </details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="activation/overview.html">Activation Function</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="activation/01_part.html">Sigmoid Activation Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="activation/02_part.html">Tanh Activation Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="activation/03_part.html">ReLU</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="activation/04_part.html">Exponential Linear Unit (ELU / Exponential ReLU) in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="activation/05_part.html">Softmax Activation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="activation/06_part.html">Activation choice</a></li>
+</ul>
+</details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="optimizers/overview.html">Optmizers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="optimizers/01_part.html">Gradient Descent Optimizer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="optimizers/02_part.html">Stochastic Gradient Descent (SGD) Optimizer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="optimizers/03_part.html">Mini-batch Stochastic Gradient Descent</a></li>
-<li class="toctree-l3"><a class="reference internal" href="optimizers/04_part.html">SGD with Momentum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="optimizers/01_part.html">Gradient Descent Optimizer in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="optimizers/02_part.html">Stochastic Gradient Descent (SGD) Optimizer in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="optimizers/03_part.html">Mini-Batch Gradient Descent Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="optimizers/04_part.html">Momentum</a></li>
 <li class="toctree-l3"><a class="reference internal" href="optimizers/05_part.html">Adagrad Optimizer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="optimizers/06_part.html">Adadelta and RMSProp</a></li>
-<li class="toctree-l3"><a class="reference internal" href="optimizers/07_part.html">Adam Optmizers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="optimizers/06_part.html">Adadelta Optimizer in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="optimizers/07_part.html">RMSProp Optimizer in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="optimizers/08_part.html">Adam Optimizer</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="techniques/01_part.html">Exploding Gradient Problem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="techniques/02_part.html">Weight Initializing Techniques</a></li>
-<li class="toctree-l2"><a class="reference internal" href="techniques/03_part.html">Dropout Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="techniques/02_part.html">Weight Initialization in Deep Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="techniques/03_part.html">Weight Initialization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="techniques/04_part.html">Optmization Techniques</a></li>
 <li class="toctree-l2"><a class="reference internal" href="techniques/05_part.html">Regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="techniques/06_part.html">Learning Rate Scheduling</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../cnn/overview.html">CNN (Convolution Neural Network)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -336,9 +363,9 @@
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</button></div>
+</label></div>
       
     </div>
   
@@ -363,14 +390,14 @@
       
       <li><a href="https://colab.research.google.com/github/svgoudar/Learn-DeepLearning/blob/master/ann/overview.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
-   title="Launch on Colab"
+   title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
 <span class="btn__icon-container">
   
-    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+    <img src="../_static/images/logo_colab.png">
   </span>
 <span class="btn__text-container">Colab</span>
 </a>
@@ -510,9 +537,9 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</button>
+</label>
 </div></div>
       
     </div>
@@ -570,7 +597,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <nav class="contents" id="contents" role="doc-toc">
+  <div class="contents topic" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#artificial-neural-network-ann" id="id1">Artificial Neural Network (ANN)</a></p>
@@ -606,9 +633,9 @@ document.write(`
 </ul>
 </li>
 </ul>
-</nav>
+</div>
 <section id="artificial-neural-network-ann">
-<h1><a class="toc-backref" href="#id1" role="doc-backlink">Artificial Neural Network (ANN)</a><a class="headerlink" href="#artificial-neural-network-ann" title="Link to this heading">#</a></h1>
+<h1><a class="toc-backref" href="#id1">Artificial Neural Network (ANN)</a><a class="headerlink" href="#artificial-neural-network-ann" title="Permalink to this heading">#</a></h1>
 <p>An ANN is a <strong>computational model inspired by the human brain</strong>.</p>
 <ul class="simple">
 <li><p>It consists of <strong>neurons (nodes)</strong> arranged in layers.</p></li>
@@ -623,7 +650,7 @@ document.write(`
 </ul>
 <hr class="docutils" />
 <section id="intuition">
-<h2><a class="toc-backref" href="#id2" role="doc-backlink">Intuition</a><a class="headerlink" href="#intuition" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id2">Intuition</a><a class="headerlink" href="#intuition" title="Permalink to this heading">#</a></h2>
 <p>The <strong>core idea</strong>:</p>
 <ul class="simple">
 <li><p>A neural network <strong>combines inputs in weighted ways</strong> to compute an output.</p></li>
@@ -650,9 +677,9 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="components-of-an-ann">
-<h2><a class="toc-backref" href="#id3" role="doc-backlink">Components of an ANN</a><a class="headerlink" href="#components-of-an-ann" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id3">Components of an ANN</a><a class="headerlink" href="#components-of-an-ann" title="Permalink to this heading">#</a></h2>
 <section id="neurons">
-<h3><a class="toc-backref" href="#id4" role="doc-backlink">Neurons</a><a class="headerlink" href="#neurons" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id4">Neurons</a><a class="headerlink" href="#neurons" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Input: (x_1, x_2, \dots, x_n)</p></li>
 <li><p>Weights: (w_1, w_2, \dots, w_n)</p></li>
@@ -668,7 +695,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="layers">
-<h3><a class="toc-backref" href="#id5" role="doc-backlink"><strong>Layers</strong></a><a class="headerlink" href="#layers" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id5"><strong>Layers</strong></a><a class="headerlink" href="#layers" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Input layer</strong>: raw features.</p></li>
 <li><p><strong>Hidden layers</strong>: learn <strong>intermediate patterns</strong>.</p></li>
@@ -683,7 +710,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="activation-functions">
-<h2><a class="toc-backref" href="#id6" role="doc-backlink"><strong>Activation Functions</strong></a><a class="headerlink" href="#activation-functions" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id6"><strong>Activation Functions</strong></a><a class="headerlink" href="#activation-functions" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Transform neuron output.</p></li>
 <li><p><strong>Why needed?</strong> Without them, multiple layers collapse into a single linear layer.</p></li>
@@ -703,7 +730,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="forward-propagation">
-<h2><a class="toc-backref" href="#id7" role="doc-backlink"><strong>Forward Propagation</strong></a><a class="headerlink" href="#forward-propagation" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id7"><strong>Forward Propagation</strong></a><a class="headerlink" href="#forward-propagation" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p><strong>Goal:</strong> compute output from inputs.</p></li>
 <li><p>Each neuron → weighted sum → activation → next layer.</p></li>
@@ -716,7 +743,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="loss-function">
-<h2><a class="toc-backref" href="#id8" role="doc-backlink"><strong>Loss Function</strong></a><a class="headerlink" href="#loss-function" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id8"><strong>Loss Function</strong></a><a class="headerlink" href="#loss-function" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Measures <strong>error between predicted and true output</strong>.</p></li>
 <li><p>Examples:</p>
@@ -734,7 +761,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="backpropagation">
-<h2><a class="toc-backref" href="#id9" role="doc-backlink"><strong>Backpropagation</strong></a><a class="headerlink" href="#backpropagation" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id9"><strong>Backpropagation</strong></a><a class="headerlink" href="#backpropagation" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Computes <strong>gradients of loss w.r.t weights</strong> using chain rule.</p></li>
 <li><p>Updates weights to <strong>reduce loss</strong> (learning).</p></li>
@@ -747,7 +774,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="optimizers">
-<h2><a class="toc-backref" href="#id10" role="doc-backlink"><strong>Optimizers</strong></a><a class="headerlink" href="#optimizers" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id10"><strong>Optimizers</strong></a><a class="headerlink" href="#optimizers" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Algorithms to adjust weights efficiently.</p></li>
 <li><p>Examples: SGD, Momentum, RMSProp, Adam.</p></li>
@@ -760,7 +787,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="regularization">
-<h2><a class="toc-backref" href="#id11" role="doc-backlink"><strong>Regularization</strong></a><a class="headerlink" href="#regularization" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id11"><strong>Regularization</strong></a><a class="headerlink" href="#regularization" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Prevents overfitting.</p></li>
 <li><p>Techniques: dropout, L1/L2 penalties, early stopping.</p></li>
@@ -773,7 +800,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="why-anns-are-powerful">
-<h2><a class="toc-backref" href="#id12" role="doc-backlink">Why ANNs are powerful</a><a class="headerlink" href="#why-anns-are-powerful" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id12">Why ANNs are powerful</a><a class="headerlink" href="#why-anns-are-powerful" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Can approximate <strong>any function</strong> (Universal Approximation Theorem).</p></li>
 <li><p>Handle <strong>high-dimensional data</strong> (images, text, speech).</p></li>
@@ -786,7 +813,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="training-process-summary">
-<h2><a class="toc-backref" href="#id13" role="doc-backlink">Training Process Summary</a><a class="headerlink" href="#training-process-summary" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id13">Training Process Summary</a><a class="headerlink" href="#training-process-summary" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Initialize weights &amp; biases.</p></li>
 <li><p>Forward pass → compute outputs.</p></li>
@@ -808,9 +835,9 @@ document.write(`
 </ul>
 </section>
 <section id="types-of-neural-network">
-<h2><a class="toc-backref" href="#id14" role="doc-backlink">Types of Neural Network</a><a class="headerlink" href="#types-of-neural-network" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id14">Types of Neural Network</a><a class="headerlink" href="#types-of-neural-network" title="Permalink to this heading">#</a></h2>
 <section id="feedforward-neural-network-fnn">
-<h3><a class="toc-backref" href="#id15" role="doc-backlink">Feedforward Neural Network (FNN)</a><a class="headerlink" href="#feedforward-neural-network-fnn" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id15">Feedforward Neural Network (FNN)</a><a class="headerlink" href="#feedforward-neural-network-fnn" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Structure:</strong> Data moves only forward — input → hidden → output layers.</p></li>
 <li><p><strong>No feedback or memory.</strong></p></li>
@@ -820,7 +847,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="convolutional-neural-network-cnn">
-<h3><a class="toc-backref" href="#id16" role="doc-backlink">Convolutional Neural Network (CNN)</a><a class="headerlink" href="#convolutional-neural-network-cnn" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id16">Convolutional Neural Network (CNN)</a><a class="headerlink" href="#convolutional-neural-network-cnn" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Structure:</strong> Uses convolution layers to extract spatial patterns from data.</p></li>
 <li><p><strong>Key idea:</strong> Detects features like edges → shapes → objects.</p></li>
@@ -830,7 +857,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="recurrent-neural-network-rnn">
-<h3><a class="toc-backref" href="#id17" role="doc-backlink">Recurrent Neural Network (RNN)</a><a class="headerlink" href="#recurrent-neural-network-rnn" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id17">Recurrent Neural Network (RNN)</a><a class="headerlink" href="#recurrent-neural-network-rnn" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Structure:</strong> Loops within layers, allowing information from previous steps to influence the current output.</p></li>
 <li><p><strong>Purpose:</strong> Handles sequential data.</p></li>
@@ -845,7 +872,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="autoencoder">
-<h3><a class="toc-backref" href="#id18" role="doc-backlink">Autoencoder</a><a class="headerlink" href="#autoencoder" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id18">Autoencoder</a><a class="headerlink" href="#autoencoder" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Structure:</strong> Encoder compresses input → Decoder reconstructs it.</p></li>
 <li><p><strong>Goal:</strong> Learn efficient data representation (latent space).</p></li>
@@ -854,7 +881,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="generative-adversarial-network-gan">
-<h3><a class="toc-backref" href="#id19" role="doc-backlink">Generative Adversarial Network (GAN)</a><a class="headerlink" href="#generative-adversarial-network-gan" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id19">Generative Adversarial Network (GAN)</a><a class="headerlink" href="#generative-adversarial-network-gan" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Structure:</strong> Two networks —</p>
 <ul>
@@ -867,7 +894,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="transformer">
-<h3><a class="toc-backref" href="#id20" role="doc-backlink">Transformer</a><a class="headerlink" href="#transformer" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id20">Transformer</a><a class="headerlink" href="#transformer" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Structure:</strong> Based on <em>self-attention</em> — each token (word, image patch, etc.) attends to others.</p></li>
 <li><p><strong>No recurrence.</strong></p></li>
@@ -876,7 +903,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="radial-basis-function-network-rbfn">
-<h3><a class="toc-backref" href="#id21" role="doc-backlink">Radial Basis Function Network (RBFN)</a><a class="headerlink" href="#radial-basis-function-network-rbfn" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id21">Radial Basis Function Network (RBFN)</a><a class="headerlink" href="#radial-basis-function-network-rbfn" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Structure:</strong> Hidden layer uses radial basis (Gaussian) functions.</p></li>
 <li><p><strong>Use:</strong> Function approximation, classification with smooth decision boundaries.</p></li>
@@ -884,7 +911,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="graph-neural-network-gnn">
-<h3><a class="toc-backref" href="#id22" role="doc-backlink">Graph Neural Network (GNN)</a><a class="headerlink" href="#graph-neural-network-gnn" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id22">Graph Neural Network (GNN)</a><a class="headerlink" href="#graph-neural-network-gnn" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p><strong>Structure:</strong> Operates on graph data (nodes + edges).</p></li>
 <li><p><strong>Goal:</strong> Aggregate information from connected nodes.</p></li>
@@ -893,7 +920,7 @@ document.write(`
 </section>
 <hr class="docutils" />
 <section id="modular-hybrid-networks">
-<h3><a class="toc-backref" href="#id23" role="doc-backlink">Modular / Hybrid Networks</a><a class="headerlink" href="#modular-hybrid-networks" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id23">Modular / Hybrid Networks</a><a class="headerlink" href="#modular-hybrid-networks" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
 <li><p>Combine different types for complex tasks.</p></li>
 <li><p><strong>Examples:</strong></p>
@@ -903,7 +930,7 @@ document.write(`
 </ul>
 </li>
 </ul>
-<div class="pst-scrollable-table-container"><table class="table">
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="head"><p><strong>Network Type</strong></p></th>
 <th class="head"><p><strong>Input Type</strong></p></th>
@@ -984,10 +1011,30 @@ document.write(`
 </div>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
-<span class="sd-summary-text">Click here for Sections</span><span class="sd-summary-state-marker sd-summary-chevron-right"><svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-right" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.72 18.78a.75.75 0 0 1 0-1.06L14.44 12 8.72 6.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018l6.25 6.25a.75.75 0 0 1 0 1.06l-6.25 6.25a.75.75 0 0 1-1.06 0Z"></path></svg></span></summary><div class="sd-summary-content sd-card-body docutils">
+Click here for Sections<div class="sd-summary-down docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-down" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M5.22 8.72a.75.75 0 000 1.06l6.25 6.25a.75.75 0 001.06 0l6.25-6.25a.75.75 0 00-1.06-1.06L12 14.44 6.28 8.72a.75.75 0 00-1.06 0z"></path></svg></div>
+<div class="sd-summary-up docutils">
+<svg version="1.1" width="1.5em" height="1.5em" class="sd-octicon sd-octicon-chevron-up" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M18.78 15.28a.75.75 0 000-1.06l-6.25-6.25a.75.75 0 00-1.06 0l-6.25 6.25a.75.75 0 101.06 1.06L12 9.56l5.72 5.72a.75.75 0 001.06 0z"></path></svg></div>
+</summary><div class="sd-summary-content sd-card-body docutils">
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="neural_network/overview.html">Neural Network</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gradient_descent/overview.html">Gradient Descent</a></li>
+<li class="toctree-l1"><a class="reference internal" href="training/overview.html">Training</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="training/01_part.html">Data Ingestion Pipeline</a></li>
+<li class="toctree-l2"><a class="reference internal" href="training/02_part.html">Model Definition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="training/03_part.html">Loss Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="training/04_part.html">Optimizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="training/05_part.html">Training Loop</a></li>
+<li class="toctree-l2"><a class="reference internal" href="training/06_part.html">Forward Propagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="training/07_part.html">Backpropagation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="training/08_part.html">Weight Updation and the Chain Rule</a></li>
+<li class="toctree-l2"><a class="reference internal" href="training/09_part.html">Batch and Epoch</a></li>
+<li class="toctree-l2"><a class="reference internal" href="training/10_part.html">Validation and Metrics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="training/11_part.html">Variants of Training in Deep Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="training/12_part.html">Training Failure Modes, Convergence Diagnostics, and Optimization Dynamics</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="cost_loss_function/overview.html">Loss Function vs Cost Function</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="cost_loss_function/01_part.html">Cost Function vs Loss Function</a></li>
 <li class="toctree-l2"><a class="reference internal" href="cost_loss_function/02_part.html">Loss Functions for Regression in Neural Networks</a></li>
@@ -995,21 +1042,33 @@ document.write(`
 <li class="toctree-l2"><a class="reference internal" href="cost_loss_function/04_part.html">Choice of Loss Function</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="activation/overview.html">Activation Function</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="activation/01_part.html">Sigmoid Activation Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activation/02_part.html">Tanh Activation Function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activation/03_part.html">ReLU</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activation/03_part.html#parametric-relu-prelu">2. <strong>Parametric ReLU (PReLU)</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="activation/04_part.html">Exponential Linear Unit (ELU / Exponential ReLU) in Deep Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activation/05_part.html">Softmax Activation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="activation/06_part.html">Activation choice</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="optimizers/overview.html">Optmizers</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="optimizers/01_part.html">Gradient Descent Optimizer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="optimizers/02_part.html">Stochastic Gradient Descent (SGD) Optimizer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="optimizers/03_part.html">Mini-batch Stochastic Gradient Descent</a></li>
-<li class="toctree-l2"><a class="reference internal" href="optimizers/04_part.html">SGD with Momentum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="optimizers/01_part.html">Gradient Descent Optimizer in Deep Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="optimizers/02_part.html">Stochastic Gradient Descent (SGD) Optimizer in Deep Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="optimizers/03_part.html">Mini-Batch Gradient Descent Optimizer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="optimizers/04_part.html">Momentum</a></li>
 <li class="toctree-l2"><a class="reference internal" href="optimizers/05_part.html">Adagrad Optimizer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="optimizers/06_part.html">Adadelta and RMSProp</a></li>
-<li class="toctree-l2"><a class="reference internal" href="optimizers/07_part.html">Adam Optmizers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="optimizers/06_part.html">Adadelta Optimizer in Deep Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="optimizers/07_part.html">RMSProp Optimizer in Deep Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="optimizers/08_part.html">Adam Optimizer</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="techniques/01_part.html">Exploding Gradient Problem</a></li>
-<li class="toctree-l1"><a class="reference internal" href="techniques/02_part.html">Weight Initializing Techniques</a></li>
-<li class="toctree-l1"><a class="reference internal" href="techniques/03_part.html">Dropout Layer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="techniques/02_part.html">Weight Initialization in Deep Learning</a></li>
+<li class="toctree-l1"><a class="reference internal" href="techniques/03_part.html">Weight Initialization</a></li>
 <li class="toctree-l1"><a class="reference internal" href="techniques/04_part.html">Optmization Techniques</a></li>
 <li class="toctree-l1"><a class="reference internal" href="techniques/05_part.html">Regularization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="techniques/06_part.html">Learning Rate Scheduling</a></li>
 </ul>
 </div>
 </div>
@@ -1131,7 +1190,7 @@ By svgoudar
 
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2022.
       <br/>
     
   </p>

@@ -1,0 +1,1056 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Training Failure Modes, Convergence Diagnostics, and Optimization Dynamics &#8212; Machine Learning Handbook</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-examples.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.bundle.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-shadow.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-punk.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-noir.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-light.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-borderless.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/micromodal.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../_static/tabs.js"></script>
+    <script src="../../_static/js/hoverxref.js"></script>
+    <script src="../../_static/js/tooltipster.bundle.min.js"></script>
+    <script src="../../_static/js/micromodal.min.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ann/training/12_part';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Loss Function vs Cost Function" href="../cost_loss_function/overview.html" />
+    <link rel="prev" title="Variants of Training in Deep Learning" href="11_part.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../introduction.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Machine Learning Handbook - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Machine Learning Handbook - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../introduction.html">
+                    Deep Learning
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../overview.html">Artificial Neural Network (ANN)</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../neural_network/overview.html">Neural Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../neural_network/00_part.html">Biological Neuron vs Artificial Neuron</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../neural_network/01_part.html">Neuron</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../neural_network/02_part.html">Neural Network House Price Prediction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../neural_network/03_part.html">Perceptron Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../neural_network/04_part.html">Multi-Layer Perceptron (MLP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../neural_network/05_part.html">Vanishing Gradient Problem in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../neural_network/06_part.html">Vanishing Gradient Problem</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../gradient_descent/overview.html">Gradient Descent</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../gradient_descent/01_part.html">Batch Gradient Descent in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gradient_descent/02_part.html">Mini-Batch Gradient Descent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gradient_descent/03_part.html">Stochastic Gradient Descent (SGD)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="overview.html">Training</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="01_part.html">Data Ingestion Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="02_part.html">Model Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="03_part.html">Loss Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="04_part.html">Optimizers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="05_part.html">Training Loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="06_part.html">Forward Propagation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="07_part.html">Backpropagation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="08_part.html">Weight Updation and the Chain Rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="09_part.html">Batch and Epoch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="10_part.html">Validation and Metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="11_part.html">Variants of Training in Deep Learning</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Training Failure Modes, Convergence Diagnostics, and Optimization Dynamics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../cost_loss_function/overview.html">Loss Function vs Cost Function</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cost_loss_function/01_part.html">Cost Function vs Loss Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cost_loss_function/02_part.html">Loss Functions for Regression in Neural Networks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cost_loss_function/03_part.html">Loss Functions for Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cost_loss_function/04_part.html">Choice of Loss Function</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../activation/overview.html">Activation Function</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../activation/01_part.html">Sigmoid Activation Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../activation/02_part.html">Tanh Activation Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../activation/03_part.html">ReLU</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../activation/04_part.html">Exponential Linear Unit (ELU / Exponential ReLU) in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../activation/05_part.html">Softmax Activation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../activation/06_part.html">Activation choice</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../optimizers/overview.html">Optmizers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/01_part.html">Gradient Descent Optimizer in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/02_part.html">Stochastic Gradient Descent (SGD) Optimizer in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/03_part.html">Mini-Batch Gradient Descent Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/04_part.html">Momentum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/05_part.html">Adagrad Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/06_part.html">Adadelta Optimizer in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/07_part.html">RMSProp Optimizer in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/08_part.html">Adam Optimizer</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../techniques/01_part.html">Exploding Gradient Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../techniques/02_part.html">Weight Initialization in Deep Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../techniques/03_part.html">Weight Initialization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../techniques/04_part.html">Optmization Techniques</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../techniques/05_part.html">Regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../techniques/06_part.html">Learning Rate Scheduling</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../cnn/overview.html">CNN (Convolution Neural Network)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/01_part.html">CNN v/s Brain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/02_part.html">Know about Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/03_part.html">Convolution Operation in CNNs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/04_part.html">Padding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/05_part.html">ANN vs CNN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/06_part.html">Pooling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/07_part.html">Fully Connected Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/08_part.html">CNN Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/09_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ffn/overview.html">FeedForward Neural Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ffn/01_part.html">Intiution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffn/02_part.html">Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffn/03_part.html">Training &amp; Hyper-Parameter Tuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffn/04_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../rnn/overview.html">RNN</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../rnn/01_part.html">Intuition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rnn/02_part.html">Backward &amp; Forward Propogation with RNN context</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rnn/03_part.html">Workflows</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../rnn/variants/overview.html">Variants</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../rnn/variants/01_part.html">Simple RNN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../rnn/variants/02_part.html">LSTM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../rnn/variants/03_part.html">GRU</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../rnn/variants/04_part.html">BiRNN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../rnn/variants/05_part.html">Deep (Stacked) RNN — Explanation, Intuition, and Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../rnn/variants/06_part.html">Echo State Networks (ESN)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../rnn/variants/07_part.html">Attention-Based RNN (Vanilla)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../rnn/variants/08_part.html">Seq2Seq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../rnn/variants/09_part.html">Attention</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../transformers/overview.html">The Transformer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/01_part.html">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/02_part.html">The Transformer Encoder Layer (Deep Explanation)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/03_part.html">Positional Encoding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/04_part.html">Residual Connection + Layer Normalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/05_part.html">Transformer Decoder Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/06_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../gan/overview.html">Generative Adversarial Network (GAN)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../gan/01_part.html">Intuition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gan/02_part.html">Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gan/03_part.html">Applications of Generative Adversarial Networks (GANs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gan/04_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../rbf/overview.html">Radial Basis Function (RBF) Neural Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../rbf/01_part.html">Intuition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rbf/02_part.html">Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rbf/03_part.html">Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rbf/04_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../siamese/overview.html">Siamese Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../siamese/01_part.html">Intuition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../siamese/02_part.html">Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../siamese/03_part.html">Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../siamese/04_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../autoencoders/overview.html">Autoencoders</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../autoencoders/01_part.html">Intiution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoencoders/02_part.html">Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoencoders/03_part.html">Application of Autoencoders</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/svgoudar/Learn-DeepLearning/blob/master/ann/training/12_part.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/svgoudar/Learn-DeepLearning" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/svgoudar/Learn-DeepLearning/issues/new?title=Issue%20on%20page%20%2Fann/training/12_part.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/ann/training/12_part.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Training Failure Modes, Convergence Diagnostics, and Optimization Dynamics</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-these-topics-matter">Why These Topics Matter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-failure-modes">Training Failure Modes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#underfitting">Underfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting">Overfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vanishing-exploding-gradients">Vanishing / Exploding Gradients</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-instability">Optimization Instability</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convergence-diagnostics">Convergence Diagnostics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-signals-to-monitor">Key Signals to Monitor</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-training-curves">Interpreting Training Curves</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-dynamics">Optimization Dynamics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-optimizers">Common Optimizers</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-demonstration-detecting-failures">PyTorch Demonstration: Detecting Failures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-diagnosis">Example Diagnosis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#monitoring-gradient-health">Monitoring Gradient Health</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stabilization-techniques">Stabilization Techniques</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-insight">Key Insight</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="contents topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#training-failure-modes-convergence-diagnostics-and-optimization-dynamics" id="id1">Training Failure Modes, Convergence Diagnostics, and Optimization Dynamics</a></p>
+<ul>
+<li><p><a class="reference internal" href="#why-these-topics-matter" id="id2">Why These Topics Matter</a></p></li>
+<li><p><a class="reference internal" href="#training-failure-modes" id="id3">Training Failure Modes</a></p>
+<ul>
+<li><p><a class="reference internal" href="#underfitting" id="id4">Underfitting</a></p></li>
+<li><p><a class="reference internal" href="#overfitting" id="id5">Overfitting</a></p></li>
+<li><p><a class="reference internal" href="#vanishing-exploding-gradients" id="id6">Vanishing / Exploding Gradients</a></p></li>
+<li><p><a class="reference internal" href="#optimization-instability" id="id7">Optimization Instability</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#convergence-diagnostics" id="id8">Convergence Diagnostics</a></p>
+<ul>
+<li><p><a class="reference internal" href="#key-signals-to-monitor" id="id9">Key Signals to Monitor</a></p></li>
+<li><p><a class="reference internal" href="#interpreting-training-curves" id="id10">Interpreting Training Curves</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#optimization-dynamics" id="id11">Optimization Dynamics</a></p>
+<ul>
+<li><p><a class="reference internal" href="#common-optimizers" id="id12">Common Optimizers</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#pytorch-demonstration-detecting-failures" id="id13">PyTorch Demonstration: Detecting Failures</a></p>
+<ul>
+<li><p><a class="reference internal" href="#example-diagnosis" id="id14">Example Diagnosis</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#monitoring-gradient-health" id="id15">Monitoring Gradient Health</a></p></li>
+<li><p><a class="reference internal" href="#stabilization-techniques" id="id16">Stabilization Techniques</a></p></li>
+<li><p><a class="reference internal" href="#key-insight" id="id17">Key Insight</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<section id="training-failure-modes-convergence-diagnostics-and-optimization-dynamics">
+<h1><a class="toc-backref" href="#id1">Training Failure Modes, Convergence Diagnostics, and Optimization Dynamics</a><a class="headerlink" href="#training-failure-modes-convergence-diagnostics-and-optimization-dynamics" title="Permalink to this heading">#</a></h1>
+<section id="why-these-topics-matter">
+<h2><a class="toc-backref" href="#id2">Why These Topics Matter</a><a class="headerlink" href="#why-these-topics-matter" title="Permalink to this heading">#</a></h2>
+<p>Modern deep learning success depends less on model architecture and more on <strong>how training behaves</strong>.
+Understanding <em>failure modes</em>, <em>diagnostics</em>, and <em>optimization dynamics</em> allows practitioners to:</p>
+<ul class="simple">
+<li><p>Detect problems early</p></li>
+<li><p>Choose appropriate hyperparameters</p></li>
+<li><p>Stabilize and accelerate convergence</p></li>
+<li><p>Improve generalization</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="training-failure-modes">
+<h2><a class="toc-backref" href="#id3">Training Failure Modes</a><a class="headerlink" href="#training-failure-modes" title="Permalink to this heading">#</a></h2>
+<section id="underfitting">
+<h3><a class="toc-backref" href="#id4">Underfitting</a><a class="headerlink" href="#underfitting" title="Permalink to this heading">#</a></h3>
+<p>Model is too simple or insufficiently trained.</p>
+<p><strong>Symptoms</strong></p>
+<ul class="simple">
+<li><p>High training loss</p></li>
+<li><p>High validation loss</p></li>
+</ul>
+<p><strong>Causes</strong></p>
+<ul class="simple">
+<li><p>Insufficient capacity</p></li>
+<li><p>Too much regularization</p></li>
+<li><p>Inadequate training time</p></li>
+</ul>
+<p><strong>Fixes</strong></p>
+<ul class="simple">
+<li><p>Increase model depth/width</p></li>
+<li><p>Reduce regularization</p></li>
+<li><p>Train longer</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="overfitting">
+<h3><a class="toc-backref" href="#id5">Overfitting</a><a class="headerlink" href="#overfitting" title="Permalink to this heading">#</a></h3>
+<p>Model memorizes training data.</p>
+<p><strong>Symptoms</strong></p>
+<ul class="simple">
+<li><p>Training loss ↓</p></li>
+<li><p>Validation loss ↑</p></li>
+</ul>
+<p><strong>Causes</strong></p>
+<ul class="simple">
+<li><p>Excessive capacity</p></li>
+<li><p>Small dataset</p></li>
+<li><p>Poor regularization</p></li>
+</ul>
+<p><strong>Fixes</strong></p>
+<ul class="simple">
+<li><p>Data augmentation</p></li>
+<li><p>Dropout, weight decay</p></li>
+<li><p>Early stopping</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="vanishing-exploding-gradients">
+<h3><a class="toc-backref" href="#id6">Vanishing / Exploding Gradients</a><a class="headerlink" href="#vanishing-exploding-gradients" title="Permalink to this heading">#</a></h3>
+<p>Common in deep or recurrent networks.</p>
+<p><strong>Symptoms</strong></p>
+<ul class="simple">
+<li><p>Gradients → 0 (learning stalls)</p></li>
+<li><p>Gradients → ∞ (loss diverges)</p></li>
+</ul>
+<p><strong>Fixes</strong></p>
+<ul class="simple">
+<li><p>Proper initialization (Xavier, He)</p></li>
+<li><p>Batch normalization</p></li>
+<li><p>Residual connections</p></li>
+<li><p>Gradient clipping</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="optimization-instability">
+<h3><a class="toc-backref" href="#id7">Optimization Instability</a><a class="headerlink" href="#optimization-instability" title="Permalink to this heading">#</a></h3>
+<p>Loss oscillates or diverges.</p>
+<p><strong>Causes</strong></p>
+<ul class="simple">
+<li><p>Learning rate too high</p></li>
+<li><p>Poor normalization</p></li>
+<li><p>Bad initialization</p></li>
+</ul>
+<p><strong>Fix</strong></p>
+<ul class="simple">
+<li><p>Lower learning rate</p></li>
+<li><p>Use Adam/AdamW</p></li>
+<li><p>Apply batch norm</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="convergence-diagnostics">
+<h2><a class="toc-backref" href="#id8">Convergence Diagnostics</a><a class="headerlink" href="#convergence-diagnostics" title="Permalink to this heading">#</a></h2>
+<section id="key-signals-to-monitor">
+<h3><a class="toc-backref" href="#id9">Key Signals to Monitor</a><a class="headerlink" href="#key-signals-to-monitor" title="Permalink to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Metric</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Training loss</p></td>
+<td><p>Optimization progress</p></td>
+</tr>
+<tr class="row-odd"><td><p>Validation loss</p></td>
+<td><p>Generalization</p></td>
+</tr>
+<tr class="row-even"><td><p>Accuracy / F1</p></td>
+<td><p>Task performance</p></td>
+</tr>
+<tr class="row-odd"><td><p>Gradient norms</p></td>
+<td><p>Stability</p></td>
+</tr>
+<tr class="row-even"><td><p>Learning rate</p></td>
+<td><p>Step magnitude</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="interpreting-training-curves">
+<h3><a class="toc-backref" href="#id10">Interpreting Training Curves</a><a class="headerlink" href="#interpreting-training-curves" title="Permalink to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Pattern</p></th>
+<th class="head"><p>Interpretation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Loss decreases smoothly</p></td>
+<td><p>Healthy convergence</p></td>
+</tr>
+<tr class="row-odd"><td><p>Loss oscillates</p></td>
+<td><p>LR too high</p></td>
+</tr>
+<tr class="row-even"><td><p>Loss plateaus early</p></td>
+<td><p>LR too low</p></td>
+</tr>
+<tr class="row-odd"><td><p>Validation diverges</p></td>
+<td><p>Overfitting</p></td>
+</tr>
+<tr class="row-even"><td><p>Both high</p></td>
+<td><p>Underfitting</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="optimization-dynamics">
+<h2><a class="toc-backref" href="#id11">Optimization Dynamics</a><a class="headerlink" href="#optimization-dynamics" title="Permalink to this heading">#</a></h2>
+<p>Deep learning optimization is <strong>non-convex</strong>, but exhibits special structure:</p>
+<ul class="simple">
+<li><p>Many flat low-loss regions</p></li>
+<li><p>Wide minima correlate with better generalization</p></li>
+<li><p>SGD noise helps escape sharp minima</p></li>
+</ul>
+<section id="common-optimizers">
+<h3><a class="toc-backref" href="#id12">Common Optimizers</a><a class="headerlink" href="#common-optimizers" title="Permalink to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Optimizer</p></th>
+<th class="head"><p>Dynamics</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SGD</p></td>
+<td><p>Stable, slower, good generalization</p></td>
+</tr>
+<tr class="row-odd"><td><p>Adam</p></td>
+<td><p>Fast convergence, adaptive</p></td>
+</tr>
+<tr class="row-even"><td><p>AdamW</p></td>
+<td><p>Better regularization</p></td>
+</tr>
+<tr class="row-odd"><td><p>RMSprop</p></td>
+<td><p>Good for RNNs</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="pytorch-demonstration-detecting-failures">
+<h2><a class="toc-backref" href="#id13">PyTorch Demonstration: Detecting Failures</a><a class="headerlink" href="#pytorch-demonstration-detecting-failures" title="Permalink to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">):</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+    <span class="n">train_loss</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">train_loader</span><span class="p">:</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">model</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+        <span class="n">train_loss</span> <span class="o">+=</span> <span class="n">loss</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+    <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+    <span class="n">val_loss</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">val_loader</span><span class="p">:</span>
+            <span class="n">val_loss</span> <span class="o">+=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">model</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="n">epoch</span><span class="p">,</span> <span class="n">train_loss</span><span class="p">,</span> <span class="n">val_loss</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="example-diagnosis">
+<h3><a class="toc-backref" href="#id14">Example Diagnosis</a><a class="headerlink" href="#example-diagnosis" title="Permalink to this heading">#</a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Epoch 5  Train: 0.20  Val: 0.45
+Epoch 6  Train: 0.15  Val: 0.60   ← overfitting begins
+</pre></div>
+</div>
+<p>Apply early stopping:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">val_loss</span> <span class="o">&gt;</span> <span class="n">best_val</span><span class="p">:</span>
+    <span class="n">patience</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">patience</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">break</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="monitoring-gradient-health">
+<h2><a class="toc-backref" href="#id15">Monitoring Gradient Health</a><a class="headerlink" href="#monitoring-gradient-health" title="Permalink to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">total_norm</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">():</span>
+    <span class="n">param_norm</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">grad</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">total_norm</span> <span class="o">+=</span> <span class="n">param_norm</span><span class="o">.</span><span class="n">item</span><span class="p">()</span> <span class="o">**</span> <span class="mi">2</span>
+<span class="n">total_norm</span> <span class="o">=</span> <span class="n">total_norm</span> <span class="o">**</span> <span class="mf">0.5</span>
+</pre></div>
+</div>
+<p>Large values → exploding gradients
+Tiny values → vanishing gradients</p>
+</section>
+<hr class="docutils" />
+<section id="stabilization-techniques">
+<h2><a class="toc-backref" href="#id16">Stabilization Techniques</a><a class="headerlink" href="#stabilization-techniques" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Technique</p></th>
+<th class="head"><p>Effect</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Batch Normalization</p></td>
+<td><p>Smooths optimization</p></td>
+</tr>
+<tr class="row-odd"><td><p>Gradient Clipping</p></td>
+<td><p>Prevents explosions</p></td>
+</tr>
+<tr class="row-even"><td><p>Learning rate scheduling</p></td>
+<td><p>Faster convergence</p></td>
+</tr>
+<tr class="row-odd"><td><p>Warmup</p></td>
+<td><p>Prevents early divergence</p></td>
+</tr>
+<tr class="row-even"><td><p>Residual connections</p></td>
+<td><p>Improves gradient flow</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="key-insight">
+<h2><a class="toc-backref" href="#id17">Key Insight</a><a class="headerlink" href="#key-insight" title="Permalink to this heading">#</a></h2>
+<blockquote>
+<div><p>Training behavior is an emergent property of architecture, data, optimization, and initialization.</p>
+</div></blockquote>
+<p>Controlling this behavior is the difference between <strong>failed training and state-of-the-art performance</strong>.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./ann\training"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="11_part.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Variants of Training in Deep Learning</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../cost_loss_function/overview.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Loss Function vs Cost Function</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-these-topics-matter">Why These Topics Matter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-failure-modes">Training Failure Modes</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#underfitting">Underfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#overfitting">Overfitting</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vanishing-exploding-gradients">Vanishing / Exploding Gradients</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-instability">Optimization Instability</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#convergence-diagnostics">Convergence Diagnostics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#key-signals-to-monitor">Key Signals to Monitor</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpreting-training-curves">Interpreting Training Curves</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optimization-dynamics">Optimization Dynamics</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#common-optimizers">Common Optimizers</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-demonstration-detecting-failures">PyTorch Demonstration: Detecting Failures</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-diagnosis">Example Diagnosis</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#monitoring-gradient-health">Monitoring Gradient Health</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stabilization-techniques">Stabilization Techniques</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-insight">Key Insight</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By svgoudar
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

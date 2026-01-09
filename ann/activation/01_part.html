@@ -1,0 +1,956 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Sigmoid Activation Function &#8212; Machine Learning Handbook</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-examples.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.bundle.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-shadow.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-punk.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-noir.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-light.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-borderless.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/micromodal.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../_static/tabs.js"></script>
+    <script src="../../_static/js/hoverxref.js"></script>
+    <script src="../../_static/js/tooltipster.bundle.min.js"></script>
+    <script src="../../_static/js/micromodal.min.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ann/activation/01_part';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Tanh Activation Function" href="02_part.html" />
+    <link rel="prev" title="Activation Function" href="overview.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../introduction.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Machine Learning Handbook - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Machine Learning Handbook - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../introduction.html">
+                    Deep Learning
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../overview.html">Artificial Neural Network (ANN)</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 has-children"><a class="reference internal" href="../neural_network/overview.html">Neural Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../neural_network/00_part.html">Biological Neuron vs Artificial Neuron</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../neural_network/01_part.html">Intuition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../neural_network/02_part.html">Problem Statement</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../neural_network/03.01_part.html">Multi-Layer Perceptron (MLP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../neural_network/03_part.html">Perceptron Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../neural_network/04_part.html">Multi-Layer Neural Networks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../neural_network/05_part.html">Vanishing Gradient Problem in Deep Learning</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../training/overview.html">Training</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../training/01_part.html">Data Ingestion Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/02_part.html">Model Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/03_part.html">Loss Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/04_part.html">Optimizers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/05_part.html">Training Loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/06_part.html">Forward Propagation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/07_part.html">Backpropagation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/08_part.html">Weight Updation and the Chain Rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/09_part.html">Batch and Epoch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/10_part.html">Validation and Metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/11_part.html">Variants of Training in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/12_part.html">Training Failure Modes, Convergence Diagnostics, and Optimization Dynamics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../cost_loss_function/overview.html">Loss Function vs Cost Function</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cost_loss_function/01_part.html">Cost Function vs Loss Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cost_loss_function/02_part.html">Loss Functions for Regression in Neural Networks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cost_loss_function/03_part.html">Loss Functions for Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cost_loss_function/04_part.html">Choice of Loss Function</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="overview.html">Activation Function</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Sigmoid Activation Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="02_part.html">Tanh Activation Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="03_part.html">ReLU</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="04_part.html">ELU (Exponential Linear Unit)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="05_part.html">Softmax Activation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="06_part.html">Activation choice</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../optimizers/overview.html">Optmizers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/01_part.html">Gradient Descent Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/02_part.html">Stochastic Gradient Descent (SGD) Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/03_part.html">Mini-batch Stochastic Gradient Descent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/04_part.html">SGD with Momentum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/05_part.html">Adagrad Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/06_part.html">Adadelta and RMSProp</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/07_part.html">Adam Optmizers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../techniques/01_part.html">Exploding Gradient Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../techniques/02_part.html">Weight Initializing Techniques</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../techniques/03_part.html">Dropout Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../techniques/04_part.html">Optmization Techniques</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../techniques/05_part.html">Regularization</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../cnn/overview.html">CNN (Convolution Neural Network)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/01_part.html">CNN v/s Brain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/02_part.html">Know about Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/03_part.html">Convolution Operation in CNNs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/04_part.html">Padding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/05_part.html">ANN vs CNN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/06_part.html">Pooling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/07_part.html">Fully Connected Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/08_part.html">CNN Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/09_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ffn/overview.html">FeedForward Neural Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ffn/01_part.html">Intiution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffn/02_part.html">Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffn/03_part.html">Training &amp; Hyper-Parameter Tuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffn/04_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../rnn/overview.html">RNN</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../rnn/01_part.html">Intuition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rnn/02_part.html">Backward &amp; Forward Propogation with RNN context</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rnn/03_part.html">Workflows</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../rnn/variants/overview.html">Variants</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../rnn/variants/01_part.html">Simple RNN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../rnn/variants/02_part.html">LSTM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../rnn/variants/03_part.html">GRU</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../rnn/variants/04_part.html">BiRNN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../rnn/variants/05_part.html">Deep (Stacked) RNN — Explanation, Intuition, and Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../rnn/variants/06_part.html">Echo State Networks (ESN)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../rnn/variants/07_part.html">Attention-Based RNN (Vanilla)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../rnn/variants/08_part.html">Seq2Seq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../rnn/variants/09_part.html">Attention</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../transformers/overview.html">The Transformer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/01_part.html">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/02_part.html">The Transformer Encoder Layer (Deep Explanation)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/03_part.html">Positional Encoding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/04_part.html">Residual Connection + Layer Normalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/05_part.html">Transformer Decoder Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/06_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../gan/overview.html">Generative Adversarial Network (GAN)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../gan/01_part.html">Intuition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gan/02_part.html">Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gan/03_part.html">Applications of Generative Adversarial Networks (GANs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gan/04_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../rbf/overview.html">Radial Basis Function (RBF) Neural Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../rbf/01_part.html">Intuition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rbf/02_part.html">Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rbf/03_part.html">Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rbf/04_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../siamese/overview.html">Siamese Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../siamese/01_part.html">Intuition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../siamese/02_part.html">Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../siamese/03_part.html">Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../siamese/04_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../autoencoders/overview.html">Autoencoders</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../autoencoders/01_part.html">Intiution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoencoders/02_part.html">Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoencoders/03_part.html">Application of Autoencoders</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/svgoudar/Learn-DeepLearning/blob/master/ann/activation/01_part.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/svgoudar/Learn-DeepLearning" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/svgoudar/Learn-DeepLearning/issues/new?title=Issue%20on%20page%20%2Fann/activation/01_part.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/ann/activation/01_part.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Sigmoid Activation Function</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formula">✔ Formula</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#output-range">✔ Output Range</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivative-vanishing-gradient-problem">✅ Derivative &amp; Vanishing Gradient Problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#drawbacks-of-sigmoid">✅ Drawbacks of Sigmoid</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vanishing-gradients">❌ 1. Vanishing Gradients</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#not-zero-centered">❌ 2. Not Zero-Centered</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computationally-slow">❌ 3. Computationally Slow</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages-of-sigmoid">✅ Advantages of Sigmoid</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-disadvantages-recap">✅ Key Disadvantages Recap</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transition-to-better-alternatives">Transition to Better Alternatives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-sigmoid-activation-function">What is the Sigmoid Activation Function?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivative-of-sigmoid-its-impact">Derivative of Sigmoid &amp; Its Impact</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#main-disadvantages-of-sigmoid">Main Disadvantages of Sigmoid</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vanishing-gradient-problem">❌ 1. Vanishing Gradient Problem</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">❌ 2. Not Zero-Centered</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computationally-expensive">❌ 3. Computationally Expensive</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Advantages of Sigmoid</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-move-beyond-sigmoid">Why Move Beyond Sigmoid?</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="contents topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#sigmoid-activation-function" id="id3">Sigmoid Activation Function</a></p>
+<ul>
+<li><p><a class="reference internal" href="#formula" id="id4">✔ Formula</a></p></li>
+<li><p><a class="reference internal" href="#output-range" id="id5">✔ Output Range</a></p></li>
+<li><p><a class="reference internal" href="#derivative-vanishing-gradient-problem" id="id6">✅ Derivative &amp; Vanishing Gradient Problem</a></p></li>
+<li><p><a class="reference internal" href="#drawbacks-of-sigmoid" id="id7">✅ Drawbacks of Sigmoid</a></p>
+<ul>
+<li><p><a class="reference internal" href="#vanishing-gradients" id="id8">❌ 1. Vanishing Gradients</a></p></li>
+<li><p><a class="reference internal" href="#not-zero-centered" id="id9">❌ 2. Not Zero-Centered</a></p></li>
+<li><p><a class="reference internal" href="#computationally-slow" id="id10">❌ 3. Computationally Slow</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#advantages-of-sigmoid" id="id11">✅ Advantages of Sigmoid</a></p></li>
+<li><p><a class="reference internal" href="#key-disadvantages-recap" id="id12">✅ Key Disadvantages Recap</a></p></li>
+<li><p><a class="reference internal" href="#transition-to-better-alternatives" id="id13">Transition to Better Alternatives</a></p></li>
+<li><p><a class="reference internal" href="#what-is-the-sigmoid-activation-function" id="id14">What is the Sigmoid Activation Function?</a></p></li>
+<li><p><a class="reference internal" href="#derivative-of-sigmoid-its-impact" id="id15">Derivative of Sigmoid &amp; Its Impact</a></p></li>
+<li><p><a class="reference internal" href="#main-disadvantages-of-sigmoid" id="id16">Main Disadvantages of Sigmoid</a></p>
+<ul>
+<li><p><a class="reference internal" href="#vanishing-gradient-problem" id="id17">❌ 1. Vanishing Gradient Problem</a></p></li>
+<li><p><a class="reference internal" href="#id1" id="id18">❌ 2. Not Zero-Centered</a></p></li>
+<li><p><a class="reference internal" href="#computationally-expensive" id="id19">❌ 3. Computationally Expensive</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#id2" id="id20">Advantages of Sigmoid</a></p></li>
+<li><p><a class="reference internal" href="#why-move-beyond-sigmoid" id="id21">Why Move Beyond Sigmoid?</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="sigmoid-activation-function">
+<h1><a class="toc-backref" href="#id3">Sigmoid Activation Function</a><a class="headerlink" href="#sigmoid-activation-function" title="Permalink to this heading">#</a></h1>
+<section id="formula">
+<h2><a class="toc-backref" href="#id4">✔ Formula</a><a class="headerlink" href="#formula" title="Permalink to this heading">#</a></h2>
+<div class="math notranslate nohighlight">
+\[
+\sigma(x) = \frac{1}{1 + e^{-x}}
+\]</div>
+</section>
+<section id="output-range">
+<h2><a class="toc-backref" href="#id5">✔ Output Range</a><a class="headerlink" href="#output-range" title="Permalink to this heading">#</a></h2>
+<p>Transforms any input into a value between <strong>0 and 1</strong>.</p>
+<p>This made sigmoid initially useful for:</p>
+<ul class="simple">
+<li><p>Small neural networks</p></li>
+<li><p>Binary classification</p></li>
+<li><p>Probabilistic interpretation (to some extent)</p></li>
+</ul>
+<p>!<span class="math notranslate nohighlight">\(alt text\)</span>(../images/sigmoid.png)</p>
+</section>
+<hr class="docutils" />
+<section id="derivative-vanishing-gradient-problem">
+<h2><a class="toc-backref" href="#id6">✅ Derivative &amp; Vanishing Gradient Problem</a><a class="headerlink" href="#derivative-vanishing-gradient-problem" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>The derivative of sigmoid ranges between <strong>0 and 0.25</strong></p></li>
+<li><p>During <strong>backpropagation</strong>, many layers multiply small gradients repeatedly</p></li>
+<li><p>With deep networks, gradients shrink drastically → <strong>vanishing gradient problem</strong></p></li>
+<li><p>Result: <strong>weights stop updating</strong>, slowing or halting learning</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="drawbacks-of-sigmoid">
+<h2><a class="toc-backref" href="#id7">✅ Drawbacks of Sigmoid</a><a class="headerlink" href="#drawbacks-of-sigmoid" title="Permalink to this heading">#</a></h2>
+<section id="vanishing-gradients">
+<h3><a class="toc-backref" href="#id8">❌ 1. Vanishing Gradients</a><a class="headerlink" href="#vanishing-gradients" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Due to tiny derivatives (0 to 0.25), weight updates get smaller layer by layer.</p></li>
+</ul>
+</section>
+<section id="not-zero-centered">
+<h3><a class="toc-backref" href="#id9">❌ 2. Not Zero-Centered</a><a class="headerlink" href="#not-zero-centered" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>The output is between 0 and 1 (mean ≈ 0.5, not 0)</p></li>
+<li><p>This causes <strong>inefficient weight updates</strong> during optimization</p></li>
+</ul>
+<p>Zero-centered activations help:</p>
+<ul class="simple">
+<li><p>Faster convergence</p></li>
+<li><p>Better gradient flow</p></li>
+</ul>
+</section>
+<section id="computationally-slow">
+<h3><a class="toc-backref" href="#id10">❌ 3. Computationally Slow</a><a class="headerlink" href="#computationally-slow" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Uses exponential operation: ( e^{-x} ), which is <strong>computationally expensive</strong></p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="advantages-of-sigmoid">
+<h2><a class="toc-backref" href="#id11">✅ Advantages of Sigmoid</a><a class="headerlink" href="#advantages-of-sigmoid" title="Permalink to this heading">#</a></h2>
+<p>✔ Smooth and continuous
+✔ Output strictly between <strong>0 and 1</strong>
+✔ Useful when output interpretation is binary
+✔ Prevents sharp jumps in output</p>
+</section>
+<hr class="docutils" />
+<section id="key-disadvantages-recap">
+<h2><a class="toc-backref" href="#id12">✅ Key Disadvantages Recap</a><a class="headerlink" href="#key-disadvantages-recap" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>❌ Prone to <strong>vanishing gradients</strong></p></li>
+<li><p>❌ <strong>Not zero-centered</strong></p></li>
+<li><p>❌ Uses costly <strong>exponential operations</strong></p></li>
+</ol>
+<p>Because of these issues, sigmoid is rarely preferred in <strong>deep networks</strong> today.</p>
+</section>
+<hr class="docutils" />
+<section id="transition-to-better-alternatives">
+<h2><a class="toc-backref" href="#id13">Transition to Better Alternatives</a><a class="headerlink" href="#transition-to-better-alternatives" title="Permalink to this heading">#</a></h2>
+<p>Due to sigmoid’s drawbacks, the next activation functions like <strong>tanh</strong> (and later <strong>ReLU</strong>) were introduced to overcome these problems.</p>
+<hr class="docutils" />
+<p><strong>Conclusion</strong></p>
+<p>The sigmoid function was widely used in early deep learning models, but due to:</p>
+<ul class="simple">
+<li><p>Vanishing gradients</p></li>
+<li><p>Non-zero-centered output</p></li>
+<li><p>Computation inefficiency</p></li>
+</ul>
+<p>…it has mostly been replaced by more effective activations like <strong>tanh</strong> and <strong>ReLU</strong>.</p>
+<p>The next step in the lesson is understanding <strong>tanh activation</strong> — its benefits and limitations.</p>
+<p>Here’s a <strong>clear and structured summary</strong> of the explanation you provided on <strong>Sigmoid Activation Function</strong>:</p>
+</section>
+<hr class="docutils" />
+<section id="what-is-the-sigmoid-activation-function">
+<h2><a class="toc-backref" href="#id14">What is the Sigmoid Activation Function?</a><a class="headerlink" href="#what-is-the-sigmoid-activation-function" title="Permalink to this heading">#</a></h2>
+<p>The <strong>sigmoid function</strong> is defined as:</p>
+<p><span class="math notranslate nohighlight">\(
+\sigma(x) = \frac{1}{1 + e^{-x}}
+\)</span></p>
+<p>It is applied during <strong>forward propagation</strong> after:</p>
+<ol class="arabic simple">
+<li><p>Inputs × Weights</p></li>
+<li><p>Adding Bias</p></li>
+<li><p>Applying Activation Function</p></li>
+</ol>
+<p>It <strong>squashes values to the range (0, 1)</strong> and is commonly used in early neural network models.</p>
+</section>
+<hr class="docutils" />
+<section id="derivative-of-sigmoid-its-impact">
+<h2><a class="toc-backref" href="#id15">Derivative of Sigmoid &amp; Its Impact</a><a class="headerlink" href="#derivative-of-sigmoid-its-impact" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>The derivative of the sigmoid function always lies between <strong>0 and 0.25</strong></p></li>
+<li><p>This is important during <strong>backpropagation</strong>, when gradients are used to update weights</p></li>
+<li><p>Due to chain rule, multiplying many small derivatives causes the <strong>vanishing gradient problem</strong></p></li>
+</ul>
+<p>Example:</p>
+<ul class="simple">
+<li><p>Multiple small gradients get multiplied (e.g., 0.2 × 0.01 × 0.1…)</p></li>
+<li><p>Final gradient becomes extremely small</p></li>
+<li><p>Weight updates become negligible → learning stops</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+w_{\text{new}} \approx w_{\text{old}}
+\]</div>
+<p>This prevents proper training in deep networks.</p>
+</section>
+<hr class="docutils" />
+<section id="main-disadvantages-of-sigmoid">
+<h2><a class="toc-backref" href="#id16">Main Disadvantages of Sigmoid</a><a class="headerlink" href="#main-disadvantages-of-sigmoid" title="Permalink to this heading">#</a></h2>
+<section id="vanishing-gradient-problem">
+<h3><a class="toc-backref" href="#id17">❌ 1. Vanishing Gradient Problem</a><a class="headerlink" href="#vanishing-gradient-problem" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Small derivatives (0 to 0.25) lead to tiny weight updates during backpropagation.</p></li>
+</ul>
+</section>
+<section id="id1">
+<h3><a class="toc-backref" href="#id18">❌ 2. Not Zero-Centered</a><a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Output lies between <strong>0 and 1</strong>, not symmetric around zero</p></li>
+<li><p>Makes gradient descent inefficient</p></li>
+<li><p>Nullifies efficient weight updates</p></li>
+</ul>
+<p>✅ Zero-centered functions help optimize weights faster
+(e.g., tanh outputs from −1 to 1)</p>
+</section>
+<section id="computationally-expensive">
+<h3><a class="toc-backref" href="#id19">❌ 3. Computationally Expensive</a><a class="headerlink" href="#computationally-expensive" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Sigmoid uses <strong>exponential operations (e⁻ˣ)</strong></p></li>
+<li><p>Slower on processors compared to simpler functions like ReLU</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id2">
+<h2><a class="toc-backref" href="#id20">Advantages of Sigmoid</a><a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<p>✔ Works well for <strong>binary classification</strong>
+✔ Outputs values close to <strong>0 or 1</strong> (good for interpretation)
+✔ Smooth and differentiable function</p>
+<p>However, it’s only practical in:</p>
+<ul class="simple">
+<li><p>Output layers of binary classification models</p></li>
+<li><p>Small or shallow neural networks</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="why-move-beyond-sigmoid">
+<h2><a class="toc-backref" href="#id21">Why Move Beyond Sigmoid?</a><a class="headerlink" href="#why-move-beyond-sigmoid" title="Permalink to this heading">#</a></h2>
+<p>Because of its:</p>
+<ul class="simple">
+<li><p>Vanishing gradient issues</p></li>
+<li><p>Non-zero-centered output</p></li>
+<li><p>Computational inefficiency</p></li>
+</ul>
+<p>Researchers introduced better activation functions like:</p>
+<ul class="simple">
+<li><p><strong>tanh</strong> (fixes zero-centering issue)</p></li>
+<li><p><strong>ReLU</strong> and its variants (avoids vanishing gradients)</p></li>
+</ul>
+<hr class="docutils" />
+<p><strong>Conclusion</strong></p>
+<p>Sigmoid was historically important but is <strong>not ideal for deep networks</strong> because:</p>
+<ul class="simple">
+<li><p>It slows or stops learning</p></li>
+<li><p>It doesn’t update weights efficiently</p></li>
+<li><p>It adds unnecessary computation</p></li>
+</ul>
+<p>It is now mostly used:
+✅ In <strong>output layers</strong> for binary classification
+❌ Not in <strong>hidden layers</strong> of deep neural networks</p>
+<p>Next, we move to <strong>tanh activation function</strong> as an improvement.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./ann\activation"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="overview.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Activation Function</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="02_part.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Tanh Activation Function</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#formula">✔ Formula</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#output-range">✔ Output Range</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivative-vanishing-gradient-problem">✅ Derivative &amp; Vanishing Gradient Problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#drawbacks-of-sigmoid">✅ Drawbacks of Sigmoid</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vanishing-gradients">❌ 1. Vanishing Gradients</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#not-zero-centered">❌ 2. Not Zero-Centered</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computationally-slow">❌ 3. Computationally Slow</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages-of-sigmoid">✅ Advantages of Sigmoid</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-disadvantages-recap">✅ Key Disadvantages Recap</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transition-to-better-alternatives">Transition to Better Alternatives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-sigmoid-activation-function">What is the Sigmoid Activation Function?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#derivative-of-sigmoid-its-impact">Derivative of Sigmoid &amp; Its Impact</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#main-disadvantages-of-sigmoid">Main Disadvantages of Sigmoid</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#vanishing-gradient-problem">❌ 1. Vanishing Gradient Problem</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">❌ 2. Not Zero-Centered</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#computationally-expensive">❌ 3. Computationally Expensive</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">Advantages of Sigmoid</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-move-beyond-sigmoid">Why Move Beyond Sigmoid?</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By svgoudar
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

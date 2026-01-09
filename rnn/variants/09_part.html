@@ -1,12 +1,13 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../../" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
     <title>Attention &#8212; Machine Learning Handbook</title>
   
@@ -28,53 +29,55 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=4c969af8" />
-    <link rel="stylesheet" type="text/css" href="../../_static/proof.css?v=b4b7a797" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-examples.css?v=e236af4b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.custom.css?v=7bc2f056" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.bundle.min.css?v=37217874" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-shadow.min.css?v=6227e517" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-punk.min.css?v=94669e23" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-noir.min.css?v=21a39f42" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-light.min.css?v=a18b2449" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-borderless.min.css?v=dbff53e4" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/micromodal.css?v=d7bf34ee" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=40389e5b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-examples.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.bundle.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-shadow.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-punk.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-noir.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-light.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-borderless.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/micromodal.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../../_static/jquery.js?v=5d32c60e"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../../_static/copybutton.js?v=7f8ff830"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
-    <script src="../../_static/tabs.js?v=3ee01567"></script>
-    <script src="../../_static/js/hoverxref.js?v=c95ade4f"></script>
-    <script src="../../_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
-    <script src="../../_static/js/micromodal.min.js?v=04d6302d"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../_static/tabs.js"></script>
+    <script src="../../_static/js/hoverxref.js"></script>
+    <script src="../../_static/js/tooltipster.bundle.min.js"></script>
+    <script src="../../_static/js/micromodal.min.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'rnn/variants/09_part';</script>
@@ -178,18 +181,7 @@
   
   
 </a></div>
-        <div class="sidebar-primary-item">
-
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -202,11 +194,28 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../ann/overview.html">Artificial Neural Network (ANN)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../ann/neural_network/overview.html">Neural Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/neural_network/00_part.html">Biological Neuron vs Artificial Neuron</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../ann/neural_network/01_part.html">Intuition</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../ann/neural_network/02_part.html">Problem Statement</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../ann/neural_network/03_part.html">Perceptron</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/neural_network/03.01_part.html">Multi-Layer Perceptron (MLP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/neural_network/03_part.html">Perceptron Model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../ann/neural_network/04_part.html">Multi-Layer Neural Networks</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../ann/neural_network/05_part.html">Vanishing Gradient Problem in Deep Learning</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../ann/training/overview.html">Training</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/training/01_part.html">Data Ingestion Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/training/02_part.html">Model Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/training/03_part.html">Loss Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/training/04_part.html">Optimizers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/training/05_part.html">Training Loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/training/06_part.html">Forward Propagation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/training/07_part.html">Backpropagation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/training/08_part.html">Weight Updation and the Chain Rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/training/09_part.html">Batch and Epoch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/training/10_part.html">Validation and Metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/training/11_part.html">Variants of Training in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/training/12_part.html">Training Failure Modes, Convergence Diagnostics, and Optimization Dynamics</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../ann/cost_loss_function/overview.html">Loss Function vs Cost Function</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -214,6 +223,16 @@
 <li class="toctree-l3"><a class="reference internal" href="../../ann/cost_loss_function/02_part.html">Loss Functions for Regression in Neural Networks</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../ann/cost_loss_function/03_part.html">Loss Functions for Classification</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../ann/cost_loss_function/04_part.html">Choice of Loss Function</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../ann/activation/overview.html">Activation Function</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/activation/01_part.html">Sigmoid Activation Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/activation/02_part.html">Tanh Activation Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/activation/03_part.html">ReLU</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../ann/activation/04_part.html">ELU (Exponential Linear Unit)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/activation/05_part.html">Softmax Activation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../ann/activation/06_part.html">Activation choice</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../ann/optimizers/overview.html">Optmizers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -275,8 +294,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../transformers/01_part.html">Architecture</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../transformers/02_part.html">The Transformer Encoder Layer (Deep Explanation)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../transformers/03_part.html">Positional Encoding</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../transformers/04_part.html"><strong>Residual Connection + Layer Normalization</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../transformers/05_part.html"><strong>Transformer Decoder Layer</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/04_part.html">Residual Connection + Layer Normalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/05_part.html">Transformer Decoder Layer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../transformers/06_part.html">Demonstration</a></li>
 </ul>
 </details></li>
@@ -336,9 +355,9 @@
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</button></div>
+</label></div>
       
     </div>
   
@@ -363,14 +382,14 @@
       
       <li><a href="https://colab.research.google.com/github/svgoudar/Learn-DeepLearning/blob/master/rnn/variants/09_part.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
-   title="Launch on Colab"
+   title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
 <span class="btn__icon-container">
   
-    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+    <img src="../../_static/images/logo_colab.png">
   </span>
 <span class="btn__text-container">Colab</span>
 </a>
@@ -510,9 +529,9 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</button>
+</label>
 </div></div>
       
     </div>
@@ -590,7 +609,7 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <nav class="contents" id="contents" role="doc-toc">
+  <div class="contents topic" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#attention" id="id16">Attention</a></p>
@@ -652,9 +671,9 @@ document.write(`
 </ul>
 </li>
 </ul>
-</nav>
+</div>
 <section id="attention">
-<h1><a class="toc-backref" href="#id16" role="doc-backlink">Attention</a><a class="headerlink" href="#attention" title="Link to this heading">#</a></h1>
+<h1><a class="toc-backref" href="#id16">Attention</a><a class="headerlink" href="#attention" title="Permalink to this heading">#</a></h1>
 <p>Attention allows a model to <strong>focus selectively</strong> on the most relevant parts of the input sequence when producing each element of the output.</p>
 <p>In formal terms, attention computes:</p>
 <div class="math notranslate nohighlight">
@@ -669,7 +688,7 @@ document.write(`
 </ul>
 <p>Weights are learned via similarity between <code class="docutils literal notranslate"><span class="pre">Q</span></code> and <code class="docutils literal notranslate"><span class="pre">K</span></code>.</p>
 <section id="goal-of-attention">
-<h2><a class="toc-backref" href="#id17" role="doc-backlink">Goal of Attention</a><a class="headerlink" href="#goal-of-attention" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id17">Goal of Attention</a><a class="headerlink" href="#goal-of-attention" title="Permalink to this heading">#</a></h2>
 <p>Attention learns <strong>how much each input token should “focus” on other tokens</strong> when producing an output.
 To do this, every token in a sequence is transformed into three vectors:</p>
 <ul class="simple">
@@ -680,18 +699,18 @@ To do this, every token in a sequence is transformed into three vectors:</p>
 </section>
 <hr class="docutils" />
 <section id="major-types-of-attention">
-<h2><a class="toc-backref" href="#id18" role="doc-backlink"><strong>Major Types of Attention</strong></a><a class="headerlink" href="#major-types-of-attention" title="Link to this heading">#</a></h2>
+<h2><a class="toc-backref" href="#id18"><strong>Major Types of Attention</strong></a><a class="headerlink" href="#major-types-of-attention" title="Permalink to this heading">#</a></h2>
 <section id="additive-attention-bahdanau-attention-2014">
-<h3><a class="toc-backref" href="#id19" role="doc-backlink">Additive Attention (Bahdanau Attention, 2014)</a><a class="headerlink" href="#additive-attention-bahdanau-attention-2014" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id19">Additive Attention (Bahdanau Attention, 2014)</a><a class="headerlink" href="#additive-attention-bahdanau-attention-2014" title="Permalink to this heading">#</a></h3>
 <blockquote>
 <div><p>The original attention mechanism for RNN-based Seq2Seq models.</p>
 </div></blockquote>
 <section id="used-in">
-<h4><a class="toc-backref" href="#id20" role="doc-backlink">Used In:</a><a class="headerlink" href="#used-in" title="Link to this heading">#</a></h4>
+<h4><a class="toc-backref" href="#id20">Used In:</a><a class="headerlink" href="#used-in" title="Permalink to this heading">#</a></h4>
 <p>Neural Machine Translation (Bahdanau et al., 2014)</p>
 </section>
 <section id="mechanism">
-<h4><a class="toc-backref" href="#id21" role="doc-backlink">Mechanism:</a><a class="headerlink" href="#mechanism" title="Link to this heading">#</a></h4>
+<h4><a class="toc-backref" href="#id21">Mechanism:</a><a class="headerlink" href="#mechanism" title="Permalink to this heading">#</a></h4>
 <ul class="simple">
 <li><p>Combines encoder hidden states <span class="math notranslate nohighlight">\(h_i\)</span> and decoder state <span class="math notranslate nohighlight">\(s_{t-1}\)</span></p></li>
 <li><p>Uses a small feed-forward network to learn attention scores.</p></li>
@@ -711,21 +730,21 @@ c_t = \sum_i \alpha_{t,i} h_i
 \]</div>
 </section>
 <section id="advantages">
-<h4><a class="toc-backref" href="#id22" role="doc-backlink">Advantages:</a><a class="headerlink" href="#advantages" title="Link to this heading">#</a></h4>
+<h4><a class="toc-backref" href="#id22">Advantages:</a><a class="headerlink" href="#advantages" title="Permalink to this heading">#</a></h4>
 <ul class="simple">
 <li><p>Handles long dependencies better than vanilla Seq2Seq</p></li>
 <li><p>Works well for smaller hidden dimensions</p></li>
 </ul>
 </section>
 <section id="disadvantage">
-<h4><a class="toc-backref" href="#id23" role="doc-backlink">Disadvantage:</a><a class="headerlink" href="#disadvantage" title="Link to this heading">#</a></h4>
+<h4><a class="toc-backref" href="#id23">Disadvantage:</a><a class="headerlink" href="#disadvantage" title="Permalink to this heading">#</a></h4>
 <ul class="simple">
 <li><p>Computationally expensive due to many matrix multiplications.</p></li>
 </ul>
 </section>
 <hr class="docutils" />
 <section id="demonstration">
-<h4><a class="toc-backref" href="#id24" role="doc-backlink">Demonstration</a><a class="headerlink" href="#demonstration" title="Link to this heading">#</a></h4>
+<h4><a class="toc-backref" href="#id24">Demonstration</a><a class="headerlink" href="#demonstration" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
@@ -815,12 +834,12 @@ Context vector:
 </section>
 </section>
 <section id="multiplicative-attention-luong-attention-2015">
-<h3><a class="toc-backref" href="#id25" role="doc-backlink">Multiplicative Attention (Luong Attention, 2015)</a><a class="headerlink" href="#multiplicative-attention-luong-attention-2015" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id25">Multiplicative Attention (Luong Attention, 2015)</a><a class="headerlink" href="#multiplicative-attention-luong-attention-2015" title="Permalink to this heading">#</a></h3>
 <blockquote>
 <div><p>A faster, more memory-efficient variant of Bahdanau’s attention.</p>
 </div></blockquote>
 <section id="id1">
-<h4><a class="toc-backref" href="#id26" role="doc-backlink">Mechanism:</a><a class="headerlink" href="#id1" title="Link to this heading">#</a></h4>
+<h4><a class="toc-backref" href="#id26">Mechanism:</a><a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h4>
 <ul class="simple">
 <li><p>Uses <strong>dot products</strong> instead of feedforward networks.</p></li>
 </ul>
@@ -843,21 +862,21 @@ c_t = \sum_i \alpha_{t,i} h_i
 \)</span>$</p>
 </section>
 <section id="id2">
-<h4><a class="toc-backref" href="#id27" role="doc-backlink">Advantages:</a><a class="headerlink" href="#id2" title="Link to this heading">#</a></h4>
+<h4><a class="toc-backref" href="#id27">Advantages:</a><a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h4>
 <ul class="simple">
 <li><p>Simpler and faster than additive attention</p></li>
 <li><p>Easier to train on GPUs</p></li>
 </ul>
 </section>
 <section id="id3">
-<h4><a class="toc-backref" href="#id28" role="doc-backlink">Disadvantage:</a><a class="headerlink" href="#id3" title="Link to this heading">#</a></h4>
+<h4><a class="toc-backref" href="#id28">Disadvantage:</a><a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h4>
 <ul class="simple">
 <li><p>Slightly less flexible for very different input-output spaces.</p></li>
 </ul>
 </section>
 <hr class="docutils" />
 <section id="id4">
-<h4><a class="toc-backref" href="#id29" role="doc-backlink">Demonstration</a><a class="headerlink" href="#id4" title="Link to this heading">#</a></h4>
+<h4><a class="toc-backref" href="#id29">Demonstration</a><a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
@@ -948,16 +967,16 @@ Context vector:
 </section>
 </section>
 <section id="self-attention-intra-attention">
-<h3><a class="toc-backref" href="#id30" role="doc-backlink">Self-Attention (Intra-Attention)</a><a class="headerlink" href="#self-attention-intra-attention" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id30">Self-Attention (Intra-Attention)</a><a class="headerlink" href="#self-attention-intra-attention" title="Permalink to this heading">#</a></h3>
 <blockquote>
 <div><p>Each element in a sequence attends to <strong>other elements in the same sequence.</strong></p>
 </div></blockquote>
 <section id="id5">
-<h4><a class="toc-backref" href="#id31" role="doc-backlink">Used In:</a><a class="headerlink" href="#id5" title="Link to this heading">#</a></h4>
+<h4><a class="toc-backref" href="#id31">Used In:</a><a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h4>
 <p>Transformers (e.g., BERT, GPT, T5)</p>
 </section>
 <section id="id6">
-<h4><a class="toc-backref" href="#id32" role="doc-backlink">Mechanism:</a><a class="headerlink" href="#id6" title="Link to this heading">#</a></h4>
+<h4><a class="toc-backref" href="#id32">Mechanism:</a><a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h4>
 <p>Instead of encoder-decoder cross attention, self-attention uses:
 $<span class="math notranslate nohighlight">\(
 Q = K = V = \text{same sequence embeddings}
@@ -969,7 +988,7 @@ Each token computes attention to all others in the same sentence.</p>
 \]</div>
 </section>
 <section id="id7">
-<h4><a class="toc-backref" href="#id33" role="doc-backlink">Advantages:</a><a class="headerlink" href="#id7" title="Link to this heading">#</a></h4>
+<h4><a class="toc-backref" href="#id33">Advantages:</a><a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h4>
 <ul class="simple">
 <li><p>Parallelizable</p></li>
 <li><p>Captures long-range dependencies efficiently</p></li>
@@ -977,14 +996,14 @@ Each token computes attention to all others in the same sentence.</p>
 </ul>
 </section>
 <section id="id8">
-<h4><a class="toc-backref" href="#id34" role="doc-backlink">Disadvantage:</a><a class="headerlink" href="#id8" title="Link to this heading">#</a></h4>
+<h4><a class="toc-backref" href="#id34">Disadvantage:</a><a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h4>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(O(n^2)\)</span> memory cost for long sequences.</p></li>
 </ul>
 </section>
 <hr class="docutils" />
 <section id="id9">
-<h4><a class="toc-backref" href="#id35" role="doc-backlink">Demonstration</a><a class="headerlink" href="#id9" title="Link to this heading">#</a></h4>
+<h4><a class="toc-backref" href="#id35">Demonstration</a><a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
@@ -1071,8 +1090,8 @@ Attention Matrix (who attends to whom):
 </section>
 </section>
 <section id="global-vs-local-attention">
-<h3><a class="toc-backref" href="#id36" role="doc-backlink">Global vs Local Attention</a><a class="headerlink" href="#global-vs-local-attention" title="Link to this heading">#</a></h3>
-<div class="pst-scrollable-table-container"><table class="table">
+<h3><a class="toc-backref" href="#id36">Global vs Local Attention</a><a class="headerlink" href="#global-vs-local-attention" title="Permalink to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Type</p></th>
 <th class="head"><p>Description</p></th>
@@ -1093,7 +1112,7 @@ Attention Matrix (who attends to whom):
 </div>
 <p>Local Attention ≈ “Sliding window” attention.</p>
 <section id="id10">
-<h4><a class="toc-backref" href="#id37" role="doc-backlink">Demonstration</a><a class="headerlink" href="#id10" title="Link to this heading">#</a></h4>
+<h4><a class="toc-backref" href="#id37">Demonstration</a><a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
@@ -1208,8 +1227,8 @@ Window: (3, 8, 5.804706573486328)
 </section>
 <hr class="docutils" />
 <section id="hard-vs-soft-attention">
-<h3><a class="toc-backref" href="#id38" role="doc-backlink">Hard vs Soft Attention</a><a class="headerlink" href="#hard-vs-soft-attention" title="Link to this heading">#</a></h3>
-<div class="pst-scrollable-table-container"><table class="table">
+<h3><a class="toc-backref" href="#id38">Hard vs Soft Attention</a><a class="headerlink" href="#hard-vs-soft-attention" title="Permalink to this heading">#</a></h3>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Type</p></th>
 <th class="head"><p>Description</p></th>
@@ -1231,7 +1250,7 @@ Window: (3, 8, 5.804706573486328)
 <p>Soft attention = smooth focus
 Hard attention = discrete focus (like human eye fixations)</p>
 <section id="id11">
-<h4><a class="toc-backref" href="#id39" role="doc-backlink">Demonstration</a><a class="headerlink" href="#id11" title="Link to this heading">#</a></h4>
+<h4><a class="toc-backref" href="#id39">Demonstration</a><a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
@@ -1329,12 +1348,12 @@ Hard Attention Picked Index: 2
 </section>
 <hr class="docutils" />
 <section id="multi-head-attention-transformer-attention">
-<h3><a class="toc-backref" href="#id40" role="doc-backlink">Multi-Head Attention (Transformer Attention)</a><a class="headerlink" href="#multi-head-attention-transformer-attention" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id40">Multi-Head Attention (Transformer Attention)</a><a class="headerlink" href="#multi-head-attention-transformer-attention" title="Permalink to this heading">#</a></h3>
 <blockquote>
 <div><p>Core of the Transformer architecture.</p>
 </div></blockquote>
 <section id="id12">
-<h4><a class="toc-backref" href="#id41" role="doc-backlink">Mechanism:</a><a class="headerlink" href="#id12" title="Link to this heading">#</a></h4>
+<h4><a class="toc-backref" href="#id41">Mechanism:</a><a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h4>
 <p>Instead of one attention operation, use <strong>multiple heads</strong> (parallel attentions) to learn different aspects of relationships.</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1346,14 +1365,14 @@ $<span class="math notranslate nohighlight">\(
 \)</span>$</p>
 </section>
 <section id="id13">
-<h4><a class="toc-backref" href="#id42" role="doc-backlink">Advantages:</a><a class="headerlink" href="#id13" title="Link to this heading">#</a></h4>
+<h4><a class="toc-backref" href="#id42">Advantages:</a><a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h4>
 <ul class="simple">
 <li><p>Learns multiple semantic relationships (syntax, meaning, position)</p></li>
 <li><p>Improves performance and generalization</p></li>
 </ul>
 </section>
 <section id="id14">
-<h4><a class="toc-backref" href="#id43" role="doc-backlink">Demonstration</a><a class="headerlink" href="#id14" title="Link to this heading">#</a></h4>
+<h4><a class="toc-backref" href="#id43">Demonstration</a><a class="headerlink" href="#id14" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
@@ -1446,7 +1465,7 @@ Attention weights shape: torch.Size([1, 4, 6, 6])
 </section>
 <hr class="docutils" />
 <section id="cross-attention">
-<h3><a class="toc-backref" href="#id44" role="doc-backlink">Cross-Attention</a><a class="headerlink" href="#cross-attention" title="Link to this heading">#</a></h3>
+<h3><a class="toc-backref" href="#id44">Cross-Attention</a><a class="headerlink" href="#cross-attention" title="Permalink to this heading">#</a></h3>
 <blockquote>
 <div><p>Used in encoder–decoder models (Transformers, BERT2BERT, etc.)</p>
 </div></blockquote>
@@ -1456,7 +1475,7 @@ Attention weights shape: torch.Size([1, 4, 6, 6])
 </ul>
 <p>Allows decoder to “look at” encoder outputs directly (e.g., in translation tasks).</p>
 <section id="id15">
-<h4><a class="toc-backref" href="#id45" role="doc-backlink">Demonstration</a><a class="headerlink" href="#id15" title="Link to this heading">#</a></h4>
+<h4><a class="toc-backref" href="#id45">Demonstration</a><a class="headerlink" href="#id15" title="Permalink to this heading">#</a></h4>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
@@ -1548,8 +1567,8 @@ Attention weights shape: torch.Size([1, 4, 4, 8])
 </section>
 <hr class="docutils" />
 <section id="summary-table">
-<h2><a class="toc-backref" href="#id46" role="doc-backlink"><strong>Summary Table</strong></a><a class="headerlink" href="#summary-table" title="Link to this heading">#</a></h2>
-<div class="pst-scrollable-table-container"><table class="table">
+<h2><a class="toc-backref" href="#id46"><strong>Summary Table</strong></a><a class="headerlink" href="#summary-table" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Type</p></th>
 <th class="head"><p>Key Feature</p></th>
@@ -1738,7 +1757,7 @@ By svgoudar
 
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2022.
       <br/>
     
   </p>

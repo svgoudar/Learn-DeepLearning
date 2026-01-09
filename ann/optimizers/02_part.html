@@ -1,14 +1,15 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../../" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Stochastic Gradient Descent (SGD) Optimizer &#8212; Machine Learning Handbook</title>
+    <title>Stochastic Gradient Descent (SGD) Optimizer in Deep Learning &#8212; Machine Learning Handbook</title>
   
   
   
@@ -28,60 +29,62 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=4c969af8" />
-    <link rel="stylesheet" type="text/css" href="../../_static/proof.css?v=b4b7a797" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-examples.css?v=e236af4b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.custom.css?v=7bc2f056" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.bundle.min.css?v=37217874" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-shadow.min.css?v=6227e517" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-punk.min.css?v=94669e23" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-noir.min.css?v=21a39f42" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-light.min.css?v=a18b2449" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-borderless.min.css?v=dbff53e4" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/micromodal.css?v=d7bf34ee" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=40389e5b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-examples.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.bundle.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-shadow.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-punk.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-noir.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-light.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-borderless.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/micromodal.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../../_static/jquery.js?v=5d32c60e"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../../_static/copybutton.js?v=7f8ff830"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
-    <script src="../../_static/tabs.js?v=3ee01567"></script>
-    <script src="../../_static/js/hoverxref.js?v=c95ade4f"></script>
-    <script src="../../_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
-    <script src="../../_static/js/micromodal.min.js?v=04d6302d"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../_static/tabs.js"></script>
+    <script src="../../_static/js/hoverxref.js"></script>
+    <script src="../../_static/js/tooltipster.bundle.min.js"></script>
+    <script src="../../_static/js/micromodal.min.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ann/optimizers/02_part';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Mini-batch Stochastic Gradient Descent" href="03_part.html" />
-    <link rel="prev" title="Gradient Descent Optimizer" href="01_part.html" />
+    <link rel="next" title="Mini-Batch Gradient Descent Optimizer" href="03_part.html" />
+    <link rel="prev" title="Gradient Descent Optimizer in Deep Learning" href="01_part.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -178,18 +181,7 @@
   
   
 </a></div>
-        <div class="sidebar-primary-item">
-
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -202,11 +194,34 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../overview.html">Artificial Neural Network (ANN)</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 has-children"><a class="reference internal" href="../neural_network/overview.html">Neural Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../neural_network/01_part.html">Intuition</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../neural_network/02_part.html">Problem Statement</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../neural_network/03_part.html">Perceptron</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../neural_network/04_part.html">Multi-Layer Neural Networks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../neural_network/00_part.html">Biological Neuron vs Artificial Neuron</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../neural_network/01_part.html">Neuron</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../neural_network/02_part.html">Neural Network House Price Prediction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../neural_network/03_part.html">Perceptron Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../neural_network/04_part.html">Multi-Layer Perceptron (MLP)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../neural_network/05_part.html">Vanishing Gradient Problem in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../neural_network/06_part.html">Vanishing Gradient Problem</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../gradient_descent/overview.html">Gradient Descent</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../gradient_descent/01_part.html">Batch Gradient Descent in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gradient_descent/02_part.html">Mini-Batch Gradient Descent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gradient_descent/03_part.html">Stochastic Gradient Descent (SGD)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../training/overview.html">Training</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../training/01_part.html">Data Ingestion Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/02_part.html">Model Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/03_part.html">Loss Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/04_part.html">Optimizers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/05_part.html">Training Loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/06_part.html">Forward Propagation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/07_part.html">Backpropagation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/08_part.html">Weight Updation and the Chain Rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/09_part.html">Batch and Epoch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/10_part.html">Validation and Metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/11_part.html">Variants of Training in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/12_part.html">Training Failure Modes, Convergence Diagnostics, and Optimization Dynamics</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../cost_loss_function/overview.html">Loss Function vs Cost Function</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -216,21 +231,33 @@
 <li class="toctree-l3"><a class="reference internal" href="../cost_loss_function/04_part.html">Choice of Loss Function</a></li>
 </ul>
 </details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../activation/overview.html">Activation Function</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../activation/01_part.html">Sigmoid Activation Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../activation/02_part.html">Tanh Activation Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../activation/03_part.html">ReLU</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../activation/04_part.html">Exponential Linear Unit (ELU / Exponential ReLU) in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../activation/05_part.html">Softmax Activation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../activation/06_part.html">Activation choice</a></li>
+</ul>
+</details></li>
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="overview.html">Optmizers</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="01_part.html">Gradient Descent Optimizer</a></li>
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">Stochastic Gradient Descent (SGD) Optimizer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="03_part.html">Mini-batch Stochastic Gradient Descent</a></li>
-<li class="toctree-l3"><a class="reference internal" href="04_part.html">SGD with Momentum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="01_part.html">Gradient Descent Optimizer in Deep Learning</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Stochastic Gradient Descent (SGD) Optimizer in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="03_part.html">Mini-Batch Gradient Descent Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="04_part.html">Momentum</a></li>
 <li class="toctree-l3"><a class="reference internal" href="05_part.html">Adagrad Optimizer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="06_part.html">Adadelta and RMSProp</a></li>
-<li class="toctree-l3"><a class="reference internal" href="07_part.html">Adam Optmizers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="06_part.html">Adadelta Optimizer in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="07_part.html">RMSProp Optimizer in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="08_part.html">Adam Optimizer</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2"><a class="reference internal" href="../techniques/01_part.html">Exploding Gradient Problem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../techniques/02_part.html">Weight Initializing Techniques</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../techniques/03_part.html">Dropout Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../techniques/02_part.html">Weight Initialization in Deep Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../techniques/03_part.html">Weight Initialization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../techniques/04_part.html">Optmization Techniques</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../techniques/05_part.html">Regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../techniques/06_part.html">Learning Rate Scheduling</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../cnn/overview.html">CNN (Convolution Neural Network)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -275,8 +302,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../transformers/01_part.html">Architecture</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../transformers/02_part.html">The Transformer Encoder Layer (Deep Explanation)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../transformers/03_part.html">Positional Encoding</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../transformers/04_part.html"><strong>Residual Connection + Layer Normalization</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../transformers/05_part.html"><strong>Transformer Decoder Layer</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/04_part.html">Residual Connection + Layer Normalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/05_part.html">Transformer Decoder Layer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../transformers/06_part.html">Demonstration</a></li>
 </ul>
 </details></li>
@@ -336,9 +363,9 @@
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</button></div>
+</label></div>
       
     </div>
   
@@ -363,14 +390,14 @@
       
       <li><a href="https://colab.research.google.com/github/svgoudar/Learn-DeepLearning/blob/master/ann/optimizers/02_part.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
-   title="Launch on Colab"
+   title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
 <span class="btn__icon-container">
   
-    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+    <img src="../../_static/images/logo_colab.png">
   </span>
 <span class="btn__text-container">Colab</span>
 </a>
@@ -510,9 +537,9 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</button>
+</label>
 </div></div>
       
     </div>
@@ -523,7 +550,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Stochastic Gradient Descent (SGD) Optimizer</h1>
+    <h1>Stochastic Gradient Descent (SGD) Optimizer in Deep Learning</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -533,12 +560,23 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concept">1️⃣ Concept</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-it-works">2️⃣ How it works</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages">3️⃣ Advantages</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#disadvantages">4️⃣ Disadvantages</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#noise-explanation">5️⃣ Noise explanation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-to-noise">6️⃣ Solution to noise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concept-overview">Concept Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-foundation">Mathematical Foundation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition">Intuition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-workflow">Training Workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variants-of-gradient-descent">Variants of Gradient Descent</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-problems-with-vanilla-sgd">Core Problems with Vanilla SGD</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-demonstration">PyTorch Demonstration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model">Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-with-sgd">Training with SGD</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#momentum-sgd-variant">Momentum: SGD Variant</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-hyperparameters">Practical Hyperparameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-with-modern-optimizers">Comparison with Modern Optimizers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-to-use-sgd">When to Use SGD</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaway">Key Takeaway</a></li>
 </ul>
             </nav>
         </div>
@@ -550,99 +588,287 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <nav class="contents" id="contents" role="doc-toc">
+  <div class="contents topic" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#stochastic-gradient-descent-sgd-optimizer" id="id1">Stochastic Gradient Descent (SGD) Optimizer</a></p>
+<li><p><a class="reference internal" href="#stochastic-gradient-descent-sgd-optimizer-in-deep-learning" id="id1">Stochastic Gradient Descent (SGD) Optimizer in Deep Learning</a></p>
 <ul>
-<li><p><a class="reference internal" href="#concept" id="id2">1️⃣ Concept</a></p></li>
-<li><p><a class="reference internal" href="#how-it-works" id="id3">2️⃣ How it works</a></p></li>
-<li><p><a class="reference internal" href="#advantages" id="id4">3️⃣ Advantages</a></p></li>
-<li><p><a class="reference internal" href="#disadvantages" id="id5">4️⃣ Disadvantages</a></p></li>
-<li><p><a class="reference internal" href="#noise-explanation" id="id6">5️⃣ Noise explanation</a></p></li>
-<li><p><a class="reference internal" href="#solution-to-noise" id="id7">6️⃣ Solution to noise</a></p></li>
+<li><p><a class="reference internal" href="#concept-overview" id="id2">Concept Overview</a></p></li>
+<li><p><a class="reference internal" href="#mathematical-foundation" id="id3">Mathematical Foundation</a></p></li>
+<li><p><a class="reference internal" href="#intuition" id="id4">Intuition</a></p></li>
+<li><p><a class="reference internal" href="#training-workflow" id="id5">Training Workflow</a></p></li>
+<li><p><a class="reference internal" href="#variants-of-gradient-descent" id="id6">Variants of Gradient Descent</a></p></li>
+<li><p><a class="reference internal" href="#core-problems-with-vanilla-sgd" id="id7">Core Problems with Vanilla SGD</a></p></li>
+<li><p><a class="reference internal" href="#pytorch-demonstration" id="id8">PyTorch Demonstration</a></p>
+<ul>
+<li><p><a class="reference internal" href="#dataset" id="id9">Dataset</a></p></li>
+<li><p><a class="reference internal" href="#model" id="id10">Model</a></p></li>
+<li><p><a class="reference internal" href="#training-with-sgd" id="id11">Training with SGD</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#momentum-sgd-variant" id="id12">Momentum: SGD Variant</a></p></li>
+<li><p><a class="reference internal" href="#practical-hyperparameters" id="id13">Practical Hyperparameters</a></p></li>
+<li><p><a class="reference internal" href="#comparison-with-modern-optimizers" id="id14">Comparison with Modern Optimizers</a></p></li>
+<li><p><a class="reference internal" href="#when-to-use-sgd" id="id15">When to Use SGD</a></p></li>
+<li><p><a class="reference internal" href="#key-takeaway" id="id16">Key Takeaway</a></p></li>
 </ul>
 </li>
 </ul>
-</nav>
-<section id="stochastic-gradient-descent-sgd-optimizer">
-<h1><a class="toc-backref" href="#id1" role="doc-backlink">Stochastic Gradient Descent (SGD) Optimizer</a><a class="headerlink" href="#stochastic-gradient-descent-sgd-optimizer" title="Link to this heading">#</a></h1>
+</div>
+<section id="stochastic-gradient-descent-sgd-optimizer-in-deep-learning">
+<h1><a class="toc-backref" href="#id1">Stochastic Gradient Descent (SGD) Optimizer in Deep Learning</a><a class="headerlink" href="#stochastic-gradient-descent-sgd-optimizer-in-deep-learning" title="Permalink to this heading">#</a></h1>
+<section id="concept-overview">
+<h2><a class="toc-backref" href="#id2">Concept Overview</a><a class="headerlink" href="#concept-overview" title="Permalink to this heading">#</a></h2>
+<p><strong>Stochastic Gradient Descent (SGD)</strong> is the fundamental optimization algorithm used to train neural networks.
+It updates model parameters by moving them in the direction that <strong>minimizes the loss function</strong>, using <strong>small random subsets of data</strong> (mini-batches).</p>
+<p>Unlike full-batch gradient descent, SGD introduces controlled randomness, which improves convergence speed and generalization.</p>
+</section>
 <hr class="docutils" />
-<section id="concept">
-<h2><a class="toc-backref" href="#id2" role="doc-backlink">1️⃣ Concept</a><a class="headerlink" href="#concept" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><strong>Goal:</strong> Reduce the loss function by updating weights during training.</p></li>
-<li><p><strong>Difference from Gradient Descent:</strong></p>
-<ul>
-<li><p>Gradient Descent (GD) uses <strong>all training data</strong> in one forward and backward pass.</p></li>
-<li><p>SGD uses <strong>one data point at a time</strong> for forward and backward propagation.</p></li>
-</ul>
-</li>
-</ul>
-<p><strong>Weight update formula:</strong></p>
+<section id="mathematical-foundation">
+<h2><a class="toc-backref" href="#id3">Mathematical Foundation</a><a class="headerlink" href="#mathematical-foundation" title="Permalink to this heading">#</a></h2>
+<p>Given model parameters <span class="math notranslate nohighlight">\(\theta\)</span> and loss <span class="math notranslate nohighlight">\(\mathcal{L}(\theta; x, y)\)</span>, the update rule is:</p>
 <div class="math notranslate nohighlight">
 \[
-w_{\text{new}} = w_{\text{old}} - \eta \frac{\partial L}{\partial w_{\text{old}}}
+\theta_{t+1} = \theta_t - \eta \cdot \nabla_\theta \mathcal{L}(\theta_t; x_i, y_i)
 \]</div>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\eta\)</span> = learning rate</p></li>
-<li><p><span class="math notranslate nohighlight">\(L\)</span> = loss for <strong>one sample</strong></p></li>
-</ul>
+<p>Where:</p>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Symbol</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\eta\)</span></p></td>
+<td><p>Learning rate</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\nabla \mathcal{L}\)</span></p></td>
+<td><p>Gradient of loss</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(x_i, y_i\)</span></p></td>
+<td><p>Sample or mini-batch</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 <hr class="docutils" />
-<section id="how-it-works">
-<h2><a class="toc-backref" href="#id3" role="doc-backlink">2️⃣ How it works</a><a class="headerlink" href="#how-it-works" title="Link to this heading">#</a></h2>
+<section id="intuition">
+<h2><a class="toc-backref" href="#id4">Intuition</a><a class="headerlink" href="#intuition" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Explanation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Random sampling</p></td>
+<td><p>Introduces noise that helps escape local minima</p></td>
+</tr>
+<tr class="row-odd"><td><p>Frequent updates</p></td>
+<td><p>Faster convergence than batch GD</p></td>
+</tr>
+<tr class="row-even"><td><p>Noise in gradients</p></td>
+<td><p>Improves generalization</p></td>
+</tr>
+<tr class="row-odd"><td><p>Memory efficient</p></td>
+<td><p>Scales to large datasets</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="training-workflow">
+<h2><a class="toc-backref" href="#id5">Training Workflow</a><a class="headerlink" href="#training-workflow" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p>Pick <strong>one data point</strong>.</p></li>
-<li><p>Compute predicted output <span class="math notranslate nohighlight">\(\hat{y}\)</span>.</p></li>
-<li><p>Calculate loss <span class="math notranslate nohighlight">\(L(y, \hat{y})\)</span>.</p></li>
-<li><p>Update weights using gradient.</p></li>
-<li><p>Repeat for next data point.</p></li>
-</ol>
-<ul class="simple">
-<li><p><strong>One epoch:</strong> passing <strong>all data points once</strong>.</p></li>
-<li><p>If 1000 points → 1000 iterations per epoch.</p></li>
-</ul>
-</section>
-<hr class="docutils" />
-<section id="advantages">
-<h2><a class="toc-backref" href="#id4" role="doc-backlink">3️⃣ Advantages</a><a class="headerlink" href="#advantages" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><strong>Memory efficient:</strong> Can train on systems with limited RAM or GPU.</p></li>
-<li><p><strong>Scales to large datasets:</strong> Avoids loading all data at once.</p></li>
-</ul>
-</section>
-<hr class="docutils" />
-<section id="disadvantages">
-<h2><a class="toc-backref" href="#id5" role="doc-backlink">4️⃣ Disadvantages</a><a class="headerlink" href="#disadvantages" title="Link to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p><strong>Time-consuming:</strong> Updating weights per data point is slow for large datasets.</p></li>
-<li><p><strong>Noisy updates:</strong> Convergence path jumps around, not smooth like GD.</p></li>
-<li><p><strong>Slower convergence:</strong> May take more epochs to reach the global minimum.</p></li>
+<li><p>Initialize model parameters</p></li>
+<li><p>Sample mini-batch from dataset</p></li>
+<li><p>Compute predictions</p></li>
+<li><p>Compute loss</p></li>
+<li><p>Backpropagate gradients</p></li>
+<li><p>Update parameters</p></li>
+<li><p>Repeat until convergence</p></li>
 </ol>
 </section>
 <hr class="docutils" />
-<section id="noise-explanation">
-<h2><a class="toc-backref" href="#id6" role="doc-backlink">5️⃣ Noise explanation</a><a class="headerlink" href="#noise-explanation" title="Link to this heading">#</a></h2>
+<section id="variants-of-gradient-descent">
+<h2><a class="toc-backref" href="#id6">Variants of Gradient Descent</a><a class="headerlink" href="#variants-of-gradient-descent" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variant</p></th>
+<th class="head"><p>Update Data</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Batch GD</p></td>
+<td><p>Entire dataset</p></td>
+</tr>
+<tr class="row-odd"><td><p>SGD</p></td>
+<td><p>Single sample</p></td>
+</tr>
+<tr class="row-even"><td><p>Mini-batch SGD</p></td>
+<td><p>Small batch (most common)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="core-problems-with-vanilla-sgd">
+<h2><a class="toc-backref" href="#id7">Core Problems with Vanilla SGD</a><a class="headerlink" href="#core-problems-with-vanilla-sgd" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Issue</p></th>
+<th class="head"><p>Effect</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Slow convergence</p></td>
+<td><p>Zig-zag behavior</p></td>
+</tr>
+<tr class="row-odd"><td><p>Sensitive to learning rate</p></td>
+<td><p>Can diverge</p></td>
+</tr>
+<tr class="row-even"><td><p>Gets stuck in plateaus</p></td>
+<td><p>Slow progress</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>These led to enhanced variants such as <strong>Momentum, RMSProp, Adam</strong>.</p>
+</section>
+<hr class="docutils" />
+<section id="pytorch-demonstration">
+<h2><a class="toc-backref" href="#id8">PyTorch Demonstration</a><a class="headerlink" href="#pytorch-demonstration" title="Permalink to this heading">#</a></h2>
+<section id="dataset">
+<h3><a class="toc-backref" href="#id9">Dataset</a><a class="headerlink" href="#dataset" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_moons</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">make_moons</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">long</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="model">
+<h3><a class="toc-backref" href="#id10">Model</a><a class="headerlink" href="#model" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+    <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">32</span><span class="p">),</span>
+    <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+    <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="training-with-sgd">
+<h3><a class="toc-backref" href="#id11">Training with SGD</a><a class="headerlink" href="#training-with-sgd" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">):</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="momentum-sgd-variant">
+<h2><a class="toc-backref" href="#id12">Momentum: SGD Variant</a><a class="headerlink" href="#momentum-sgd-variant" title="Permalink to this heading">#</a></h2>
+<p><strong>Momentum</strong> accelerates SGD by accumulating past gradients:</p>
+<div class="math notranslate nohighlight">
+\[
+v_t = \gamma v_{t-1} + \eta \nabla \mathcal{L}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\theta_{t+1} = \theta_t - v_t
+\]</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">momentum</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="practical-hyperparameters">
+<h2><a class="toc-backref" href="#id13">Practical Hyperparameters</a><a class="headerlink" href="#practical-hyperparameters" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Typical Value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Learning rate</p></td>
+<td><p>0.1, 0.01, 0.001</p></td>
+</tr>
+<tr class="row-odd"><td><p>Momentum</p></td>
+<td><p>0.9</p></td>
+</tr>
+<tr class="row-even"><td><p>Batch size</p></td>
+<td><p>32–256</p></td>
+</tr>
+<tr class="row-odd"><td><p>Weight decay</p></td>
+<td><p>1e-4</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="comparison-with-modern-optimizers">
+<h2><a class="toc-backref" href="#id14">Comparison with Modern Optimizers</a><a class="headerlink" href="#comparison-with-modern-optimizers" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Optimizer</p></th>
+<th class="head"><p>Strength</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>SGD</p></td>
+<td><p>Strong generalization</p></td>
+</tr>
+<tr class="row-odd"><td><p>Adam</p></td>
+<td><p>Fast convergence</p></td>
+</tr>
+<tr class="row-even"><td><p>RMSProp</p></td>
+<td><p>Handles noisy gradients</p></td>
+</tr>
+<tr class="row-odd"><td><p>Adagrad</p></td>
+<td><p>Sparse data</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="when-to-use-sgd">
+<h2><a class="toc-backref" href="#id15">When to Use SGD</a><a class="headerlink" href="#when-to-use-sgd" title="Permalink to this heading">#</a></h2>
+<p>Use SGD when:</p>
 <ul class="simple">
-<li><p>Because each weight update is based on <strong>one sample</strong>, the loss function fluctuates.</p></li>
-<li><p>The training curve is jagged rather than smooth.</p></li>
-<li><p>The global minimum is eventually reached, but the path is less stable.</p></li>
+<li><p>Training very large models</p></li>
+<li><p>You need strong generalization</p></li>
+<li><p>You want stable long-term convergence</p></li>
+</ul>
+<p>Use Adam when:</p>
+<ul class="simple">
+<li><p>Rapid convergence is required</p></li>
+<li><p>Dataset is noisy or sparse</p></li>
 </ul>
 </section>
 <hr class="docutils" />
-<section id="solution-to-noise">
-<h2><a class="toc-backref" href="#id7" role="doc-backlink">6️⃣ Solution to noise</a><a class="headerlink" href="#solution-to-noise" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><strong>Mini-batch SGD:</strong> Uses a small batch of data points (e.g., 32, 64) instead of one.</p></li>
-<li><p>Reduces noise and speeds up convergence while keeping memory requirements low.</p></li>
-</ul>
-<hr class="docutils" />
-<p><strong>Summary:</strong></p>
-<ul class="simple">
-<li><p><strong>SGD = weight update per sample</strong> → memory efficient, introduces noise, slower convergence.</p></li>
-<li><p><strong>Mini-batch SGD = weight update per batch</strong> → balances speed, stability, and memory.</p></li>
-</ul>
+<section id="key-takeaway">
+<h2><a class="toc-backref" href="#id16">Key Takeaway</a><a class="headerlink" href="#key-takeaway" title="Permalink to this heading">#</a></h2>
+<blockquote>
+<div><p><strong>SGD is the foundation of deep learning optimization; modern optimizers are engineered improvements on its principles.</strong></p>
+</div></blockquote>
 </section>
 </section>
 
@@ -682,7 +908,7 @@ w_{\text{new}} = w_{\text{old}} - \eta \frac{\partial L}{\partial w_{\text{old}}
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Gradient Descent Optimizer</p>
+        <p class="prev-next-title">Gradient Descent Optimizer in Deep Learning</p>
       </div>
     </a>
     <a class="right-next"
@@ -690,7 +916,7 @@ w_{\text{new}} = w_{\text{old}} - \eta \frac{\partial L}{\partial w_{\text{old}}
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Mini-batch Stochastic Gradient Descent</p>
+        <p class="prev-next-title">Mini-Batch Gradient Descent Optimizer</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -710,12 +936,23 @@ w_{\text{new}} = w_{\text{old}} - \eta \frac{\partial L}{\partial w_{\text{old}}
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concept">1️⃣ Concept</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-it-works">2️⃣ How it works</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages">3️⃣ Advantages</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#disadvantages">4️⃣ Disadvantages</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#noise-explanation">5️⃣ Noise explanation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solution-to-noise">6️⃣ Solution to noise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concept-overview">Concept Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-foundation">Mathematical Foundation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition">Intuition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-workflow">Training Workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variants-of-gradient-descent">Variants of Gradient Descent</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-problems-with-vanilla-sgd">Core Problems with Vanilla SGD</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-demonstration">PyTorch Demonstration</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model">Model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-with-sgd">Training with SGD</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#momentum-sgd-variant">Momentum: SGD Variant</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-hyperparameters">Practical Hyperparameters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#comparison-with-modern-optimizers">Comparison with Modern Optimizers</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-to-use-sgd">When to Use SGD</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaway">Key Takeaway</a></li>
 </ul>
   </nav></div>
 
@@ -740,7 +977,7 @@ By svgoudar
 
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2022.
       <br/>
     
   </p>

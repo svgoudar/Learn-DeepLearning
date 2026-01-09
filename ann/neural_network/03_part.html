@@ -1,14 +1,15 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../../" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Perceptron &#8212; Machine Learning Handbook</title>
+    <title>Perceptron Model &#8212; Machine Learning Handbook</title>
   
   
   
@@ -28,60 +29,62 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=4c969af8" />
-    <link rel="stylesheet" type="text/css" href="../../_static/proof.css?v=b4b7a797" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-examples.css?v=e236af4b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.custom.css?v=7bc2f056" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.bundle.min.css?v=37217874" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-shadow.min.css?v=6227e517" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-punk.min.css?v=94669e23" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-noir.min.css?v=21a39f42" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-light.min.css?v=a18b2449" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-borderless.min.css?v=dbff53e4" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/micromodal.css?v=d7bf34ee" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=40389e5b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-examples.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.bundle.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-shadow.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-punk.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-noir.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-light.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-borderless.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/micromodal.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../../_static/jquery.js?v=5d32c60e"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../../_static/copybutton.js?v=7f8ff830"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
-    <script src="../../_static/tabs.js?v=3ee01567"></script>
-    <script src="../../_static/js/hoverxref.js?v=c95ade4f"></script>
-    <script src="../../_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
-    <script src="../../_static/js/micromodal.min.js?v=04d6302d"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../_static/tabs.js"></script>
+    <script src="../../_static/js/hoverxref.js"></script>
+    <script src="../../_static/js/tooltipster.bundle.min.js"></script>
+    <script src="../../_static/js/micromodal.min.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ann/neural_network/03_part';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Multi-Layer Neural Networks" href="04_part.html" />
-    <link rel="prev" title="Problem Statement" href="02_part.html" />
+    <link rel="prev" title="Multi-Layer Perceptron (MLP)" href="03.01_part.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -178,18 +181,7 @@
   
   
 </a></div>
-        <div class="sidebar-primary-item">
-
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -202,11 +194,28 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../overview.html">Artificial Neural Network (ANN)</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="overview.html">Neural Network</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="00_part.html">Biological Neuron vs Artificial Neuron</a></li>
 <li class="toctree-l3"><a class="reference internal" href="01_part.html">Intuition</a></li>
 <li class="toctree-l3"><a class="reference internal" href="02_part.html">Problem Statement</a></li>
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">Perceptron</a></li>
+<li class="toctree-l3"><a class="reference internal" href="03.01_part.html">Multi-Layer Perceptron (MLP)</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Perceptron Model</a></li>
 <li class="toctree-l3"><a class="reference internal" href="04_part.html">Multi-Layer Neural Networks</a></li>
 <li class="toctree-l3"><a class="reference internal" href="05_part.html">Vanishing Gradient Problem in Deep Learning</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../training/overview.html">Training</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../training/01_part.html">Data Ingestion Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/02_part.html">Model Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/03_part.html">Loss Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/04_part.html">Optimizers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/05_part.html">Training Loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/06_part.html">Forward Propagation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/07_part.html">Backpropagation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/08_part.html">Weight Updation and the Chain Rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/09_part.html">Batch and Epoch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/10_part.html">Validation and Metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/11_part.html">Variants of Training in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/12_part.html">Training Failure Modes, Convergence Diagnostics, and Optimization Dynamics</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../cost_loss_function/overview.html">Loss Function vs Cost Function</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -214,6 +223,16 @@
 <li class="toctree-l3"><a class="reference internal" href="../cost_loss_function/02_part.html">Loss Functions for Regression in Neural Networks</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../cost_loss_function/03_part.html">Loss Functions for Classification</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../cost_loss_function/04_part.html">Choice of Loss Function</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../activation/overview.html">Activation Function</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../activation/01_part.html">Sigmoid Activation Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../activation/02_part.html">Tanh Activation Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../activation/03_part.html">ReLU</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../activation/04_part.html">ELU (Exponential Linear Unit)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../activation/05_part.html">Softmax Activation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../activation/06_part.html">Activation choice</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../optimizers/overview.html">Optmizers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -275,8 +294,8 @@
 <li class="toctree-l2"><a class="reference internal" href="../../transformers/01_part.html">Architecture</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../transformers/02_part.html">The Transformer Encoder Layer (Deep Explanation)</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../transformers/03_part.html">Positional Encoding</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../transformers/04_part.html"><strong>Residual Connection + Layer Normalization</strong></a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../transformers/05_part.html"><strong>Transformer Decoder Layer</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/04_part.html">Residual Connection + Layer Normalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/05_part.html">Transformer Decoder Layer</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../transformers/06_part.html">Demonstration</a></li>
 </ul>
 </details></li>
@@ -336,9 +355,9 @@
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</button></div>
+</label></div>
       
     </div>
   
@@ -363,14 +382,14 @@
       
       <li><a href="https://colab.research.google.com/github/svgoudar/Learn-DeepLearning/blob/master/ann/neural_network/03_part.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
-   title="Launch on Colab"
+   title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
 <span class="btn__icon-container">
   
-    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+    <img src="../../_static/images/logo_colab.png">
   </span>
 <span class="btn__text-container">Colab</span>
 </a>
@@ -510,9 +529,9 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</button>
+</label>
 </div></div>
       
     </div>
@@ -523,7 +542,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Perceptron</h1>
+    <h1>Perceptron Model</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -533,36 +552,20 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-scenario">Example Scenario</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture-of-a-perceptron">✅ Architecture of a Perceptron</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#input-layer">1️⃣ Input Layer</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hidden-layer-single-neuron">2️⃣ Hidden Layer (Single Neuron)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concept-and-intuition"><strong>1. Concept and Intuition</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-perceptron-matters-in-deep-learning"><strong>2. Why the Perceptron Matters in Deep Learning</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-the-perceptron-learning-rule"><strong>3. Training the Perceptron (Learning Rule)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitation-of-a-single-perceptron"><strong>4. Limitation of a Single Perceptron</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perceptron-in-modern-deep-learning-context"><strong>5. Perceptron in Modern Deep Learning Context</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-demonstration"><strong>6. PyTorch Demonstration</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-linearly-separable"><strong>Dataset (Linearly Separable)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><strong>Perceptron Model</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-loop"><strong>Training Loop</strong></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-components">✅ Core Components</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#weights-w-1-w-2">✔ Weights (<span class="math notranslate nohighlight">\(w_1, w_2\)</span>)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-b">✔ Bias (<span class="math notranslate nohighlight">\(b\)</span>)</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computation-steps">✅ Computation Steps</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-weighted-sum-linear-combination">✅ Step 1: Weighted Sum (Linear Combination)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-activation-function">✅ Step 2: Activation Function</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-and-weight-update">✅ Error and Weight Update</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perceptron-models-overview">Perceptron Models Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-single-layer-perceptron-works">How Single-Layer Perceptron Works</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages-of-single-layer-perceptron">Advantages of Single-Layer Perceptron</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations-of-single-layer-perceptron">❌ Limitations of Single-Layer Perceptron</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-move-to-multi-layer-perceptron-mlp">Why Move to Multi-Layer Perceptron (MLP)?</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-propagation">1. Forward Propagation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-propagation">2. Backward Propagation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-cost-functions">3. Loss/Cost Functions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizers">4. Optimizers</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-activation-functions">5. Multiple Activation Functions</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transition-to-deep-learning">Transition to Deep Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variants-and-extensions"><strong>7. Variants and Extensions</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary"><strong>8. Summary</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-insight"><strong>Key Insight</strong></a></li>
 </ul>
             </nav>
         </div>
@@ -574,191 +577,241 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="perceptron">
-<h1>Perceptron<a class="headerlink" href="#perceptron" title="Link to this heading">#</a></h1>
-<p>A <strong>Perceptron</strong> is the simplest form of a neural network and is also called a <strong>single-layer neural network</strong>. It is mainly used for <strong>binary classification</strong> problems.</p>
-<section id="example-scenario">
-<h2>Example Scenario<a class="headerlink" href="#example-scenario" title="Link to this heading">#</a></h2>
-<p>You have a dataset with:</p>
+  <div class="contents topic" id="contents">
+<p class="topic-title">Contents</p>
 <ul class="simple">
-<li><p><strong>Features</strong>: IQ and Study Hours</p></li>
-<li><p><strong>Output</strong>: Pass or Fail (binary)</p></li>
-</ul>
-<p>The perceptron predicts whether a person will pass or fail based on these inputs.</p>
-</section>
-<hr class="docutils" />
-<section id="architecture-of-a-perceptron">
-<h2>✅ Architecture of a Perceptron<a class="headerlink" href="#architecture-of-a-perceptron" title="Link to this heading">#</a></h2>
-<section id="input-layer">
-<h3>1️⃣ Input Layer<a class="headerlink" href="#input-layer" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Contains one node for each input feature.</p></li>
-<li><p>Example:</p>
+<li><p><a class="reference internal" href="#perceptron-model" id="id2">Perceptron Model</a></p>
 <ul>
-<li><p><span class="math notranslate nohighlight">\(x_1 = \text{IQ}\)</span></p></li>
-<li><p><span class="math notranslate nohighlight">\(x_2 = \text{Study Hours}\)</span></p></li>
+<li><p><a class="reference internal" href="#concept-and-intuition" id="id3"><strong>1. Concept and Intuition</strong></a></p></li>
+<li><p><a class="reference internal" href="#why-the-perceptron-matters-in-deep-learning" id="id4"><strong>2. Why the Perceptron Matters in Deep Learning</strong></a></p></li>
+<li><p><a class="reference internal" href="#training-the-perceptron-learning-rule" id="id5"><strong>3. Training the Perceptron (Learning Rule)</strong></a></p></li>
+<li><p><a class="reference internal" href="#limitation-of-a-single-perceptron" id="id6"><strong>4. Limitation of a Single Perceptron</strong></a></p></li>
+<li><p><a class="reference internal" href="#perceptron-in-modern-deep-learning-context" id="id7"><strong>5. Perceptron in Modern Deep Learning Context</strong></a></p></li>
+<li><p><a class="reference internal" href="#pytorch-demonstration" id="id8"><strong>6. PyTorch Demonstration</strong></a></p>
+<ul>
+<li><p><a class="reference internal" href="#dataset-linearly-separable" id="id9"><strong>Dataset (Linearly Separable)</strong></a></p></li>
+<li><p><a class="reference internal" href="#id1" id="id10"><strong>Perceptron Model</strong></a></p></li>
+<li><p><a class="reference internal" href="#training-loop" id="id11"><strong>Training Loop</strong></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#variants-and-extensions" id="id12"><strong>7. Variants and Extensions</strong></a></p></li>
+<li><p><a class="reference internal" href="#summary" id="id13"><strong>8. Summary</strong></a></p></li>
+<li><p><a class="reference internal" href="#key-insight" id="id14"><strong>Key Insight</strong></a></p></li>
 </ul>
 </li>
 </ul>
-</section>
-<section id="hidden-layer-single-neuron">
-<h3>2️⃣ Hidden Layer (Single Neuron)<a class="headerlink" href="#hidden-layer-single-neuron" title="Link to this heading">#</a></h3>
-<p>Although called “hidden layer,” in a perceptron there is just <strong>one neuron</strong> performing computation.</p>
-</section>
-</section>
+</div>
+<section id="perceptron-model">
+<h1><a class="toc-backref" href="#id2">Perceptron Model</a><a class="headerlink" href="#perceptron-model" title="Permalink to this heading">#</a></h1>
 <hr class="docutils" />
-<section id="core-components">
-<h2>✅ Core Components<a class="headerlink" href="#core-components" title="Link to this heading">#</a></h2>
-<section id="weights-w-1-w-2">
-<h3>✔ Weights (<span class="math notranslate nohighlight">\(w_1, w_2\)</span>)<a class="headerlink" href="#weights-w-1-w-2" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Each input is connected to the neuron via a weight.</p></li>
-<li><p>Weights control the influence of each feature.</p></li>
-</ul>
-</section>
-<section id="bias-b">
-<h3>✔ Bias (<span class="math notranslate nohighlight">\(b\)</span>)<a class="headerlink" href="#bias-b" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p>A constant added to prevent the model from producing zero output.</p></li>
-<li><p>Helps the neuron activate even when the weighted sum is zero.</p></li>
-</ul>
-</section>
-</section>
-<hr class="docutils" />
-<section id="computation-steps">
-<h2>✅ Computation Steps<a class="headerlink" href="#computation-steps" title="Link to this heading">#</a></h2>
-<section id="step-1-weighted-sum-linear-combination">
-<h3>✅ Step 1: Weighted Sum (Linear Combination)<a class="headerlink" href="#step-1-weighted-sum-linear-combination" title="Link to this heading">#</a></h3>
+<section id="concept-and-intuition">
+<h2><a class="toc-backref" href="#id3"><strong>1. Concept and Intuition</strong></a><a class="headerlink" href="#concept-and-intuition" title="Permalink to this heading">#</a></h2>
+<p>The <strong>Perceptron</strong> is the simplest form of a neural network and the foundational building block of deep learning.
+It models a single artificial neuron that performs <strong>linear classification</strong>.</p>
+<p>Biological analogy:</p>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Biological Neuron</p></th>
+<th class="head"><p>Perceptron</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Dendrites</p></td>
+<td><p>Inputs <span class="math notranslate nohighlight">\(x_1, x_2, \dots, x_n\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Synapse</p></td>
+<td><p>Weights <span class="math notranslate nohighlight">\(w_1, w_2, \dots, w_n\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Cell body</p></td>
+<td><p>Weighted sum</p></td>
+</tr>
+<tr class="row-odd"><td><p>Axon</p></td>
+<td><p>Output</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Mathematical model:</p>
 <div class="math notranslate nohighlight">
 \[
-z = \sum (w_i \cdot x_i) + b = w_1x_1 + w_2x_2 + b
+y = f(\mathbf{w}^T \mathbf{x} + b)
 \]</div>
-<p>This is similar to the equation of a linear model:
-$<span class="math notranslate nohighlight">\(
-y = mx + c \quad \text{or} \quad \beta_1x_1 + \beta_2x_2 + b
-\)</span>$</p>
-</section>
-<section id="step-2-activation-function">
-<h3>✅ Step 2: Activation Function<a class="headerlink" href="#step-2-activation-function" title="Link to this heading">#</a></h3>
-<p>The activation function transforms ( z ) into an output (0 or 1).</p>
-<p>Common activation functions:</p>
+<p>where</p>
 <ul class="simple">
-<li><p><strong>Step Function</strong></p>
-<ul>
-<li><p>If <span class="math notranslate nohighlight">\(z \leq 0\)</span> → 0</p></li>
-<li><p>If <span class="math notranslate nohighlight">\(z &gt; 0\)</span> → 1</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{x}\)</span> = input vector</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{w}\)</span> = weight vector</p></li>
+<li><p><span class="math notranslate nohighlight">\(b\)</span> = bias</p></li>
+<li><p><span class="math notranslate nohighlight">\(f(\cdot)\)</span> = activation function</p></li>
 </ul>
-</li>
-<li><p><strong>Sigmoid Function</strong></p>
-<ul>
-<li><p>Converts output to range (0,1)</p></li>
-<li><p>Uses 0.5 as threshold</p></li>
-</ul>
-</li>
-</ul>
+</section>
+<hr class="docutils" />
+<section id="why-the-perceptron-matters-in-deep-learning">
+<h2><a class="toc-backref" href="#id4"><strong>2. Why the Perceptron Matters in Deep Learning</strong></a><a class="headerlink" href="#why-the-perceptron-matters-in-deep-learning" title="Permalink to this heading">#</a></h2>
+<p>The perceptron provides the <strong>core abstraction</strong> used by all deep networks:</p>
+<blockquote>
+<div><p><strong>Linear transformation → Non-linearity</strong></p>
+</div></blockquote>
+<p>Every layer in a deep neural network is essentially a <strong>vectorized extension of perceptrons</strong>.</p>
+</section>
+<hr class="docutils" />
+<section id="training-the-perceptron-learning-rule">
+<h2><a class="toc-backref" href="#id5"><strong>3. Training the Perceptron (Learning Rule)</strong></a><a class="headerlink" href="#training-the-perceptron-learning-rule" title="Permalink to this heading">#</a></h2>
+<p>For binary classification with labels (y \in {-1, +1}):</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{y} = \text{sign}(\mathbf{w}^T \mathbf{x} + b)
+\]</div>
+<p>Update rule:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{w} \leftarrow \mathbf{w} + \eta (y - \hat{y}) \mathbf{x}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+b \leftarrow b + \eta (y - \hat{y})
+\]</div>
+<p>This is a form of <strong>gradient descent on a hinge-like loss</strong>.</p>
+</section>
+<hr class="docutils" />
+<section id="limitation-of-a-single-perceptron">
+<h2><a class="toc-backref" href="#id6"><strong>4. Limitation of a Single Perceptron</strong></a><a class="headerlink" href="#limitation-of-a-single-perceptron" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Limitation</p></th>
+<th class="head"><p>Explanation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Linearly separable only</p></td>
+<td><p>Cannot learn XOR</p></td>
+</tr>
+<tr class="row-odd"><td><p>No hidden layers</p></td>
+<td><p>No representation learning</p></td>
+</tr>
+<tr class="row-even"><td><p>Hard decision boundary</p></td>
+<td><p>Not differentiable everywhere</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>This limitation motivates <strong>multi-layer perceptrons (MLPs)</strong> and deep networks.</p>
+</section>
+<hr class="docutils" />
+<section id="perceptron-in-modern-deep-learning-context">
+<h2><a class="toc-backref" href="#id7"><strong>5. Perceptron in Modern Deep Learning Context</strong></a><a class="headerlink" href="#perceptron-in-modern-deep-learning-context" title="Permalink to this heading">#</a></h2>
+<p>A deep network layer is a vectorized perceptron:</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{Y} = f(\mathbf{XW} + \mathbf{b})
+\]</div>
+<p>Perceptron → MLP → Deep Neural Network</p>
+</section>
+<hr class="docutils" />
+<section id="pytorch-demonstration">
+<h2><a class="toc-backref" href="#id8"><strong>6. PyTorch Demonstration</strong></a><a class="headerlink" href="#pytorch-demonstration" title="Permalink to this heading">#</a></h2>
+<section id="dataset-linearly-separable">
+<h3><a class="toc-backref" href="#id9"><strong>Dataset (Linearly Separable)</strong></a><a class="headerlink" href="#dataset-linearly-separable" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+
+<span class="c1"># Simple dataset</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">],</span>
+                  <span class="p">[</span><span class="mf">1.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">],</span>
+                  <span class="p">[</span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.0</span><span class="p">],</span>
+                  <span class="p">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]])</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">float</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="id1">
+<h3><a class="toc-backref" href="#id10"><strong>Perceptron Model</strong></a><a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Perceptron</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">linear</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">torch</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">linear</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="training-loop">
+<h3><a class="toc-backref" href="#id11"><strong>Training Loop</strong></a><a class="headerlink" href="#training-loop" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">Perceptron</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">xi</span><span class="p">,</span> <span class="n">yi</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">xi</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="o">-</span><span class="n">yi</span> <span class="o">*</span> <span class="n">output</span><span class="p">)</span>  <span class="c1"># perceptron loss</span>
+
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+</pre></div>
+</div>
 </section>
 </section>
 <hr class="docutils" />
-<section id="error-and-weight-update">
-<h2>✅ Error and Weight Update<a class="headerlink" href="#error-and-weight-update" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>The perceptron compares predicted output with actual output.</p></li>
-<li><p>If wrong, it <strong>updates weights</strong> to reduce error.</p></li>
-<li><p>This process continues until performance improves.</p></li>
-</ul>
-<p>Error = (Real Output – Predicted Output)</p>
-<p>This leads to <strong>forward propagation and weight updates</strong> (backward update).</p>
-<hr class="docutils" />
-<p>Here’s a <strong>clear and structured summary</strong> of the content you provided about <strong>Single-Layer Perceptron vs Multi-Layer Perceptron (MLP)</strong>:</p>
+<section id="variants-and-extensions">
+<h2><a class="toc-backref" href="#id12"><strong>7. Variants and Extensions</strong></a><a class="headerlink" href="#variants-and-extensions" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variant</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Rosenblatt Perceptron</p></td>
+<td><p>Original hard-threshold model</p></td>
+</tr>
+<tr class="row-odd"><td><p>Multi-Layer Perceptron (MLP)</p></td>
+<td><p>Stacked perceptrons</p></td>
+</tr>
+<tr class="row-even"><td><p>Kernel Perceptron</p></td>
+<td><p>Non-linear decision surfaces</p></td>
+</tr>
+<tr class="row-odd"><td><p>Differentiable Perceptron</p></td>
+<td><p>Uses sigmoid / ReLU for backprop</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 <hr class="docutils" />
-<section id="perceptron-models-overview">
-<h2>Perceptron Models Overview<a class="headerlink" href="#perceptron-models-overview" title="Link to this heading">#</a></h2>
-<p>There are two main types of perceptron models:</p>
-<ol class="arabic simple">
-<li><p><strong>Single-Layer Perceptron (SLP)</strong></p></li>
-<li><p><strong>Multi-Layer Perceptron (MLP)</strong> – also called <strong>Artificial Neural Network (ANN)</strong> or <strong>Multilayer Neural Network</strong></p></li>
-</ol>
-<p>The earlier discussion focused on the <strong>Single-Layer Perceptron</strong>.</p>
+<section id="summary">
+<h2><a class="toc-backref" href="#id13"><strong>8. Summary</strong></a><a class="headerlink" href="#summary" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Aspect</p></th>
+<th class="head"><p>Role</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Foundational unit</p></td>
+<td><p>Basis of all deep networks</p></td>
+</tr>
+<tr class="row-odd"><td><p>Linear classifier</p></td>
+<td><p>Simplest learning model</p></td>
+</tr>
+<tr class="row-even"><td><p>Scales to deep learning</p></td>
+<td><p>Through vectorization and stacking</p></td>
+</tr>
+<tr class="row-odd"><td><p>Motivates non-linear networks</p></td>
+<td><p>Due to XOR limitation</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 <hr class="docutils" />
-<section id="how-single-layer-perceptron-works">
-<h2>How Single-Layer Perceptron Works<a class="headerlink" href="#how-single-layer-perceptron-works" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Inputs are multiplied with weights.</p></li>
-<li><p>A <strong>bias</strong> is added.</p></li>
-<li><p>The result goes through an <strong>activation function</strong> (like step or sigmoid).</p></li>
-<li><p>Output is binary: <strong>0 or 1</strong>.</p></li>
-<li><p>If prediction is wrong, weights are <strong>randomly updated</strong> and the feedforward process repeats.</p></li>
-</ul>
-<p>This process is called <strong>Feed Forward Neural Network</strong> (left to right).</p>
-</section>
-<hr class="docutils" />
-<section id="advantages-of-single-layer-perceptron">
-<h2>Advantages of Single-Layer Perceptron<a class="headerlink" href="#advantages-of-single-layer-perceptron" title="Link to this heading">#</a></h2>
-<p>✔ Works well only for:</p>
-<ul class="simple">
-<li><p><strong>Binary classification</strong></p></li>
-<li><p><strong>Linearly separable data</strong></p></li>
-</ul>
-<p>Example:
-If data points can be separated by a straight line, SLP can classify them.</p>
-</section>
-<hr class="docutils" />
-<section id="limitations-of-single-layer-perceptron">
-<h2>❌ Limitations of Single-Layer Perceptron<a class="headerlink" href="#limitations-of-single-layer-perceptron" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Cannot solve <strong>non-linearly separable problems</strong></p></li>
-<li><p>Weight updates are inefficient (random changes)</p></li>
-<li><p>No mechanism for <strong>loss calculation</strong> or <strong>error minimization</strong></p></li>
-<li><p>No backpropagation</p></li>
-<li><p>Struggles with complex patterns</p></li>
-</ul>
-<p>Example of non-linear data: XOR problem (classes mixed such that a line cannot separate them)</p>
-</section>
-<hr class="docutils" />
-<section id="why-move-to-multi-layer-perceptron-mlp">
-<h2>Why Move to Multi-Layer Perceptron (MLP)?<a class="headerlink" href="#why-move-to-multi-layer-perceptron-mlp" title="Link to this heading">#</a></h2>
-<p>MLP overcomes the limitations of SLP and can handle <strong>complex and non-linear</strong> problems.</p>
-<p>Key techniques used in MLP:</p>
-<section id="forward-propagation">
-<h3>1. Forward Propagation<a class="headerlink" href="#forward-propagation" title="Link to this heading">#</a></h3>
-<p>(Like in SLP – weighted sum + activation)</p>
-</section>
-<section id="backward-propagation">
-<h3>2. Backward Propagation<a class="headerlink" href="#backward-propagation" title="Link to this heading">#</a></h3>
-<p>Used to update weights efficiently based on errors.</p>
-</section>
-<section id="loss-cost-functions">
-<h3>3. Loss/Cost Functions<a class="headerlink" href="#loss-cost-functions" title="Link to this heading">#</a></h3>
-<p>Measure how far predictions are from actual results.</p>
-</section>
-<section id="optimizers">
-<h3>4. Optimizers<a class="headerlink" href="#optimizers" title="Link to this heading">#</a></h3>
-<p>Algorithms (like SGD, Adam) to update weights systematically.</p>
-</section>
-<section id="multiple-activation-functions">
-<h3>5. Multiple Activation Functions<a class="headerlink" href="#multiple-activation-functions" title="Link to this heading">#</a></h3>
-<p>Examples: ReLU, Sigmoid, Tanh</p>
-<p>These enable deep learning models to solve complex tasks.</p>
-</section>
-</section>
-<hr class="docutils" />
-<section id="transition-to-deep-learning">
-<h2>Transition to Deep Learning<a class="headerlink" href="#transition-to-deep-learning" title="Link to this heading">#</a></h2>
-<p>Using multilayer perceptrons, we can build <strong>deep neural networks</strong> that handle:</p>
-<ul class="simple">
-<li><p>Nonlinear classification</p></li>
-<li><p>Complex decision boundaries</p></li>
-<li><p>Multiclass problems</p></li>
-<li><p>Real-world applications (e.g., image, speech, NLP)</p></li>
-</ul>
-<p><strong>Key Insights</strong></p>
-<ul class="simple">
-<li><p>Perceptron is a <strong>linear classifier</strong>, meaning it draws a <strong>straight line</strong> to separate two classes.</p></li>
-<li><p>It works only if data is <strong>linearly separable</strong>.</p></li>
-<li><p>Limitations in solving complex problems lead to <strong>multilayer neural networks</strong> (ANNs).</p></li>
-</ul>
+<section id="key-insight">
+<h2><a class="toc-backref" href="#id14"><strong>Key Insight</strong></a><a class="headerlink" href="#key-insight" title="Permalink to this heading">#</a></h2>
+<blockquote>
+<div><p><strong>Deep learning is nothing more than millions of perceptrons trained jointly through backpropagation.</strong></p>
+</div></blockquote>
 </section>
 </section>
 
@@ -793,12 +846,12 @@ If data points can be separated by a straight line, SLP can classify them.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="02_part.html"
+       href="03.01_part.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Problem Statement</p>
+        <p class="prev-next-title">Multi-Layer Perceptron (MLP)</p>
       </div>
     </a>
     <a class="right-next"
@@ -826,36 +879,20 @@ If data points can be separated by a straight line, SLP can classify them.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#example-scenario">Example Scenario</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture-of-a-perceptron">✅ Architecture of a Perceptron</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#input-layer">1️⃣ Input Layer</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hidden-layer-single-neuron">2️⃣ Hidden Layer (Single Neuron)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#concept-and-intuition"><strong>1. Concept and Intuition</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-the-perceptron-matters-in-deep-learning"><strong>2. Why the Perceptron Matters in Deep Learning</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-the-perceptron-learning-rule"><strong>3. Training the Perceptron (Learning Rule)</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitation-of-a-single-perceptron"><strong>4. Limitation of a Single Perceptron</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perceptron-in-modern-deep-learning-context"><strong>5. Perceptron in Modern Deep Learning Context</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-demonstration"><strong>6. PyTorch Demonstration</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset-linearly-separable"><strong>Dataset (Linearly Separable)</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><strong>Perceptron Model</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-loop"><strong>Training Loop</strong></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-components">✅ Core Components</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#weights-w-1-w-2">✔ Weights (<span class="math notranslate nohighlight">\(w_1, w_2\)</span>)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bias-b">✔ Bias (<span class="math notranslate nohighlight">\(b\)</span>)</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computation-steps">✅ Computation Steps</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-weighted-sum-linear-combination">✅ Step 1: Weighted Sum (Linear Combination)</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-activation-function">✅ Step 2: Activation Function</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#error-and-weight-update">✅ Error and Weight Update</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perceptron-models-overview">Perceptron Models Overview</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-single-layer-perceptron-works">How Single-Layer Perceptron Works</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages-of-single-layer-perceptron">Advantages of Single-Layer Perceptron</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations-of-single-layer-perceptron">❌ Limitations of Single-Layer Perceptron</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-move-to-multi-layer-perceptron-mlp">Why Move to Multi-Layer Perceptron (MLP)?</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-propagation">1. Forward Propagation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-propagation">2. Backward Propagation</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-cost-functions">3. Loss/Cost Functions</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#optimizers">4. Optimizers</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#multiple-activation-functions">5. Multiple Activation Functions</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transition-to-deep-learning">Transition to Deep Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variants-and-extensions"><strong>7. Variants and Extensions</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary"><strong>8. Summary</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-insight"><strong>Key Insight</strong></a></li>
 </ul>
   </nav></div>
 
@@ -880,7 +917,7 @@ By svgoudar
 
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2022.
       <br/>
     
   </p>

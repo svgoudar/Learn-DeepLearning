@@ -1,14 +1,15 @@
 
+
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="../../" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Multi-Layer Neural Networks &#8212; Machine Learning Handbook</title>
+    <title>Multi-Layer Perceptron (MLP) &#8212; Machine Learning Handbook</title>
   
   
   
@@ -28,60 +29,62 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=eba8b062" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
-    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css?v=6644e6bb" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css?v=4c969af8" />
-    <link rel="stylesheet" type="text/css" href="../../_static/proof.css?v=b4b7a797" />
-    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-examples.css?v=e236af4b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.custom.css?v=7bc2f056" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.bundle.min.css?v=37217874" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-shadow.min.css?v=6227e517" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-punk.min.css?v=94669e23" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-noir.min.css?v=21a39f42" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-light.min.css?v=a18b2449" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-borderless.min.css?v=dbff53e4" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/micromodal.css?v=d7bf34ee" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
-    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=40389e5b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-examples.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.bundle.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-shadow.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-punk.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-noir.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-light.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-borderless.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/micromodal.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script src="../../_static/jquery.js?v=5d32c60e"></script>
-    <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
-    <script src="../../_static/doctools.js?v=9a2dae69"></script>
-    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
-    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="../../_static/copybutton.js?v=7f8ff830"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
-    <script src="../../_static/tabs.js?v=3ee01567"></script>
-    <script src="../../_static/js/hoverxref.js?v=c95ade4f"></script>
-    <script src="../../_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
-    <script src="../../_static/js/micromodal.min.js?v=04d6302d"></script>
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../_static/tabs.js"></script>
+    <script src="../../_static/js/hoverxref.js"></script>
+    <script src="../../_static/js/tooltipster.bundle.min.js"></script>
+    <script src="../../_static/js/micromodal.min.js"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'ann/neural_network/04_part';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Vanishing Gradient Problem in Deep Learning" href="05_part.html" />
-    <link rel="prev" title="Perceptron" href="03_part.html" />
+    <link rel="prev" title="Perceptron Model" href="03_part.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -178,18 +181,7 @@
   
   
 </a></div>
-        <div class="sidebar-primary-item">
-
- <script>
- document.write(`
-   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <i class="fa-solid fa-magnifying-glass"></i>
-    <span class="search-button__default-text">Search</span>
-    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
-   </button>
- `);
- </script></div>
-        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
@@ -202,11 +194,28 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../overview.html">Artificial Neural Network (ANN)</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 current active has-children"><a class="reference internal" href="overview.html">Neural Network</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="00_part.html">Biological Neuron vs Artificial Neuron</a></li>
 <li class="toctree-l3"><a class="reference internal" href="01_part.html">Intuition</a></li>
 <li class="toctree-l3"><a class="reference internal" href="02_part.html">Problem Statement</a></li>
-<li class="toctree-l3"><a class="reference internal" href="03_part.html">Perceptron</a></li>
-<li class="toctree-l3 current active"><a class="current reference internal" href="#">Multi-Layer Neural Networks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="03_part.html">Perceptron Model</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Multi-Layer Perceptron (MLP)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="05_part.html">Vanishing Gradient Problem in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="06_part.html">Vanishing Gradient Problem in Deep Learning</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../training/overview.html">Training</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../training/01_part.html">Data Ingestion Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/02_part.html">Model Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/03_part.html">Loss Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/04_part.html">Optimizers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/05_part.html">Training Loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/06_part.html">Forward Propagation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/07_part.html">Backpropagation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/08_part.html">Weight Updation and the Chain Rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/09_part.html">Batch and Epoch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/10_part.html">Validation and Metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/11_part.html">Variants of Training in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/12_part.html">Training Failure Modes, Convergence Diagnostics, and Optimization Dynamics</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../cost_loss_function/overview.html">Loss Function vs Cost Function</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -214,6 +223,16 @@
 <li class="toctree-l3"><a class="reference internal" href="../cost_loss_function/02_part.html">Loss Functions for Regression in Neural Networks</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../cost_loss_function/03_part.html">Loss Functions for Classification</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../cost_loss_function/04_part.html">Choice of Loss Function</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../activation/overview.html">Activation Function</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../activation/01_part.html">Sigmoid Activation Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../activation/02_part.html">Tanh Activation Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../activation/03_part.html">ReLU</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../activation/04_part.html">ELU (Exponential Linear Unit)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../activation/05_part.html">Softmax Activation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../activation/06_part.html">Activation choice</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../optimizers/overview.html">Optmizers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -336,9 +355,9 @@
   
     <div class="header-article-items__start">
       
-        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
   <span class="fa-solid fa-bars"></span>
-</button></div>
+</label></div>
       
     </div>
   
@@ -363,14 +382,14 @@
       
       <li><a href="https://colab.research.google.com/github/svgoudar/Learn-DeepLearning/blob/master/ann/neural_network/04_part.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
-   title="Launch on Colab"
+   title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
 <span class="btn__icon-container">
   
-    <img alt="Colab logo" src="../../_static/images/logo_colab.png">
+    <img src="../../_static/images/logo_colab.png">
   </span>
 <span class="btn__text-container">Colab</span>
 </a>
@@ -510,9 +529,9 @@ document.write(`
   </button>
 `);
 </script>
-<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <span class="fa-solid fa-list"></span>
-</button>
+</label>
 </div></div>
       
     </div>
@@ -523,7 +542,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Multi-Layer Neural Networks</h1>
+    <h1>Multi-Layer Perceptron (MLP)</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -533,37 +552,20 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture-of-a-multi-layer-neural-network">Architecture of a Multi-Layer Neural Network</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-propagation-feedforward">Forward Propagation (Feedforward)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-weighted-sum">Step 1: Weighted Sum</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-activation-function">Step 2: Activation Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-an-mlp"><strong>1. What is an MLP?</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-formulation"><strong>2. Mathematical Formulation</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-mlp-works"><strong>3. Why MLP Works</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-workflow"><strong>4. Training Workflow</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activation-functions-in-mlp"><strong>5. Activation Functions in MLP</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variants-of-mlp"><strong>6. Variants of MLP</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-demonstration"><strong>7. PyTorch Demonstration</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-definition"><strong>Model Definition</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-loop"><strong>Training Loop</strong></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-function-error-calculation">Loss Function (Error Calculation)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-propagation-backprop">Backward Propagation (Backprop)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-function-vs-cost-function">Loss Function vs Cost Function</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activations-optimizers">Activations &amp; Optimizers</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-training-loop">The Training Loop</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neuron-as-a-function">Neuron as a Function</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#single-layer-vs-multi-layer">Single Layer vs Multi-Layer</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-propagation">Forward Propagation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-function-and-training">Loss Function and Training</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backpropagation-intuition">Backpropagation (Intuition)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-statement-predicting-student-exam-success"><strong>Problem Statement: Predicting Student Exam Success</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-representing-as-a-neural-network"><strong>Step 1: Representing as a Neural Network</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-forward-propagation"><strong>Step 2: Forward Propagation</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-calculating-loss"><strong>Step 3: Calculating Loss</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-backward-propagation-weight-updates"><strong>Step 4: Backward Propagation (Weight Updates)</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-key-takeaways-from-this-example"><strong>Step 5: Key Takeaways from This Example</strong></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chain-rule-of-derivatives-in-neural-networks">Chain Rule of Derivatives in Neural Networks</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#weight-update-formula-recap">1. Weight Update Formula Recap</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-the-chain-rule">2. Applying the Chain Rule</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">3. Example</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-learning"><strong>8. Interpretation of Learning</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-to-use-mlp"><strong>9. When to Use MLP</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations"><strong>10. Limitations</strong></a></li>
 </ul>
             </nav>
         </div>
@@ -575,524 +577,283 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <nav class="contents" id="contents" role="doc-toc">
+  <div class="contents topic" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#multi-layer-neural-networks" id="id2">Multi-Layer Neural Networks</a></p>
+<li><p><a class="reference internal" href="#multi-layer-perceptron-mlp" id="id1">Multi-Layer Perceptron (MLP)</a></p>
 <ul>
-<li><p><a class="reference internal" href="#architecture-of-a-multi-layer-neural-network" id="id3">Architecture of a Multi-Layer Neural Network</a></p></li>
-<li><p><a class="reference internal" href="#id1" id="id4">alt text</a></p></li>
-<li><p><a class="reference internal" href="#forward-propagation-feedforward" id="id5">Forward Propagation (Feedforward)</a></p>
+<li><p><a class="reference internal" href="#what-is-an-mlp" id="id2"><strong>1. What is an MLP?</strong></a></p></li>
+<li><p><a class="reference internal" href="#mathematical-formulation" id="id3"><strong>2. Mathematical Formulation</strong></a></p></li>
+<li><p><a class="reference internal" href="#why-mlp-works" id="id4"><strong>3. Why MLP Works</strong></a></p></li>
+<li><p><a class="reference internal" href="#training-workflow" id="id5"><strong>4. Training Workflow</strong></a></p></li>
+<li><p><a class="reference internal" href="#activation-functions-in-mlp" id="id6"><strong>5. Activation Functions in MLP</strong></a></p></li>
+<li><p><a class="reference internal" href="#variants-of-mlp" id="id7"><strong>6. Variants of MLP</strong></a></p></li>
+<li><p><a class="reference internal" href="#pytorch-demonstration" id="id8"><strong>7. PyTorch Demonstration</strong></a></p>
 <ul>
-<li><p><a class="reference internal" href="#step-1-weighted-sum" id="id6">Step 1: Weighted Sum</a></p></li>
-<li><p><a class="reference internal" href="#step-2-activation-function" id="id7">Step 2: Activation Function</a></p></li>
+<li><p><a class="reference internal" href="#model-definition" id="id9"><strong>Model Definition</strong></a></p></li>
+<li><p><a class="reference internal" href="#training-loop" id="id10"><strong>Training Loop</strong></a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#loss-function-error-calculation" id="id8">Loss Function (Error Calculation)</a></p></li>
-<li><p><a class="reference internal" href="#backward-propagation-backprop" id="id9">Backward Propagation (Backprop)</a></p></li>
-<li><p><a class="reference internal" href="#loss-function-vs-cost-function" id="id10">Loss Function vs Cost Function</a></p></li>
-<li><p><a class="reference internal" href="#activations-optimizers" id="id11">Activations &amp; Optimizers</a></p></li>
-<li><p><a class="reference internal" href="#the-training-loop" id="id12">The Training Loop</a></p></li>
-<li><p><a class="reference internal" href="#neuron-as-a-function" id="id13">Neuron as a Function</a></p></li>
-<li><p><a class="reference internal" href="#single-layer-vs-multi-layer" id="id14">Single Layer vs Multi-Layer</a></p></li>
-<li><p><a class="reference internal" href="#forward-propagation" id="id15">Forward Propagation</a></p></li>
-<li><p><a class="reference internal" href="#loss-function-and-training" id="id16">Loss Function and Training</a></p></li>
-<li><p><a class="reference internal" href="#backpropagation-intuition" id="id17">Backpropagation (Intuition)</a></p></li>
-<li><p><a class="reference internal" href="#problem-statement-predicting-student-exam-success" id="id18"><strong>Problem Statement: Predicting Student Exam Success</strong></a></p>
-<ul>
-<li><p><a class="reference internal" href="#step-1-representing-as-a-neural-network" id="id19"><strong>Step 1: Representing as a Neural Network</strong></a></p></li>
-<li><p><a class="reference internal" href="#step-2-forward-propagation" id="id20"><strong>Step 2: Forward Propagation</strong></a></p></li>
-<li><p><a class="reference internal" href="#step-3-calculating-loss" id="id21"><strong>Step 3: Calculating Loss</strong></a></p></li>
-<li><p><a class="reference internal" href="#step-4-backward-propagation-weight-updates" id="id22"><strong>Step 4: Backward Propagation (Weight Updates)</strong></a></p></li>
-<li><p><a class="reference internal" href="#step-5-key-takeaways-from-this-example" id="id23"><strong>Step 5: Key Takeaways from This Example</strong></a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#chain-rule-of-derivatives-in-neural-networks" id="id24">Chain Rule of Derivatives in Neural Networks</a></p>
-<ul>
-<li><p><a class="reference internal" href="#weight-update-formula-recap" id="id25">1. Weight Update Formula Recap</a></p></li>
-<li><p><a class="reference internal" href="#applying-the-chain-rule" id="id26">2. Applying the Chain Rule</a></p></li>
-<li><p><a class="reference internal" href="#example" id="id27">3. Example</a></p></li>
+<li><p><a class="reference internal" href="#interpretation-of-learning" id="id11"><strong>8. Interpretation of Learning</strong></a></p></li>
+<li><p><a class="reference internal" href="#when-to-use-mlp" id="id12"><strong>9. When to Use MLP</strong></a></p></li>
+<li><p><a class="reference internal" href="#limitations" id="id13"><strong>10. Limitations</strong></a></p></li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-</nav>
-<section class="tex2jax_ignore mathjax_ignore" id="multi-layer-neural-networks">
-<h1><a class="toc-backref" href="#id2" role="doc-backlink">Multi-Layer Neural Networks</a><a class="headerlink" href="#multi-layer-neural-networks" title="Link to this heading">#</a></h1>
-<p>The discussion moves from <strong>single-layer perceptrons</strong> to <strong>multi-layer perceptrons (MLPs)</strong>—also known as <strong>artificial neural networks (ANNs)</strong>—to overcome limitations of basic models.</p>
-<p>Single-layer perceptrons:</p>
-<ul class="simple">
-<li><p>Only support <strong>feedforward propagation</strong></p></li>
-<li><p>Can solve only <strong>linearly separable problems</strong></p></li>
-<li><p>Have no efficient way to update weights</p></li>
-</ul>
-<p>To address this, we move to <strong>multi-layer neural networks</strong> that use:</p>
-<ul class="simple">
-<li><p>✅ <strong>Forward Propagation</strong></p></li>
-<li><p>✅ <strong>Backward Propagation</strong> (invented/popularized by Geoffrey Hinton)</p></li>
-<li><p>✅ <strong>Loss Functions</strong></p></li>
-<li><p>✅ <strong>Optimizers</strong></p></li>
-<li><p>✅ <strong>Activation Functions</strong></p></li>
-</ul>
+</div>
+<section id="multi-layer-perceptron-mlp">
+<h1><a class="toc-backref" href="#id1">Multi-Layer Perceptron (MLP)</a><a class="headerlink" href="#multi-layer-perceptron-mlp" title="Permalink to this heading">#</a></h1>
 <hr class="docutils" />
-<section id="architecture-of-a-multi-layer-neural-network">
-<h2><a class="toc-backref" href="#id3" role="doc-backlink">Architecture of a Multi-Layer Neural Network</a><a class="headerlink" href="#architecture-of-a-multi-layer-neural-network" title="Link to this heading">#</a></h2>
-<p>Example dataset:</p>
-<ul class="simple">
-<li><p>Inputs/features: IQ, Study Hours, Play Hours → <strong>X₁, X₂, X₃</strong></p></li>
-<li><p>Output: Pass/Fail → <strong>y (1 or 0)</strong></p></li>
-</ul>
-<p>Network structure:</p>
-<ul class="simple">
-<li><p><strong>Input Layer</strong> → 3 neurons</p></li>
-<li><p><strong>Hidden Layer 1</strong> → 1 neuron</p></li>
-<li><p><strong>Output Layer</strong> → 1 neuron
-(This example shows a simple 2-layer ANN, but real networks can have many layers and neurons.)</p></li>
-</ul>
-<p>Each layer includes:</p>
-<ul class="simple">
-<li><p>Weights (W)</p></li>
-<li><p>Biases (b)</p></li>
-<li><p>Neurons</p></li>
-</ul>
+<section id="what-is-an-mlp">
+<h2><a class="toc-backref" href="#id2"><strong>1. What is an MLP?</strong></a><a class="headerlink" href="#what-is-an-mlp" title="Permalink to this heading">#</a></h2>
+<p>A <strong>Multi-Layer Perceptron (MLP)</strong> is a <strong>feed-forward neural network</strong> composed of:</p>
+<blockquote>
+<div><p><strong>Input Layer → One or more Hidden Layers → Output Layer</strong></p>
+</div></blockquote>
+<p>Each layer contains neurons connected by <strong>learnable weights</strong> and <strong>biases</strong>, followed by <strong>non-linear activation functions</strong>.</p>
+<p>MLPs approximate arbitrary continuous functions and form the backbone of modern deep learning.</p>
 </section>
-<section id="id1">
-<h2><a class="toc-backref" href="#id4" role="doc-backlink"><img alt="alt text" src="ann/neural_network/..%5Cimages%5Cmnn.png" /></a><a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
-</section>
-<section id="forward-propagation-feedforward">
-<h2><a class="toc-backref" href="#id5" role="doc-backlink">Forward Propagation (Feedforward)</a><a class="headerlink" href="#forward-propagation-feedforward" title="Link to this heading">#</a></h2>
-<p>Forward propagation happens in two main steps <strong>for each neuron</strong>:</p>
-<section id="step-1-weighted-sum">
-<h3><a class="toc-backref" href="#id6" role="doc-backlink">Step 1: Weighted Sum</a><a class="headerlink" href="#step-1-weighted-sum" title="Link to this heading">#</a></h3>
+<hr class="docutils" />
+<section id="mathematical-formulation">
+<h2><a class="toc-backref" href="#id3"><strong>2. Mathematical Formulation</strong></a><a class="headerlink" href="#mathematical-formulation" title="Permalink to this heading">#</a></h2>
+<p>For layer $<span class="math notranslate nohighlight">\(l\)</span>$:</p>
 <div class="math notranslate nohighlight">
 \[
-z = \sum (x_i \cdot w_i) + b
+z^{(l)} = W^{(l)} a^{(l-1)} + b^{(l)}
 \]</div>
-<p>Example:</p>
-<ul class="simple">
-<li><p>(z = 95×0.01 + 4×0.02 + 4×0.03 + b_1 ≈ 1.151)</p></li>
-</ul>
-</section>
-<section id="step-2-activation-function">
-<h3><a class="toc-backref" href="#id7" role="doc-backlink">Step 2: Activation Function</a><a class="headerlink" href="#step-2-activation-function" title="Link to this heading">#</a></h3>
-<p>Using <strong>sigmoid</strong>:</p>
 <div class="math notranslate nohighlight">
 \[
-σ(z) = \frac{1}{1 + e^{-z}}
-\]</div>
-<ul class="simple">
-<li><p>Converts value to range <strong>0 to 1</strong></p></li>
-<li><p>Example:
-$<span class="math notranslate nohighlight">\(
-σ(1.151) ≈ 0.759
-\)</span>$</p></li>
-</ul>
-<p>This output is passed forward to the next layer, and the process repeats until the final output (<strong>ŷ</strong>) is produced.</p>
-</section>
-</section>
-<hr class="docutils" />
-<section id="loss-function-error-calculation">
-<h2><a class="toc-backref" href="#id8" role="doc-backlink">Loss Function (Error Calculation)</a><a class="headerlink" href="#loss-function-error-calculation" title="Link to this heading">#</a></h2>
-<p>After forward propagation:</p>
-<ul class="simple">
-<li><p>Predicted output: <strong>ŷ = 0.511</strong></p></li>
-<li><p>Actual output: <strong>y = 1</strong></p></li>
-</ul>
-<p>Error (Loss):
-$<span class="math notranslate nohighlight">\(
-Loss = (y - ŷ)^2 ≈ (1 - 0.511)^2 ≈ 0.49
-\)</span>$</p>
-</section>
-<hr class="docutils" />
-<section id="backward-propagation-backprop">
-<h2><a class="toc-backref" href="#id9" role="doc-backlink">Backward Propagation (Backprop)</a><a class="headerlink" href="#backward-propagation-backprop" title="Link to this heading">#</a></h2>
-<p>Goal:</p>
-<ul class="simple">
-<li><p>Reduce the loss by updating weights</p></li>
-<li><p>Starts from output layer and moves <strong>backwards</strong></p></li>
-</ul>
-<p>Weights updated in reverse order:</p>
-<ol class="arabic simple">
-<li><p>Output layer weights (e.g., W₄)</p></li>
-<li><p>Hidden layer weights (e.g., W₁, W₂, W₃)</p></li>
-</ol>
-<p>To do this efficiently, we use:</p>
-<ul class="simple">
-<li><p><strong>Optimizers</strong> (e.g., Gradient Descent)</p></li>
-<li><p><strong>Loss functions</strong></p></li>
-<li><p><strong>Activation function derivatives</strong></p></li>
-</ul>
-</section>
-<hr class="docutils" />
-<section id="loss-function-vs-cost-function">
-<h2><a class="toc-backref" href="#id10" role="doc-backlink">Loss Function vs Cost Function</a><a class="headerlink" href="#loss-function-vs-cost-function" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><strong>Loss Function</strong>: Error for <strong>each individual data point</strong></p></li>
-<li><p><strong>Cost Function</strong>: Average (or total) loss over <strong>all data points</strong>
-$<span class="math notranslate nohighlight">\(
-Cost = \frac{1}{n} \sum (y - \hat{y})^2
-\)</span>$</p></li>
-</ul>
-</section>
-<hr class="docutils" />
-<section id="activations-optimizers">
-<h2><a class="toc-backref" href="#id11" role="doc-backlink">Activations &amp; Optimizers</a><a class="headerlink" href="#activations-optimizers" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><strong>Sigmoid</strong> used for binary outputs</p></li>
-<li><p>Other activations (ReLU, Tanh, etc.) will be covered later</p></li>
-<li><p>Optimizers (like SGD, Adam) adjust weights during backprop</p></li>
-</ul>
-</section>
-<hr class="docutils" />
-<section id="the-training-loop">
-<h2><a class="toc-backref" href="#id12" role="doc-backlink">The Training Loop</a><a class="headerlink" href="#the-training-loop" title="Link to this heading">#</a></h2>
-<p>For each record:</p>
-<ol class="arabic simple">
-<li><p>Forward propagation → compute ŷ</p></li>
-<li><p>Calculate loss</p></li>
-<li><p>Backward propagation → update weights</p></li>
-<li><p>Repeat until loss is minimized</p></li>
-</ol>
-</section>
-<hr class="docutils" />
-<section id="neuron-as-a-function">
-<h2><a class="toc-backref" href="#id13" role="doc-backlink">Neuron as a Function</a><a class="headerlink" href="#neuron-as-a-function" title="Link to this heading">#</a></h2>
-<p>At the core of any neural network is a <strong>neuron</strong>, which is essentially a mathematical function.</p>
-<p>For a neuron, the <strong>input-output relationship</strong> is:</p>
-<div class="math notranslate nohighlight">
-\[
-y = f(z) = f\Big(\sum_{i=1}^{n} w_i x_i + b \Big)
+a^{(l)} = \sigma(z^{(l)})
 \]</div>
 <p>Where:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(x_1, x_2, ..., x_n\)</span> are the inputs.</p></li>
-<li><p><span class="math notranslate nohighlight">\(w_1, w_2, ..., w_n\)</span> are the <strong>weights</strong> associated with each input.</p></li>
-<li><p><span class="math notranslate nohighlight">\(b\)</span> is the <strong>bias</strong>.</p></li>
-<li><p><span class="math notranslate nohighlight">\(z = \sum w_i x_i + b\)</span> is called the <strong>logit</strong> or <strong>pre-activation value</strong>.</p></li>
-<li><p><span class="math notranslate nohighlight">\(f\)</span> is the <strong>activation function</strong> (e.g., Sigmoid, ReLU, Tanh), introducing <strong>nonlinearity</strong>.</p></li>
-<li><p><span class="math notranslate nohighlight">\(y\)</span> is the output of the neuron.</p></li>
-</ul>
-<p><strong>Intuition:</strong>
-Weights determine how important each input is, bias allows shifting the activation, and the activation function lets the neuron “decide” whether to activate or not.</p>
-</section>
-<hr class="docutils" />
-<section id="single-layer-vs-multi-layer">
-<h2><a class="toc-backref" href="#id14" role="doc-backlink">Single Layer vs Multi-Layer</a><a class="headerlink" href="#single-layer-vs-multi-layer" title="Link to this heading">#</a></h2>
-<ul class="simple">
-<li><p><strong>Single layer network</strong>: Only one layer of neurons between input and output.
-$<span class="math notranslate nohighlight">\(
-\hat{y} = f(W^T x + b)
-\)</span>$</p>
-<ul>
-<li><p>Limitation: Can only model <strong>linear relationships</strong> (or linear separable problems).</p></li>
-</ul>
-</li>
-<li><p><strong>Multi-layer network</strong>: Multiple layers of neurons allow <strong>composing functions</strong>, enabling modeling of <strong>nonlinear relationships</strong>.</p></li>
-</ul>
-<p>Mathematically, a <strong>2-layer network</strong> (1 hidden layer) is:</p>
-<div class="math notranslate nohighlight">
-\[
-\begin{aligned}
-h &amp;= f_1(W_1^T x + b_1) \quad \text{(hidden layer output)} \
-\hat{y} &amp;= f_2(W_2^T h + b_2) \quad \text{(final output)}
-\end{aligned}
-\]</div>
-<p>Here:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(x \in \mathbb{R}^n\)</span> is input</p></li>
-<li><p><span class="math notranslate nohighlight">\(h \in \mathbb{R}^m\)</span> is hidden layer activation</p></li>
-<li><p><span class="math notranslate nohighlight">\(\hat{y}\)</span> is the predicted output</p></li>
-</ul>
-<p><strong>Intuition:</strong> Each layer applies a <strong>nonlinear transformation</strong> to the input from the previous layer, building increasingly complex representations.</p>
-</section>
-<hr class="docutils" />
-<section id="forward-propagation">
-<h2><a class="toc-backref" href="#id15" role="doc-backlink">Forward Propagation</a><a class="headerlink" href="#forward-propagation" title="Link to this heading">#</a></h2>
-<p>Forward propagation is just <strong>computing outputs layer by layer</strong>:</p>
-<ol class="arabic simple">
-<li><p>Multiply inputs by weights, add bias → (z = W^T x + b)</p></li>
-<li><p>Apply activation → (a = f(z))</p></li>
-<li><p>Pass (a) as input to the next layer</p></li>
-</ol>
-<p>For (L) layers:</p>
-<div class="math notranslate nohighlight">
-\[
-\begin{aligned}
-a^1 &amp;= f^1(W^1 x + b^1) \
-a^2 &amp;= f^2(W^2 a^1 + b^2) \
-&amp;\vdots \
-\hat{y} &amp;= f^L(W^L a^{L-1} + b^L)
-\end{aligned}
-\]</div>
-<p><strong>Intuition:</strong> The network transforms raw input into a hierarchical representation, layer by layer.</p>
-</section>
-<hr class="docutils" />
-<section id="loss-function-and-training">
-<h2><a class="toc-backref" href="#id16" role="doc-backlink">Loss Function and Training</a><a class="headerlink" href="#loss-function-and-training" title="Link to this heading">#</a></h2>
-<p>To train the network, we define a <strong>loss function</strong>, e.g., Mean Squared Error (MSE) for regression:</p>
-<div class="math notranslate nohighlight">
-\[
-\mathcal{L} = \frac{1}{N} \sum_{i=1}^{N} (\hat{y}_i - y_i)^2
-\]</div>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\hat{y}_i\)</span> = predicted output</p></li>
-<li><p><span class="math notranslate nohighlight">\(y_i\)</span> = true output</p></li>
-</ul>
-<p><strong>Goal:</strong> Minimize the loss by adjusting weights and biases.</p>
-</section>
-<hr class="docutils" />
-<section id="backpropagation-intuition">
-<h2><a class="toc-backref" href="#id17" role="doc-backlink">Backpropagation (Intuition)</a><a class="headerlink" href="#backpropagation-intuition" title="Link to this heading">#</a></h2>
-<p><strong>Backpropagation</strong> is a way to compute <strong>how much each weight contributed to the error</strong> using the <strong>chain rule of calculus</strong>:</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{\partial \mathcal{L}}{\partial W^l} = \frac{\partial \mathcal{L}}{\partial a^l} \cdot \frac{\partial a^l}{\partial z^l} \cdot \frac{\partial z^l}{\partial W^l}
-\]</div>
-<p><strong>Intuition:</strong></p>
-<ul class="simple">
-<li><p>Start from the output, compute the error</p></li>
-<li><p>Propagate the error backward through each layer</p></li>
-<li><p>Update weights in the direction that reduces loss</p></li>
-</ul>
-<p>Weight update formula (gradient descent):</p>
-<div class="math notranslate nohighlight">
-\[
-W^l := W^l - \eta \frac{\partial \mathcal{L}}{\partial W^l}
-\]</div>
-<p>Where <span class="math notranslate nohighlight">\(\eta\)</span> is the <strong>learning rate</strong>.</p>
-<hr class="docutils" />
-<p><strong>Key Takeaways</strong></p>
-<ol class="arabic simple">
-<li><p>Multi-layer networks <strong>compose functions</strong>: Each layer transforms the representation of input data.</p></li>
-<li><p><strong>Nonlinearity is essential</strong>: Without activation functions, multiple layers collapse to a single linear transformation.</p></li>
-<li><p>Forward propagation = compute predictions; backward propagation = compute gradients and update weights.</p></li>
-<li><p>Hidden layers automatically <strong>learn hierarchical features</strong>, reducing the need for manual feature engineering.</p></li>
-<li><p>Multilayer networks use <strong>hidden layers</strong></p></li>
-<li><p>Forward and backward propagation make learning possible</p></li>
-<li><p><strong>Sigmoid</strong> activation converts values to (0,1)</p></li>
-<li><p>Loss tells us how wrong the model is</p></li>
-<li><p>Optimizers reduce error by adjusting weights</p></li>
-<li><p>Backpropagation enables efficient learning</p></li>
-<li><p>This is the foundation of deep neural networks</p></li>
-</ol>
-</section>
-<section id="problem-statement-predicting-student-exam-success">
-<h2><a class="toc-backref" href="#id18" role="doc-backlink"><strong>Problem Statement: Predicting Student Exam Success</strong></a><a class="headerlink" href="#problem-statement-predicting-student-exam-success" title="Link to this heading">#</a></h2>
-<p>Imagine we want to predict whether a student will <strong>pass or fail an exam</strong> based on the following features:</p>
-<div class="pst-scrollable-table-container"><table class="table">
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
 <thead>
-<tr class="row-odd"><th class="head"><p>Feature</p></th>
-<th class="head"><p>Symbol</p></th>
-<th class="head"><p>Example</p></th>
+<tr class="row-odd"><th class="head"><p>Symbol</p></th>
+<th class="head"><p>Meaning</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>IQ</p></td>
-<td><p>(x_1)</p></td>
-<td><p>95</p></td>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(W^{(l)}\)</span></p></td>
+<td><p>Weight matrix</p></td>
 </tr>
-<tr class="row-odd"><td><p>Hours of Study per day</p></td>
-<td><p>(x_2)</p></td>
-<td><p>4</p></td>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(b^{(l)}\)</span></p></td>
+<td><p>Bias vector</p></td>
 </tr>
-<tr class="row-even"><td><p>Hours of Play per day</p></td>
-<td><p>(x_3)</p></td>
-<td><p>2</p></td>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\sigma\)</span></p></td>
+<td><p>Activation function</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(a^{(l)}\)</span></p></td>
+<td><p>Output of layer</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>The <strong>output</strong> is:</p>
-<div class="math notranslate nohighlight">
-\[
-y =
-\begin{cases}
-1 &amp; \text{if student passes} \
-0 &amp; \text{if student fails}
-\end{cases}
-\]</div>
-<hr class="docutils" />
-<section id="step-1-representing-as-a-neural-network">
-<h3><a class="toc-backref" href="#id19" role="doc-backlink"><strong>Step 1: Representing as a Neural Network</strong></a><a class="headerlink" href="#step-1-representing-as-a-neural-network" title="Link to this heading">#</a></h3>
-<p>We can design a <strong>simple multi-layer neural network</strong>:</p>
-<ul class="simple">
-<li><p><strong>Input Layer:</strong> 3 neurons (IQ, study hours, play hours)</p></li>
-<li><p><strong>Hidden Layer 1:</strong> 2 neurons</p></li>
-<li><p><strong>Output Layer:</strong> 1 neuron (pass/fail)</p></li>
-</ul>
-<p>Each neuron has:</p>
-<div class="math notranslate nohighlight">
-\[
-z = \sum w_i x_i + b
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-a = f(z) \quad (\text{activation function})
-\]</div>
-<ul class="simple">
-<li><p><strong>Weights ((w))</strong> determine the importance of each feature.</p></li>
-<li><p><strong>Bias ((b))</strong> shifts the activation threshold.</p></li>
-<li><p><strong>Activation function (sigmoid)</strong> squashes the output between 0 and 1, representing a probability.</p></li>
-</ul>
 </section>
 <hr class="docutils" />
-<section id="step-2-forward-propagation">
-<h3><a class="toc-backref" href="#id20" role="doc-backlink"><strong>Step 2: Forward Propagation</strong></a><a class="headerlink" href="#step-2-forward-propagation" title="Link to this heading">#</a></h3>
-<p><strong>1. Hidden Layer 1</strong></p>
-<p>For neuron 1 in hidden layer 1:</p>
-<div class="math notranslate nohighlight">
-\[
-z_1^{(1)} = w_{11}x_1 + w_{12}x_2 + w_{13}x_3 + b_1
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-a_1^{(1)} = f(z_1^{(1)}) \quad \text{(sigmoid)}
-\]</div>
-<p>For neuron 2:</p>
-<div class="math notranslate nohighlight">
-\[
-z_2^{(1)} = w_{21}x_1 + w_{22}x_2 + w_{23}x_3 + b_2
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-a_2^{(1)} = f(z_2^{(1)})
-\]</div>
-<p><strong>Intuition:</strong>
-The hidden layer transforms the raw features (IQ, study hours, play hours) into an <strong>intermediate representation</strong> that captures nonlinear combinations of the inputs.</p>
-<hr class="docutils" />
-<p><strong>2. Output Layer</strong></p>
-<p>The output neuron takes inputs from the hidden layer:</p>
-<div class="math notranslate nohighlight">
-\[
-z^{(2)} = w_{31} a_1^{(1)} + w_{32} a_2^{(1)} + b_3
-\]</div>
-<div class="math notranslate nohighlight">
-\[
-\hat{y} = f(z^{(2)}) \quad \text{(sigmoid, probability of passing)}
-\]</div>
-<p><strong>Intuition:</strong>
-The output layer combines the learned features from hidden layers to make the final prediction.</p>
+<section id="why-mlp-works">
+<h2><a class="toc-backref" href="#id4"><strong>3. Why MLP Works</strong></a><a class="headerlink" href="#why-mlp-works" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Property</p></th>
+<th class="head"><p>Explanation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Universal Approximation</p></td>
+<td><p>Can approximate any continuous function</p></td>
+</tr>
+<tr class="row-odd"><td><p>Non-linearity</p></td>
+<td><p>Activation functions enable complex patterns</p></td>
+</tr>
+<tr class="row-even"><td><p>Hierarchical Learning</p></td>
+<td><p>Deeper layers learn higher-level features</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 <hr class="docutils" />
-<section id="step-3-calculating-loss">
-<h3><a class="toc-backref" href="#id21" role="doc-backlink"><strong>Step 3: Calculating Loss</strong></a><a class="headerlink" href="#step-3-calculating-loss" title="Link to this heading">#</a></h3>
-<p>We compare the predicted output ((\hat{y})) with the true label ((y)) using a <strong>loss function</strong>, e.g., <strong>Mean Squared Error</strong>:</p>
-<div class="math notranslate nohighlight">
-\[
-\mathcal{L} = (\hat{y} - y)^2
-\]</div>
-<p><strong>Example:</strong></p>
-<ul class="simple">
-<li><p>Predicted probability: (\hat{y} = 0.6)</p></li>
-<li><p>True output: (y = 1)</p></li>
-<li><p>Loss: ((0.6 - 1)^2 = 0.16)</p></li>
-</ul>
-<p><strong>Intuition:</strong>
-This tells us <strong>how wrong the prediction is</strong>.</p>
-</section>
-<hr class="docutils" />
-<section id="step-4-backward-propagation-weight-updates">
-<h3><a class="toc-backref" href="#id22" role="doc-backlink"><strong>Step 4: Backward Propagation (Weight Updates)</strong></a><a class="headerlink" href="#step-4-backward-propagation-weight-updates" title="Link to this heading">#</a></h3>
-<p>To reduce the loss, we adjust the weights <strong>proportionally to their contribution to the error</strong>:</p>
-<div class="math notranslate nohighlight">
-\[
-w := w - \eta \frac{\partial \mathcal{L}}{\partial w}
-\]</div>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\eta\)</span> = learning rate</p></li>
-<li><p><span class="math notranslate nohighlight">\(\frac{\partial \mathcal{L}}{\partial w}\)</span> = gradient of loss w.r.t weight</p></li>
-</ul>
-<p><strong>Intuition:</strong></p>
-<ul class="simple">
-<li><p>Neurons that contributed more to the error get updated more.</p></li>
-<li><p>This process repeats over many examples until the network predicts accurately.</p></li>
-</ul>
-</section>
-<hr class="docutils" />
-<section id="step-5-key-takeaways-from-this-example">
-<h3><a class="toc-backref" href="#id23" role="doc-backlink"><strong>Step 5: Key Takeaways from This Example</strong></a><a class="headerlink" href="#step-5-key-takeaways-from-this-example" title="Link to this heading">#</a></h3>
+<section id="training-workflow">
+<h2><a class="toc-backref" href="#id5"><strong>4. Training Workflow</strong></a><a class="headerlink" href="#training-workflow" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p><strong>Hidden Layers Learn Features Automatically</strong></p>
-<ul class="simple">
-<li><p>The network learns how to combine IQ, study, and play hours into features that help predict pass/fail.</p></li>
-</ul>
-</li>
-<li><p><strong>Nonlinearity Matters</strong></p>
-<ul class="simple">
-<li><p>Without activation functions like sigmoid, the network would <strong>only be able to learn linear rules</strong> (e.g., a simple weighted sum).</p></li>
-</ul>
-</li>
-<li><p><strong>Forward + Backward Propagation</strong></p>
-<ul class="simple">
-<li><p>Forward: compute predictions</p></li>
-<li><p>Backward: update weights based on error</p></li>
-</ul>
-</li>
-<li><p><strong>Output as Probability</strong></p>
-<ul class="simple">
-<li><p>The network can output a probability (0-1) of passing, which can be thresholded to make a binary prediction.</p></li>
-</ul>
-</li>
+<li><p><strong>Forward Propagation</strong></p></li>
+<li><p><strong>Loss Computation</strong></p></li>
+<li><p><strong>Backpropagation (Chain Rule)</strong></p></li>
+<li><p><strong>Weight Update (Optimizer)</strong></p></li>
 </ol>
-<p><img alt="alt text" src="ann/neural_network/..%5Cimages%5Cbp_wu.png" /></p>
-</section>
-</section>
-<section id="chain-rule-of-derivatives-in-neural-networks">
-<h2><a class="toc-backref" href="#id24" role="doc-backlink">Chain Rule of Derivatives in Neural Networks</a><a class="headerlink" href="#chain-rule-of-derivatives-in-neural-networks" title="Link to this heading">#</a></h2>
-<p>This video explains the <strong>chain rule of derivatives</strong> and its importance in <strong>weight updating</strong> during backpropagation.</p>
-<hr class="docutils" />
-<section id="weight-update-formula-recap">
-<h3><a class="toc-backref" href="#id25" role="doc-backlink">1. Weight Update Formula Recap</a><a class="headerlink" href="#weight-update-formula-recap" title="Link to this heading">#</a></h3>
-<p>The generic weight update rule is:</p>
-<div class="math notranslate nohighlight">
-\[
-w_{\text{new}} = w_{\text{old}} - \text{learning rate} \times \frac{\partial \text{Loss}}{\partial w_{\text{old}}}
-\]</div>
-<p>The key challenge is calculating the derivative (\frac{\partial \text{Loss}}{\partial w_{\text{old}}}) efficiently when a weight influences multiple neurons across layers.</p>
 </section>
 <hr class="docutils" />
-<section id="applying-the-chain-rule">
-<h3><a class="toc-backref" href="#id26" role="doc-backlink">2. Applying the Chain Rule</a><a class="headerlink" href="#applying-the-chain-rule" title="Link to this heading">#</a></h3>
-<p>The chain rule helps decompose the derivative of the loss with respect to a weight into a product of simpler derivatives across layers:</p>
-<div class="math notranslate nohighlight">
-\[
-\frac{\partial \text{Loss}}{\partial w} = \frac{\partial \text{Loss}}{\partial O_{\text{next}}} \cdot \frac{\partial O_{\text{next}}}{\partial O_{\text{current}}} \cdot \frac{\partial O_{\text{current}}}{\partial w}
-\]</div>
-<ul class="simple">
-<li><p>For a hidden neuron affecting multiple outputs, the chain rule ensures all paths are accounted for.</p></li>
-<li><p>This allows the calculation of gradients even for weights deep in the network.</p></li>
-</ul>
+<section id="activation-functions-in-mlp">
+<h2><a class="toc-backref" href="#id6"><strong>5. Activation Functions in MLP</strong></a><a class="headerlink" href="#activation-functions-in-mlp" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Activation</p></th>
+<th class="head"><p>Role</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ReLU</p></td>
+<td><p>Prevents vanishing gradients</p></td>
+</tr>
+<tr class="row-odd"><td><p>Sigmoid</p></td>
+<td><p>Binary classification output</p></td>
+</tr>
+<tr class="row-even"><td><p>Tanh</p></td>
+<td><p>Centered nonlinearity</p></td>
+</tr>
+<tr class="row-odd"><td><p>Softmax</p></td>
+<td><p>Multi-class probability output</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 <hr class="docutils" />
-<section id="example">
-<h3><a class="toc-backref" href="#id27" role="doc-backlink">3. Example</a><a class="headerlink" href="#example" title="Link to this heading">#</a></h3>
-<ul class="simple">
-<li><p>Consider a network with one input layer, one hidden layer, and one output layer.</p></li>
-<li><p>To update a weight (w_4), the derivative is computed as:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-\frac{\partial \text{Loss}}{\partial w_4} = \frac{\partial \text{Loss}}{\partial O_2} \cdot \frac{\partial O_2}{\partial w_4}
-\]</div>
-<ul class="simple">
-<li><p>For a weight in the first layer ((w_1)) influencing multiple downstream neurons, the derivative sums contributions through all paths:</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-\frac{\partial \text{Loss}}{\partial w_1} = \frac{\partial \text{Loss}}{\partial O_2} \cdot \frac{\partial O_2}{\partial O_1} \cdot \frac{\partial O_1}{\partial w_1} + \dots
-\]</div>
-<p>This illustrates how <strong>backpropagation relies on the chain rule</strong> to propagate errors backward through multiple layers.</p>
-<p><img alt="" src="ann/images/cod.png" /></p>
-<hr class="docutils" />
-<p><strong>Key Takeaways</strong></p>
-<ul class="simple">
-<li><p>Chain rule allows calculating gradients for weights in <strong>deep networks</strong>.</p></li>
-<li><p>Gradients account for all paths from a weight to the output.</p></li>
-<li><p>These gradients are multiplied by the learning rate to update the weights.</p></li>
-<li><p>This process enables the network to <strong>learn efficiently</strong> via backpropagation.</p></li>
-</ul>
+<section id="variants-of-mlp">
+<h2><a class="toc-backref" href="#id7"><strong>6. Variants of MLP</strong></a><a class="headerlink" href="#variants-of-mlp" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variant</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Shallow MLP</p></td>
+<td><p>1 hidden layer</p></td>
+</tr>
+<tr class="row-odd"><td><p>Deep MLP</p></td>
+<td><p>Many hidden layers</p></td>
+</tr>
+<tr class="row-even"><td><p>Residual MLP</p></td>
+<td><p>Skip connections</p></td>
+</tr>
+<tr class="row-odd"><td><p>Dropout MLP</p></td>
+<td><p>Regularized network</p></td>
+</tr>
+<tr class="row-even"><td><p>BatchNorm MLP</p></td>
+<td><p>Stabilized training</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
+<hr class="docutils" />
+<section id="pytorch-demonstration">
+<h2><a class="toc-backref" href="#id8"><strong>7. PyTorch Demonstration</strong></a><a class="headerlink" href="#pytorch-demonstration" title="Permalink to this heading">#</a></h2>
+<section id="model-definition">
+<h3><a class="toc-backref" href="#id9"><strong>Model Definition</strong></a><a class="headerlink" href="#model-definition" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MLP</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">input_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">net</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">input_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">hidden_dim</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">hidden_dim</span><span class="p">,</span> <span class="n">output_dim</span><span class="p">))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">net</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="training-loop">
+<h3><a class="toc-backref" href="#id10"><strong>Training Loop</strong></a><a class="headerlink" href="#training-loop" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">MSELoss</span><span class="p">()</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">pred</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">pred</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+    <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="interpretation-of-learning">
+<h2><a class="toc-backref" href="#id11"><strong>8. Interpretation of Learning</strong></a><a class="headerlink" href="#interpretation-of-learning" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Layer</p></th>
+<th class="head"><p>Learns</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Early layers</p></td>
+<td><p>Low-level feature combinations</p></td>
+</tr>
+<tr class="row-odd"><td><p>Deep layers</p></td>
+<td><p>High-level abstractions</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="when-to-use-mlp">
+<h2><a class="toc-backref" href="#id12"><strong>9. When to Use MLP</strong></a><a class="headerlink" href="#when-to-use-mlp" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Task Type</p></th>
+<th class="head"><p>Suitability</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Tabular data</p></td>
+<td><p>Excellent</p></td>
+</tr>
+<tr class="row-odd"><td><p>Time series</p></td>
+<td><p>With feature engineering</p></td>
+</tr>
+<tr class="row-even"><td><p>Vision</p></td>
+<td><p>As classifier head</p></td>
+</tr>
+<tr class="row-odd"><td><p>NLP</p></td>
+<td><p>As output projection</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="limitations">
+<h2><a class="toc-backref" href="#id13"><strong>10. Limitations</strong></a><a class="headerlink" href="#limitations" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Issue</p></th>
+<th class="head"><p>Reason</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Parameter explosion</p></td>
+<td><p>Fully connected</p></td>
+</tr>
+<tr class="row-odd"><td><p>No spatial awareness</p></td>
+<td><p>Unlike CNNs</p></td>
+</tr>
+<tr class="row-even"><td><p>Sequential inefficiency</p></td>
+<td><p>Unlike RNNs/Transformers</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr class="docutils" />
+<p><strong>Summary</strong></p>
+<blockquote>
+<div><p>An MLP is the fundamental deep learning architecture that learns complex functions through stacked affine transformations and non-linear activations, trained end-to-end via backpropagation.</p>
+</div></blockquote>
 </section>
 </section>
 
@@ -1132,7 +893,7 @@ w_{\text{new}} = w_{\text{old}} - \text{learning rate} \times \frac{\partial \te
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Perceptron</p>
+        <p class="prev-next-title">Perceptron Model</p>
       </div>
     </a>
     <a class="right-next"
@@ -1160,37 +921,20 @@ w_{\text{new}} = w_{\text{old}} - \text{learning rate} \times \frac{\partial \te
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture-of-a-multi-layer-neural-network">Architecture of a Multi-Layer Neural Network</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-propagation-feedforward">Forward Propagation (Feedforward)</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-weighted-sum">Step 1: Weighted Sum</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-activation-function">Step 2: Activation Function</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-an-mlp"><strong>1. What is an MLP?</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-formulation"><strong>2. Mathematical Formulation</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-mlp-works"><strong>3. Why MLP Works</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-workflow"><strong>4. Training Workflow</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activation-functions-in-mlp"><strong>5. Activation Functions in MLP</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variants-of-mlp"><strong>6. Variants of MLP</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-demonstration"><strong>7. PyTorch Demonstration</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-definition"><strong>Model Definition</strong></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-loop"><strong>Training Loop</strong></a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-function-error-calculation">Loss Function (Error Calculation)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backward-propagation-backprop">Backward Propagation (Backprop)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-function-vs-cost-function">Loss Function vs Cost Function</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activations-optimizers">Activations &amp; Optimizers</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-training-loop">The Training Loop</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#neuron-as-a-function">Neuron as a Function</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#single-layer-vs-multi-layer">Single Layer vs Multi-Layer</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forward-propagation">Forward Propagation</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-function-and-training">Loss Function and Training</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#backpropagation-intuition">Backpropagation (Intuition)</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-statement-predicting-student-exam-success"><strong>Problem Statement: Predicting Student Exam Success</strong></a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-1-representing-as-a-neural-network"><strong>Step 1: Representing as a Neural Network</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-2-forward-propagation"><strong>Step 2: Forward Propagation</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-3-calculating-loss"><strong>Step 3: Calculating Loss</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-4-backward-propagation-weight-updates"><strong>Step 4: Backward Propagation (Weight Updates)</strong></a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#step-5-key-takeaways-from-this-example"><strong>Step 5: Key Takeaways from This Example</strong></a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#chain-rule-of-derivatives-in-neural-networks">Chain Rule of Derivatives in Neural Networks</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#weight-update-formula-recap">1. Weight Update Formula Recap</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#applying-the-chain-rule">2. Applying the Chain Rule</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example">3. Example</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretation-of-learning"><strong>8. Interpretation of Learning</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#when-to-use-mlp"><strong>9. When to Use MLP</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#limitations"><strong>10. Limitations</strong></a></li>
 </ul>
   </nav></div>
 
@@ -1215,7 +959,7 @@ By svgoudar
 
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2022.
       <br/>
     
   </p>

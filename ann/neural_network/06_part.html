@@ -1,0 +1,1599 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Vanishing Gradient Problem &#8212; Machine Learning Handbook</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/proof.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-examples.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster.bundle.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-shadow.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-punk.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-noir.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-light.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/tooltipster-sideTip-borderless.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/micromodal.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script src="../../_static/tabs.js"></script>
+    <script src="../../_static/js/hoverxref.js"></script>
+    <script src="../../_static/js/tooltipster.bundle.min.js"></script>
+    <script src="../../_static/js/micromodal.min.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"tex": {"macros": {"N": "\\mathbb{N}", "floor": ["\\lfloor#1\\rfloor", 1], "bmat": ["\\left[\\begin{array}"], "emat": ["\\end{array}\\right]"]}}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ann/neural_network/06_part';</script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Gradient Descent" href="../gradient_descent/overview.html" />
+    <link rel="prev" title="Vanishing Gradient Problem in Deep Learning" href="05_part.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../introduction.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Machine Learning Handbook - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Machine Learning Handbook - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../introduction.html">
+                    Deep Learning
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../overview.html">Artificial Neural Network (ANN)</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2 current active has-children"><a class="reference internal" href="overview.html">Neural Network</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="00_part.html">Biological Neuron vs Artificial Neuron</a></li>
+<li class="toctree-l3"><a class="reference internal" href="01_part.html">Neuron</a></li>
+<li class="toctree-l3"><a class="reference internal" href="02_part.html">Neural Network House Price Prediction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="03_part.html">Perceptron Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="04_part.html">Multi-Layer Perceptron (MLP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="05_part.html">Vanishing Gradient Problem in Deep Learning</a></li>
+<li class="toctree-l3 current active"><a class="current reference internal" href="#">Vanishing Gradient Problem</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../gradient_descent/overview.html">Gradient Descent</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../gradient_descent/01_part.html">Batch Gradient Descent in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gradient_descent/02_part.html">Mini-Batch Gradient Descent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gradient_descent/03_part.html">Stochastic Gradient Descent (SGD)</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../training/overview.html">Training</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../training/01_part.html">Data Ingestion Pipeline</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/02_part.html">Model Definition</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/03_part.html">Loss Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/04_part.html">Optimizers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/05_part.html">Training Loop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/06_part.html">Forward Propagation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/07_part.html">Backpropagation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/08_part.html">Weight Updation and the Chain Rule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/09_part.html">Batch and Epoch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/10_part.html">Validation and Metrics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/11_part.html">Variants of Training in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../training/12_part.html">Training Failure Modes, Convergence Diagnostics, and Optimization Dynamics</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../cost_loss_function/overview.html">Loss Function vs Cost Function</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../cost_loss_function/01_part.html">Cost Function vs Loss Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cost_loss_function/02_part.html">Loss Functions for Regression in Neural Networks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cost_loss_function/03_part.html">Loss Functions for Classification</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cost_loss_function/04_part.html">Choice of Loss Function</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../activation/overview.html">Activation Function</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../activation/01_part.html">Sigmoid Activation Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../activation/02_part.html">Tanh Activation Function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../activation/03_part.html">ReLU</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../activation/04_part.html">Exponential Linear Unit (ELU / Exponential ReLU) in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../activation/05_part.html">Softmax Activation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../activation/06_part.html">Activation choice</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../optimizers/overview.html">Optmizers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/01_part.html">Gradient Descent Optimizer in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/02_part.html">Stochastic Gradient Descent (SGD) Optimizer in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/03_part.html">Mini-Batch Gradient Descent Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/04_part.html">Momentum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/05_part.html">Adagrad Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/06_part.html">Adadelta Optimizer in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/07_part.html">RMSProp Optimizer in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/08_part.html">Adam Optimizer</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2"><a class="reference internal" href="../techniques/01_part.html">Exploding Gradient Problem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../techniques/02_part.html">Weight Initialization in Deep Learning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../techniques/03_part.html">Weight Initialization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../techniques/04_part.html">Optmization Techniques</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../techniques/05_part.html">Regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../techniques/06_part.html">Learning Rate Scheduling</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../cnn/overview.html">CNN (Convolution Neural Network)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/01_part.html">CNN v/s Brain</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/02_part.html">Know about Images</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/03_part.html">Convolution Operation in CNNs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/04_part.html">Padding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/05_part.html">ANN vs CNN</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/06_part.html">Pooling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/07_part.html">Fully Connected Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/08_part.html">CNN Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../cnn/09_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../ffn/overview.html">FeedForward Neural Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../ffn/01_part.html">Intiution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffn/02_part.html">Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffn/03_part.html">Training &amp; Hyper-Parameter Tuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../ffn/04_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../rnn/overview.html">RNN</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../rnn/01_part.html">Intuition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rnn/02_part.html">Backward &amp; Forward Propogation with RNN context</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rnn/03_part.html">Workflows</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../rnn/variants/overview.html">Variants</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../rnn/variants/01_part.html">Simple RNN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../rnn/variants/02_part.html">LSTM</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../rnn/variants/03_part.html">GRU</a></li>
+
+<li class="toctree-l3"><a class="reference internal" href="../../rnn/variants/04_part.html">BiRNN</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../rnn/variants/05_part.html">Deep (Stacked) RNN — Explanation, Intuition, and Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../rnn/variants/06_part.html">Echo State Networks (ESN)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../rnn/variants/07_part.html">Attention-Based RNN (Vanilla)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../rnn/variants/08_part.html">Seq2Seq</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../rnn/variants/09_part.html">Attention</a></li>
+</ul>
+</details></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../transformers/overview.html">The Transformer</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/01_part.html">Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/02_part.html">The Transformer Encoder Layer (Deep Explanation)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/03_part.html">Positional Encoding</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/04_part.html">Residual Connection + Layer Normalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/05_part.html">Transformer Decoder Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../transformers/06_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../gan/overview.html">Generative Adversarial Network (GAN)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../gan/01_part.html">Intuition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gan/02_part.html">Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gan/03_part.html">Applications of Generative Adversarial Networks (GANs)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../gan/04_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../rbf/overview.html">Radial Basis Function (RBF) Neural Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../rbf/01_part.html">Intuition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rbf/02_part.html">Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rbf/03_part.html">Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../rbf/04_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../siamese/overview.html">Siamese Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../siamese/01_part.html">Intuition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../siamese/02_part.html">Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../siamese/03_part.html">Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../siamese/04_part.html">Demonstration</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../autoencoders/overview.html">Autoencoders</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../autoencoders/01_part.html">Intiution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoencoders/02_part.html">Workflows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../autoencoders/03_part.html">Application of Autoencoders</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/svgoudar/Learn-DeepLearning/blob/master/ann/neural_network/06_part.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/svgoudar/Learn-DeepLearning" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/svgoudar/Learn-DeepLearning/issues/new?title=Issue%20on%20page%20%2Fann/neural_network/06_part.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/ann/neural_network/06_part.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Vanishing Gradient Problem</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-it-happens">Why It Happens</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consequences-in-training">Consequences in Training</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-visualization">Simple Visualization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demonstration-in-pytorch">Demonstration in PyTorch</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-modern-networks-solve-it">How Modern Networks Solve It</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relu-based-improvement-how-modern-networks-solve-the-vanishing-gradient-problem">ReLU-Based Improvement## How Modern Networks Solve the Vanishing Gradient Problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relu-family-keeps-gradients-from-shrinking">ReLU Family — Keeps Gradients from Shrinking</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition">Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-demonstration">PyTorch Demonstration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#he-xavier-initialization-preserves-variance-across-layers">He / Xavier Initialization — Preserves Variance Across Layers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">PyTorch Demonstration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-normalization-stabilizes-activation-distributions">Batch Normalization — Stabilizes Activation Distributions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">PyTorch Demonstration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#residual-connections-create-direct-gradient-paths">Residual Connections — Create Direct Gradient Paths</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">PyTorch Demonstration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proper-learning-rates-avoids-collapse">Proper Learning Rates — Avoids Collapse</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">PyTorch Demonstration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#end-to-end-stable-architecture-example">End-to-End Stable Architecture Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-table">Summary Table</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-insight">Final Insight</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variants-and-related-problems">Variants and Related Problems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-checklist">Practical Checklist</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-modern-networks-solve-the-vanishing-gradient-problem">How Modern Networks Solve the Vanishing Gradient Problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">ReLU Family — Keeps Gradients from Shrinking</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">PyTorch Demonstration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">He / Xavier Initialization — Preserves Variance Across Layers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">PyTorch Demonstration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">Batch Normalization — Stabilizes Activation Distributions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">PyTorch Demonstration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">Residual Connections — Create Direct Gradient Paths</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">PyTorch Demonstration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id21">Proper Learning Rates — Avoids Collapse</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id22">Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id23">PyTorch Demonstration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id24">End-to-End Stable Architecture Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id25">Summary Table</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id26">Final Insight</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="contents topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#vanishing-gradient-problem" id="id27">Vanishing Gradient Problem</a></p>
+<ul>
+<li><p><a class="reference internal" href="#why-it-happens" id="id28">Why It Happens</a></p></li>
+<li><p><a class="reference internal" href="#consequences-in-training" id="id29">Consequences in Training</a></p></li>
+<li><p><a class="reference internal" href="#simple-visualization" id="id30">Simple Visualization</a></p></li>
+<li><p><a class="reference internal" href="#demonstration-in-pytorch" id="id31">Demonstration in PyTorch</a></p></li>
+<li><p><a class="reference internal" href="#how-modern-networks-solve-it" id="id32">How Modern Networks Solve It</a></p></li>
+<li><p><a class="reference internal" href="#relu-based-improvement-how-modern-networks-solve-the-vanishing-gradient-problem" id="id33">ReLU-Based Improvement## How Modern Networks Solve the Vanishing Gradient Problem</a></p></li>
+<li><p><a class="reference internal" href="#relu-family-keeps-gradients-from-shrinking" id="id34">ReLU Family — Keeps Gradients from Shrinking</a></p>
+<ul>
+<li><p><a class="reference internal" href="#intuition" id="id35">Intuition</a></p></li>
+<li><p><a class="reference internal" href="#pytorch-demonstration" id="id36">PyTorch Demonstration</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#he-xavier-initialization-preserves-variance-across-layers" id="id37">He / Xavier Initialization — Preserves Variance Across Layers</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id1" id="id38">Intuition</a></p></li>
+<li><p><a class="reference internal" href="#id2" id="id39">PyTorch Demonstration</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#batch-normalization-stabilizes-activation-distributions" id="id40">Batch Normalization — Stabilizes Activation Distributions</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id3" id="id41">Intuition</a></p></li>
+<li><p><a class="reference internal" href="#id4" id="id42">PyTorch Demonstration</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#residual-connections-create-direct-gradient-paths" id="id43">Residual Connections — Create Direct Gradient Paths</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id5" id="id44">Intuition</a></p></li>
+<li><p><a class="reference internal" href="#id6" id="id45">PyTorch Demonstration</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#proper-learning-rates-avoids-collapse" id="id46">Proper Learning Rates — Avoids Collapse</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id7" id="id47">Intuition</a></p></li>
+<li><p><a class="reference internal" href="#id8" id="id48">PyTorch Demonstration</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#end-to-end-stable-architecture-example" id="id49">End-to-End Stable Architecture Example</a></p></li>
+<li><p><a class="reference internal" href="#summary-table" id="id50">Summary Table</a></p></li>
+<li><p><a class="reference internal" href="#final-insight" id="id51">Final Insight</a></p></li>
+<li><p><a class="reference internal" href="#variants-and-related-problems" id="id52">Variants and Related Problems</a></p></li>
+<li><p><a class="reference internal" href="#practical-checklist" id="id53">Practical Checklist</a></p></li>
+<li><p><a class="reference internal" href="#summary" id="id54">Summary</a></p></li>
+<li><p><a class="reference internal" href="#how-modern-networks-solve-the-vanishing-gradient-problem" id="id55">How Modern Networks Solve the Vanishing Gradient Problem</a></p></li>
+<li><p><a class="reference internal" href="#id9" id="id56">ReLU Family — Keeps Gradients from Shrinking</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id10" id="id57">Intuition</a></p></li>
+<li><p><a class="reference internal" href="#id11" id="id58">PyTorch Demonstration</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#id12" id="id59">He / Xavier Initialization — Preserves Variance Across Layers</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id13" id="id60">Intuition</a></p></li>
+<li><p><a class="reference internal" href="#id14" id="id61">PyTorch Demonstration</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#id15" id="id62">Batch Normalization — Stabilizes Activation Distributions</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id16" id="id63">Intuition</a></p></li>
+<li><p><a class="reference internal" href="#id17" id="id64">PyTorch Demonstration</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#id18" id="id65">Residual Connections — Create Direct Gradient Paths</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id19" id="id66">Intuition</a></p></li>
+<li><p><a class="reference internal" href="#id20" id="id67">PyTorch Demonstration</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#id21" id="id68">Proper Learning Rates — Avoids Collapse</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id22" id="id69">Intuition</a></p></li>
+<li><p><a class="reference internal" href="#id23" id="id70">PyTorch Demonstration</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#id24" id="id71">End-to-End Stable Architecture Example</a></p></li>
+<li><p><a class="reference internal" href="#id25" id="id72">Summary Table</a></p></li>
+<li><p><a class="reference internal" href="#id26" id="id73">Final Insight</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<section id="vanishing-gradient-problem">
+<h1><a class="toc-backref" href="#id27">Vanishing Gradient Problem</a><a class="headerlink" href="#vanishing-gradient-problem" title="Permalink to this heading">#</a></h1>
+<p>The <strong>vanishing gradient problem</strong> is a fundamental optimization difficulty in deep neural networks where gradients become extremely small as they are backpropagated through many layers.
+When gradients shrink toward zero, earlier layers learn <strong>very slowly or not at all</strong>, preventing the network from modeling complex patterns.</p>
+<p><strong>Core idea</strong></p>
+<p>During backpropagation, gradients are repeatedly multiplied by derivatives of activation functions and weight matrices:</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial \mathcal{L}}{\partial W_1} =
+\frac{\partial \mathcal{L}}{\partial a_n}
+\prod_{k=2}^{n} \frac{\partial a_k}{\partial a_{k-1}}
+\]</div>
+<p>If the factors in this product are mostly <strong>&lt; 1</strong>, the product <strong>decays exponentially</strong> as depth increases.</p>
+<hr class="docutils" />
+<section id="why-it-happens">
+<h2><a class="toc-backref" href="#id28">Why It Happens</a><a class="headerlink" href="#why-it-happens" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Cause</p></th>
+<th class="head"><p>Effect</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Sigmoid / Tanh saturate</p></td>
+<td><p>Their derivatives approach zero for large inputs</p></td>
+</tr>
+<tr class="row-odd"><td><p>Poor weight initialization</p></td>
+<td><p>Shrinks signal magnitude</p></td>
+</tr>
+<tr class="row-even"><td><p>Very deep networks</p></td>
+<td><p>Exponential decay of gradients</p></td>
+</tr>
+<tr class="row-odd"><td><p>Unnormalized inputs</p></td>
+<td><p>Activation distributions drift into saturation</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="consequences-in-training">
+<h2><a class="toc-backref" href="#id29">Consequences in Training</a><a class="headerlink" href="#consequences-in-training" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Early layers stop learning</p></li>
+<li><p>Convergence becomes extremely slow</p></li>
+<li><p>Network behaves like a shallow model</p></li>
+<li><p>Training becomes unstable and unpredictable</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="simple-visualization">
+<h2><a class="toc-backref" href="#id30">Simple Visualization</a><a class="headerlink" href="#simple-visualization" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Layer</p></th>
+<th class="head"><p>Gradient magnitude</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Output layer</p></td>
+<td><p>1.2e-01</p></td>
+</tr>
+<tr class="row-odd"><td><p>Layer 10</p></td>
+<td><p>4.3e-04</p></td>
+</tr>
+<tr class="row-even"><td><p>Layer 5</p></td>
+<td><p>1.7e-07</p></td>
+</tr>
+<tr class="row-odd"><td><p>Layer 1</p></td>
+<td><p>3.2e-12</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="demonstration-in-pytorch">
+<h2><a class="toc-backref" href="#id31">Demonstration in PyTorch</a><a class="headerlink" href="#demonstration-in-pytorch" title="Permalink to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">DeepSigmoidNet</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="n">layers</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">depth</span><span class="p">):</span>
+            <span class="n">layers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">))</span>
+            <span class="n">layers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Sigmoid</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">net</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="o">*</span><span class="n">layers</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">net</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">DeepSigmoidNet</span><span class="p">()</span>
+<span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">MSELoss</span><span class="p">()</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+
+<span class="c1"># Inspect gradient magnitude per layer</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">net</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">):</span>
+        <span class="n">grad_norm</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">grad</span><span class="o">.</span><span class="n">norm</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Layer </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> gradient norm: </span><span class="si">{</span><span class="n">grad_norm</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Layer 0 gradient norm: 9.47e-18
+Layer 2 gradient norm: 1.69e-17
+Layer 4 gradient norm: 7.95e-17
+Layer 6 gradient norm: 5.36e-16
+Layer 8 gradient norm: 3.96e-15
+Layer 10 gradient norm: 2.72e-14
+Layer 12 gradient norm: 1.81e-13
+Layer 14 gradient norm: 1.22e-12
+Layer 16 gradient norm: 8.75e-12
+Layer 18 gradient norm: 6.65e-11
+Layer 20 gradient norm: 5.20e-10
+Layer 22 gradient norm: 3.42e-09
+Layer 24 gradient norm: 3.29e-08
+Layer 26 gradient norm: 2.23e-07
+Layer 28 gradient norm: 1.51e-06
+Layer 30 gradient norm: 1.05e-05
+Layer 32 gradient norm: 7.76e-05
+Layer 34 gradient norm: 5.04e-04
+Layer 36 gradient norm: 3.70e-03
+Layer 38 gradient norm: 2.88e-02
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>Expected observation</strong>
+Earlier layers display extremely small gradient norms compared to later layers.</p>
+</section>
+<hr class="docutils" />
+<section id="how-modern-networks-solve-it">
+<h2><a class="toc-backref" href="#id32">How Modern Networks Solve It</a><a class="headerlink" href="#how-modern-networks-solve-it" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Technique</p></th>
+<th class="head"><p>Role</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ReLU family</p></td>
+<td><p>Keeps gradients from shrinking</p></td>
+</tr>
+<tr class="row-odd"><td><p>He / Xavier initialization</p></td>
+<td><p>Preserves variance across layers</p></td>
+</tr>
+<tr class="row-even"><td><p>Batch Normalization</p></td>
+<td><p>Stabilizes activation distributions</p></td>
+</tr>
+<tr class="row-odd"><td><p>Residual connections</p></td>
+<td><p>Create direct gradient paths</p></td>
+</tr>
+<tr class="row-even"><td><p>Proper learning rates</p></td>
+<td><p>Avoids collapse</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="relu-based-improvement-how-modern-networks-solve-the-vanishing-gradient-problem">
+<h2><a class="toc-backref" href="#id33">ReLU-Based Improvement## How Modern Networks Solve the Vanishing Gradient Problem</a><a class="headerlink" href="#relu-based-improvement-how-modern-networks-solve-the-vanishing-gradient-problem" title="Permalink to this heading">#</a></h2>
+<p>The <strong>vanishing gradient problem</strong> arises when gradients propagated through deep networks shrink exponentially, preventing early layers from learning.
+Modern deep learning architectures are explicitly engineered to <strong>preserve gradient flow</strong>. Below is a systematic explanation of the key techniques, with intuition, workflow, and PyTorch demonstrations.</p>
+</section>
+<hr class="docutils" />
+<section id="relu-family-keeps-gradients-from-shrinking">
+<h2><a class="toc-backref" href="#id34">ReLU Family — Keeps Gradients from Shrinking</a><a class="headerlink" href="#relu-family-keeps-gradients-from-shrinking" title="Permalink to this heading">#</a></h2>
+<section id="intuition">
+<h3><a class="toc-backref" href="#id35">Intuition</a><a class="headerlink" href="#intuition" title="Permalink to this heading">#</a></h3>
+<p>Sigmoid and Tanh squash activations into narrow ranges where derivatives are &lt; 1, shrinking gradients.
+ReLU and its variants have derivatives ≈ 1 in the active region:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = \max(0, x), \quad f'(x) = 1 \text{ for } x&gt;0
+\]</div>
+<p>This prevents exponential decay of gradients.</p>
+</section>
+<section id="pytorch-demonstration">
+<h3><a class="toc-backref" href="#id36">PyTorch Demonstration</a><a class="headerlink" href="#pytorch-demonstration" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>model = nn.Sequential$
+    nn.Linear(100, 128),
+    nn.ReLU(),
+    nn.Linear(128, 128),
+    nn.ReLU(),
+    nn.Linear(128, 10)$
+)
+</pre></div>
+</div>
+<p>Variants: <strong>LeakyReLU, ELU, GELU, Swish</strong> — all maintain stronger gradient flow.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="he-xavier-initialization-preserves-variance-across-layers">
+<h2><a class="toc-backref" href="#id37">He / Xavier Initialization — Preserves Variance Across Layers</a><a class="headerlink" href="#he-xavier-initialization-preserves-variance-across-layers" title="Permalink to this heading">#</a></h2>
+<section id="id1">
+<h3><a class="toc-backref" href="#id38">Intuition</a><a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<p>Each layer should maintain approximately the same variance of activations and gradients.
+He and Xavier initializations mathematically enforce this constraint.</p>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Initialization</p></th>
+<th class="head"><p>Best For</p></th>
+<th class="head"><p>Variance</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Xavier</p></td>
+<td><p>Tanh / Sigmoid</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{1}{fan_{in}}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>He (Kaiming)</p></td>
+<td><p>ReLU family</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{2}{fan_{in}}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id2">
+<h3><a class="toc-backref" href="#id39">PyTorch Demonstration</a><a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">init_weights</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">):</span>
+        <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">kaiming_normal_</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">weight</span><span class="p">)</span>
+        <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">zeros_</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">bias</span><span class="p">)</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">init_weights</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="batch-normalization-stabilizes-activation-distributions">
+<h2><a class="toc-backref" href="#id40">Batch Normalization — Stabilizes Activation Distributions</a><a class="headerlink" href="#batch-normalization-stabilizes-activation-distributions" title="Permalink to this heading">#</a></h2>
+<section id="id3">
+<h3><a class="toc-backref" href="#id41">Intuition</a><a class="headerlink" href="#id3" title="Permalink to this heading">#</a></h3>
+<p>As training progresses, each layer’s input distribution drifts, pushing neurons into saturated regimes with tiny gradients.
+BatchNorm normalizes layer inputs, keeping activations in regions with strong gradients.</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{x} = \frac{x - \mu}{\sigma}
+\]</div>
+</section>
+<section id="id4">
+<h3><a class="toc-backref" href="#id42">PyTorch Demonstration</a><a class="headerlink" href="#id4" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>model = nn.Sequential$
+    nn.Linear(100, 128),
+    nn.BatchNorm1d(128),
+    nn.ReLU(),
+    nn.Linear(128, 128),
+    nn.BatchNorm1d(128),
+    nn.ReLU(),
+    nn.Linear(128, 10)$
+)
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="residual-connections-create-direct-gradient-paths">
+<h2><a class="toc-backref" href="#id43">Residual Connections — Create Direct Gradient Paths</a><a class="headerlink" href="#residual-connections-create-direct-gradient-paths" title="Permalink to this heading">#</a></h2>
+<section id="id5">
+<h3><a class="toc-backref" href="#id44">Intuition</a><a class="headerlink" href="#id5" title="Permalink to this heading">#</a></h3>
+<p>Deep networks fail when gradients must traverse many nonlinear transformations.
+Residual connections create <strong>shortcut paths</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+y = F(x) + x
+\]</div>
+<p>Gradients can bypass problematic layers, preserving learning signal.</p>
+</section>
+<section id="id6">
+<h3><a class="toc-backref" href="#id45">PyTorch Demonstration</a><a class="headerlink" href="#id6" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ResidualBlock</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dim</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">block</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">dim</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">dim</span><span class="p">))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">block</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Used extensively in <strong>ResNet, Transformers, DenseNet</strong>.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="proper-learning-rates-avoids-collapse">
+<h2><a class="toc-backref" href="#id46">Proper Learning Rates — Avoids Collapse</a><a class="headerlink" href="#proper-learning-rates-avoids-collapse" title="Permalink to this heading">#</a></h2>
+<section id="id7">
+<h3><a class="toc-backref" href="#id47">Intuition</a><a class="headerlink" href="#id7" title="Permalink to this heading">#</a></h3>
+<p>If learning rates are too small, gradients vanish numerically.
+If too large, gradients explode.
+Adaptive optimizers maintain effective gradient scales.</p>
+</section>
+<section id="id8">
+<h3><a class="toc-backref" href="#id48">PyTorch Demonstration</a><a class="headerlink" href="#id8" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Optional stabilization:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">clip_grad_norm_</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="mf">1.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="end-to-end-stable-architecture-example">
+<h2><a class="toc-backref" href="#id49">End-to-End Stable Architecture Example</a><a class="headerlink" href="#end-to-end-stable-architecture-example" title="Permalink to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">StableNet</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">net</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">256</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm1d</span><span class="p">(</span><span class="mi">256</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">ResidualBlock</span><span class="p">(</span><span class="mi">256</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">net</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="summary-table">
+<h2><a class="toc-backref" href="#id50">Summary Table</a><a class="headerlink" href="#summary-table" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Technique</p></th>
+<th class="head"><p>Mechanism</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ReLU family</p></td>
+<td><p>Prevents gradient shrinkage</p></td>
+</tr>
+<tr class="row-odd"><td><p>He/Xavier init</p></td>
+<td><p>Preserves variance</p></td>
+</tr>
+<tr class="row-even"><td><p>BatchNorm</p></td>
+<td><p>Keeps activations in linear regime</p></td>
+</tr>
+<tr class="row-odd"><td><p>Residual connections</p></td>
+<td><p>Provides gradient shortcuts</p></td>
+</tr>
+<tr class="row-even"><td><p>Proper LR &amp; optimizers</p></td>
+<td><p>Maintains numerical stability</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="final-insight">
+<h2><a class="toc-backref" href="#id51">Final Insight</a><a class="headerlink" href="#final-insight" title="Permalink to this heading">#</a></h2>
+<blockquote>
+<div><p><strong>Modern deep networks succeed because they are designed as gradient-preservation systems.</strong>
+Almost every architectural innovation since 2012 exists to ensure gradients remain strong, stable, and trainable across depth.</p>
+</div></blockquote>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">DeepReLUNet</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">20</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="n">layers</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">depth</span><span class="p">):</span>
+            <span class="n">layers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">))</span>
+            <span class="n">layers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">net</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="o">*</span><span class="n">layers</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">out</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">out</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">net</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">DeepReLUNet</span><span class="p">()</span>
+<span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">MSELoss</span><span class="p">()</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+
+<span class="c1"># Inspect gradient magnitude per layer</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">layer</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">net</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">layer</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">):</span>
+        <span class="n">grad_norm</span> <span class="o">=</span> <span class="n">layer</span><span class="o">.</span><span class="n">weight</span><span class="o">.</span><span class="n">grad</span><span class="o">.</span><span class="n">norm</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Layer </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2"> gradient norm: </span><span class="si">{</span><span class="n">grad_norm</span><span class="si">:</span><span class="s2">.2e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Layer 0 gradient norm: 2.21e-08
+Layer 2 gradient norm: 2.32e-08
+Layer 4 gradient norm: 2.61e-08
+Layer 6 gradient norm: 3.17e-08
+Layer 8 gradient norm: 5.19e-08
+Layer 10 gradient norm: 1.19e-07
+Layer 12 gradient norm: 2.98e-07
+Layer 14 gradient norm: 8.63e-07
+Layer 16 gradient norm: 3.11e-06
+Layer 18 gradient norm: 8.70e-06
+Layer 20 gradient norm: 2.07e-05
+Layer 22 gradient norm: 4.50e-05
+Layer 24 gradient norm: 1.05e-04
+Layer 26 gradient norm: 2.22e-04
+Layer 28 gradient norm: 5.74e-04
+Layer 30 gradient norm: 1.31e-03
+Layer 32 gradient norm: 3.43e-03
+Layer 34 gradient norm: 6.51e-03
+Layer 36 gradient norm: 1.40e-02
+Layer 38 gradient norm: 4.33e-02
+</pre></div>
+</div>
+</div>
+</div>
+<p>Replacing Sigmoid with ReLU drastically improves gradient flow.</p>
+</section>
+<hr class="docutils" />
+<section id="variants-and-related-problems">
+<h2><a class="toc-backref" href="#id52">Variants and Related Problems</a><a class="headerlink" href="#variants-and-related-problems" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Problem</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Exploding gradients</p></td>
+<td><p>Gradients grow exponentially</p></td>
+</tr>
+<tr class="row-odd"><td><p>Dead ReLU</p></td>
+<td><p>Neurons stuck outputting zero</p></td>
+</tr>
+<tr class="row-even"><td><p>Dying units</p></td>
+<td><p>No gradient flow through some activations</p></td>
+</tr>
+<tr class="row-odd"><td><p>Internal covariate shift</p></td>
+<td><p>Distribution drift across layers</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="practical-checklist">
+<h2><a class="toc-backref" href="#id53">Practical Checklist</a><a class="headerlink" href="#practical-checklist" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Avoid Sigmoid/Tanh in deep hidden layers</p></li>
+<li><p>Use ReLU, LeakyReLU, GELU, or Swish</p></li>
+<li><p>Apply He/Xavier initialization</p></li>
+<li><p>Add BatchNorm or LayerNorm</p></li>
+<li><p>Use residual connections for deep networks</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="summary">
+<h2><a class="toc-backref" href="#id54">Summary</a><a class="headerlink" href="#summary" title="Permalink to this heading">#</a></h2>
+<p>The vanishing gradient problem is a mathematical consequence of deep composition.
+Modern deep learning architecture design focuses almost entirely on <strong>preserving gradient flow</strong>, enabling stable training of networks with hundreds or even thousands of layers.</p>
+</section>
+<section id="how-modern-networks-solve-the-vanishing-gradient-problem">
+<h2><a class="toc-backref" href="#id55">How Modern Networks Solve the Vanishing Gradient Problem</a><a class="headerlink" href="#how-modern-networks-solve-the-vanishing-gradient-problem" title="Permalink to this heading">#</a></h2>
+<p>The <strong>vanishing gradient problem</strong> arises when gradients propagated through deep networks shrink exponentially, preventing early layers from learning.
+Modern deep learning architectures are explicitly engineered to <strong>preserve gradient flow</strong>. Below is a systematic explanation of the key techniques, with intuition, workflow, and PyTorch demonstrations.</p>
+</section>
+<hr class="docutils" />
+<section id="id9">
+<h2><a class="toc-backref" href="#id56">ReLU Family — Keeps Gradients from Shrinking</a><a class="headerlink" href="#id9" title="Permalink to this heading">#</a></h2>
+<section id="id10">
+<h3><a class="toc-backref" href="#id57">Intuition</a><a class="headerlink" href="#id10" title="Permalink to this heading">#</a></h3>
+<p>Sigmoid and Tanh squash activations into narrow ranges where derivatives are &lt; 1, shrinking gradients.
+ReLU and its variants have derivatives ≈ 1 in the active region:</p>
+<div class="math notranslate nohighlight">
+\[
+f(x) = \max(0, x), \quad f'(x) = 1 \text{ for } x&gt;0
+\]</div>
+<p>This prevents exponential decay of gradients.</p>
+</section>
+<section id="id11">
+<h3><a class="toc-backref" href="#id58">PyTorch Demonstration</a><a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+    <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span>
+    <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+    <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span>
+    <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+    <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Variants: <strong>LeakyReLU, ELU, GELU, Swish</strong> — all maintain stronger gradient flow.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id12">
+<h2><a class="toc-backref" href="#id59">He / Xavier Initialization — Preserves Variance Across Layers</a><a class="headerlink" href="#id12" title="Permalink to this heading">#</a></h2>
+<section id="id13">
+<h3><a class="toc-backref" href="#id60">Intuition</a><a class="headerlink" href="#id13" title="Permalink to this heading">#</a></h3>
+<p>Each layer should maintain approximately the same variance of activations and gradients.
+He and Xavier initializations mathematically enforce this constraint.</p>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Initialization</p></th>
+<th class="head"><p>Best For</p></th>
+<th class="head"><p>Variance</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Xavier</p></td>
+<td><p>Tanh / Sigmoid</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{1}{fan_{in}}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>He (Kaiming)</p></td>
+<td><p>ReLU family</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{2}{fan_{in}}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="id14">
+<h3><a class="toc-backref" href="#id61">PyTorch Demonstration</a><a class="headerlink" href="#id14" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">init_weights</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">):</span>
+        <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">kaiming_normal_</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">weight</span><span class="p">)</span>
+        <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">zeros_</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">bias</span><span class="p">)</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">init_weights</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id15">
+<h2><a class="toc-backref" href="#id62">Batch Normalization — Stabilizes Activation Distributions</a><a class="headerlink" href="#id15" title="Permalink to this heading">#</a></h2>
+<section id="id16">
+<h3><a class="toc-backref" href="#id63">Intuition</a><a class="headerlink" href="#id16" title="Permalink to this heading">#</a></h3>
+<p>As training progresses, each layer’s input distribution drifts, pushing neurons into saturated regimes with tiny gradients.
+BatchNorm normalizes layer inputs, keeping activations in regions with strong gradients.</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{x} = \frac{x - \mu}{\sigma}
+\]</div>
+</section>
+<section id="id17">
+<h3><a class="toc-backref" href="#id64">PyTorch Demonstration</a><a class="headerlink" href="#id17" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+    <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span>
+    <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm1d</span><span class="p">(</span><span class="mi">128</span><span class="p">),</span>
+    <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+    <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span>
+    <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm1d</span><span class="p">(</span><span class="mi">128</span><span class="p">),</span>
+    <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+    <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id18">
+<h2><a class="toc-backref" href="#id65">Residual Connections — Create Direct Gradient Paths</a><a class="headerlink" href="#id18" title="Permalink to this heading">#</a></h2>
+<section id="id19">
+<h3><a class="toc-backref" href="#id66">Intuition</a><a class="headerlink" href="#id19" title="Permalink to this heading">#</a></h3>
+<p>Deep networks fail when gradients must traverse many nonlinear transformations.
+Residual connections create <strong>shortcut paths</strong>:</p>
+<div class="math notranslate nohighlight">
+\[
+y = F(x) + x
+\]</div>
+<p>Gradients can bypass problematic layers, preserving learning signal.</p>
+</section>
+<section id="id20">
+<h3><a class="toc-backref" href="#id67">PyTorch Demonstration</a><a class="headerlink" href="#id20" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ResidualBlock</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dim</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">block</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">dim</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">dim</span><span class="p">))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">block</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Used extensively in <strong>ResNet, Transformers, DenseNet</strong>.</p>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id21">
+<h2><a class="toc-backref" href="#id68">Proper Learning Rates — Avoids Collapse</a><a class="headerlink" href="#id21" title="Permalink to this heading">#</a></h2>
+<section id="id22">
+<h3><a class="toc-backref" href="#id69">Intuition</a><a class="headerlink" href="#id22" title="Permalink to this heading">#</a></h3>
+<p>If learning rates are too small, gradients vanish numerically.
+If too large, gradients explode.
+Adaptive optimizers maintain effective gradient scales.</p>
+</section>
+<section id="id23">
+<h3><a class="toc-backref" href="#id70">PyTorch Demonstration</a><a class="headerlink" href="#id23" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">1e-3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Optional stabilization:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">clip_grad_norm_</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="mf">1.0</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id24">
+<h2><a class="toc-backref" href="#id71">End-to-End Stable Architecture Example</a><a class="headerlink" href="#id24" title="Permalink to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">StableNet</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">net</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">256</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm1d</span><span class="p">(</span><span class="mi">256</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">ResidualBlock</span><span class="p">(</span><span class="mi">256</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">128</span><span class="p">),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">ReLU</span><span class="p">(),</span>
+            <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">net</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="id25">
+<h2><a class="toc-backref" href="#id72">Summary Table</a><a class="headerlink" href="#id25" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Technique</p></th>
+<th class="head"><p>Mechanism</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ReLU family</p></td>
+<td><p>Prevents gradient shrinkage</p></td>
+</tr>
+<tr class="row-odd"><td><p>He/Xavier init</p></td>
+<td><p>Preserves variance</p></td>
+</tr>
+<tr class="row-even"><td><p>BatchNorm</p></td>
+<td><p>Keeps activations in linear regime</p></td>
+</tr>
+<tr class="row-odd"><td><p>Residual connections</p></td>
+<td><p>Provides gradient shortcuts</p></td>
+</tr>
+<tr class="row-even"><td><p>Proper LR &amp; optimizers</p></td>
+<td><p>Maintains numerical stability</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="id26">
+<h2><a class="toc-backref" href="#id73">Final Insight</a><a class="headerlink" href="#id26" title="Permalink to this heading">#</a></h2>
+<blockquote>
+<div><p><strong>Modern deep networks succeed because they are designed as gradient-preservation systems.</strong>
+Almost every architectural innovation since 2012 exists to ensure gradients remain strong, stable, and trainable across depth.</p>
+</div></blockquote>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./ann\neural_network"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="05_part.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Vanishing Gradient Problem in Deep Learning</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../gradient_descent/overview.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Gradient Descent</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-it-happens">Why It Happens</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#consequences-in-training">Consequences in Training</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-visualization">Simple Visualization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#demonstration-in-pytorch">Demonstration in PyTorch</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-modern-networks-solve-it">How Modern Networks Solve It</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relu-based-improvement-how-modern-networks-solve-the-vanishing-gradient-problem">ReLU-Based Improvement## How Modern Networks Solve the Vanishing Gradient Problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#relu-family-keeps-gradients-from-shrinking">ReLU Family — Keeps Gradients from Shrinking</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#intuition">Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-demonstration">PyTorch Demonstration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#he-xavier-initialization-preserves-variance-across-layers">He / Xavier Initialization — Preserves Variance Across Layers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">PyTorch Demonstration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#batch-normalization-stabilizes-activation-distributions">Batch Normalization — Stabilizes Activation Distributions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id3">Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id4">PyTorch Demonstration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#residual-connections-create-direct-gradient-paths">Residual Connections — Create Direct Gradient Paths</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id5">Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id6">PyTorch Demonstration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#proper-learning-rates-avoids-collapse">Proper Learning Rates — Avoids Collapse</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id7">Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id8">PyTorch Demonstration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#end-to-end-stable-architecture-example">End-to-End Stable Architecture Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary-table">Summary Table</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-insight">Final Insight</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variants-and-related-problems">Variants and Related Problems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-checklist">Practical Checklist</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-modern-networks-solve-the-vanishing-gradient-problem">How Modern Networks Solve the Vanishing Gradient Problem</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id9">ReLU Family — Keeps Gradients from Shrinking</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id10">Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id11">PyTorch Demonstration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id12">He / Xavier Initialization — Preserves Variance Across Layers</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id13">Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id14">PyTorch Demonstration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id15">Batch Normalization — Stabilizes Activation Distributions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id16">Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id17">PyTorch Demonstration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id18">Residual Connections — Create Direct Gradient Paths</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id19">Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id20">PyTorch Demonstration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id21">Proper Learning Rates — Avoids Collapse</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id22">Intuition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id23">PyTorch Demonstration</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id24">End-to-End Stable Architecture Example</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id25">Summary Table</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id26">Final Insight</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By svgoudar
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
