@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Learning Rate Scheduling &#8212; Machine Learning Handbook</title>
+    <title>Dropout Layer &#8212; Machine Learning Handbook</title>
   
   
   
@@ -83,8 +83,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'ann/techniques/06_part';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="CNN (Convolution Neural Network)" href="../../cnn/overview.html" />
-    <link rel="prev" title="Regularization" href="05_part.html" />
+    <link rel="next" title="Remediating Overfitting and Underfitting" href="07_part.html" />
+    <link rel="prev" title="Gradient Clipping" href="05_part.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -201,6 +201,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l3"><a class="reference internal" href="../neural_network/04_part.html">Multi-Layer Perceptron (MLP)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../neural_network/05_part.html">Vanishing Gradient Problem in Deep Learning</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../neural_network/06_part.html">Vanishing Gradient Problem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../neural_network/07_part.html">Neural Network Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../neural_network/08_part.html">Types of Layers</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../gradient_descent/overview.html">Gradient Descent</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -252,12 +254,20 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l3"><a class="reference internal" href="../optimizers/08_part.html">Adam Optimizer</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2"><a class="reference internal" href="01_part.html">Exploding Gradient Problem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_part.html">Weight Initialization in Deep Learning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_part.html">Weight Initialization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04_part.html">Optmization Techniques</a></li>
-<li class="toctree-l2"><a class="reference internal" href="05_part.html">Regularization</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Learning Rate Scheduling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01_part.html">Weight Initialization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_part.html">ReLU and GELU Activation Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_part.html">Learning Rate Scheduling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_part.html">Gradient Clipping</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Dropout Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_part.html">Remediating Overfitting and Underfitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="08_part.html">Batch Normalization (BN)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="09_part.html">Early Stopping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_part.html">Data Augmentation  (Vision &amp; NLP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="11_part.html">Momentum-Based Training</a></li>
+<li class="toctree-l2"><a class="reference internal" href="12_part.html">Label Smoothing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="13_part.html">Gradient Accumulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="14_part.html">Regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="15_part.html">Learning Rate Scheduling</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../cnn/overview.html">CNN (Convolution Neural Network)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -550,7 +560,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Learning Rate Scheduling</h1>
+    <h1>Dropout Layer</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -560,22 +570,16 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-scheduling-matters">Why Scheduling Matters</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#major-scheduling-strategies">Major Scheduling Strategies</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-forms">Mathematical Forms</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-workflow-with-scheduling">Training Workflow with Scheduling</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-demonstrations">PyTorch Demonstrations</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#steplr">StepLR</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reducelronplateau">ReduceLROnPlateau</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cosine-annealing">Cosine Annealing</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#warmup-cosine">Warmup + Cosine</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-cycle-policy">One Cycle Policy</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-guidelines">Practical Guidelines</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variants-and-extensions">Variants and Extensions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-insight">Final Insight</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-perspective">Mathematical Perspective</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-vs-inference-behavior">Training vs Inference Behavior</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-in-practice">Workflow in Practice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-dropout-works">Why Dropout Works</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-to-use-dropout">Where to Use Dropout</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameter-guidelines">Hyperparameter Guidelines</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-demonstration">PyTorch Demonstration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variants-of-dropout">Variants of Dropout</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remediation-best-practices">Remediation &amp; Best Practices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conceptual-summary">Conceptual Summary</a></li>
 </ul>
             </nav>
         </div>
@@ -590,283 +594,275 @@ document.write(`
   <div class="contents topic" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#learning-rate-scheduling" id="id1">Learning Rate Scheduling</a></p>
+<li><p><a class="reference internal" href="#dropout-layer" id="id1">Dropout Layer</a></p>
 <ul>
-<li><p><a class="reference internal" href="#why-scheduling-matters" id="id2">Why Scheduling Matters</a></p></li>
-<li><p><a class="reference internal" href="#major-scheduling-strategies" id="id3">Major Scheduling Strategies</a></p></li>
-<li><p><a class="reference internal" href="#mathematical-forms" id="id4">Mathematical Forms</a></p></li>
-<li><p><a class="reference internal" href="#training-workflow-with-scheduling" id="id5">Training Workflow with Scheduling</a></p></li>
-<li><p><a class="reference internal" href="#pytorch-demonstrations" id="id6">PyTorch Demonstrations</a></p>
-<ul>
-<li><p><a class="reference internal" href="#steplr" id="id7">StepLR</a></p></li>
-<li><p><a class="reference internal" href="#reducelronplateau" id="id8">ReduceLROnPlateau</a></p></li>
-<li><p><a class="reference internal" href="#cosine-annealing" id="id9">Cosine Annealing</a></p></li>
-<li><p><a class="reference internal" href="#warmup-cosine" id="id10">Warmup + Cosine</a></p></li>
-<li><p><a class="reference internal" href="#one-cycle-policy" id="id11">One Cycle Policy</a></p></li>
-</ul>
-</li>
-<li><p><a class="reference internal" href="#practical-guidelines" id="id12">Practical Guidelines</a></p></li>
-<li><p><a class="reference internal" href="#variants-and-extensions" id="id13">Variants and Extensions</a></p></li>
-<li><p><a class="reference internal" href="#summary" id="id14">Summary</a></p></li>
-<li><p><a class="reference internal" href="#final-insight" id="id15">Final Insight</a></p></li>
+<li><p><a class="reference internal" href="#mathematical-perspective" id="id2">Mathematical Perspective</a></p></li>
+<li><p><a class="reference internal" href="#training-vs-inference-behavior" id="id3">Training vs Inference Behavior</a></p></li>
+<li><p><a class="reference internal" href="#workflow-in-practice" id="id4">Workflow in Practice</a></p></li>
+<li><p><a class="reference internal" href="#why-dropout-works" id="id5">Why Dropout Works</a></p></li>
+<li><p><a class="reference internal" href="#where-to-use-dropout" id="id6">Where to Use Dropout</a></p></li>
+<li><p><a class="reference internal" href="#hyperparameter-guidelines" id="id7">Hyperparameter Guidelines</a></p></li>
+<li><p><a class="reference internal" href="#pytorch-demonstration" id="id8">PyTorch Demonstration</a></p></li>
+<li><p><a class="reference internal" href="#variants-of-dropout" id="id9">Variants of Dropout</a></p></li>
+<li><p><a class="reference internal" href="#remediation-best-practices" id="id10">Remediation &amp; Best Practices</a></p></li>
+<li><p><a class="reference internal" href="#conceptual-summary" id="id11">Conceptual Summary</a></p></li>
 </ul>
 </li>
 </ul>
 </div>
-<section id="learning-rate-scheduling">
-<h1><a class="toc-backref" href="#id1">Learning Rate Scheduling</a><a class="headerlink" href="#learning-rate-scheduling" title="Permalink to this heading">#</a></h1>
-<p>The <strong>learning rate (LR)</strong> controls the <strong>step size</strong> of parameter updates during training.
-A fixed LR is rarely optimal throughout training because:</p>
-<ul class="simple">
-<li><p><strong>Early training</strong> benefits from large steps for rapid progress.</p></li>
-<li><p><strong>Later training</strong> requires small steps for fine convergence.</p></li>
-</ul>
-<p><strong>Learning rate scheduling</strong> dynamically adjusts the LR over time to improve:</p>
-<ul class="simple">
-<li><p>convergence speed,</p></li>
-<li><p>training stability,</p></li>
-<li><p>final model performance.</p></li>
-</ul>
-<div class="math notranslate nohighlight">
-\[
-\theta_{t+1} = \theta_t - \eta_t \nabla \mathcal{L}(\theta_t)
-\]</div>
-<p>where <span class="math notranslate nohighlight">\(\eta_t\)</span> is the scheduled learning rate at step <span class="math notranslate nohighlight">\(t\)</span>.</p>
+<section id="dropout-layer">
+<h1><a class="toc-backref" href="#id1">Dropout Layer</a><a class="headerlink" href="#dropout-layer" title="Permalink to this heading">#</a></h1>
+<p>Deep neural networks often <strong>overfit</strong>: they memorize training data rather than learning generalizable patterns.
+This happens because neurons <strong>co-adapt</strong> — they rely on specific other neurons instead of learning robust features.</p>
+<p><strong>Dropout</strong> combats this by introducing <em>stochastic regularization</em>:</p>
+<blockquote>
+<div><p>During training, randomly disable a fraction of neurons so the network cannot rely on any single path.</p>
+</div></blockquote>
+<p>This forces the network to behave like an <strong>ensemble of many subnetworks</strong>, improving generalization.</p>
 <hr class="docutils" />
-<section id="why-scheduling-matters">
-<h2><a class="toc-backref" href="#id2">Why Scheduling Matters</a><a class="headerlink" href="#why-scheduling-matters" title="Permalink to this heading">#</a></h2>
+<section id="mathematical-perspective">
+<h2><a class="toc-backref" href="#id2">Mathematical Perspective</a><a class="headerlink" href="#mathematical-perspective" title="Permalink to this heading">#</a></h2>
+<p>Let:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(h\)</span> = activations of a layer</p></li>
+<li><p><span class="math notranslate nohighlight">\(m \sim \text{Bernoulli}(p)\)</span> = dropout mask</p></li>
+<li><p><span class="math notranslate nohighlight">\(p\)</span> = probability of keeping a neuron active</p></li>
+</ul>
+<p>Training time:
+$<span class="math notranslate nohighlight">\(
+\tilde{h} = m \odot h
+\)</span>$</p>
+<p>Inference time:
+$<span class="math notranslate nohighlight">\(
+h_{\text{test}} = p \cdot h
+\)</span>$
+(or equivalently, scale during training and do nothing at inference — used in modern frameworks)</p>
+</section>
+<hr class="docutils" />
+<section id="training-vs-inference-behavior">
+<h2><a class="toc-backref" href="#id3">Training vs Inference Behavior</a><a class="headerlink" href="#training-vs-inference-behavior" title="Permalink to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="head"><p>Phase</p></th>
-<th class="head"><p>Optimal LR Behavior</p></th>
+<th class="head"><p>What happens</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>Early training</p></td>
-<td><p>Large LR → fast exploration</p></td>
+<tr class="row-even"><td><p>Training</p></td>
+<td><p>Random neurons dropped</p></td>
 </tr>
-<tr class="row-odd"><td><p>Mid training</p></td>
-<td><p>Moderate LR → stable descent</p></td>
+<tr class="row-odd"><td><p>Inference</p></td>
+<td><p>Full network used with scaled activations</p></td>
 </tr>
-<tr class="row-even"><td><p>Late training</p></td>
-<td><p>Small LR → fine convergence</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>Without scheduling:</p>
-<ul class="simple">
-<li><p>Too large LR → divergence</p></li>
-<li><p>Too small LR → slow convergence / poor minima</p></li>
-</ul>
-</section>
-<hr class="docutils" />
-<section id="major-scheduling-strategies">
-<h2><a class="toc-backref" href="#id3">Major Scheduling Strategies</a><a class="headerlink" href="#major-scheduling-strategies" title="Permalink to this heading">#</a></h2>
-<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Scheduler</p></th>
-<th class="head"><p>Behavior</p></th>
-<th class="head"><p>Typical Use</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>Step Decay</p></td>
-<td><p>Drop LR at fixed epochs</p></td>
-<td><p>Classic CNN training</p></td>
-</tr>
-<tr class="row-odd"><td><p>Exponential Decay</p></td>
-<td><p>Smooth multiplicative decay</p></td>
-<td><p>Long training runs</p></td>
-</tr>
-<tr class="row-even"><td><p>Cosine Annealing</p></td>
-<td><p>Periodic smooth decay</p></td>
-<td><p>Vision / Transformers</p></td>
-</tr>
-<tr class="row-odd"><td><p>Warmup</p></td>
-<td><p>Gradual LR increase at start</p></td>
-<td><p>Large models</p></td>
-</tr>
-<tr class="row-even"><td><p>Reduce on Plateau</p></td>
-<td><p>Decay when validation stalls</p></td>
-<td><p>General purpose</p></td>
-</tr>
-<tr class="row-odd"><td><p>One-Cycle Policy</p></td>
-<td><p>Increase then decrease</p></td>
-<td><p>Fast convergence</p></td>
+<tr class="row-even"><td><p>Effect</p></td>
+<td><p>Implicit ensemble learning</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 </section>
 <hr class="docutils" />
-<section id="mathematical-forms">
-<h2><a class="toc-backref" href="#id4">Mathematical Forms</a><a class="headerlink" href="#mathematical-forms" title="Permalink to this heading">#</a></h2>
-<p><strong>Step Decay</strong></p>
-<div class="math notranslate nohighlight">
-\[
-\eta_t = \eta_0 \cdot \gamma^{\lfloor t/s \rfloor}
-\]</div>
-<p><strong>Exponential Decay</strong></p>
-<div class="math notranslate nohighlight">
-\[
-\eta_t = \eta_0 e^{-kt}
-\]</div>
-<p><strong>Cosine Annealing</strong></p>
-<div class="math notranslate nohighlight">
-\[
-\eta_t = \eta_{min} + \frac{1}{2}(\eta_{max}-\eta_{min})(1+\cos(\pi t/T))
-\]</div>
-</section>
-<hr class="docutils" />
-<section id="training-workflow-with-scheduling">
-<h2><a class="toc-backref" href="#id5">Training Workflow with Scheduling</a><a class="headerlink" href="#training-workflow-with-scheduling" title="Permalink to this heading">#</a></h2>
+<section id="workflow-in-practice">
+<h2><a class="toc-backref" href="#id4">Workflow in Practice</a><a class="headerlink" href="#workflow-in-practice" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
-<li><p>Initialize model and optimizer</p></li>
-<li><p>Choose base learning rate</p></li>
-<li><p>Attach scheduler</p></li>
-<li><p>Update LR at each step or epoch</p></li>
-<li><p>Monitor convergence</p></li>
+<li><p>Forward pass</p></li>
+<li><p>Sample dropout mask</p></li>
+<li><p>Zero-out selected activations</p></li>
+<li><p>Scale surviving activations</p></li>
+<li><p>Backpropagate through active neurons only</p></li>
+<li><p>At inference, disable dropout</p></li>
 </ol>
 </section>
 <hr class="docutils" />
-<section id="pytorch-demonstrations">
-<h2><a class="toc-backref" href="#id6">PyTorch Demonstrations</a><a class="headerlink" href="#pytorch-demonstrations" title="Permalink to this heading">#</a></h2>
-<section id="steplr">
-<h3><a class="toc-backref" href="#id7">StepLR</a><a class="headerlink" href="#steplr" title="Permalink to this heading">#</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
-<span class="n">scheduler</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">lr_scheduler</span><span class="o">.</span><span class="n">StepLR</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">step_size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
-
-<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">):</span>
-    <span class="n">train</span><span class="p">()</span>
-    <span class="n">scheduler</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
-</pre></div>
-</div>
-</section>
-<section id="reducelronplateau">
-<h3><a class="toc-backref" href="#id8">ReduceLROnPlateau</a><a class="headerlink" href="#reducelronplateau" title="Permalink to this heading">#</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">scheduler</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">lr_scheduler</span><span class="o">.</span><span class="n">ReduceLROnPlateau</span><span class="p">(</span>
-    <span class="n">optimizer</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;min&#39;</span><span class="p">,</span> <span class="n">factor</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">patience</span><span class="o">=</span><span class="mi">5</span>
-<span class="p">)</span>
-
-<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">):</span>
-    <span class="n">loss</span> <span class="o">=</span> <span class="n">train</span><span class="p">()</span>
-    <span class="n">scheduler</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">loss</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="cosine-annealing">
-<h3><a class="toc-backref" href="#id9">Cosine Annealing</a><a class="headerlink" href="#cosine-annealing" title="Permalink to this heading">#</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">scheduler</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">lr_scheduler</span><span class="o">.</span><span class="n">CosineAnnealingLR</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">T_max</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
-</pre></div>
-</div>
-</section>
-<section id="warmup-cosine">
-<h3><a class="toc-backref" href="#id10">Warmup + Cosine</a><a class="headerlink" href="#warmup-cosine" title="Permalink to this heading">#</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">torch.optim.lr_scheduler</span><span class="w"> </span><span class="kn">import</span> <span class="n">SequentialLR</span><span class="p">,</span> <span class="n">LinearLR</span><span class="p">,</span> <span class="n">CosineAnnealingLR</span>
-
-<span class="n">warmup</span> <span class="o">=</span> <span class="n">LinearLR</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">start_factor</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">total_iters</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-<span class="n">cosine</span> <span class="o">=</span> <span class="n">CosineAnnealingLR</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="n">T_max</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
-
-<span class="n">scheduler</span> <span class="o">=</span> <span class="n">SequentialLR</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span> <span class="p">[</span><span class="n">warmup</span><span class="p">,</span> <span class="n">cosine</span><span class="p">],</span> <span class="n">milestones</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>
-</pre></div>
-</div>
-</section>
-<section id="one-cycle-policy">
-<h3><a class="toc-backref" href="#id11">One Cycle Policy</a><a class="headerlink" href="#one-cycle-policy" title="Permalink to this heading">#</a></h3>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">scheduler</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">lr_scheduler</span><span class="o">.</span><span class="n">OneCycleLR</span><span class="p">(</span>
-    <span class="n">optimizer</span><span class="p">,</span>
-    <span class="n">max_lr</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
-    <span class="n">total_steps</span><span class="o">=</span><span class="mi">1000</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-</section>
-</section>
-<hr class="docutils" />
-<section id="practical-guidelines">
-<h2><a class="toc-backref" href="#id12">Practical Guidelines</a><a class="headerlink" href="#practical-guidelines" title="Permalink to this heading">#</a></h2>
+<section id="why-dropout-works">
+<h2><a class="toc-backref" href="#id5">Why Dropout Works</a><a class="headerlink" href="#why-dropout-works" title="Permalink to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="colwidths-auto table">
 <thead>
-<tr class="row-odd"><th class="head"><p>Model Type</p></th>
-<th class="head"><p>Recommended Strategy</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>CNNs</p></td>
-<td><p>StepLR / Cosine</p></td>
-</tr>
-<tr class="row-odd"><td><p>Transformers</p></td>
-<td><p>Warmup + Cosine</p></td>
-</tr>
-<tr class="row-even"><td><p>Large models</p></td>
-<td><p>OneCycle</p></td>
-</tr>
-<tr class="row-odd"><td><p>Unknown landscape</p></td>
-<td><p>ReduceOnPlateau</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<hr class="docutils" />
-<section id="variants-and-extensions">
-<h2><a class="toc-backref" href="#id13">Variants and Extensions</a><a class="headerlink" href="#variants-and-extensions" title="Permalink to this heading">#</a></h2>
-<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Variant</p></th>
-<th class="head"><p>Purpose</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>Cyclical LR</p></td>
-<td><p>Escape sharp minima</p></td>
-</tr>
-<tr class="row-odd"><td><p>Adaptive LR</p></td>
-<td><p>Adam / RMSProp</p></td>
-</tr>
-<tr class="row-even"><td><p>Layer-wise LR</p></td>
-<td><p>Fine-tuning pre-trained models</p></td>
-</tr>
-<tr class="row-odd"><td><p>Polynomial decay</p></td>
-<td><p>Long-horizon training</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<hr class="docutils" />
-<section id="summary">
-<h2><a class="toc-backref" href="#id14">Summary</a><a class="headerlink" href="#summary" title="Permalink to this heading">#</a></h2>
-<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Benefit</p></th>
+<tr class="row-odd"><th class="head"><p>Mechanism</p></th>
 <th class="head"><p>Effect</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>Faster convergence</p></td>
-<td><p>Early large LR</p></td>
+<tr class="row-even"><td><p>Prevents co-adaptation</p></td>
+<td><p>Encourages independent feature learning</p></td>
 </tr>
-<tr class="row-odd"><td><p>Better generalization</p></td>
-<td><p>Late small LR</p></td>
+<tr class="row-odd"><td><p>Acts as model averaging</p></td>
+<td><p>Improves robustness</p></td>
 </tr>
-<tr class="row-even"><td><p>Higher stability</p></td>
-<td><p>Avoid divergence</p></td>
-</tr>
-<tr class="row-odd"><td><p>Automatic adaptation</p></td>
-<td><p>Less manual tuning</p></td>
+<tr class="row-even"><td><p>Injects noise</p></td>
+<td><p>Smooths loss landscape</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 </section>
 <hr class="docutils" />
-<section id="final-insight">
-<h2><a class="toc-backref" href="#id15">Final Insight</a><a class="headerlink" href="#final-insight" title="Permalink to this heading">#</a></h2>
-<blockquote>
-<div><p><strong>Learning rate scheduling is the control system that governs how neural networks learn over time.</strong></p>
-</div></blockquote>
+<section id="where-to-use-dropout">
+<h2><a class="toc-backref" href="#id6">Where to Use Dropout</a><a class="headerlink" href="#where-to-use-dropout" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Layer type</p></th>
+<th class="head"><p>Usage</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Fully connected layers</p></td>
+<td><p>Very common</p></td>
+</tr>
+<tr class="row-odd"><td><p>CNN feature maps</p></td>
+<td><p>Use spatial dropout</p></td>
+</tr>
+<tr class="row-even"><td><p>Transformer attention</p></td>
+<td><p>Use dropout in attention &amp; FFN</p></td>
+</tr>
+<tr class="row-odd"><td><p>Input layer</p></td>
+<td><p>Rare, but sometimes helpful</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="hyperparameter-guidelines">
+<h2><a class="toc-backref" href="#id7">Hyperparameter Guidelines</a><a class="headerlink" href="#hyperparameter-guidelines" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Dropout rate</p></th>
+<th class="head"><p>Typical values</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Light regularization</p></td>
+<td><p>0.1 – 0.3</p></td>
+</tr>
+<tr class="row-odd"><td><p>Standard</p></td>
+<td><p>0.3 – 0.5</p></td>
+</tr>
+<tr class="row-even"><td><p>Heavy</p></td>
+<td><p>0.5 – 0.7</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Too high → underfitting
+Too low → overfitting persists</p>
+</section>
+<hr class="docutils" />
+<section id="pytorch-demonstration">
+<h2><a class="toc-backref" href="#id8">PyTorch Demonstration</a><a class="headerlink" href="#pytorch-demonstration" title="Permalink to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn.functional</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">F</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MLP</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">784</span><span class="p">,</span> <span class="mi">256</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>     <span class="c1"># applied only during training</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+</div>
+<p>Usage:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">MLP</span><span class="p">()</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>    <span class="c1"># dropout active</span>
+<span class="n">out1</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>     <span class="c1"># dropout disabled</span>
+<span class="n">out2</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="variants-of-dropout">
+<h2><a class="toc-backref" href="#id9">Variants of Dropout</a><a class="headerlink" href="#variants-of-dropout" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variant</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Standard Dropout</p></td>
+<td><p>Randomly drops individual neurons</p></td>
+</tr>
+<tr class="row-odd"><td><p>Spatial Dropout</p></td>
+<td><p>Drops entire feature maps (CNNs)</p></td>
+</tr>
+<tr class="row-even"><td><p>DropConnect</p></td>
+<td><p>Drops weights instead of activations</p></td>
+</tr>
+<tr class="row-odd"><td><p>Variational Dropout</p></td>
+<td><p>Same mask across time steps (RNNs)</p></td>
+</tr>
+<tr class="row-even"><td><p>Monte Carlo Dropout</p></td>
+<td><p>Dropout active at inference for uncertainty</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="remediation-best-practices">
+<h2><a class="toc-backref" href="#id10">Remediation &amp; Best Practices</a><a class="headerlink" href="#remediation-best-practices" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Problem</p></th>
+<th class="head"><p>Remedy</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Model underfitting</p></td>
+<td><p>Lower dropout rate</p></td>
+</tr>
+<tr class="row-odd"><td><p>Training unstable</p></td>
+<td><p>Combine with BatchNorm</p></td>
+</tr>
+<tr class="row-even"><td><p>Transformer training</p></td>
+<td><p>Apply after attention &amp; FFN</p></td>
+</tr>
+<tr class="row-odd"><td><p>Small dataset</p></td>
+<td><p>Increase dropout</p></td>
+</tr>
+<tr class="row-even"><td><p>Large dataset</p></td>
+<td><p>Reduce dropout</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Do <strong>not</strong> combine very high dropout with heavy L2 regularization — it causes excessive capacity loss.</p>
+</section>
+<hr class="docutils" />
+<section id="conceptual-summary">
+<h2><a class="toc-backref" href="#id11">Conceptual Summary</a><a class="headerlink" href="#conceptual-summary" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Aspect</p></th>
+<th class="head"><p>Interpretation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Core idea</p></td>
+<td><p>Regularization via stochastic neuron suppression</p></td>
+</tr>
+<tr class="row-odd"><td><p>Optimization effect</p></td>
+<td><p>Smoother loss, flatter minima</p></td>
+</tr>
+<tr class="row-even"><td><p>Generalization</p></td>
+<td><p>Improves robustness &amp; reduces overfitting</p></td>
+</tr>
+<tr class="row-odd"><td><p>Theoretical view</p></td>
+<td><p>Approximate ensemble of subnetworks</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 </section>
 
@@ -906,15 +902,15 @@ A fixed LR is rarely optimal throughout training because:</p>
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Regularization</p>
+        <p class="prev-next-title">Gradient Clipping</p>
       </div>
     </a>
     <a class="right-next"
-       href="../../cnn/overview.html"
+       href="07_part.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">CNN (Convolution Neural Network)</p>
+        <p class="prev-next-title">Remediating Overfitting and Underfitting</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -934,22 +930,16 @@ A fixed LR is rarely optimal throughout training because:</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-scheduling-matters">Why Scheduling Matters</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#major-scheduling-strategies">Major Scheduling Strategies</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-forms">Mathematical Forms</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-workflow-with-scheduling">Training Workflow with Scheduling</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-demonstrations">PyTorch Demonstrations</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#steplr">StepLR</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reducelronplateau">ReduceLROnPlateau</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#cosine-annealing">Cosine Annealing</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#warmup-cosine">Warmup + Cosine</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#one-cycle-policy">One Cycle Policy</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#practical-guidelines">Practical Guidelines</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variants-and-extensions">Variants and Extensions</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#summary">Summary</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#final-insight">Final Insight</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-perspective">Mathematical Perspective</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#training-vs-inference-behavior">Training vs Inference Behavior</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-in-practice">Workflow in Practice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-dropout-works">Why Dropout Works</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#where-to-use-dropout">Where to Use Dropout</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hyperparameter-guidelines">Hyperparameter Guidelines</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pytorch-demonstration">PyTorch Demonstration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#variants-of-dropout">Variants of Dropout</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#remediation-best-practices">Remediation &amp; Best Practices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conceptual-summary">Conceptual Summary</a></li>
 </ul>
   </nav></div>
 

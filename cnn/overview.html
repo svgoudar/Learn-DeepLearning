@@ -84,7 +84,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="CNN v/s Brain" href="01_part.html" />
-    <link rel="prev" title="Learning Rate Scheduling" href="../ann/techniques/06_part.html" />
+    <link rel="prev" title="Learning Rate Scheduling" href="../ann/techniques/15_part.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -201,6 +201,8 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l3"><a class="reference internal" href="../ann/neural_network/04_part.html">Multi-Layer Perceptron (MLP)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ann/neural_network/05_part.html">Vanishing Gradient Problem in Deep Learning</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../ann/neural_network/06_part.html">Vanishing Gradient Problem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/neural_network/07_part.html">Neural Network Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ann/neural_network/08_part.html">Types of Layers</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../ann/gradient_descent/overview.html">Gradient Descent</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -252,12 +254,20 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l3"><a class="reference internal" href="../ann/optimizers/08_part.html">Adam Optimizer</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2"><a class="reference internal" href="../ann/techniques/01_part.html">Exploding Gradient Problem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ann/techniques/02_part.html">Weight Initialization in Deep Learning</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ann/techniques/03_part.html">Weight Initialization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ann/techniques/04_part.html">Optmization Techniques</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ann/techniques/05_part.html">Regularization</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../ann/techniques/06_part.html">Learning Rate Scheduling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ann/techniques/01_part.html">Weight Initialization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ann/techniques/02_part.html">ReLU and GELU Activation Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ann/techniques/03_part.html">Learning Rate Scheduling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ann/techniques/05_part.html">Gradient Clipping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ann/techniques/06_part.html">Dropout Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ann/techniques/07_part.html">Remediating Overfitting and Underfitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ann/techniques/08_part.html">Batch Normalization (BN)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ann/techniques/09_part.html">Early Stopping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ann/techniques/10_part.html">Data Augmentation  (Vision &amp; NLP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ann/techniques/11_part.html">Momentum-Based Training</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ann/techniques/12_part.html">Label Smoothing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ann/techniques/13_part.html">Gradient Accumulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ann/techniques/14_part.html">Regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ann/techniques/15_part.html">Learning Rate Scheduling</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">CNN (Convolution Neural Network)</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -694,7 +704,7 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../ann/techniques/06_part.html"
+       href="../ann/techniques/15_part.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">

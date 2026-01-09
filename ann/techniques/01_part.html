@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Exploding Gradient Problem &#8212; Machine Learning Handbook</title>
+    <title>Weight Initialization &#8212; Machine Learning Handbook</title>
   
   
   
@@ -83,8 +83,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script>DOCUMENTATION_OPTIONS.pagename = 'ann/techniques/01_part';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Weight Initializing Techniques" href="02_part.html" />
-    <link rel="prev" title="Adam Optmizers" href="../optimizers/07_part.html" />
+    <link rel="next" title="ReLU and GELU Activation Functions" href="02_part.html" />
+    <link rel="prev" title="Adam Optimizer" href="../optimizers/08_part.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -195,12 +195,20 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../overview.html">Artificial Neural Network (ANN)</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2 has-children"><a class="reference internal" href="../neural_network/overview.html">Neural Network</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l3"><a class="reference internal" href="../neural_network/00_part.html">Biological Neuron vs Artificial Neuron</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../neural_network/01_part.html">Intuition</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../neural_network/02_part.html">Problem Statement</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../neural_network/03.01_part.html">Multi-Layer Perceptron (MLP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../neural_network/01_part.html">Neuron</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../neural_network/02_part.html">Neural Network House Price Prediction</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../neural_network/03_part.html">Perceptron Model</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../neural_network/04_part.html">Multi-Layer Neural Networks</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../neural_network/04_part.html">Multi-Layer Perceptron (MLP)</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../neural_network/05_part.html">Vanishing Gradient Problem in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../neural_network/06_part.html">Vanishing Gradient Problem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../neural_network/07_part.html">Neural Network Architecture</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../neural_network/08_part.html">Types of Layers</a></li>
+</ul>
+</details></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../gradient_descent/overview.html">Gradient Descent</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l3"><a class="reference internal" href="../gradient_descent/01_part.html">Batch Gradient Descent in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gradient_descent/02_part.html">Mini-Batch Gradient Descent</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gradient_descent/03_part.html">Stochastic Gradient Descent (SGD)</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../training/overview.html">Training</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -230,26 +238,36 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l3"><a class="reference internal" href="../activation/02_part.html">Tanh Activation Function</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../activation/03_part.html">ReLU</a></li>
 
-<li class="toctree-l3"><a class="reference internal" href="../activation/04_part.html">ELU (Exponential Linear Unit)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../activation/04_part.html">Exponential Linear Unit (ELU / Exponential ReLU) in Deep Learning</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../activation/05_part.html">Softmax Activation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../activation/06_part.html">Activation choice</a></li>
 </ul>
 </details></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../optimizers/overview.html">Optmizers</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l3"><a class="reference internal" href="../optimizers/01_part.html">Gradient Descent Optimizer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../optimizers/02_part.html">Stochastic Gradient Descent (SGD) Optimizer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../optimizers/03_part.html">Mini-batch Stochastic Gradient Descent</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../optimizers/04_part.html">SGD with Momentum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/01_part.html">Gradient Descent Optimizer in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/02_part.html">Stochastic Gradient Descent (SGD) Optimizer in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/03_part.html">Mini-Batch Gradient Descent Optimizer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/04_part.html">Momentum</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../optimizers/05_part.html">Adagrad Optimizer</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../optimizers/06_part.html">Adadelta and RMSProp</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../optimizers/07_part.html">Adam Optmizers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/06_part.html">Adadelta Optimizer in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/07_part.html">RMSProp Optimizer in Deep Learning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../optimizers/08_part.html">Adam Optimizer</a></li>
 </ul>
 </details></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Exploding Gradient Problem</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02_part.html">Weight Initializing Techniques</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_part.html">Dropout Layer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04_part.html">Optmization Techniques</a></li>
-<li class="toctree-l2"><a class="reference internal" href="05_part.html">Regularization</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Weight Initialization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02_part.html">ReLU and GELU Activation Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_part.html">Learning Rate Scheduling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_part.html">Gradient Clipping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_part.html">Dropout Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_part.html">Remediating Overfitting and Underfitting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="08_part.html">Batch Normalization (BN)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="09_part.html">Early Stopping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_part.html">Data Augmentation  (Vision &amp; NLP)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="11_part.html">Momentum-Based Training</a></li>
+<li class="toctree-l2"><a class="reference internal" href="12_part.html">Label Smoothing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="13_part.html">Gradient Accumulation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="14_part.html">Regularization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="15_part.html">Learning Rate Scheduling</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../cnn/overview.html">CNN (Convolution Neural Network)</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -542,7 +560,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Exploding Gradient Problem</h1>
+    <h1>Weight Initialization</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -552,9 +570,21 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-it-happens"><strong>Why It Happens</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-factors"><strong>Key Factors</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions"><strong>Solutions</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-weight-initialization-matters">Why Weight Initialization Matters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-intuition">Core Intuition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#main-initialization-families">Main Initialization Families</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#main-weight-initialization-techniques">Main Weight Initialization Techniques</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initialization-vs-activation-compatibility">Initialization vs Activation Compatibility</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-variants">Advanced Variants</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xavier-glorot-initialization">Xavier (Glorot) Initialization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#he-kaiming-initialization">He (Kaiming) Initialization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecun-initialization">LeCun Initialization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#orthogonal-initialization">Orthogonal Initialization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-pytorch-demonstration">Complete PyTorch Demonstration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initialization-workflow-in-practice">Initialization Workflow in Practice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#failure-modes-and-remediation">Failure Modes and Remediation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Advanced Variants</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key Takeaways</a></li>
 </ul>
             </nav>
         </div>
@@ -569,68 +599,329 @@ document.write(`
   <div class="contents topic" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#exploding-gradient-problem" id="id1">Exploding Gradient Problem</a></p>
+<li><p><a class="reference internal" href="#weight-initialization" id="id2">Weight Initialization</a></p>
 <ul>
-<li><p><a class="reference internal" href="#why-it-happens" id="id2"><strong>Why It Happens</strong></a></p></li>
-<li><p><a class="reference internal" href="#key-factors" id="id3"><strong>Key Factors</strong></a></p></li>
-<li><p><a class="reference internal" href="#solutions" id="id4"><strong>Solutions</strong></a></p></li>
+<li><p><a class="reference internal" href="#why-weight-initialization-matters" id="id3">Why Weight Initialization Matters</a></p></li>
+<li><p><a class="reference internal" href="#core-intuition" id="id4">Core Intuition</a></p></li>
+<li><p><a class="reference internal" href="#main-initialization-families" id="id5">Main Initialization Families</a></p></li>
+<li><p><a class="reference internal" href="#main-weight-initialization-techniques" id="id6">Main Weight Initialization Techniques</a></p></li>
+<li><p><a class="reference internal" href="#initialization-vs-activation-compatibility" id="id7">Initialization vs Activation Compatibility</a></p></li>
+<li><p><a class="reference internal" href="#advanced-variants" id="id8">Advanced Variants</a></p></li>
+<li><p><a class="reference internal" href="#xavier-glorot-initialization" id="id9">Xavier (Glorot) Initialization</a></p></li>
+<li><p><a class="reference internal" href="#he-kaiming-initialization" id="id10">He (Kaiming) Initialization</a></p></li>
+<li><p><a class="reference internal" href="#lecun-initialization" id="id11">LeCun Initialization</a></p></li>
+<li><p><a class="reference internal" href="#orthogonal-initialization" id="id12">Orthogonal Initialization</a></p></li>
+<li><p><a class="reference internal" href="#complete-pytorch-demonstration" id="id13">Complete PyTorch Demonstration</a></p></li>
+<li><p><a class="reference internal" href="#initialization-workflow-in-practice" id="id14">Initialization Workflow in Practice</a></p></li>
+<li><p><a class="reference internal" href="#failure-modes-and-remediation" id="id15">Failure Modes and Remediation</a></p></li>
+<li><p><a class="reference internal" href="#id1" id="id16">Advanced Variants</a></p></li>
+<li><p><a class="reference internal" href="#key-takeaways" id="id17">Key Takeaways</a></p></li>
 </ul>
 </li>
 </ul>
 </div>
-<section id="exploding-gradient-problem">
-<h1><a class="toc-backref" href="#id1">Exploding Gradient Problem</a><a class="headerlink" href="#exploding-gradient-problem" title="Permalink to this heading">#</a></h1>
+<section id="weight-initialization">
+<h1><a class="toc-backref" href="#id2">Weight Initialization</a><a class="headerlink" href="#weight-initialization" title="Permalink to this heading">#</a></h1>
+<section id="why-weight-initialization-matters">
+<h2><a class="toc-backref" href="#id3">Why Weight Initialization Matters</a><a class="headerlink" href="#why-weight-initialization-matters" title="Permalink to this heading">#</a></h2>
+<p>Weight initialization determines how signals propagate through a neural network <strong>before learning begins</strong>.
+A poor initialization can cause:</p>
 <ul class="simple">
-<li><p>Exploding gradients happen when gradients (derivatives of the loss with respect to weights) become <strong>extremely large</strong> during backpropagation.</p></li>
-<li><p>This makes weight updates huge, causing the model to <strong>overshoot the minimum</strong> or diverge entirely.</p></li>
-<li><p>It’s the opposite of vanishing gradients, where updates become too small.</p></li>
+<li><p><strong>Vanishing gradients</strong> → network fails to learn</p></li>
+<li><p><strong>Exploding gradients</strong> → unstable training</p></li>
+<li><p><strong>Slow convergence</strong> → inefficient optimization</p></li>
 </ul>
+<p>The goal is to start with weights that preserve the <strong>variance of activations and gradients</strong> across layers.</p>
+</section>
 <hr class="docutils" />
-<section id="why-it-happens">
-<h2><a class="toc-backref" href="#id2"><strong>Why It Happens</strong></a><a class="headerlink" href="#why-it-happens" title="Permalink to this heading">#</a></h2>
-<ol class="arabic">
-<li><p><strong>Backpropagation multiplies gradients layer by layer</strong>:</p>
-<div class="math notranslate nohighlight">
-\[
-   \frac{\partial L}{\partial w_1} = \frac{\partial L}{\partial o_3} \cdot \frac{\partial o_3}{\partial o_2} \cdot \frac{\partial o_2}{\partial o_1} \cdot \frac{\partial o_1}{\partial w_1}
-   \]</div>
-</li>
-<li><p><strong>Large weights amplify gradients</strong>:</p>
-<ul class="simple">
-<li><p>If weights are initialized too big (e.g., 500, 1000), each multiplication in the chain rule makes the gradient even larger.</p></li>
-<li><p>Result: <code class="docutils literal notranslate"><span class="pre">w_new</span> <span class="pre">=</span> <span class="pre">w_old</span> <span class="pre">-</span> <span class="pre">learning_rate</span> <span class="pre">*</span> <span class="pre">gradient</span></code> becomes <strong>too large</strong>, causing huge swings in weight values.</p></li>
-</ul>
-</li>
-<li><p><strong>Effect on training</strong>:</p>
-<ul class="simple">
-<li><p>Loss may oscillate or shoot up instead of decreasing.</p></li>
-<li><p>Model may fail to converge to the global minimum.</p></li>
-</ul>
-</li>
+<section id="core-intuition">
+<h2><a class="toc-backref" href="#id4">Core Intuition</a><a class="headerlink" href="#core-intuition" title="Permalink to this heading">#</a></h2>
+<p>For a layer with input <span class="math notranslate nohighlight">\(x\)</span> and weights <span class="math notranslate nohighlight">\(W\)</span>:</p>
+<p><span class="math notranslate nohighlight">\(
+y = W x
+\)</span></p>
+<p>If weights are too large → activations explode
+If too small → activations vanish</p>
+<p>A good initializer keeps:</p>
+<p><span class="math notranslate nohighlight">\(
+Var(\text{activations}) \approx Var(\text{gradients}) \approx \text{constant}
+\)</span></p>
+<p>across depth.</p>
+</section>
+<hr class="docutils" />
+<section id="main-initialization-families">
+<h2><a class="toc-backref" href="#id5">Main Initialization Families</a><a class="headerlink" href="#main-initialization-families" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Designed for</p></th>
+<th class="head"><p>Core Idea</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Zero / Constant</p></td>
+<td><p>none</p></td>
+<td><p>breaks symmetry</p></td>
+</tr>
+<tr class="row-odd"><td><p>Random Normal</p></td>
+<td><p>baseline</p></td>
+<td><p>unstable</p></td>
+</tr>
+<tr class="row-even"><td><p>Xavier / Glorot</p></td>
+<td><p>tanh, sigmoid</p></td>
+<td><p>variance preservation</p></td>
+</tr>
+<tr class="row-odd"><td><p>He / Kaiming</p></td>
+<td><p>ReLU family</p></td>
+<td><p>rectifier correction</p></td>
+</tr>
+<tr class="row-even"><td><p>LeCun</p></td>
+<td><p>SELU</p></td>
+<td><p>self-normalization</p></td>
+</tr>
+<tr class="row-odd"><td><p>Orthogonal</p></td>
+<td><p>deep RNNs</p></td>
+<td><p>gradient stability</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="main-weight-initialization-techniques">
+<h2><a class="toc-backref" href="#id6">Main Weight Initialization Techniques</a><a class="headerlink" href="#main-weight-initialization-techniques" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Best For</p></th>
+<th class="head"><p>Weight Distribution</p></th>
+<th class="head"><p>Key Property</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Zero</p></td>
+<td><p>None</p></td>
+<td><p>All zeros</p></td>
+<td><p>Breaks learning</p></td>
+</tr>
+<tr class="row-odd"><td><p>Random Normal</p></td>
+<td><p>Shallow nets</p></td>
+<td><p>𝒩(0, σ²)</p></td>
+<td><p>Often unstable</p></td>
+</tr>
+<tr class="row-even"><td><p>Xavier (Glorot)</p></td>
+<td><p>Tanh / Sigmoid</p></td>
+<td><p>𝒩(0, 1/fan_in)</p></td>
+<td><p>Preserves variance</p></td>
+</tr>
+<tr class="row-odd"><td><p>He (Kaiming)</p></td>
+<td><p>ReLU / variants</p></td>
+<td><p>𝒩(0, 2/fan_in)</p></td>
+<td><p>Compensates ReLU sparsity</p></td>
+</tr>
+<tr class="row-even"><td><p>Orthogonal</p></td>
+<td><p>RNNs / deep nets</p></td>
+<td><p>Orthonormal</p></td>
+<td><p>Preserves gradient norm</p></td>
+</tr>
+<tr class="row-odd"><td><p>LSUV</p></td>
+<td><p>Very deep nets</p></td>
+<td><p>Layer-wise rescaling</p></td>
+<td><p>Auto variance fixing</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="initialization-vs-activation-compatibility">
+<h2><a class="toc-backref" href="#id7">Initialization vs Activation Compatibility</a><a class="headerlink" href="#initialization-vs-activation-compatibility" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Activation</p></th>
+<th class="head"><p>Recommended Initialization</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Sigmoid</p></td>
+<td><p>Xavier</p></td>
+</tr>
+<tr class="row-odd"><td><p>Tanh</p></td>
+<td><p>Xavier</p></td>
+</tr>
+<tr class="row-even"><td><p>ReLU</p></td>
+<td><p>He</p></td>
+</tr>
+<tr class="row-odd"><td><p>LeakyReLU</p></td>
+<td><p>He</p></td>
+</tr>
+<tr class="row-even"><td><p>SELU</p></td>
+<td><p>LeCun normal</p></td>
+</tr>
+<tr class="row-odd"><td><p>Transformer</p></td>
+<td><p>Xavier + LayerNorm</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="advanced-variants">
+<h2><a class="toc-backref" href="#id8">Advanced Variants</a><a class="headerlink" href="#advanced-variants" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Variant</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>LSUV</p></td>
+<td><p>Automatic variance normalization</p></td>
+</tr>
+<tr class="row-odd"><td><p>LeCun Normal</p></td>
+<td><p>Self-normalizing networks</p></td>
+</tr>
+<tr class="row-even"><td><p>Scaled Initialization</p></td>
+<td><p>Transformers</p></td>
+</tr>
+<tr class="row-odd"><td><p>Fixup Init</p></td>
+<td><p>Residual nets without normalization</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="xavier-glorot-initialization">
+<h2><a class="toc-backref" href="#id9">Xavier (Glorot) Initialization</a><a class="headerlink" href="#xavier-glorot-initialization" title="Permalink to this heading">#</a></h2>
+<p>Designed for <strong>tanh / sigmoid</strong> networks.</p>
+<p><span class="math notranslate nohighlight">\(
+Var(W) = \frac{2}{n_{in} + n_{out}}
+\)</span></p>
+<p>Keeps forward and backward variance balanced.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">xavier_uniform_</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">weight</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="he-kaiming-initialization">
+<h2><a class="toc-backref" href="#id10">He (Kaiming) Initialization</a><a class="headerlink" href="#he-kaiming-initialization" title="Permalink to this heading">#</a></h2>
+<p>Optimized for <strong>ReLU / LeakyReLU</strong>.</p>
+<p><span class="math notranslate nohighlight">\(
+Var(W) = \frac{2}{n_{in}}
+\)</span></p>
+<p>Accounts for half activations being zeroed by ReLU.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">kaiming_normal_</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="n">nonlinearity</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="lecun-initialization">
+<h2><a class="toc-backref" href="#id11">LeCun Initialization</a><a class="headerlink" href="#lecun-initialization" title="Permalink to this heading">#</a></h2>
+<p>For <strong>SELU</strong> activations (self-normalizing nets).</p>
+<p><span class="math notranslate nohighlight">\(
+Var(W) = \frac{1}{n_{in}}
+\)</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">normal_</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">n_in</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="orthogonal-initialization">
+<h2><a class="toc-backref" href="#id12">Orthogonal Initialization</a><a class="headerlink" href="#orthogonal-initialization" title="Permalink to this heading">#</a></h2>
+<p>Keeps transformations length-preserving; excellent for <strong>deep nets &amp; RNNs</strong>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">orthogonal_</span><span class="p">(</span><span class="n">layer</span><span class="o">.</span><span class="n">weight</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="complete-pytorch-demonstration">
+<h2><a class="toc-backref" href="#id13">Complete PyTorch Demonstration</a><a class="headerlink" href="#complete-pytorch-demonstration" title="Permalink to this heading">#</a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">torch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">torch.nn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">nn</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MLP</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">256</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">64</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fc3</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+        <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">kaiming_normal_</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="n">nonlinearity</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">)</span>
+        <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">kaiming_normal_</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc2</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="n">nonlinearity</span><span class="o">=</span><span class="s2">&quot;relu&quot;</span><span class="p">)</span>
+        <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">xavier_uniform_</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc3</span><span class="o">.</span><span class="n">weight</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc1</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fc2</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fc3</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="initialization-workflow-in-practice">
+<h2><a class="toc-backref" href="#id14">Initialization Workflow in Practice</a><a class="headerlink" href="#initialization-workflow-in-practice" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Choose activation functions</p></li>
+<li><p>Select matching initializer</p></li>
+<li><p>Initialize all learnable layers</p></li>
+<li><p>Verify variance of activations</p></li>
+<li><p>Begin training</p></li>
 </ol>
 </section>
 <hr class="docutils" />
-<section id="key-factors">
-<h2><a class="toc-backref" href="#id3"><strong>Key Factors</strong></a><a class="headerlink" href="#key-factors" title="Permalink to this heading">#</a></h2>
+<section id="failure-modes-and-remediation">
+<h2><a class="toc-backref" href="#id15">Failure Modes and Remediation</a><a class="headerlink" href="#failure-modes-and-remediation" title="Permalink to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Symptom</p></th>
+<th class="head"><p>Cause</p></th>
+<th class="head"><p>Fix</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Vanishing gradients</p></td>
+<td><p>too small weights</p></td>
+<td><p>Xavier / He</p></td>
+</tr>
+<tr class="row-odd"><td><p>Exploding gradients</p></td>
+<td><p>too large weights</p></td>
+<td><p>He + gradient clipping</p></td>
+</tr>
+<tr class="row-even"><td><p>Slow convergence</p></td>
+<td><p>poor variance</p></td>
+<td><p>correct initializer</p></td>
+</tr>
+<tr class="row-odd"><td><p>Unstable training</p></td>
+<td><p>mismatch with activation</p></td>
+<td><p>align init with activation</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="id1">
+<h2><a class="toc-backref" href="#id16">Advanced Variants</a><a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p><strong>Weight Initialization</strong>: Large initial weights → exploding gradients.</p></li>
-<li><p><strong>Activation Functions</strong>: Certain activations (like sigmoid/tanh) can also amplify or saturate gradients.</p></li>
-<li><p><strong>Deep Networks</strong>: More layers → more multiplications → higher risk.</p></li>
+<li><p><strong>LSUV initialization</strong> — layer-wise variance normalization</p></li>
+<li><p><strong>Scaled Orthogonal</strong> — stabilizes extremely deep nets</p></li>
+<li><p><strong>Data-dependent initialization</strong> — uses sample batch to tune scales</p></li>
 </ul>
 </section>
 <hr class="docutils" />
-<section id="solutions">
-<h2><a class="toc-backref" href="#id4"><strong>Solutions</strong></a><a class="headerlink" href="#solutions" title="Permalink to this heading">#</a></h2>
+<section id="key-takeaways">
+<h2><a class="toc-backref" href="#id17">Key Takeaways</a><a class="headerlink" href="#key-takeaways" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Use <strong>careful weight initialization techniques</strong>, like:</p>
+<li><p>Initialization controls <strong>trainability and stability</strong></p></li>
+<li><p>Must match <strong>activation function</strong></p></li>
+<li><p>Modern defaults:</p>
 <ul>
-<li><p><strong>Xavier/Glorot Initialization</strong> for sigmoid/tanh</p></li>
-<li><p><strong>He Initialization</strong> for ReLU</p></li>
+<li><p>ReLU → <strong>He initialization</strong></p></li>
+<li><p>tanh/sigmoid → <strong>Xavier initialization</strong></p></li>
+<li><p>SELU → <strong>LeCun initialization</strong></p></li>
 </ul>
 </li>
-<li><p>Use <strong>gradient clipping</strong>: Limit the gradient magnitude to a maximum value.</p></li>
-<li><p>Prefer <strong>ReLU activations</strong> for deep networks to reduce vanishing/exploding risks.</p></li>
 </ul>
+<p>Proper initialization often determines whether a deep network trains at all.</p>
 </section>
 </section>
 
@@ -665,12 +956,12 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../optimizers/07_part.html"
+       href="../optimizers/08_part.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Adam Optmizers</p>
+        <p class="prev-next-title">Adam Optimizer</p>
       </div>
     </a>
     <a class="right-next"
@@ -678,7 +969,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Weight Initializing Techniques</p>
+        <p class="prev-next-title">ReLU and GELU Activation Functions</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -698,9 +989,21 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-it-happens"><strong>Why It Happens</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-factors"><strong>Key Factors</strong></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solutions"><strong>Solutions</strong></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#why-weight-initialization-matters">Why Weight Initialization Matters</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-intuition">Core Intuition</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#main-initialization-families">Main Initialization Families</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#main-weight-initialization-techniques">Main Weight Initialization Techniques</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initialization-vs-activation-compatibility">Initialization vs Activation Compatibility</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advanced-variants">Advanced Variants</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xavier-glorot-initialization">Xavier (Glorot) Initialization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#he-kaiming-initialization">He (Kaiming) Initialization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lecun-initialization">LeCun Initialization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#orthogonal-initialization">Orthogonal Initialization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#complete-pytorch-demonstration">Complete PyTorch Demonstration</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initialization-workflow-in-practice">Initialization Workflow in Practice</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#failure-modes-and-remediation">Failure Modes and Remediation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Advanced Variants</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-takeaways">Key Takeaways</a></li>
 </ul>
   </nav></div>
 
